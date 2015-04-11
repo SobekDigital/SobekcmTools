@@ -1,0 +1,2 @@
+C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT_WiX_Installer\bin\Release\SMaRT_WiX_Installer.msi
+C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT_WiX_Installer\bin\Release\SMaRT_WiX_Installer.wixpdb

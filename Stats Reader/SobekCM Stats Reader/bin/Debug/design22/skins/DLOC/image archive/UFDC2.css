@@ -1,0 +1,455 @@
+/* UFDC CSS Document, Derived from Secondary2.css */
+
+/************** DLOC SPECIFIC STYLES **********/
+
+#dlocheader {
+	font-family: Arial, Helvetica, sans-serif;
+	/*color: #fff;
+	*/
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	color: White;
+	height: 38px;
+	border-bottom: 2px solid #000066;
+	}
+	
+.dloclogo {
+	background-image: url(  design/skins/dloc/dlocheadback.jpg );
+	text-align: left;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: medium;
+	font-weight: bold;
+	color: White;
+	padding: 0 0 0 17px;
+	background-color: #0021a5;
+	}
+	
+.dloclogo a:link {
+	color:White;
+	text-decoration: none;
+	}
+.dloclogo a:visited {
+	color: White;
+	text-decoration: none;
+	}
+	
+ .dloclogo a:hover {
+	color: White;
+	text-decoration: none;
+	}
+
+.dlocfirstLinks {
+	background-image: url( design/skins/dloc/dlocheadback.jpg );
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: medium;
+	font-weight: bold;
+	color: White;
+	text-align: right;
+	white-space: nowrap;
+	padding: 0 17px 0 0;
+	background-color: #0021a5;
+	}
+
+.dlocfirstLinks a:link {
+	color:White;
+	text-decoration: none;
+	}
+.dlocfirstLinks a:visited {
+	color: White;
+	text-decoration: none;
+	}
+	
+ .dlocfirstLinks a:hover {
+	color: White;
+	text-decoration: none;
+	}
+	
+#dlocfooter {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 9pt;
+	margin: 0 0 0 0;
+	padding: 0;
+	width: 100%;
+	color: White;
+	height: 30px;
+	border-bottom: 2px solid #ccc;
+	background-image: url(  design/skins/dloc/dloc_footer_fill.jpg );
+
+}
+#dlocfooter a:link {color: white;
+					border-bottom: 1px solid white;}
+					
+#dlocfooter a:visited { color: white;
+						border-bottom: 1px white;}
+	
+.dlocfooterleft {
+	margin-top: 0px;
+	margin-left: 10px;
+	text-align: left;
+	color: White;	}
+	
+.dlocfooterright {
+	margin-top: -30px;
+	margin-right: 10px;
+	text-align: right;
+	color: White;	}
+
+/************ Item Viewer Styles **************/
+.UfdcSearch {margin: 0;
+		padding: 10px;
+		margin-top:1px;
+		width: 205px;
+		font-size:0.85em;
+		font-family:Arial, Helvetica, sans-serif;
+		font-weight: bold;
+		padding-left: 15px;
+		color: #444;
+		background-color: #FFFFFF;
+		}
+		
+.UfdcSearch_ie {margin: 0;
+		padding: 10px;
+		margin-top:1px;
+		width: 182px;
+		font-size:0.85em;
+		font-family:Arial, Helvetica, sans-serif;
+		font-weight: bold;
+		padding-left: 15px;
+		color: #444;
+		background-color: #FFFFFF;
+		}
+		
+form.UfdcSearch { margin:0; padding-top:5px; padding-bottom:4px; color: #0021a5;}
+
+input.UfdcSearchBox 
+{
+	color:#0021a5;
+	margin-left: 5px;
+	width: 140px;
+	}
+
+#UfdcColumnOne {
+	width: 205px;
+	float: left;
+	background-color: #EEEEEE;
+	border: 1px solid #000066;	
+}
+
+ul#UfdcNavBarMenu {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	width: 184px;
+}	
+
+
+ul#UfdcNavBarMenu ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	width:  184px;
+}
+
+ul#UfdcNavBarMenu_TOC {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	width: 184px;
+}	
+
+ul#UfdcNavBarMenu_TOC li a:link, ul#UfdcNavBarMenu_TOC li a:visited, ul#UfdcNavBarMenu_TOC li a:hover, ul#UfdcNavBarMenu_TOC li a:visited:hover {
+	font-weight: bold;
+	font-family:Arial, Helvetica, sans-serif;
+	letter-spacing: 1px;
+	color: #222;
+	padding: 5px 10px 5px 5px;
+	width: 184px;
+}
+
+.UfdcNavBarMenuNonLink_ie {
+	font-size:0.65em;
+	font-family:Arial, Helvetica, sans-serif;
+	color: #444;
+	background-color: #FFFFFF;
+	padding-bottom: 4px;
+	padding-right: 6px;
+	margin-top: 1px;
+	text-decoration: none;
+	display: block;
+	width: 100%;
+}
+
+
+.UfdcNavBarMenuNonLink {
+	font-size:0.70em;
+	font-family:Arial, Helvetica, sans-serif;
+	color: #444;
+	background-color: #FFFFFF;
+	padding-bottom: 4px;
+	padding-right: 20px;
+	margin-top: 1px;
+	text-decoration: none;
+	display: block;
+	width: 100%;
+}
+
+.UfdcNavBarHeader {
+	font-weight: bold;
+	font-size: .90em;
+	font-family:Arial, Helvetica, sans-serif;
+	letter-spacing: 1px;
+	color: #222;
+	padding: 5px 10px 5px 5px;
+	width: 184px;
+}
+
+ul#UfdcNavBarMenu li a:link, ul#UfdcNavBarMenu li a:visited {
+	font-size:0.85em;
+	font-family:Arial, Helvetica, sans-serif;
+	color: #444;
+	background-color: #FFFFFF;
+	padding-top: 4px;
+	padding-bottom: 2px;
+	padding-left: 17px;
+	padding-right: 5px;
+	margin-top: 1px;
+	text-decoration: none;
+	display: block;
+	width: 100%;
+	font-weight: bold;
+}
+ul#UfdcNavBarMenu li a:hover, ul#UfdcNavBarMenu li a:visited:hover {
+	font-size:0.85em;
+	font-family:Arial, Helvetica, sans-serif;
+	color: #000;
+	background-color: #EEEEEE;
+	padding-top: 4px;
+	padding-bottom: 2px;
+	padding-left: 17px;
+	padding-right: 5px;
+	margin-top: 1px;
+	text-decoration: none;
+	display: block;
+	width: 100%;
+	font-weight: bold;
+}
+
+#UfdcNavBarMenu li.selected a:link, #UfdcNavBarMenu li.selected a:visited, #UfdcNavBarMenu li.selected a:hover {
+	background-color: #FFFFFF;}
+	
+	
+.UfdcItemWordmarks { margin-left: 35px; margin-top: 20px; height: 220px; padding-bottom: 40px; margin-bottom: 40px; }
+	
+ul#UfdcNavBarMenu ul li a:link, ul#UfdcNavBarMenu ul li a:visited {
+	font-size:0.85em;
+	font-family:Arial, Helvetica, sans-serif;
+	color: #444;
+	background-color: #FFFFFF;
+	padding-top: 4px;
+	padding-bottom: 2px;
+	padding-left: 30px;
+	padding-right: 10px;
+	margin-top: 1px;
+	text-decoration: none;
+	display: block;
+	width: 184px;
+	font-weight: bold;
+}
+
+ul#UfdcNavBarMenu ul li a:hover, ul#UfdcNavBarMenu ul li a:visited:hover {
+	font-size:0.85em;
+	font-family:Arial, Helvetica, sans-serif;
+	color: #444;
+	background-color: #FFFFFF;
+	padding-top: 4px;
+	padding-bottom: 2px;
+	padding-left: 30px;
+	padding-right: 10px;
+	margin-top: 1px;
+	text-decoration: none;
+	display: block;
+	width: 184px;
+	font-weight: bold;
+}
+
+
+
+.UfdcCurrentView {
+	font-size:0.85em;
+	font-family:Arial, Helvetica, sans-serif;
+	color: #444;
+	background-color: #FFFFFF;
+	padding-top: 4px;
+	padding-bottom: 2px;
+	padding-left: 2px;
+	padding-right: 10px;
+	margin-top: 1px;
+	text-decoration: none;
+	display: block;
+	width: 194px;
+	font-weight: bold;
+}
+
+
+.spacer {height: 100%; background: #ffffff url( default/images/bground.jpg) repeat-y left top; margin:0; padding:0;}
+li.selected a:link, .selected a:visited, .selected a:hover {background-color: #94a2d9;}
+/* Mac IE5 fix \*/ 
+* html  .spacer {overflow: hidden;}
+/* end  */
+
+
+/************* Header Styles *****************/
+.UfdcHeaderNavLinks { background-color: #eee; border-top: 1px solid #fff; text-decoration:none; color:#444444; padding-right:20px; padding-left:10px; }
+.UfdcHeaderNavLinks a:link { text-decoration:none; color:#444444; }
+.UfdcHeaderNavLinks a:visited { text-decoration:none; color:#444444;  }
+.UfdcHeaderNavLinks a:hover { text-decoration:underline; color:#444444; }
+
+
+/************ BreadCrumbs Style **************/
+p.UfdcBreadcrumbs	
+{
+	margin:3px 9px 15px 0; 
+	padding:0px; 
+	font-size: 10px;}
+	
+p.UfdcBreadcrumbs a:link {color : #0021a5; text-decoration : none; border-bottom : 1px dashed #0021a5; font-weight: normal;}
+p.UfdcBreadcrumbs a:visited  {color : #0021a5; text-decoration : none; border-bottom : 1px dashed #0021a5; font-weight: normal;}
+p.UfdcBreadcrumbs a:hover  {color: #ff4a00; text-decoration : none; border-bottom : 1px dashed #ff4a00; font-weight: normal;}
+
+
+/********  Document Display Styles  ********************/
+.UfdcDocumentDisplay	{background-color: #000066; border: 1px solid #000066; }
+.UfdcPageViewerButton	{ background-color: #FFFFFF; border-style: solid; font-size: .80em;  }
+.UfdcGoToLabel			{ font-weight:bold; color: White; }
+.UfdcDocumentHeader		{ background-color: #000066; width: 100%; color: White; border: 1px solid #CCCCCC; }
+.UfdcDocumentText		{ background-color: #000066; font-size: medium; width: 100%; color: White; }
+.UfdcCitation			{ background-color: #FFFFFF; border: 0px; color: Black; text-align: left }
+.UfdcTOC				{ background-color: #FFFFFF; border: 0px; color: Black; text-align: left }
+.UFDC_JP2_ReCenter		{ font-size: .65em; }
+.UfdcViewerTitle		{ color: White; text-align:left; font-size: 1.4em; padding-left: 35px; padding-right: 450px; }
+
+/******** Table of Contents Styles *********************/
+.ufdcTocTreeView		{ width:205px;background-color:#FFFFFF; font-weight: bold; font-family: Arial, Helvetica, sans-serif; font-size: 0.85em; }
+.ufdcTocTreeViewItem	{ font-weight: bold; font-family: Arial, Helvetica, sans-serif; font-size: 11px; color:#444444; text-decoration:none; }
+.ufdcTocTreeViewItem a:link, .ufdcTocTreeViewItem a:visited, .ufdcTocTreeViewItem a:hover {
+	text-decoration:none;}
+
+.mainContent {margin: 0 0 0 15px;}
+
+form.enquiry { margin:0; padding-top:0; padding-bottom:4px;}
+
+/*********  Search Forms Styles ********************/
+.UfdcSearchPanel {background-color:#eee; padding:5px; font-size:small; border: 1px solid #000066; width: 744px; margin-top:10px; }
+.UfdcSearchTable { border:1px solid #000066; background-color:#eee; }
+.UfdcSearchSubcollections { margin-left:20px; }
+
+.UfdcSearchLinks { font-size: 10px; text-decoration:none; }
+.UfdcSearchLinks a:link { text-decoration:none; color:#00a; }
+.UfdcSearchLinks a:visited { text-decoration:none; color:#00a; }
+.UfdcSearchLinks a:hover { text-decoration:underline; color:#00a; }
+.UfdcSearchLinksCurrent { font-size: 10px; color:#999; }
+
+.UfdcBrowseLinks { text-decoration:none; }
+.UfdcBrowseLinks a:link { text-decoration:none; color:#00a; }
+.UfdcBrowseLinks a:visited { text-decoration:none; color:#00a; }
+.UfdcBrowseLinks a:hover { text-decoration:underline; color:#00a; }
+
+.UfdcShowSelectBox { text-decoration:none; }
+.UfdcShowSelectBox a:link { text-decoration:none; color:#00a; }
+.UfdcShowSelectBox a:visited { text-decoration:none; color:#00a; }
+.UfdcShowSelectBox a:hover { text-decoration:underline; color:#00a; }
+
+.UfdcSearchCheckBox { margin-left: 25px; }
+.UfdcNoResultsText	{font-size:1.6em; color:Red; }
+
+.UfdcQuickTipTitle { color: #999; text-align:left; font-size: 1.3em; }
+#UfdcQuickTips {margin: 0 10px 10px 10px; padding:0; color:#314384; font-size: 0.9em; }
+#UfdcQuickTips ul { margin: 0 0 0 0px; padding: 0; 	}
+#UfdcQuickTips p.tagline {margin: 0 0 0 10px; padding: 0; color:Black; }
+
+#UfdcQuickTips li  {
+	list-style-position: outside;
+	background: url( http://www.uflib.ufl.edu/ufdc/default/images/pointer_blue.gif) no-repeat 15px 7px;
+	padding: 3px 0 4px 25px;
+	margin-bottom: 7px;
+	line-height: 16px;
+	list-style-type: none;
+}
+
+/*********  Search Results Forms Styles ********************/
+.UfdcResultsPanel { width: 734px; margin-top:15px; text-align:left; }
+.UfdcResultsOptionsPanel { background-color:#eee; padding:10px; margin-bottom:10px; margin-top:15px; width:734px; text-align:center; border: 1px solid #000066; }
+.UfdcResultsNavBar { background-color:#eee; padding-left:10px; padding-right:10px; width:734px; height:35px; text-align:center; border: 1px solid #000066; }
+.UfdcResultsTitle { color: #000066; text-align:left; font-size: 1.4em; }
+.UfdcResultsDisplay { font-size: 12px; }
+.UfdcResultsDisplay a:link { text-decoration:underline; color:#00a; margin-left:15px; }
+.UfdcResultsDisplay a:visited { text-decoration:underline; color:#00a; margin-left:15px; }
+.UfdcResultsDisplay a:hover { text-decoration:underline; color:#00a; margin-left:15px; }
+.UfdcResultsDisplayCurrent { font-size: 12px; margin-left:15px; color:#999; }
+.UfdcThumbnailText { font-size: 10px; }
+
+
+/********** Home Page Styles *********************/
+#UfdcHighlight {
+	float: right;
+	margin:20px 0 10px 20px;
+	padding:10px;
+	border: 1px solid #ccc;
+}
+
+#UfdcHighlight img {border: none; display: block;}
+.UfdcHighlightText {text-align: center; font-size: 12px; font-weight: normal; display: block; padding: 10px 0 0 0;}
+.UfdcToDoText { font-size:1.5em; color:#999; text-decoration:none; }
+
+/********** UFDC Home Page Style ***************/
+.groupname {
+	font-size: small;
+	font-weight: bold;
+}
+.groupnamecaps {font-size: medium}
+.style8 {font-size: 2px}
+.collectionbuttons { font-size: small }
+
+
+/********** Search Box Styles *********************/
+.UfdcSearchTypeTitle { color: #000066; text-align:left; font-size: 1.4em}
+.UfdcAdvSearchBox { width: 343px; }
+.UfdcBasicSearchBox { width: 372px; }
+.UfdcSearchButton { width: 110px; }
+.UfdcHomeSearchBox { width: 422px; }
+.UfdcKeySearchBox { width: 422px; }
+
+
+/*********** Contact Us Styles ********************/
+.UfdcContactBox { width: 250px; }
+.UfdcContactCommentBox { width: 500px; }
+.UfdcRequiredField { FONT-SIZE: xx-large; COLOR: red }
+
+/*************  Other Styles - Alters Styles in public.css  *************/
+body  { font-size: small; font-family: Arial, sans-serif; margin: 0; padding: 0;  }
+a:link { text-decoration:none; color:#00a; }
+a:visited { text-decoration:none; color:#00a; }
+a:hover { text-decoration:underline; color:#00a; }
+
+h1 {margin:0 0 10px 0; padding:0; font-size: large;}	
+
+#footer {text-align:center; white-space:nowrap;}
+
+#UfdcWordmark { float: right; 	padding: 10px 15px 0px 0px; }
+
+#UfdcCopyright 
+{
+	height: 30px;
+	font-family: Arial, Helvetica, sans-serif; 
+	font-size: 10px; 
+	color: White;
+	background-image: url(  design/skins/dloc/dloc_footer_fill.jpg ); 
+}
+
+#UfdcCopyright a{ font-size: 10px; color: White; text-decoration: none; }
+#UfdcCopyright a:link{ 	font-size: 10px; color: White; text-decoration: none; 	}
+#UfdcCopyright a:visited{ font-size: 10px; color: White; text-decoration: none; 	}
+#UfdcCopyright a:hover{ font-size: 10px; color: White; text-decoration: underline;	}
+
+.UfdcGeneralError { font-size: 20px; }

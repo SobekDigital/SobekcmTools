@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+
+<!-- This class contains much of the information about a collection group, collection,  -->
+<!-- subcollection, or institutional page.  Contained within this XML file are the      -->
+<!-- following types of information:                                                    -->
+<!--          1) home page source files by language                                     -->
+<!--          2) banner source files by language and bandwidth                          -->
+<!--          3) highlights, with tool tips and text by language                        -->
+<!--          4) browses, with title and source by language                             -->
+<!--          5) infos, with title and source by language                               -->
+
+<hi:hierarchyInfo xmlns:hi="http://digital.uflib.ufl.edu/metadata/hierarchyInfo/" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://digital.uflib.ufl.edu/metadata/hierarchyInfo/ http://digital.uflib.ufl.edu/metadata/hierarchyInfo/hierarchyInfo.xsd" >
+	
+	<!-- Source files for the home page by language -->
+	<hi:home>
+		<hi:content>
+			<hi:body lang="en">html\home\text.html</hi:body>
+			<hi:body lang="es">html\home\text.html</hi:body>
+			<hi:body lang="fr">html\home\text.html</hi:body>
+		</hi:content>
+	</hi:home>
+	
+	<!-- Banner source files by language and bandwidth   -->
+	<!-- Source can either be jpg, gif, or html          -->
+	<hi:banner>
+		<hi:source lang="en">images/banners/coll.jpg</hi:source>
+		<hi:source lang="es">images/banners/coll.jpg</hi:source>
+		<hi:source lang="fr">images/banners/coll.jpg</hi:source>
+    <hi:source type="HIGHLIGHT" lang="en">front_banner.jpg</hi:source>
+    <hi:source type="HIGHLIGHT" lang="es">front_banner.jpg</hi:source>
+    <hi:source type="HIGHLIGHT" lang="fr">front_banner.jpg</hi:source>
+	</hi:banner>
+	
+	<!-- Highglighted items.  Inclusion of more than one will  -->
+	<!-- cause the highlighted item to rotate over time.       -->
+	<hi:highlights type="ROTATING" >
+    <hi:highlight>
+      <hi:source>highlights/UF00025330.jpg</hi:source>
+      <hi:link>UF00025330/00001</hi:link>
+      <hi:tooltip>Dreams, dances, and disappointments</hi:tooltip>
+    </hi:highlight>
+    <hi:highlight>
+      <hi:source>highlights/UF00027954.jpg</hi:source>
+      <hi:link>UF00027954/00009</hi:link>
+      <hi:tooltip>The  Eye</hi:tooltip>
+    </hi:highlight>
+    <hi:highlight>
+      <hi:source>highlights/UF00027518.jpg</hi:source>
+      <hi:link>UF00027518/00001 </hi:link>
+      <hi:tooltip>Bulletin - University of Florida. Agricultural Experiment Station - no. 471</hi:tooltip>
+    </hi:highlight>
+    <hi:highlight>
+      <hi:source>highlights/UF90000078.jpg</hi:source>
+      <hi:link>UF90000078/00001 </hi:link>
+      <hi:tooltip>A view of the town and castle of St. Augustine, and the English camp</hi:tooltip>
+    </hi:highlight>
+    <hi:highlight>
+      <hi:source>highlights/UF00034740.jpg</hi:source>
+      <hi:link>UF00034740/00001 </hi:link>
+      <hi:tooltip>Construction of Hotel Kelley</hi:tooltip>
+    </hi:highlight>
+    <hi:highlight>
+      <hi:source>highlights/UF00028486.jpg</hi:source>
+      <hi:link>UF00028486/00001 </hi:link>
+      <hi:tooltip>Correspondence from Carlos Melendez, President of El Salvador, to Vilbrum Guillaume Sam, President of Haiti, 16 July 1915</hi:tooltip>
+    </hi:highlight>
+    <hi:highlight>
+      <hi:source>highlights/UF00032099.jpg</hi:source>
+      <hi:link>UF00032099/00002  </hi:link>
+      <hi:tooltip>Biscuit</hi:tooltip>
+    </hi:highlight>
+    <hi:highlight>
+      <hi:source>highlights/UF00037147.jpg</hi:source>
+      <hi:link>UF00037147/00001 </hi:link>
+      <hi:tooltip>Dr. J.W. Shands, Postdoc Fellow with Electoron Microscope</hi:tooltip>
+    </hi:highlight>
+    <hi:highlight>
+      <hi:source>highlights/UF00072634.jpg</hi:source>
+      <hi:link>UF00072634/00014</hi:link>
+      <hi:tooltip>UF Law: University of Florida Fredric G. Levin College of Law</hi:tooltip>
+    </hi:highlight>
+    <hi:highlight>
+      <hi:source>highlights/UF00073696.jpg</hi:source>
+      <hi:link>UF00073696/00001 </hi:link>
+      <hi:tooltip>Northern Hemisphere</hi:tooltip>
+    </hi:highlight>
+    <hi:highlight>
+      <hi:source>highlights/UF00076231.jpg</hi:source>
+      <hi:link>UF00076231/00027 </hi:link>
+      <hi:tooltip>Drew Field Echoes</hi:tooltip>
+    </hi:highlight>
+    <hi:highlight>
+      <hi:source>highlights/UF00026731.jpg</hi:source>
+      <hi:link>UF00026731/00001 </hi:link>
+      <hi:tooltip>Seventeen years in the Yoruba country Memorials of Anna Hinderer and letters</hi:tooltip>
+    </hi:highlight>
+    <hi:highlight>
+      <hi:source>highlights/UF00045547.jpg</hi:source>
+      <hi:link>UF00045547/00001 </hi:link>
+      <hi:tooltip>A young boy selling sodas in Stadium</hi:tooltip>
+    </hi:highlight>
+    <hi:highlight>
+      <hi:source>highlights/UF00066698.jpg</hi:source>
+      <hi:link>UF00066698/00001</hi:link>
+      <hi:tooltip>Body condition scoring of horses</hi:tooltip>
+    </hi:highlight>
+    <hi:highlight>
+      <hi:source>highlights/UF00076787.jpg</hi:source>
+      <hi:link>UF00076787/00054 </hi:link>
+      <hi:tooltip>Preventive maintenance monthly</hi:tooltip>
+    </hi:highlight>
+    <hi:highlight>
+      <hi:source>highlights/UF00083074.jpg</hi:source>
+      <hi:link>UF00083074/00001 </hi:link>
+      <hi:tooltip>Male Royal Ancestor Mask</hi:tooltip>
+    </hi:highlight>
+    <hi:highlight>
+      <hi:source>highlights/UF00053677.jpg</hi:source>
+      <hi:link>UF00053677/00001 </hi:link>
+      <hi:tooltip>Chimes and rhymes for youthful times</hi:tooltip>
+    </hi:highlight>
+    <hi:highlight>
+      <hi:source>highlights/UF00030533.jpg</hi:source>
+      <hi:link>UF00030533/00001 </hi:link>
+      <hi:tooltip>One man shaves another man with an axe</hi:tooltip>
+    </hi:highlight>
+    <hi:highlight>
+      <hi:source>highlights/UF00072837.jpg</hi:source>
+      <hi:link>UF00072837/00011</hi:link>
+      <hi:tooltip>Waterfront news</hi:tooltip>
+    </hi:highlight>
+    <hi:highlight>
+      <hi:source>highlights/UF00087187.jpg</hi:source>
+      <hi:link>UF00087187/00001 </hi:link>
+      <hi:tooltip>Cartas de Haya de la Torre a los prisioneros apristas</hi:tooltip>
+    </hi:highlight>
+    <hi:highlight>
+      <hi:source>highlights/UF00087163.jpg</hi:source>
+      <hi:link>UF00087163/00001 </hi:link>
+      <hi:tooltip>Black migration to South Africa</hi:tooltip>
+    </hi:highlight>
+    <hi:highlight>
+      <hi:source>highlights/UF00037108.jpg</hi:source>
+      <hi:link>UF00037108/00001 </hi:link>
+      <hi:tooltip>Dr. Peggy Barnes in the Hyperbaric Chamber</hi:tooltip>
+    </hi:highlight>
+    <hi:highlight>
+      <hi:source>highlights/UF00078627.jpg</hi:source>
+      <hi:link>UF00078627/00049 </hi:link>
+      <hi:tooltip>Fun</hi:tooltip>
+    </hi:highlight>
+    <hi:highlight>
+      <hi:source>highlights/UF00026644.jpg</hi:source>
+      <hi:link>UF00026644/00001</hi:link>
+      <hi:tooltip>The history of Robinson Crusoe</hi:tooltip>
+    </hi:highlight>
+    <hi:highlight>
+      <hi:source>highlights/UF90000053.jpg</hi:source>
+      <hi:link>UF90000053/00001 </hi:link>
+      <hi:tooltip>Scheeps Togt Van Iamaica Gedaan na Panuco en Rio de las Palmas Aan</hi:tooltip>
+    </hi:highlight>
+    <hi:highlight>
+      <hi:source>highlights/UF00028307.jpg</hi:source>
+      <hi:link>UF00028307/01428 </hi:link>
+      <hi:tooltip>Jax air news</hi:tooltip>
+    </hi:highlight>
+    <hi:highlight>
+      <hi:source>highlights/UF00076868.jpg</hi:source>
+      <hi:link>UF00076868/00001 </hi:link>
+      <hi:tooltip>Qin ding Xi qing gu jian</hi:tooltip>
+    </hi:highlight>
+    <hi:highlight>
+      <hi:source>highlights/UF00094876.jpg</hi:source>
+      <hi:link>UF00094876/00009 </hi:link>
+      <hi:tooltip>Everglades canal dredging</hi:tooltip>
+    </hi:highlight>
+    <hi:highlight>
+      <hi:source>highlights/UF00072819.jpg</hi:source>
+      <hi:link>UF00072819/00006 </hi:link>
+      <hi:tooltip>Gator dentist today: University of Florida College of Dentistry Alumni/ae Magazine</hi:tooltip>
+    </hi:highlight>
+    <hi:highlight>
+      <hi:source>highlights/UF00084535.jpg</hi:source>
+      <hi:link>UF00084535/00001</hi:link>
+      <hi:tooltip>Rejuvenating furniture</hi:tooltip>
+    </hi:highlight>
+    <hi:highlight>
+      <hi:source>highlights/UF00084881.jpg</hi:source>
+      <hi:link>UF00084881/00001 </hi:link>
+      <hi:tooltip>MKR and Cal Long on movie set of The Yearling during filming</hi:tooltip>
+    </hi:highlight>
+    <hi:highlight>
+      <hi:source>highlights/UF00085955.jpg</hi:source>
+      <hi:link>UF00085955/00001 </hi:link>
+      <hi:tooltip>Denslow's 5 little pigs</hi:tooltip>
+    </hi:highlight>
+    <hi:highlight>
+      <hi:source>highlights/UF00071726.jpg</hi:source>
+      <hi:link>UF00071726</hi:link>
+      <hi:tooltip>Aerial photographs of Alachua County </hi:tooltip>
+    </hi:highlight>
+    <hi:highlight>
+      <hi:source>highlights/UF00087303.jpg</hi:source>
+      <hi:link>UF00087303/00001 </hi:link>
+      <hi:tooltip>Los Agachados de Rius</hi:tooltip>
+    </hi:highlight>
+    <hi:highlight>
+      <hi:source>highlights/UF00089190.jpg</hi:source>
+      <hi:link>UF00089190/00022 </hi:link>
+      <hi:tooltip>Woman in Hat with Telephone</hi:tooltip>
+    </hi:highlight>
+    <hi:highlight>
+      <hi:source>highlights/UF00083322.jpg</hi:source>
+      <hi:link>UF00083322/00018 </hi:link>
+      <hi:tooltip>Original State Highway A1A</hi:tooltip>
+    </hi:highlight>
+    <hi:highlight>
+      <hi:source>highlights/UF00095315.jpg</hi:source>
+      <hi:link>UF00095315/00003</hi:link>
+      <hi:tooltip>Song of the Indian River Tropical Trunk Line (adv. Jacksonville, Tampa and Key West System).</hi:tooltip>
+    </hi:highlight>
+    <hi:highlight>
+      <hi:source>highlights/UF70000148.jpg</hi:source>
+      <hi:link>UF70000148/00001 </hi:link>
+      <hi:tooltip>Insurance maps of Miami, Florida, 1921-1924</hi:tooltip>
+    </hi:highlight>
+    <hi:highlight>
+      <hi:source>highlights/UF00089432.jpg</hi:source>
+      <hi:link>UF00089432/00001 </hi:link>
+      <hi:tooltip>Bulletin of the Public Library of the City of Boston</hi:tooltip>
+    </hi:highlight>
+    <hi:highlight>
+      <hi:source>highlights/UF00095867.jpg</hi:source>
+      <hi:link>UF00095867/00001 </hi:link>
+      <hi:tooltip>Alfabeto de Idiomas Jaqaru, Kawki, Aymara</hi:tooltip>
+    </hi:highlight>
+    <hi:highlight>
+      <hi:source>highlights/UF00090045.jpg</hi:source>
+      <hi:link>UF00090045/00012</hi:link>
+      <hi:tooltip>CitrusLines</hi:tooltip>
+    </hi:highlight>
+    <hi:highlight>
+      <hi:source>highlights/UF00095315.jpg</hi:source>
+      <hi:link>UF00095315/00002</hi:link>
+      <hi:tooltip>Passes</hi:tooltip>
+    </hi:highlight>
+    <hi:highlight>
+      <hi:source>highlights/UF00095874.jpg</hi:source>
+      <hi:link>UF00095874/00001 </hi:link>
+      <hi:tooltip>Panama Canal French Bond</hi:tooltip>
+    </hi:highlight>
+    <hi:highlight>
+      <hi:source>highlights/UF00094172.jpg</hi:source>
+      <hi:link>UF00094172/00002 </hi:link>
+      <hi:tooltip>Model for Connors House</hi:tooltip>
+    </hi:highlight>
+    <hi:highlight>
+      <hi:source>highlights/UF00074110.jpg</hi:source>
+      <hi:link>UF00074110/00001 </hi:link>
+      <hi:tooltip>El Tiple Cubano</hi:tooltip>
+    </hi:highlight>
+    <hi:highlight>
+      <hi:source>highlights/UF00091603.jpg</hi:source>
+      <hi:link>UF00091603/00015</hi:link>
+      <hi:tooltip>European woman (Frau Hilda Johanssen?) in fur collar with monkeys on leashes.</hi:tooltip>
+    </hi:highlight>
+    <hi:highlight>
+      <hi:source>highlights/UF00091111.jpg</hi:source>
+      <hi:link>UF00091111/00001</hi:link>
+      <hi:tooltip>May Mann Jennings Correspondence: 1903 January-May</hi:tooltip>
+    </hi:highlight>
+    <hi:highlight>
+      <hi:source>highlights/UF00094824.jpg</hi:source>
+      <hi:link>UF00094824</hi:link>
+      <hi:tooltip>Historic St. Augustine: Block 24, Lot 1, Puente Site</hi:tooltip>
+    </hi:highlight>
+    <hi:highlight>
+      <hi:source>highlights/UF00095753.jpg</hi:source>
+      <hi:link>UF00095753/00013 </hi:link>
+      <hi:tooltip>Holocaust Memorial Construction</hi:tooltip>
+    </hi:highlight>
+    <hi:highlight>
+      <hi:source>highlights/UF00091247.jpg</hi:source>
+      <hi:link>UF00091247/00001 </hi:link>
+      <hi:tooltip>Truman at Dedication of Everglades</hi:tooltip>
+    </hi:highlight>
+    <hi:highlight>
+      <hi:source>highlights/UF00085960.jpg</hi:source>
+      <hi:link>UF00085960/00001 </hi:link>
+      <hi:tooltip>Denslow's Jack and the bean-stalk</hi:tooltip>
+    </hi:highlight>
+    <hi:highlight>
+      <hi:source>highlights/UF00017364.jpg</hi:source>
+      <hi:link>UF00017364/00001 </hi:link>
+      <hi:tooltip>Birds eye view of Florida and part of Georgia and Alabama</hi:tooltip>
+    </hi:highlight>
+	</hi:highlights>
+
+</hi:hierarchyInfo>

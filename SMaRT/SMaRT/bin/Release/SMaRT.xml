@@ -1,0 +1,2049 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SMaRT</name>
+    </assembly>
+    <members>
+        <member name="T:SobekCM.Management_Tool.Config.SobekCM_Database_Selection_Form">
+            <summary> Form assists the user in configuring the SMaRT tool by building the Microsoft SQL
+            connection string from the database name and server name  </summary>
+        </member>
+        <member name="F:SobekCM.Management_Tool.Config.SobekCM_Database_Selection_Form.Connection_String">
+            <summary> Connection string built from the server and database names </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Config.SobekCM_Database_Selection_Form.#ctor">
+            <summary> Constructor for a new instance of the SobekCM_Database_Selection_Form class </summary>
+        </member>
+        <member name="F:SobekCM.Management_Tool.Config.SobekCM_Database_Selection_Form.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Config.SobekCM_Database_Selection_Form.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Config.SobekCM_Database_Selection_Form.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Config.SMaRT_Config_Edit_Form">
+            <summary> Configuration helps to provide the very basic configuration information
+            the first time this application is run on a computer.  This provides the connection information 
+            for the SobekCM database </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Config.SMaRT_Config_Edit_Form.#ctor">
+            <summary> Constructor for a new instance of the SobekCM_Web_Config_Edit_Form class </summary>
+        </member>
+        <member name="F:SobekCM.Management_Tool.Config.SMaRT_Config_Edit_Form.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Config.SMaRT_Config_Edit_Form.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Config.SMaRT_Config_Edit_Form.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Config.SMaRT_Config_Edit_Form.Error_Reading">
+            <summary> Returns flag indicating if there was an error reading the configuration
+            file  </summary>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Reports.Tracking_Boxes_Report_Form">
+            <summary> Form displays the complete list of tracking boxes currently in use in the system </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Reports.Tracking_Boxes_Report_Form.#ctor">
+            <summary> Constructor for a new instance of the Tracking_Boxes_Report_Form form </summary>
+        </member>
+        <member name="F:SobekCM.Management_Tool.Reports.Tracking_Boxes_Report_Form.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Reports.Tracking_Boxes_Report_Form.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Reports.Tracking_Boxes_Report_Form.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Update_Material_Recd_Born_Digital_Form">
+            <summary> Form is used to update the material recevied and born digital flag
+            simultaneously for an item or a set of items  </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Update_Material_Recd_Born_Digital_Form.#ctor">
+            <summary> Constructor for a new instance of the Update_Material_Recd_Born_Digital_Form form </summary>
+        </member>
+        <member name="F:SobekCM.Management_Tool.Update_Material_Recd_Born_Digital_Form.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Update_Material_Recd_Born_Digital_Form.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Update_Material_Recd_Born_Digital_Form.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Update_Material_Recd_Born_Digital_Form.Date_Received">
+            <summary> Gets the date received information the user entered </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Update_Material_Recd_Born_Digital_Form.Estimated">
+            <summary> Gets the flag indicated the date received is a wide estimate </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Update_Material_Recd_Born_Digital_Form.Notes">
+            <summary> Gets any notes associated with the material received event </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Update_Material_Recd_Born_Digital_Form.Born_Digital_Flag">
+            <summary> Gets the born digital flag indicated by user </summary>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Add_Workflow_Form">
+            <summary> Form allows the user to add a new workflow to an existing item, or a group
+            of items </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Add_Workflow_Form.#ctor">
+            <summary>Constructor for a new instance of the Add_Workflow_Form form </summary>
+        </member>
+        <member name="F:SobekCM.Management_Tool.Add_Workflow_Form.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Add_Workflow_Form.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Add_Workflow_Form.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Add_Workflow_Form.Workflow_Type">
+            <summary> Gets the workflow type selected by the user </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Add_Workflow_Form.Workflow_Notes">
+            <summary> Gets any progress notes entered by the user </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Add_Workflow_Form.Workflow_Date">
+            <summary> Gets the workflow date entered by the user </summary>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Edit_Disposition_Advice_Form">
+            <summary> Form is used to edit the disposition advice on an item or a
+            set of items </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Edit_Disposition_Advice_Form.#ctor">
+            <summary> Constructor for a new instance of the Edit_Disposition_Advice_Form form </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Edit_Disposition_Advice_Form.#ctor(System.Int32,System.String)">
+            <summary> Constructor for a new instance of the Edit_Disposition_Advice_Form class </summary>
+            <param name="Initial_Disposition_Type"> Initialy disposition type to display </param>
+            <param name="Initial_Notes"> Initial disposition advice notes to display </param>
+        </member>
+        <member name="F:SobekCM.Management_Tool.Edit_Disposition_Advice_Form.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Edit_Disposition_Advice_Form.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Edit_Disposition_Advice_Form.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Edit_Disposition_Advice_Form.Disposition_Type_ID">
+            <summary> Gets the disposition type id selected by the user </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Edit_Disposition_Advice_Form.Disposition_Notes">
+            <summary> Gets any disposition notes entered by the user </summary>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Enter_Tracking_Box_Form">
+            <summary> Form is used to allow a user to enter a tracking box into a small
+            pop-up form, for searching or for updating an item or a set of items </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Enter_Tracking_Box_Form.#ctor">
+            <summary> Constructor for a new instance of the Enter_Tracking_Box_Form form </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Enter_Tracking_Box_Form.#ctor(System.String)">
+            <summary> Constructor for a new instance of the Enter_Tracking_Box_Form class </summary>
+            <param name="Initial_Tracking_Box"> Initial tracking box to display in this form </param>
+        </member>
+        <member name="F:SobekCM.Management_Tool.Enter_Tracking_Box_Form.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Enter_Tracking_Box_Form.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Enter_Tracking_Box_Form.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Enter_Tracking_Box_Form.New_Tracking_Box">
+            <summary> Gets the tracking box information entered by the user </summary>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Ad_Hoc_Report_Display_Form">
+            <summary> Form displays the user-requested ad hoc report </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Ad_Hoc_Report_Display_Form.#ctor(System.Data.DataSet)">
+            <summary> Constructor for a new instance of the Ad_Hoc_Report_Display_Form form </summary>
+            <param name="Display_Set">Set of titles/items to display within this form</param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Ad_Hoc_Report_Display_Form.OnResize(System.EventArgs)">
+            <summary> Method is called whenever this form is resized. </summary>
+            <param name="e"></param>
+            <remarks> This redraws the background of this form </remarks>
+        </member>
+        <member name="F:SobekCM.Management_Tool.Ad_Hoc_Report_Display_Form.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Ad_Hoc_Report_Display_Form.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Ad_Hoc_Report_Display_Form.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Ad_Hoc_Reporting_Query_Form">
+            <summary> Form is used to retrieve the user's requested search or browse for an ad hoc
+            report and only displays if the user does not use a hotkey to take an existing search and 
+            display it as an ad hoc report  </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Ad_Hoc_Reporting_Query_Form.#ctor">
+            <summary> Constructor for a new instance of the Ad_Hoc_Reporting_Query_Form form </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Ad_Hoc_Reporting_Query_Form.#ctor(SobekCM.Library.Search.SobekCM_Search_Object,System.Data.DataSet)">
+            <summary> Constructor for a new instance of the Ad_Hoc_Reporting_Query_Form form </summary>
+            <param name="Initial_Search"> Initial search to display in this form </param>
+            <param name="Initial_DataSet"> Initial dataset to display, which matches the intial search </param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Ad_Hoc_Reporting_Query_Form.OnResize(System.EventArgs)">
+            <summary> Method is called whenever this form is resized. </summary>
+            <param name="e"></param>
+            <remarks> This redraws the background of this form </remarks>
+        </member>
+        <member name="F:SobekCM.Management_Tool.Ad_Hoc_Reporting_Query_Form.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Ad_Hoc_Reporting_Query_Form.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Ad_Hoc_Reporting_Query_Form.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Controls.SobekCM_Item_Discovery_Panel">
+            <summary>Control is used to allow the user to narrow the rows which should show in the 
+            main section of the SMaRT Tool </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Controls.SobekCM_Item_Discovery_Panel.#ctor">
+            <summary> Constructor for a new instance of the SobekCM_Item_Discovery_Panel user control  </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Controls.SobekCM_Item_Discovery_Panel.Finish_Loading_Data">
+            <summary> Finish loading all the data needed to populate this selection panel </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Controls.SobekCM_Item_Discovery_Panel.Clear_Search_Boxes">
+            <summary> Clear all the search box information </summary>
+        </member>
+        <member name="F:SobekCM.Management_Tool.Controls.SobekCM_Item_Discovery_Panel.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Controls.SobekCM_Item_Discovery_Panel.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Controls.SobekCM_Item_Discovery_Panel.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Controls.SobekCM_Item_Discovery_Panel.Current_Search">
+            <summary> Gets the current search object for the user's requested search or browse  </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Controls.SobekCM_Item_Discovery_Panel.Search_Precision">
+            <summary> Gets the user requested search precision </summary>
+        </member>
+        <member name="E:SobekCM.Management_Tool.Controls.SobekCM_Item_Discovery_Panel.Search_Requested">
+            <summary> Event is fired when the user requests a new search or browse </summary>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Controls.SobekCM_Item_Discovery_Panel.Search_Requested_Delegate">
+            <summary> Delegate defines the signature for the event fired when the user selects a new search  </summary>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Update_Born_Digital_Form">
+            <summary> Form is used to update the born digital flag on an item or a set of items </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Update_Born_Digital_Form.#ctor">
+            <summary> Constructor for a new instance of the Update_Born_Digital_Form form </summary>
+        </member>
+        <member name="F:SobekCM.Management_Tool.Update_Born_Digital_Form.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Update_Born_Digital_Form.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Update_Born_Digital_Form.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Update_Born_Digital_Form.Born_Digital_Flag">
+            <summary> Gets the born digital flag indicated by user </summary>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Update_Disposition_Form">
+            <summary> Form is used to update the disposition of an item or set of items  </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Update_Disposition_Form.#ctor">
+            <summary> Constructor for a new instance of the Update_Disposition_Form form </summary>
+        </member>
+        <member name="F:SobekCM.Management_Tool.Update_Disposition_Form.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Update_Disposition_Form.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Update_Disposition_Form.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Update_Disposition_Form.Disposition_Type_ID">
+            <summary> Gets the disposition type id selected by the user </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Update_Disposition_Form.Disposition_Notes">
+            <summary> Gets any disposition notes entered by the user </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Update_Disposition_Form.Disposition_Date">
+            <summary> Gets any disposition date entered by the user </summary>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Update_Material_Received_Form">
+            <summary> Form allows the user to update the material received flag for an item
+            or a set of items  </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Update_Material_Received_Form.#ctor">
+            <summary> Constructor for a new instance of the Update_Material_Received_Form form </summary>
+        </member>
+        <member name="F:SobekCM.Management_Tool.Update_Material_Received_Form.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Update_Material_Received_Form.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Update_Material_Received_Form.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Update_Material_Received_Form.Date_Received">
+            <summary> Gets the date received information the user entered </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Update_Material_Received_Form.Estimated">
+            <summary> Gets the flag indicated the date received is a wide estimate </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Update_Material_Received_Form.Notes">
+            <summary> Gets any notes associated with the material received event </summary>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Volume_Import_Form">
+            <summary> Form is used to import a spreadsheet of new volumes to add to a single title  </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Volume_Import_Form.#ctor">
+            <summary> Constructor for a new instance of the Volume_Import_Form form  </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Volume_Import_Form.#ctor(System.String,System.String,System.Data.DataTable)">
+            <summary> Constructor for a new instance of the Volume_Import_Form form </summary>
+            <param name="bibid">Bibliographic identifier for the title to add volumes to</param>
+            <param name="grouptitle">Group title for the title to add volumes to</param>
+            <param name="childTable"></param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Volume_Import_Form.OnResize(System.EventArgs)">
+            <summary> Method is called whenever this form is resized. </summary>
+            <param name="e"></param>
+            <remarks> This redraws the background of this form </remarks>
+        </member>
+        <member name="F:SobekCM.Management_Tool.Volume_Import_Form.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Volume_Import_Form.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Volume_Import_Form.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Reports.Aggregation_Space_Used_Form">
+            <summary> Form collects input to determine the details for the aggregation space used report </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Reports.Aggregation_Space_Used_Form.#ctor">
+            <summary> Constructor for a new instance of the Aggregation_Space_Used_Form class </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Reports.Aggregation_Space_Used_Form.OnResize(System.EventArgs)">
+            <summary> Method is called whenever this form is resized. </summary>
+            <param name="e"></param>
+            <remarks> This redraws the background of this form </remarks>
+        </member>
+        <member name="F:SobekCM.Management_Tool.Reports.Aggregation_Space_Used_Form.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Reports.Aggregation_Space_Used_Form.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Reports.Aggregation_Space_Used_Form.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:SobekCM.Management_Tool.BibIdReport_Printer">
+            <summary> BibIdReport_Printer is the class which is used to print 
+            the tracking-style report for an item group (title) or a single item (volume). </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.BibIdReport_Printer.#ctor(System.Drawing.Printing.PrintDocument,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary> Constructor for a new instance of the BibIdReport_Printer class </summary>
+            <param name="printDocument1"> Print document to use to print the report for a particular item or title </param>
+            <param name="BibID"> </param>
+            <param name="VID"></param>
+            <param name="GroupTitle"></param>
+            <param name="Title"></param>
+            <param name="Author"></param>
+            <param name="Publisher"></param>
+            <param name="MaterialType"></param>
+            <param name="ALEPH"></param>
+            <param name="OCLC"></param>
+            <param name="Level1_Text"></param>
+            <param name="Level2_Text"></param>
+            <param name="Level3_Text"></param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.BibIdReport_Printer.Print_Title_Report(System.Drawing.Graphics)">
+            <summary> Print the report for this title </summary>
+            <param name="g"></param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Importer.Forms.Importer_Form.OnResize(System.EventArgs)">
+            <summary> Method is called whenever this form is resized. </summary>
+            <param name="e"></param>
+            <remarks> This redraws the background of this form </remarks>
+        </member>
+        <member name="F:SobekCM.Management_Tool.Importer.Forms.Importer_Form.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Importer.Forms.Importer_Form.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Importer.Forms.Importer_Form.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Reports.Items_Pending_Online_Complete_Form">
+            <summary> Form displays the items which are QC complete but are pending online complete,
+            and are currently set to PRIVATE </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Reports.Items_Pending_Online_Complete_Form.#ctor">
+            <summary> Constructor for a new instance of the Items_Pending_Online_Complete_Form form </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Reports.Items_Pending_Online_Complete_Form.OnResize(System.EventArgs)">
+            <summary> Method is called whenever this form is resized. </summary>
+            <param name="e"></param>
+            <remarks> This redraws the background of this form </remarks>
+        </member>
+        <member name="F:SobekCM.Management_Tool.Reports.Items_Pending_Online_Complete_Form.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Reports.Items_Pending_Online_Complete_Form.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Reports.Items_Pending_Online_Complete_Form.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Reports.Reports_Form">
+            <summary> Reporting form for the SMaRT tool ( SobekCM Management and Reporting Tool )</summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Reports.Reports_Form.#ctor">
+            <summary> Constructor for a new instance of the MainForm class </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Reports.Reports_Form.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Reports.Reports_Form.Dispose(System.Boolean)">
+            <summary>Clean up any resources being used.</summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Reports.Reports_Form.OnResize(System.EventArgs)">
+            <summary> Method is called whenever this form is resized. </summary>
+            <param name="e"></param>
+            <remarks> This redraws the background of this form </remarks>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Importer.DataGridPrinter">
+            <summary> Class is used to print a data grid to a printer. <br /> <br /> </summary>
+            <remarks> Adapted by Mark Sullivan (2005) from original by Michael Gold (2002). </remarks>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Importer.DataGridPrinter.#ctor(System.Windows.Forms.DataGrid,System.Drawing.Printing.PrintDocument,System.Data.DataTable)">
+            <summary> Constructor for a new instance of this class </summary>
+            <param name="aGrid"></param>
+            <param name="aPrintDocument"></param>
+            <param name="aTable"></param>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Importer.Forms.MARC_Importer_Form">
+            <summary> Form allows the user to set the source and destination
+            files for this process.  <br /> <br /> </summary>
+            <remarks> Written by Mark Sullivan (2005) </remarks>
+            <example> <img src="Source_Setup_Form2.jpg" /> </example>
+        </member>
+        <member name="F:SobekCM.Management_Tool.Importer.Forms.MARC_Importer_Form.processThread">
+            <summary> Thread in which the processor runs </summary>
+        </member>
+        <member name="F:SobekCM.Management_Tool.Importer.Forms.MARC_Importer_Form.processor">
+            <summary> Processor object which actually parses the input file and
+            gets the data for each item. </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Importer.Forms.MARC_Importer_Form.#ctor">
+            <summary> Constructor for a new instance of this class </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Importer.Forms.MARC_Importer_Form.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Importer.Forms.MARC_Importer_Form.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Importer.Forms.MARC_Importer_Form.OnResize(System.EventArgs)">
+            <summary> Method is called whenever this form is resized. </summary>
+            <param name="e"></param>
+            <remarks> This redraws the background of this form </remarks>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Importer.Forms.MARC_Importer_Form.Import_Records">
+            <summary> Imports the records from the indicated source file </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Importer.Forms.MARC_Importer_Form.Browse_Source">
+            <summary> Browse to the source file to import </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Importer.Forms.MARC_Importer_Form.Last_Tickler">
+            <summary> Last tickler assigned through the form, during an import </summary>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Importer.Forms.Matching_Record_Dialog_Form">
+            <summary> This is a dialog form that appears when a user trys to input a data row without a bib id and the row matches
+            an existing bib record in the Tracking database.  The user must select either to overlay the existing bib record, create
+            a new bib record, or skip the row in the input file.</summary>
+            <remarks> This default radio button is used to force the other radio buttons to be unchecked when the form is displayed. </remarks>
+        </member>
+        <member name="F:SobekCM.Management_Tool.Importer.Forms.Matching_Record_Dialog_Form.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Importer.Forms.Matching_Record_Dialog_Form.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Importer.Forms.Matching_Record_Dialog_Form.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Importer.Forms.Results_Form">
+            <summary> Form displays a simple <see cref="T:System.Windows.Forms.DataGrid"/> and allows the user to print
+            reports based on that data. <br/> <br/> </summary>
+            <remarks> Written by Mark Sullivan (2005) </remarks>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Importer.Forms.Results_Form.#ctor(System.Data.DataTable,SobekCM.Management_Tool.Importer.Importer_Type_Enum,System.Boolean)">
+            <summary> Constructor for a new instance of this class </summary>
+            <param name="resultSet"> Results set to display </param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Importer.Forms.Results_Form.Dispose(System.Boolean)">
+            <summary> Clean up any resources being used.  </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Importer.Forms.Results_Form.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Importer.Forms.Results_Form.OnResize(System.EventArgs)">
+            <summary> Method is called whenever this form is resized. </summary>
+            <param name="e"></param>
+            <remarks> This redraws the background of this form </remarks>
+        </member>
+        <member name="F:SobekCM.Management_Tool.Importer.Forms.Select_Material_Type_Form.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Importer.Forms.Select_Material_Type_Form.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Importer.Forms.Select_Material_Type_Form.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:SobekCM.Management_Tool.Importer.Forms.Select_Projects_Form.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Importer.Forms.Select_Projects_Form.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Importer.Forms.Select_Projects_Form.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Importer.Forms.DataGridForm.OnResize(System.EventArgs)">
+            <summary> Method is called whenever this form is resized. </summary>
+            <param name="e"></param>
+            <remarks> This redraws the background of this form </remarks>
+        </member>
+        <member name="F:SobekCM.Management_Tool.Importer.Forms.DataGridForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Importer.Forms.DataGridForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Importer.Forms.DataGridForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Importer.Forms.SpreadSheet_Importer_Form.OnResize(System.EventArgs)">
+            <summary> Method is called whenever this form is resized. </summary>
+            <param name="e"></param>
+            <remarks> This redraws the background of this form </remarks>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Importer.Forms.SpreadSheet_Importer_Form.Import_Records(System.Data.DataTable)">
+            <summary> Imports the records from the indicated source file </summary>
+        </member>
+        <member name="F:SobekCM.Management_Tool.Importer.Forms.SpreadSheet_Importer_Form.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Importer.Forms.SpreadSheet_Importer_Form.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Importer.Forms.SpreadSheet_Importer_Form.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Importer.Forms.SpreadSheet_Importer_Form.Last_Tickler">
+            <summary> Last tickler assigned through the form, during an import </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Importer.baseImporter_Processor.add_to_database(SobekCM.Resource_Object.SobekCM_Item,System.String,System.Boolean,System.Boolean)">
+            <summary> Adds this bib id to the SobekCM database. </summary>
+            <param name="bibPackage"> Digital resource object to save to teh database </param>
+            <param name="source"> String indicates the source of this new item </param>
+            <param name="preview_mode"> Flag indicates this is preview mode </param>
+            <returns> TRUE if successful, otherwise FALSE </returns>
+            <remarks> If the save is successful, the new BibID, VID, ItemID, and GroupID are 
+            added to the digital resource object. </remarks>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Importer.baseImporter_Processor.is_bibid_format(System.String)">
+            <summary> Gets a flag indicating if the provided string appears to be in bib id format </summary>
+            <param name="test_string"> string to check for bib id format </param>
+            <returns> TRUE if this string appears to be in bib id format, otherwise FALSE </returns>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Importer.baseImporter_Processor.Error_Message">
+            <summary>Gets the formatted messages for errors that prevent saving</summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Importer.baseImporter_Processor.Tracking_Warnings">
+            <summary>Gets the formatted messages for warningd that do not prevent saving</summary>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Importer.MARC_Importer_Processor">
+            <summary> Processor object steps through the MARC file, and does all the necessary work. <br /> <br /> </summary>
+            <remarks> This runs in a seperate thread than the main form class. <br /> <br /> Written by Mark Sullivan (2005) </remarks>
+        </member>
+        <member name="F:SobekCM.Management_Tool.Importer.MARC_Importer_Processor.parser">
+            <summary> Object is used to actually step through the file and parse the
+            information into <see cref="!:SobekCM.Bib_Package.MARC.MARC_Record"/> object. </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Importer.MARC_Importer_Processor.#ctor(System.String,System.Boolean,System.String,SobekCM.Management_Tool.Importer.Constant_Fields,System.Boolean,System.String)">
+            <summary> Constructor for a new instance of this class </summary>
+            <param name="fields"> Fields which will be added to each record created </param>
+            <param name="inputFile"> Text of the input file </param>
+            <param name="outputFile"> Text for the output file as well </param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Importer.MARC_Importer_Processor.Do_Work">
+            <summary> Do the bulk of the work of stepping through the input file and
+            copying the data from the MARC record to the Tracking data object. </summary>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Importer.SpreadSheet_Importer_Processor">
+            <summary> Processor object steps through the MARC file, and does all the necessary work. <br /> <br /> </summary>
+            <remarks> This runs in a seperate thread than the main form class. <br /> <br /> </remarks>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Importer.SpreadSheet_Importer_Processor.#ctor(System.Data.DataTable,System.Collections.Generic.List{SobekCM.Resource_Object.Mapped_Fields},SobekCM.Management_Tool.Importer.Constant_Fields,System.Boolean)">
+            <summary> Constructor for a new instance of this class </summary>
+            <param name="InputDataTable">Table from the Excel spreadsheet being processed</param>
+            <param name="Mapping">Arraylist of 'enum Mapped_Fields' members.</param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Importer.SpreadSheet_Importer_Processor.Do_Work">
+            <summary> Do the bulk of the work of stepping through the input file and
+            copying the data from the Bib Package to the Tracking Database and creating METS files.</summary>
+        </member>
+        <member name="F:SobekCM.Management_Tool.Importer.Column_Assignment_Control.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Importer.Column_Assignment_Control.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Importer.Column_Assignment_Control.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:SobekCM.Management_Tool.Importer.Constant_Assignment_Control.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Importer.Constant_Assignment_Control.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Importer.Constant_Assignment_Control.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Importer.Column_Field_Map">
+            <summary>
+            Summary description for Column_Field_Map.
+            </summary>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Importer.Column_Field_Mapper">
+            <summary>
+            Summary description for Column_Field_Mapper.
+            </summary>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Importer.Constant_Fields">
+            <summary>
+            Summary description for Constant_Fields.
+            </summary>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Importer.Constant_Field_Data">
+            <summary>
+            Summary description for Constant_Field_Data.
+            </summary>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Importer.ExcelBibliographicReader">
+            <summary>
+            Summary description for ExcelBibliographicReader.
+            </summary>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Importer.iBibliographicReader">
+            <summary> Defines the basic methods expected from any bibliographic reader <br /> <br /> </summary>
+            <remarks> Written by Mark Sullivan (2005) </remarks>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Importer.iBibliographicReader.Check_Source">
+            <summary> Checks the source to make sure it exists, can be connected to, and conforms
+            to the expected format. </summary>
+            <returns> TRUE if everything checks out, otherwise FALSE </returns>
+            <remarks> This can be called before Next(), but is not mandatory. </remarks>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Importer.iBibliographicReader.Next">
+            <summary> Reads in the next bit of bibliographic information </summary>
+            <returns> Bibliographic information object, or NULL if there are no more to read </returns>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Importer.iBibliographicReader.Close">
+            <summary> Closes any resources which are being used by this reader </summary>
+            <remarks> This should always be called after reading </remarks>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Importer.iBibliographicReader.Count">
+            <summary> This will attempt to return the number of items which are available to be read.  </summary>
+            <remarks> If it is not possible to determine the number of items, -1 will be returned. </remarks>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Importer.ExcelBibliographicReader.GetExcelSheetNames(System.String)">
+            <summary>
+            This mehtod retrieves the excel sheet names from 
+            an excel workbook.
+            </summary>
+            <param name="Filename">The excel file name.</param>
+            <returns>String[]</returns>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Retrieve_Archives_Form">
+            <summary> Class is used to request retrieving some items from the local TIVOLI backup </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Retrieve_Archives_Form.#ctor(System.String,System.String)">
+            <summary> Constructor for a new instance of the Retrieve_Archives_Form form </summary>
+            <param name="BibID"> Bibliographic identifier for the title </param>
+            <param name="VID"> Volume identifier for the item within the title </param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Retrieve_Archives_Form.OnResize(System.EventArgs)">
+            <summary> Method is called whenever this form is resized. </summary>
+            <param name="e"></param>
+            <remarks> This redraws the background of this form </remarks>
+        </member>
+        <member name="F:SobekCM.Management_Tool.Retrieve_Archives_Form.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Retrieve_Archives_Form.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Retrieve_Archives_Form.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:SobekCM.Management_Tool.MainForm">
+            <summary> Main form for the SMaRT tool ( SobekCM Management and Reporting Tool )</summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.MainForm.#ctor">
+            <summary> Constructor for a new instance of the MainForm class </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.MainForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.MainForm.Dispose(System.Boolean)">
+            <summary>Clean up any resources being used.</summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.MainForm.OnResize(System.EventArgs)">
+            <summary> Method is called whenever this form is resized. </summary>
+            <param name="e"></param>
+            <remarks> This redraws the background of this form </remarks>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Arrow_TextBox">
+            <summary> Control is a textbox which listens for the up button, down button, and tab button, passing
+            these events out to an external control </summary>
+            <remarks> This class extends the TextBox control </remarks>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Arrow_TextBox.OnLostFocus(System.EventArgs)">
+            <summary> Overrides the base TextBox's onLostFocus method and stores the fact that 
+            focus has been unregistered </summary>
+            <param name="e"> Event arguments </param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Arrow_TextBox.OnMouseDown(System.Windows.Forms.MouseEventArgs)">
+            <summary> Overrides the base TextBox's OnMouseDown method and stores the fact that
+            focus has been registered </summary>
+            <param name="e"> Event arguments </param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Arrow_TextBox.PreProcessMessage(System.Windows.Forms.Message@)">
+            <summary> Overrides the base TextBox's PreProcessMessage method which listens for
+            key strokes and raises the appropriate events when an UP button, DOWN button, or 
+            TAB button is detected. </summary>
+            <param name="msg"> Message to be preprocessed </param>
+            <returns> TRUE if the keystroke is handled </returns>
+        </member>
+        <member name="E:SobekCM.Management_Tool.Arrow_TextBox.Up_Button_Pressed">
+            <summary> Event is fired when the user hits the UP button from within this text box </summary>
+        </member>
+        <member name="E:SobekCM.Management_Tool.Arrow_TextBox.Down_Button_Pressed">
+            <summary> Event is fired when the user hits the DOWN button from within this text box </summary>
+        </member>
+        <member name="E:SobekCM.Management_Tool.Arrow_TextBox.Tab_Button_Pressed">
+            <summary> Event is fired when the user hits the TAB button from within this text box </summary>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Arrow_TextBox.Arrow_TextBox_Delegate">
+            <summary> Empty delegate used for the events fired by the <see cref="T:SobekCM.Management_Tool.Arrow_TextBox"/> class's events </summary>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Number_TextBox">
+            <summary> Text box which only allows the entry of numeric values </summary>
+            <remarks> This is used during serial hierarchy editing and extends the TreeBox control </remarks>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Number_TextBox.OnLostFocus(System.EventArgs)">
+            <summary> Overrides the base TextBox's onLostFocus method and stores the fact that 
+            focus has been unregistered </summary>
+            <param name="e"> Event arguments </param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Number_TextBox.OnMouseDown(System.Windows.Forms.MouseEventArgs)">
+            <summary> Overrides the base TextBox's OnMouseDown method and stores the fact that
+            focus has been registered </summary>
+            <param name="e"> Event arguments </param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Number_TextBox.PreProcessMessage(System.Windows.Forms.Message@)">
+            <summary> Overrides the base TextBox's PreProcessMessage method which listens for
+            key strokes,raises the appropriate events when an UP button, DOWN button, or 
+            TAB button is detected, and only allows numeric values to be entered </summary>
+            <param name="msg"> Message to be preprocessed </param>
+            <returns> TRUE if the keystroke is handled </returns>
+        </member>
+        <member name="E:SobekCM.Management_Tool.Number_TextBox.Up_Button_Pressed">
+            <summary> Event is fired when the user hits the UP button from within this text box </summary>
+        </member>
+        <member name="E:SobekCM.Management_Tool.Number_TextBox.Down_Button_Pressed">
+            <summary> Event is fired when the user hits the DOWN button from within this text box </summary>
+        </member>
+        <member name="E:SobekCM.Management_Tool.Number_TextBox.Tab_Button_Pressed">
+            <summary> Event is fired when the user hits the TAB button from within this text box </summary>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Number_TextBox.Number_TextBox_Delegate">
+            <summary> Empty delegate used for the events fired by the <see cref="T:SobekCM.Management_Tool.Number_TextBox"/> class's events </summary>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Round_Button">
+            <summary> Custom user control draws a rounded button on a windows form </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Round_Button.#cctor">
+            <summary> Static constructor for the round button control </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Round_Button.#ctor">
+            <summary> Constructor for a new instance of the Round_Button control </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Round_Button.OnKeyDown(System.Windows.Forms.KeyEventArgs)">
+            <summary> Overrides tbe standard OnKeyDown method and listens for a value which should cause the button to be pressed </summary>
+            <param name="e"> Key event arguments </param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Round_Button.OnPaint(System.Windows.Forms.PaintEventArgs)">
+            <summary> Overrides tbe standard OnPaint method and draws this button </summary>
+            <param name="e"> Paint event arguments </param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Round_Button.OnEnter(System.EventArgs)">
+            <summary> Overrides tbe standard OnEnter method and causes this button to be redrawn </summary>
+            <param name="e"> Event arguments </param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Round_Button.OnLeave(System.EventArgs)">
+            <summary> Overrides tbe standard OnLeave method and causes this button to be redrawn </summary>
+            <param name="e"> Event arguments </param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Round_Button.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Round_Button.Inactive_Fill_Color">
+            <summary> Color used to fill the body of all inactive buttons </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Round_Button.Inactive_Border_Color">
+            <summary> Color used to draw the border of all inactive buttons </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Round_Button.Inactive_Text_Color">
+            <summary> Color used to draw the text of all inactive buttons </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Round_Button.Active_Fill_Color">
+            <summary> Color used to fill all active buttons </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Round_Button.Active_Border_Color">
+            <summary> Color used to draw the border of all active buttons </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Round_Button.Active_Text_Color">
+            <summary> Color used to draw the text on all active buttons </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Round_Button.Mouse_Down_Fill_Color">
+            <summary> Color used to fill all active buttons when an active button is selected </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Round_Button.Mouse_Down_Border_Color">
+            <summary> Color used to draw borders for all active buttons when an active button is selected </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Round_Button.Mouse_Down_Text_Color">
+            <summary> Color used to draw the text on all active buttons when an active button is selected </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Round_Button.Button_Enabled">
+            <summary> Flag indicates if this button is currently enabled </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Round_Button.Button_Text">
+            <summary> Text to be displayed within this button </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Round_Button.Button_Type">
+            <summary> Type of button to be rendered ( what type of arrow to display ) </summary>
+        </member>
+        <member name="E:SobekCM.Management_Tool.Round_Button.Button_Pressed">
+            <summary> Event is fired when this button is pressed </summary>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Round_Button.Button_Type_Enum">
+            <summary> Enumeration determines the type of arrow to display within the rendered button </summary>
+        </member>
+        <member name="F:SobekCM.Management_Tool.Round_Button.Button_Type_Enum.Standard">
+            <summary> Standard button does not have any arrows displayed </summary>
+        </member>
+        <member name="F:SobekCM.Management_Tool.Round_Button.Button_Type_Enum.Forward">
+            <summary> Button has a forward arrow pointing to the right </summary>
+        </member>
+        <member name="F:SobekCM.Management_Tool.Round_Button.Button_Type_Enum.Backward">
+            <summary> Button has a backward arrow pointing to the left </summary>
+        </member>
+        <member name="F:SobekCM.Management_Tool.Round_Button.Button_Type_Enum.Full_Backward">
+            <summary> Button has a backward arrow pointing to the left with a line indicating 
+            to go all the way to the start </summary>
+        </member>
+        <member name="F:SobekCM.Management_Tool.Round_Button.Button_Type_Enum.Full_Forward">
+            <summary> Button has a forward arrow pointing to the right with a line indicating
+            to go all the way to the end </summary>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Serial_Hierarchy_Row">
+            <summary> Control represents a single row in the serial hierarchy edit form </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Serial_Hierarchy_Row.#ctor(System.String)">
+            <summary> Constructor for a new instance of the Serial_Hierarchy_Row class </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Serial_Hierarchy_Row.Set_Interal_Focus(System.Int32)">
+            <summary> Sets the internal focus on one of the text boxes within this serial hierarchy </summary>
+            <param name="box"> Number indicates which text box to focus upon </param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Serial_Hierarchy_Row.Save(System.Data.DataColumn,System.Data.DataColumn,System.Data.DataColumn,System.Data.DataColumn,System.Data.DataColumn,System.Data.DataColumn)">
+            <summary> Save the values from the text boxes within this serial hierarchy row to the
+            item object held within this row </summary>
+            <returns> Return TRUE if successful, otherwise FALSE </returns>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Serial_Hierarchy_Row.Set_Serial_Hierarchy(System.Data.DataRow,System.Data.DataColumn,System.Data.DataColumn,System.Data.DataColumn,System.Data.DataColumn,System.Data.DataColumn,System.Data.DataColumn,System.Data.DataColumn,System.Data.DataColumn,System.Data.DataColumn)">
+            <summary> Sets the serial hierarchy displaying within this row </summary>
+            <param name="Item_Row"></param>
+            <param name="itemIdColumn"></param>
+            <param name="titleColumn"></param>
+            <param name="level1TextColumn"></param>
+            <param name="level1IndexColumn"></param>
+            <param name="level2TextColumn"></param>
+            <param name="level2IndexColumn"></param>
+            <param name="level3TextColumn"></param>
+            <param name="level3IndexColumn"></param>
+            <param name="vidColumn"></param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Serial_Hierarchy_Row.OnPaint(System.Windows.Forms.PaintEventArgs)">
+            <summary>  Override base OnPaint method which writes the VID as a graphics string on this row </summary>
+            <param name="e"> Paint event arguments </param>
+        </member>
+        <member name="F:SobekCM.Management_Tool.Serial_Hierarchy_Row.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Serial_Hierarchy_Row.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Serial_Hierarchy_Row.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Serial_Hierarchy_Row.Columns_Of_Interest">
+            <summary> Sets the number of columns of interest which should be emphasized in this row </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Serial_Hierarchy_Row.isXP">
+            <summary> Flag sets the border style of all the text boxes, depending on whether the
+            current windows appearance is XP-style or earlier Win95 style </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Serial_Hierarchy_Row.Index">
+            <summary> Sets the index for this serial hierarcy edit row </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Serial_Hierarchy_Row.Checked">
+            <summary> Gets and sets the flag indicating this row is checked within the serial hierarchy edit form </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Serial_Hierarchy_Row.Odd_Row">
+            <summary> Flag indicates if this is an odd row in the collection of rows to display </summary>
+            <remarks> This just affects the background color used, to make the complete list of rows
+            more readable. </remarks>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Serial_Hierarchy_Row.Serial_Hierarchy">
+            <summary> Gets and sets the item row with the serial hierarchy for this individual volume </summary>
+        </member>
+        <member name="E:SobekCM.Management_Tool.Serial_Hierarchy_Row.New_Row_Requested">
+            <summary> Event is fired when the user opts to move to the row before or after this one </summary>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Serial_Hierarchy_Row.Serial_Hiearchy_Row_Delegate">
+            <summary> Delegate used for the new row requested event, fired when a user opts to move to the row before or after this row </summary>
+            <param name="index"> Index for the requested row </param>
+            <param name="location"> Which text box the focus should be placed </param>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Edit_Serial_Hierarchy_Form">
+            <summary> Form is used to edit the serial hierarchy associated with an item group within a SobekCM library </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Edit_Serial_Hierarchy_Form.#ctor(System.String,SobekCM.Library.Items.SobekCM_Items_In_Title)">
+            <summary> Constructor for a new instance of the Edit_Item_Group_Form class </summary>
+            <param name="Group_Info"> List of all the items within this item group </param>
+            <param name="BibID"> BibID of the current item being displayed </param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Edit_Serial_Hierarchy_Form.OnResize(System.EventArgs)">
+            <summary> Method is called whenever this form is resized. </summary>
+            <param name="e"></param>
+            <remarks> This redraws the background of this form </remarks>
+        </member>
+        <member name="F:SobekCM.Management_Tool.Edit_Serial_Hierarchy_Form.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Edit_Serial_Hierarchy_Form.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Edit_Serial_Hierarchy_Form.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Find_Replace_Form">
+            <summary> Tool-type form is used to perform find and replace within serial hierarchy which is being edited </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Find_Replace_Form.#ctor(System.Boolean)">
+            <summary> Constructor for a new instance of the Find_Replace_Form class </summary>
+            <param name="defaultScopeRestricted"> Indicates if the default scope is set to restricted to checked rows </param>
+        </member>
+        <member name="F:SobekCM.Management_Tool.Find_Replace_Form.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Find_Replace_Form.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Find_Replace_Form.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Find_Replace_Form.Cancelled">
+            <summary> Returns flag which indicates if this find/replace request was cancelled </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Find_Replace_Form.Checked_Rows_Only">
+            <summary> Returns flag which indicates if this request should only be applied to those
+            rows which were checked on the serial hierarchy edit form </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Find_Replace_Form.Find_Value">
+            <summary> Gets the string value to be found and replaced </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Find_Replace_Form.Replace_Value">
+            <summary> Returns the value to be used during replacements </summary>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Reports.Groups_Needed_Serial_Hierarchy_Form">
+            <summary> Form displays the newspaper item groups which have items lacking serial hierarchy information  </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Reports.Groups_Needed_Serial_Hierarchy_Form.#ctor">
+            <summary> Constructor for a new instance of the Groups_Needed_Serial_Hierarchy_Form class </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Reports.Groups_Needed_Serial_Hierarchy_Form.OnResize(System.EventArgs)">
+            <summary> Method is called whenever this form is resized. </summary>
+            <param name="e"></param>
+            <remarks> This redraws the background of this form </remarks>
+        </member>
+        <member name="F:SobekCM.Management_Tool.Reports.Groups_Needed_Serial_Hierarchy_Form.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Reports.Groups_Needed_Serial_Hierarchy_Form.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Reports.Groups_Needed_Serial_Hierarchy_Form.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Retrieve_SobekCM_Items_Form">
+            <summary> Form is used to retrieve SobekCM_Items from a library, based on 
+            a SobekCM search or browse URL  </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Retrieve_SobekCM_Items_Form.#ctor">
+            <summary> Constructor for a new instance of the Retrieve_SobekCM_Items_Form class </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Retrieve_SobekCM_Items_Form.OnResize(System.EventArgs)">
+            <summary> Method is called whenever this form is resized. </summary>
+            <param name="e"></param>
+            <remarks> This redraws the background of this form </remarks>
+        </member>
+        <member name="F:SobekCM.Management_Tool.Retrieve_SobekCM_Items_Form.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Retrieve_SobekCM_Items_Form.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Retrieve_SobekCM_Items_Form.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Retrieval_Type_Enum">
+            <summary> Enumeration defines the type of retrieval to be performed </summary>
+        </member>
+        <member name="F:SobekCM.Management_Tool.Retrieval_Type_Enum.METS_Only">
+            <summary> Retrieve the METS files for the selected items </summary>
+        </member>
+        <member name="F:SobekCM.Management_Tool.Retrieval_Type_Enum.Complete">
+            <summary> Retrieve the complete package for the selected items </summary>
+        </member>
+        <member name="F:SobekCM.Management_Tool.Retrieval_Type_Enum.MARC_XML">
+            <summary> Retrieve a MarcXML report with the information or all selected items </summary>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Retrieve_SobekCM_Items_Progress_Delegate">
+            <summary> Delegate for the progress event during SobekCM item retrieval </summary>
+            <param name="currentItem"> Index of the ccurrently being progressed item </param>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Retrieve_SobekCM_Items_Complete_Delegate">
+            <summary> Delegate for the items complete event during SobekCM item retrieval </summary>
+            <param name="errorCount"> Number of errors encountered </param>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Retrieve_SobekCM_Items_File_Progress_Delegate">
+            <summary> Delegate for the individual file progress during a complete SobekCM item retrieval </summary>
+            <param name="fileCount"> Number of files processed </param>
+            <param name="maxFiles"> Complete number of files to be processed </param>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Retrieve_SobekCM_Items_Processor">
+            <summary> Processor class pulls packages (or portions of packages) from a SobekCM library </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Retrieve_SobekCM_Items_Processor.#ctor(System.Data.DataTable,System.String,SobekCM.Management_Tool.Retrieval_Type_Enum)">
+            <summary> Constructor for a new instance of the Retrieve_SobekCM_Items_Processor </summary>
+            <param name="Item_List"> List of items to retrieve </param>
+            <param name="Destination"> Destination (directory) for the retrieved items </param>
+            <param name="Retrieval_Type"> Type of retrieval to perform ( i.e, METS, complete package, MarcXML report, etc.. ) </param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Retrieve_SobekCM_Items_Processor.Start">
+            <summary> Start processing this item retrieval request </summary>
+        </member>
+        <member name="E:SobekCM.Management_Tool.Retrieve_SobekCM_Items_Processor.New_Progress">
+            <summary> Event is fired as each package's retrieval completes </summary>
+        </member>
+        <member name="E:SobekCM.Management_Tool.Retrieve_SobekCM_Items_Processor.Progress_Complete">
+            <summary> Event is fired when the retrieval process is complete </summary>
+        </member>
+        <member name="E:SobekCM.Management_Tool.Retrieve_SobekCM_Items_Processor.File_Progress">
+            <summary> Event is fired as each individual file is processed when retrieving complete packages </summary>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Settings.View_Items_Form_Action_On_Click_Enum">
+            <summary> Enumeration defines what occurs when a user clicks on an item group 
+            row in the view items form </summary>
+        </member>
+        <member name="F:SobekCM.Management_Tool.Settings.View_Items_Form_Action_On_Click_Enum.Show_Form">
+            <summary> Users is shown a form for the specific item group or item selected </summary>
+        </member>
+        <member name="F:SobekCM.Management_Tool.Settings.View_Items_Form_Action_On_Click_Enum.Open_On_Web">
+            <summary> Item group or item is opened on the web, in the default browser </summary>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Settings.Single_Result_Action_Enum">
+            <summary> Enumeration defines what occurs when a user performs a search in the discovery
+            form and has only one matching item group </summary>
+        </member>
+        <member name="F:SobekCM.Management_Tool.Settings.Single_Result_Action_Enum.Show_In_Grid">
+            <summary> Users is shown the result in the grid, just like any other result set </summary>
+        </member>
+        <member name="F:SobekCM.Management_Tool.Settings.Single_Result_Action_Enum.Show_Details_For_Single_Item">
+            <summary> Item group is opened for display, either online or in the form </summary>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Settings.SMaRT_UserSettings">
+            <summary> SMaRT_UserSettings is a static class which holds all of the settings for this 
+            particular user and assemply in the Isolated Storage. </summary>
+        </member>
+        <member name="F:SobekCM.Management_Tool.Settings.SMaRT_UserSettings.fileName">
+            <summary> Name of the XML file used to store the QC settings </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Settings.SMaRT_UserSettings.#cctor">
+            <summary> Static constructor for the SMaRT_UserSettings class. </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Settings.SMaRT_UserSettings.Load">
+            <summary> Load the individual user settings </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Settings.SMaRT_UserSettings.Save">
+            <summary> Save the individual user settings </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Settings.SMaRT_UserSettings.Item_Discovery_Form_Single_Result_Action">
+            <summary> Preference on the Item Discovery form when a single item group is returned from a search </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Settings.SMaRT_UserSettings.Search_Precision">
+            <summary> Remembers last search precision used during item discovery or ad hoc report generation </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Settings.SMaRT_UserSettings.Item_Discovery_Form_Action_On_Click">
+            <summary> Preference on the View Items form when a single item group row is double clicked </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Settings.SMaRT_UserSettings.Item_Group_Form_Action_On_Click">
+            <summary> Preference on the View Items form when a single item group row is double clicked </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Settings.SMaRT_UserSettings.Ad_Hoc_Form_Action_On_Click">
+            <summary> Preference on the Ad Hoc Report form when a single item group row is double clicked </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Settings.SMaRT_UserSettings.Title_Grid_Print_Landscape">
+            <summary> Flag determines if the user is currently printing in landscape mode when printing a grid of different titles  </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Settings.SMaRT_UserSettings.Item_Grid_Print_Landscape">
+            <summary> Flag determines if the user is currently printing in landscape mode when printing a grid of individual items within a title </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Settings.SMaRT_UserSettings.Item_Discovery_Form_Size">
+            <summary> Last size of the item discovery form </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Settings.SMaRT_UserSettings.Item_Discovery_Form_Maximized">
+            <summary> Gets a flag indicating if the item discovery form was last maximized </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Settings.SMaRT_UserSettings.View_Item_Group_Form_Size">
+            <summary> Last size of the view item group form </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Settings.SMaRT_UserSettings.View_Item_Group_Form_Maximized">
+            <summary> Gets a flag indicating if the view item group form was last maximized </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Settings.SMaRT_UserSettings.View_Item_Form_Size">
+            <summary> Last size of the view items form </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Settings.SMaRT_UserSettings.View_Item_Form_Maximized">
+            <summary> Gets a flag indicating if the view items form was last maximized </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Settings.SMaRT_UserSettings.Edit_Hierarchy_Form_Size">
+            <summary> Last size of the edit serial hierarchy form </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Settings.SMaRT_UserSettings.Edit_Hierarchy_Form_Maximized">
+            <summary> Gets a flag indicating if the edit serial hierarchy form was last maximized </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Settings.SMaRT_UserSettings.Ad_Hoc_Report_Form_Size">
+            <summary> Last size of the ad hoc report display form </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Settings.SMaRT_UserSettings.Ad_Hoc_Report_Form_Maximized">
+            <summary> Gets a flag indicating if the ad hoc report display form was last maximized </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Settings.SMaRT_UserSettings.Tracking_Box_Report_Form_Size">
+            <summary> Last size of the tracking box report form </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Settings.SMaRT_UserSettings.Tracking_Box_Report_Form_Maximized">
+            <summary> Gets a flag indicating if the tracking box report form was last maximized </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Settings.SMaRT_UserSettings.User_Name">
+            <summary> Indicates the user's preferred user name, used when retrieving items from archive </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Settings.SMaRT_UserSettings.Email_Address">
+            <summary> Indicates the user's preferred email address, used when retrieving items from archive </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Settings.SMaRT_UserSettings.Discovery_Form_Title_Width">
+            <summary> Gets the last width selected by the user for the TITLE field on the results
+            grid in the main discovery form </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Settings.SMaRT_UserSettings.Discovery_Form_Author_Width">
+            <summary> Gets the last width selected by the user for the AUTHOR field on the results
+            grid in the main discovery form </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Settings.SMaRT_UserSettings.Discovery_Form_Publisher_Width">
+            <summary> Gets the last width selected by the user for the PUBLISHER field on the results
+            grid in the main discovery form </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Settings.SMaRT_UserSettings.View_Item_Group_Form_Title_Width">
+            <summary> Gets the last width selected by the user for the TITLE field on the item
+            grid in the view item group form </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Settings.SMaRT_UserSettings.View_Item_Group_Form_Author_Width">
+            <summary> Gets the last width selected by the user for the AUTHOR field on the item
+            grid in the view item group form </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Settings.SMaRT_UserSettings.View_Item_Group_Form_Publisher_Width">
+            <summary> Gets the last width selected by the user for the PUBLISHER field on the item
+            grid in the view item group form </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Settings.SMaRT_UserSettings.View_Item_Group_Form_Date_Width">
+            <summary> Gets the last width selected by the user for the PUBLICATION DATE field on the item
+            grid in the view item group form </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Settings.SMaRT_UserSettings.View_Item_Group_Form_Level1_Width">
+            <summary> Gets the last width selected by the user for the SERIAL HIERARCHY LEVEL 1 field on the item
+            grid in the view item group form </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Settings.SMaRT_UserSettings.View_Item_Group_Form_Level2_Width">
+            <summary> Gets the last width selected by the user for the SERIAL HIERARCHY LEVEL 2 field on the item
+            grid in the view item group form </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Settings.SMaRT_UserSettings.View_Item_Group_Form_Level3_Width">
+            <summary> Gets the last width selected by the user for the SERIAL HIERARCHY LEVEL 3 field on the item
+            grid in the view item group form </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Settings.SMaRT_UserSettings.Ad_Hoc_Report_Form_Title_Width">
+            <summary> Gets the last width selected by the user for the TITLE field on the item
+            grid in the ad hoc report form </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Settings.SMaRT_UserSettings.Ad_Hoc_Report_Form_Author_Width">
+            <summary> Gets the last width selected by the user for the AUTHOR field on the item
+            grid in the ad hoc report form </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Settings.SMaRT_UserSettings.Ad_Hoc_Report_Form_Publisher_Width">
+            <summary> Gets the last width selected by the user for the PUBLISHER field on the item
+            grid in the ad hoc report form </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Settings.SMaRT_UserSettings.Ad_Hoc_Report_Form_Date_Width">
+            <summary> Gets the last width selected by the user for the PUBLICATION DATE field on the item
+            grid in the ad hoc report form </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Settings.SMaRT_UserSettings.Ad_Hoc_Report_Form_Level1_Width">
+            <summary> Gets the last width selected by the user for the SERIAL HIERARCHY LEVEL 1 field on the item
+            grid in the ad hoc report form </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Settings.SMaRT_UserSettings.Ad_Hoc_Report_Form_Level2_Width">
+            <summary> Gets the last width selected by the user for the SERIAL HIERARCHY LEVEL 2 field on the item
+            grid in the ad hoc report form </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Settings.SMaRT_UserSettings.Ad_Hoc_Report_Form_Level3_Width">
+            <summary> Gets the last width selected by the user for the SERIAL HIERARCHY LEVEL 3 field on the item
+            grid in the ad hoc report form </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Settings.SMaRT_UserSettings.Discovery_Panel_Search_Term1">
+            <summary> Gets the last search term for the first of the search boxes in the discovery panel  </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Settings.SMaRT_UserSettings.Discovery_Panel_Search_Term2">
+            <summary> Gets the last search term for the second of the search boxes in the discovery panel  </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Settings.SMaRT_UserSettings.Discovery_Panel_Search_Term3">
+            <summary> Gets the last search term for the third of the search boxes in the discovery panel  </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Settings.SMaRT_UserSettings.Discovery_Panel_Search_Term4">
+            <summary> Gets the last search term for the fourth of the search boxes in the discovery panel  </summary>
+        </member>
+        <member name="T:SobekCM.Management_Tool.StartUp">
+            <summary> Start up for the entire application looks for a new version, and pulls the basic
+            configuration from the database before launching the main form </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.StartUp.Main">
+            <summary>
+            The main entry point for the application.
+            </summary>
+        </member>
+        <member name="T:DLC.Tools.Forms.ErrorMessageBox">
+            <summary> Class is used to launch the internal error message box which provides
+            access to the stack trace of any caught exceptions  </summary>
+        </member>
+        <member name="M:DLC.Tools.Forms.ErrorMessageBox.Show(System.String,System.String,System.Exception)">
+            <summary> Display an error message box with access to the stack trace for 
+            any caught exception  </summary>
+            <param name="Message"> Message to display </param>
+            <param name="Title"> Title for error message box which pops up </param>
+            <param name="ee"> Exception to include access to the stack trace and information </param>
+            <returns> Dialog result from the box </returns>
+        </member>
+        <member name="M:DLC.Tools.Forms.ErrorMessageBox.Show(System.String,System.String)">
+            <summary> Display an error message box with access to the stack trace for 
+            any caught exception  </summary>
+            <param name="Message"> Message to display </param>
+            <param name="Title"> Title for error message box which pops up </param>
+            <returns> Dialog result from the box </returns>
+        </member>
+        <member name="M:DLC.Tools.Forms.ErrorMessageBox.Show(System.String)">
+            <summary> Display an error message box with access to the stack trace for 
+            any caught exception  </summary>
+            <param name="Message"> Message to display </param>
+            <returns> Dialog result from the box </returns>
+        </member>
+        <member name="T:DLC.Tools.Forms.ErrorMessageBox_Internal">
+            <summary> Form displays an error message with optional access to the stack trace of
+            any related, caught exceptions  </summary>
+        </member>
+        <member name="M:DLC.Tools.Forms.ErrorMessageBox_Internal.#ctor(System.String,System.String,System.Exception)">
+            <summary> Constructor for a new instance of the ErrorMessageBox_Internal error dialog form </summary>
+            <param name="message"> Message to display</param>
+            <param name="title"> Title for error message box which pops up</param>
+            <param name="ee"> Exception to include access to the stack trace and information</param>
+        </member>
+        <member name="F:DLC.Tools.Forms.ErrorMessageBox_Internal.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:DLC.Tools.Forms.ErrorMessageBox_Internal.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:DLC.Tools.Forms.ErrorMessageBox_Internal.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:SobekCM.Management_Tool.About">
+             <summary> About is a form used to display the simple versioning and copyright information
+             for an application. <br/> <br/> </summary>
+             <remarks> This form appears and goes away when the user clicks the form anywhere.  This form
+             is often used in concert with the <see cref="T:SobekCM.Management_Tool.Versioning.VersionChecker"/> and <see cref="T:SobekCM.Management_Tool.Versioning.VersionConfigSettings"/> objects,
+             as shown in the second example below. 	
+             <br/> <br/>
+             Object created by Mark V Sullivan (2003) for University of Florida's Digital Library Center.  </remarks>
+             <example> EXAMPLE 1: Shows how to use this form in a stand-alone application.
+             <code> <SPAN class="lang">[C#]</SPAN> 
+            	using System;
+            	using UF.Libraries.DLC.CustomTools.Forms;
+            
+            	namespace UF.Libraries.DLC.CustomTools
+            	{
+            		public class AboutForm_Example_1
+            		{
+            			static void Main() 
+            			{
+            				// Create a new About Form
+            				About showAbout = new About( "Baldwin Record Importer", "1.1.0" );
+            				showAbout.ShowDialog();
+            			}
+            		}
+            	}
+            	</code> <br/>
+            	Below is what this form will look like: <br/> <br/>
+            	<img src="AboutForm.jpg"/>
+             <br/> <br/> <br/>
+             EXAMPLE 2: Using the About form in conjunction with the <see cref="T:SobekCM.Management_Tool.Versioning.VersionChecker"/> solution and <see cref="T:SobekCM.Management_Tool.Versioning.VersionConfigSettings"/> object.
+             <code> <SPAN class="lang">[C#]</SPAN> 
+            	using System;
+            	using UF.Libraries.DLC.CustomTools;
+            	using UF.Libraries.DLC.CustomTools.Forms;
+            
+            	namespace UF.Libraries.DLC.CustomTools
+            	{
+            		public class AboutForm_Example_2
+            		{
+            			static void Main() 
+            			{
+            				// Create a new About Form
+            				About showAbout = new About( VersionConfigSettings.AppName, VersionConfigSettings.AppName );
+            				showAbout.ShowDialog();
+            			}
+            		}
+            	}
+            	</code>
+             </example>
+        </member>
+        <member name="F:SobekCM.Management_Tool.About.appNameLabel">
+            <summary> Private form-related Label variable holds the textual boxes. </summary>
+        </member>
+        <member name="F:SobekCM.Management_Tool.About.ufSealPictureBox">
+            <summary> Private form-related PictureBox variable holds the UF seal. </summary>
+        </member>
+        <member name="F:SobekCM.Management_Tool.About.uFimagePanel">
+            <summary> Private form-related Panel variable holds all the information in the white box </summary>
+        </member>
+        <member name="F:SobekCM.Management_Tool.About.components">
+            <summary> Required designer variable. </summary>
+        </member>
+        <member name="F:SobekCM.Management_Tool.About.developedByLabel">
+            <summary> Private form-related Label variable holds the textual boxes. </summary>
+        </member>
+        <member name="F:SobekCM.Management_Tool.About.versionLabel">
+            <summary> Private form-related Label variable holds the textual boxes. </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.About.#ctor(System.String,System.String)">
+            <summary> Default constructor accepts the version number of this software. </summary>
+            <param name="appName"> Name of the application </param>
+            <param name="version"> Version number for the application </param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.About.Dispose(System.Boolean)">
+            <summary> Clean up any resources being used. </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.About.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.About.About_Click(System.Object,System.EventArgs)">
+            <summary> Private Event_Handler is called when the form is clicked.  
+            This closes the form. </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Versioning.VersionCheckerConfigSection">
+            <summary> Custom version check configuration section which is essentially a name value collection </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Versioning.VersionCheckerConfigSection.Settings">
+            <summary> Gets the collection of name-value pairs from this custom configuration section </summary>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Versioning.VersionChecker">
+             <summary>
+             VersionChecker is a class used to check against a XML versioning database file on the network
+             drives to determine if a newer version of an application is available. <br /> <br /> </summary>
+             <remarks>  This object should be used as an application is launched to check against the XML
+             versioning database on the network.  If there is a later version of the calling application, then this class
+             will tell whether the update is mandatory.  If the update is requested, another Process
+             can be launched to do the update. <br /> <br />
+             To use this class, a custom versioning section (shown below) must exist in the Application Config file.  An example
+             file is <a href="example.exe.config.html">here</a>, and below are just the sections needed.  This section must include 
+             information on where the XML versioning database sits, as well as the application name and current version.
+             <code>
+            	&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+            	&lt;configuration&gt;
+            
+            		&lt;!-- Define a custom section for VersionChecking                            --&gt;
+            		&lt;configSections&gt;
+            			&lt;section name=&quot;VersionChecker&quot;  type=&quot;System.Configuration.NameValueSectionHandler&quot; /&gt;
+            		&lt;/configSections&gt;
+               
+            		&lt;!-- Below is information to allow for VersionChecking prior to execution.  --&gt;
+            		&lt;!-- XML_Directory holds all the centralized version information and then   --&gt;
+            		&lt;!-- the AppName and Version allow for checking this particular app.        --&gt;
+            		&lt;VersionChecker&gt;
+            			&lt;add key=&quot;XML_Directory&quot; value=&quot;\\Smathersnt12\DLCdocs\ScanQC\People\Mark\Applications\Versioning&quot; /&gt;
+            			&lt;add key=&quot;AppName&quot; value=&quot;Aerial Image Collector&quot; /&gt;
+            			&lt;add key=&quot;Version&quot; value=&quot;2.1.0&quot; /&gt;
+            		&lt;/VersionChecker&gt;
+               
+            	&lt;/configuration&gt; 
+             </code>
+             <br /> Object created by Mark V Sullivan (2003) for University of Florida's Digital Library Center. </remarks>
+             <example> EXAMPLE 1: Example <a href="VersioningDB.xml">Versioning XML database</a> can be found below and 
+             <a href="VersioningDB.xml">here</a>.  The <a href="VersioningDB.xsd">Versioning XSD file</a> can be 
+             found <a href="VersioningDB.xsd">here</a>:
+             <code>
+            	&lt;VersionChecker xmlns=&quot;DLC&quot;&gt;
+            		&lt;Application&gt;
+            			&lt;Name&gt;DLC CD Manager&lt;/Name&gt;
+            			&lt;NewVersion&gt;1.1.2&lt;/NewVersion&gt;
+            			&lt;LastOldVersion&gt;1.0.2&lt;/LastOldVersion&gt;
+            			&lt;SetupFile&gt;\\Smathersnt12\DLCdocs\ScanQC\People\Mark\SetupFiles\DLC CD Manager\Upgrade Only\Setup.exe&lt;/SetupFile&gt;
+            			&lt;Mandatory&gt;true&lt;/Mandatory&gt;
+            		&lt;/Application&gt;
+            		&lt;Application&gt;
+            			&lt;Name&gt;DLC FTP Application&lt;/Name&gt;
+            			&lt;NewVersion&gt;2.1.3&lt;/NewVersion&gt;
+            			&lt;LastOldVersion&gt;2.0.0&lt;/LastOldVersion&gt;
+            			&lt;SetupFile&gt;\\Smathersnt12\DLCdocs\ScanQC\People\Mark\SetupFiles\DLC FTP Application\Upgrade Only\Setup.exe&lt;/SetupFile&gt;
+            			&lt;Mandatory&gt;true&lt;/Mandatory&gt;
+            		&lt;/Application&gt;
+            		&lt;Application&gt;
+            			&lt;Name&gt;DLC TimeTracker&lt;/Name&gt;
+            			&lt;NewVersion&gt;1.1.5&lt;/NewVersion&gt;
+            			&lt;LastOldVersion&gt;1.0.0&lt;/LastOldVersion&gt;
+            			&lt;SetupFile&gt;\\Smathersnt12\DLCdocs\ScanQC\People\Mark\SetupFiles\DLC TimeTracker\Upgrade Only\Setup.exe&lt;/SetupFile&gt;
+            			&lt;Mandatory&gt;false&lt;/Mandatory&gt;
+            		&lt;/Application&gt;
+            	&lt;/VersionChecker&gt;
+             </code>
+             <br /> <br /> EXAMPLE 2: Below is an example of a program which performs this version check.
+             <code>
+             <SPAN class="lang">[C#]</SPAN> 
+            	using System;
+            	using UF.Libraries.DLC.CustomTools;
+            
+            	namespace UF.Libraries.DLC.CustomTools
+            	{
+            		public class Startup
+            		{
+            			static void Main() 
+            			{
+            				// Create a version checker to see if this is the latest version
+            				VersionChecker versionChecker = new VersionChecker();
+            
+            				// Update this application, as necessary
+            				versionChecker.UpdateAsNecessary();
+            
+            				// Only continue if this application is not being updated
+            				if ( !versionChecker.Updating )
+            				{
+            					// Now, if an error was encountered anywhere, show an error message
+            					if ( versionChecker.Error )
+            						MessageBox.Show("An error was encountered while performing the routine Version check.              \n\n" +
+            							"Your application may not be the most recent version.","Version Check Error", MessageBoxButtons.OK, 
+            							MessageBoxIcon.Warning  );
+            
+            					// Now, launch the actual work
+            					Application.Run( new MainForm() );
+            				}
+            			}
+            		}
+            	} 
+             </code> </example>
+        </member>
+        <member name="F:SobekCM.Management_Tool.Versioning.VersionChecker.error">
+            <summary> Private boolean flag indicates if an error occurred during any of 
+            the processed. </summary>
+        </member>
+        <member name="F:SobekCM.Management_Tool.Versioning.VersionChecker.updating">
+            <summary> Flag indicates if the update() function has been called. </summary>
+        </member>
+        <member name="F:SobekCM.Management_Tool.Versioning.VersionChecker.versioning">
+            <summary> Private DataTable class holds the information from the XML versioning
+            database to verify versioning against. </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Versioning.VersionChecker.#ctor">
+            <summary> Constructor for a new VersionChecker object. </summary>
+            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Management_Tool.Versioning.VersionChecker"/> class. </example>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Versioning.VersionChecker.UpdateExists">
+            <summary> Checks to see if a later version of the calling application exists. </summary>
+            <returns> TRUE if this is not the latest version </returns>
+            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Management_Tool.Versioning.VersionChecker"/> class. </example>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Versioning.VersionChecker.UpdateMandatory">
+            <summary> Checks to see if any update for this is mandatory or not. </summary>
+            <returns> TRUE if there is a mandatory update available </returns>
+            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Management_Tool.Versioning.VersionChecker"/> class. </example>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Versioning.VersionChecker.UpdateAsNecessary">
+            <summary> Performs all of the querying to determine if this application needs to be
+            updated, queries the user, and updates as necessary. </summary>
+            <returns> TRUE if it is updating, otherwise FALSE </returns>
+            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Management_Tool.Versioning.VersionChecker"/> class. </example>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Versioning.VersionChecker.Update">
+            <summary> Runs the MSI file for this application from the network location. </summary>
+            <remarks> The calling application should quit immediately after calling this. </remarks>
+            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Management_Tool.Versioning.VersionChecker"/> class. </example>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Versioning.VersionChecker.CreateXML">
+            <summary> Method used to build the initial XML and XML schemas. </summary>
+            <remarks> This remains here just in case it is ever needed again </remarks>
+            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Management_Tool.Versioning.VersionChecker"/> class. </example>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Versioning.VersionChecker.Error">
+            <summary> Returns TRUE if an error occurred anywhere, otherwise FALSE. </summary>
+            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Management_Tool.Versioning.VersionChecker"/> class. </example>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Versioning.VersionChecker.Updating">
+            <summary> Returns TRUE if the application is updating, otherwise FALSE.  </summary>
+            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Management_Tool.Versioning.VersionChecker"/> class. </example>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Versioning.VersionConfigSettings">
+             <summary> Reads the VersionConfiguration section of the .exe.config file <br/> <br/> </summary>
+             <remarks>  This static class is part of the general <see cref="T:SobekCM.Management_Tool.Versioning.VersionChecker"/> solution.  This keeps
+             local installatins of an application current, by checking a network XML versioning database upon
+             startup to determine if the application needs to be updated. <br/> <br/>
+             To use this class, a custom versioning section (shown below) must exist in the Application Config file.  An example
+             file is <a href="example.exe.config.html">here</a>, and below are just the sections needed.  This section must include 
+             information on where the XML versioning database sits, as well as the application name and current version.
+             <code>
+            	&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+            	&lt;configuration&gt;
+            
+            		&lt;!-- Define a custom section for VersionChecking                            --&gt;
+            		&lt;configSections&gt;
+            			&lt;section name="VersionChecker"  type="System.Configuration.NameValueSectionHandler" /&gt;
+            		&lt;/configSections&gt;
+               
+            		&lt;!-- Below is information to allow for VersionChecking prior to execution.  --&gt;
+            		&lt;!-- XML_Directory holds all the centralized version information and then   --&gt;
+            		&lt;!-- the AppName and Version allow for checking this particular app.        --&gt;
+            		&lt;VersionChecker&gt;
+            			&lt;add key="XML_Directory" value="\\Smathersnt12\DLCdocs\ScanQC\People\Mark\Applications\Versioning" /&gt;
+            			&lt;add key="AppName" value="Aerial Image Collector" /&gt;
+            			&lt;add key="Version" value="2.1.0" /&gt;
+            		&lt;/VersionChecker&gt;
+               
+            	&lt;/configuration&gt; 
+             </code>
+             <br/> Object created by Mark V Sullivan (2003) for University of Florida's Digital Library Center. </remarks>
+             <example> For additional examples, look at the examples listed under the main <see cref="T:SobekCM.Management_Tool.Versioning.VersionChecker"/> class. 
+             <br/> <br/>
+             EXAMPLE 1: Using the <see cref="T:SobekCM.Management_Tool.About"/> form in conjunction with the <see cref="T:SobekCM.Management_Tool.Versioning.VersionChecker"/> solution and <see cref="T:SobekCM.Management_Tool.Versioning.VersionConfigSettings"/> object.
+             <code> <SPAN class="lang">[C#]</SPAN> 
+            	using System;
+            	using UF.Libraries.DLC.CustomTools;
+            	using UF.Libraries.DLC.CustomTools.Forms;
+            
+            	namespace UF.Libraries.DLC.CustomTools
+            	{
+            		public class AboutForm_Example_2
+            		{
+            			static void Main() 
+            			{
+            				// Create a new About Form
+            				About showAbout = new About( VersionConfigSettings.AppName, VersionConfigSettings.AppName );
+            				showAbout.ShowDialog();
+            			}
+            		}
+            	}
+            	</code>
+             </example>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Versioning.VersionConfigSettings.#cctor">
+            <summary> Emptry constructor for this class.  </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Versioning.VersionConfigSettings.VersionCheckingXML">
+            <summary> Gets the directory where the XML file holding all of the versioning
+            information is located. </summary>
+            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Management_Tool.Versioning.VersionChecker"/> class
+            as well as the main <see cref="T:SobekCM.Management_Tool.Versioning.VersionConfigSettings"/> class. </example>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Versioning.VersionConfigSettings.AppName">
+            <summary> Gets the name of the application to look for in the XML Versioning database. </summary>
+            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Management_Tool.Versioning.VersionChecker"/> class
+            as well as the main <see cref="T:SobekCM.Management_Tool.Versioning.VersionConfigSettings"/> class. </example>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Versioning.VersionConfigSettings.AppVersion">
+            <summary> Gets the version number of this application to look for in the XML Versioning database. </summary>
+            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Management_Tool.Versioning.VersionChecker"/> class
+            as well as the main <see cref="T:SobekCM.Management_Tool.Versioning.VersionConfigSettings"/> class. </example>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Item_Discovery_Form">
+            <summary> Form allows searches and browses to be performed to get a list of matching items
+            from a SobekCM library and to perform certain tasks against those items </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Item_Discovery_Form.#ctor">
+            <summary> Constructor for a new instance of the View_Items_Form class </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Item_Discovery_Form.OnResize(System.EventArgs)">
+            <summary> Method is called whenever this form is resized. </summary>
+            <param name="e"></param>
+            <remarks> This redraws the background of this form </remarks>
+        </member>
+        <member name="F:SobekCM.Management_Tool.Item_Discovery_Form.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Item_Discovery_Form.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Item_Discovery_Form.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:SobekCM.Management_Tool.View_Item_Form">
+            <summary> Form is used to display all the details about a single item from within a title 
+            from the SobekCM system </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.View_Item_Form.#ctor(System.Int32,System.String,System.String)">
+            <summary> Constructor for a new instance of the View_Item_Form form </summary>
+            <param name="ItemID"> Primary key for this item in the SobekCM database </param>
+            <param name="BibID"> Bibliographic identifier for the title related to this item </param>
+            <param name="VID"> Volume identifier for this item within the title </param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.View_Item_Form.OnResize(System.EventArgs)">
+            <summary> Method is called whenever this form is resized. </summary>
+            <param name="e"></param>
+            <remarks> This redraws the background of this form </remarks>
+        </member>
+        <member name="F:SobekCM.Management_Tool.View_Item_Form.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.View_Item_Form.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.View_Item_Form.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:SobekCM.Management_Tool.View_Item_Group_Form">
+            <summary> Form displays information about a single item group from within a SobekCM library </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.View_Item_Group_Form.#ctor(System.Data.DataRow)">
+            <summary> Constructor for a new instance of the View_Item_Group_Form class </summary>
+            <param name="Title_Row"> Row of title information from the display table </param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.View_Item_Group_Form.OnResize(System.EventArgs)">
+            <summary> Method is called whenever this form is resized. </summary>
+            <param name="e"></param>
+            <remarks> This redraws the background of this form </remarks>
+        </member>
+        <member name="F:SobekCM.Management_Tool.View_Item_Group_Form.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.View_Item_Group_Form.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.View_Item_Group_Form.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Windows_Appearance_Checker">
+            <summary> Static class is used to check if the current window's theme is XP-style, or complies
+            with the older Win95-type display </summary>
+            <remarks> This class is often used when constructing a form to determine which style to apply to 
+            some of the controls within the form, such as text boxes, combo boxes, and buttons.  This check is performed
+            by checking the CurrentUser's Control Panel\Appearance's Current registry value. <br/><br/>
+            The first time the <see cref="P:SobekCM.Management_Tool.Windows_Appearance_Checker.is_XP_Theme"/> method is called, the
+            registry is checked and the value is stored for the remainder of checks.  Although this is promotes
+            high-performance and does not repeatadly check the registry, this means if the style is modified 
+            during execution of the application, the changed value is not read and the internal value of this
+            class is not updated.</remarks>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Windows_Appearance_Checker.#cctor">
+            <summary> Static constructor for the Windows_Appearance_Checker static class </summary>
+        </member>
+        <member name="P:SobekCM.Management_Tool.Windows_Appearance_Checker.is_XP_Theme">
+            <summary> Returns flag indicating if the current user's appearance is set to XP-style, or the 
+            older Win-95 type appearance </summary>
+            <remarks> If this is the first time this check has been performed, this checks the CurrentUser's
+            Control Panel\Appearance's Current registry value. </remarks>
+        </member>
+        <member name="T:SobekCM.Management_Tool.Volume_Import_Processor">
+            <summary>Processor class imports a number of items (volumes) into an existing title  </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Volume_Import_Processor.#ctor(System.Data.DataTable,System.String,System.String,System.String,System.Int32,System.Boolean)">
+            <summary> Processor is used to import a number of items into an existing title  </summary>
+            <param name="tableToImport"> Table of items to import </param>
+            <param name="bibid"> Bibliographic identifier for the title to add all the new volumes to </param>
+            <param name="sourceMets"> Source METS file to be used for all newly added volumes </param>
+            <param name="WorkingFolder"> Working folder where these will be prepped </param>
+            <param name="IP_Restriction_Mask"> IP restriction mask to set for each new item </param>
+            <param name="Dark"> Dark flag to apply to each new item </param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Volume_Import_Processor.Go">
+            <summary> Perform the importing process </summary>
+        </member>
+        <member name="E:SobekCM.Management_Tool.Volume_Import_Processor.New_Progress">
+            <summary> Event is fired during processing to update the progress form  </summary>
+        </member>
+        <member name="E:SobekCM.Management_Tool.Volume_Import_Processor.Complete">
+            <summary> Event is fired when the import process is complete  </summary>
+        </member>
+    </members>
+</doc>

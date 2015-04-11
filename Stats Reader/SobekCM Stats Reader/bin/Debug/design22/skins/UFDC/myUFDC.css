@@ -1,0 +1,269 @@
+.metadata_section
+{
+	background-color: #f0e68c;
+}
+
+
+.metadata_label
+{
+	padding-top: 17px;
+}
+
+
+.metadata_label A:link
+{
+	padding-top: 17px; color:Black;
+}
+
+.metadata_label A:visited
+{
+	padding-top: 17px; color:Black;
+}
+
+.metadata_label A:hover 
+{
+	padding-top: 17px; color:Black; text-decoration:underline;
+}
+
+.metadata_label2
+{
+	padding-top: 23px;
+}
+
+
+.metadata_label2 A:link
+{
+	padding-top: 23px; color:Black;
+}
+
+.metadata_label2 A:visited
+{
+	padding-top: 23px; color:Black;
+}
+
+.metadata_label2 A:hover 
+{
+	padding-top: 23px; color:Black; text-decoration:underline;
+}
+
+.metadata_sublabel
+{
+	padding-left: 15px; font-size: 0.9em; padding-right: 5px; 
+}
+
+.metadata_sublabel2
+{
+	font-size: 0.9em; padding-right: 5px; 
+}
+
+.repeat_button
+{
+	 padding-bottom: 0px;  
+}
+
+
+input.edition_input  {  color:Blue;  width: 350px; margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+input.edition_input_focused {  color:Blue;  width: 350px; margin-top: 6px; background-color: #f0e68c; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+
+input.creator_input  {  color:Blue;  width: 500px; margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+input.creator_input_focused  {  color:Blue;  width: 500px; margin-top: 6px; background-color: #f0e68c; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+
+input.complex_creator_input  {  color:Blue;  width: 340px; margin-top: 6px; margin-bottom: 1px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+input.complex_creator_input_focused  {  color:Blue;  width: 340px; margin-top: 6px; margin-bottom: 1px; background-color: #f0e68c; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+select.complex_creator_select { color:Blue; width: 150px; margin-left: 10px;  margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+select.complex_creator_select_focused { color:Blue; width: 150px; margin-left: 10px;  margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+select.complex_creator_select_init { color:Gray; width: 150px; margin-left: 10px;  margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+
+input.physical_description_input  {  color:Blue;  width: 250px; margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+input.physical_description_input_focused {  color:Blue;  width: 250px; margin-top: 6px; background-color: #f0e68c; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+
+input.language_input  {  color:Blue;  width: 150px; margin-top: 6px; margin-right: 10px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+input.language_input_focused {  color:Blue;  width: 150px; margin-top: 6px; margin-right: 10px; background-color: #f0e68c; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+
+input.title_main_input  {  color:Blue;  width: 500px; margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+input.title_main_input_focused  {  color:Blue;  width: 500px; margin-top: 6px; background-color: #f0e68c; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+
+input.othertitle_input  {  color:Blue;  width: 360px; margin-top: 6px; margin-bottom: 1px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+input.othertitle_input_focused  {  color:Blue;  width: 360px; margin-top: 6px; margin-bottom: 1px; background-color: #f0e68c; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+select.othertitle_select { color:Blue; width: 130px; margin-left: 10px;  margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+select.othertitle_select_focused { color:Blue; width: 130px; margin-left: 10px;  margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+select.othertitle_select_input { color:Gray; width: 130px; margin-left: 10px;  margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+
+input.spatial_input  {  color:Blue;  width: 500px; margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+input.spatial_input_focused  {  color:Blue;  width: 500px; margin-top: 6px; background-color: #f0e68c; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+
+select.type_select { color:Blue; width: 200px; margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+select.type_select_focused { color:Blue; width: 200px; margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+select.type_select_init { color:Gray; width: 200px; margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+
+select.ir_type_input { color:Blue; width: 200px; margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+select.ir_type_input_focused { color:Blue; width: 200px; margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+select.ir_type_input_init { color:Gray; width: 200px; margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+
+input.irtype_other_input  {  color:Blue;  width: 180px; margin-right: 10px; margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+input.irtype_other_input_focused  {  color:Blue;  width: 180px; margin-right: 10px; margin-top: 6px; background-color: #f0e68c; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+
+input.larger_body_input  {  color:Blue;  width: 500px; margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+input.larger_body_input_focused  {  color:Blue;  width: 500px; margin-top: 6px; background-color: #f0e68c; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+
+select.pub_status_select { color:Blue; width: 100px; margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+select.pub_status_select_focused { color:Blue; width: 100px; margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+select.pub_status_select_init { color:Gray; width: 100px; margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+
+input.publisher_input  {  color:Blue;  width: 500px; margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+input.publisher_input_focused  {  color:Blue;  width: 500px; margin-top: 6px; background-color: #f0e68c; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+
+input.manufacturer_input  {  color:Blue;  width: 500px; margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+input.manufacturer_input_focused  {  color:Blue;  width: 500px; margin-top: 6px; background-color: #f0e68c; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+
+input.pubplace_input  {  color:Blue;  width: 500px; margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+input.pubplace_input_focused  {  color:Blue;  width: 500px; margin-top: 6px; background-color: #f0e68c; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+
+input.pub_date_input  {  color:Blue;  width: 150px; margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+input.pub_date_input_focused  {  color:Blue;  width: 150px; margin-top: 6px; background-color: #f0e68c; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+
+input.copyright_date_input  {  color:Blue;  width: 150px; margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+input.copyright_date_input_focused  {  color:Blue;  width: 150px; margin-top: 6px; background-color: #f0e68c; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+
+textarea.abstract_input  {  color:Blue;  margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; FONT-FAMILY: Arial, sans-serif; }
+textarea.abstract_input_focused  {  color:Blue;  margin-top: 6px; background-color: #f0e68c; border-style:solid; border-width: 1px; border-color: #7f9db9;FONT-FAMILY: Arial, sans-serif; }
+
+textarea.note_input  {  color:Blue;  margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; FONT-FAMILY: Arial, sans-serif;}
+textarea.note_input_focused  {  color:Blue;  margin-top: 6px; background-color: #f0e68c; border-style:solid; border-width: 1px; border-color: #7f9db9; FONT-FAMILY: Arial, sans-serif; }
+
+input.UfdcInputBox_Small  {  color:Blue;  width: 100px; margin-top: 6px; border-style:solid; border-width: 1px;  border-color: #7f9db9; }
+input.UfdcInputBox_Medium  {  color:Blue;  width: 340px; margin-top: 6px; border-style:solid; border-width: 1px;  border-color: #7f9db9;}
+input.UfdcInputBox_Large  {  color:Blue;  width: 500px; margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+input.UfdcInputBox_Large_Focused  {  color:Blue;  width: 500px; margin-top: 6px; background-color: #f0e68c; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+
+input.subject_first_input  {  margin-top: 6px; color:Blue;  width: 320px;  border-style:solid; border-width: 1px; border-color: #7f9db9; }
+input.subject_first_input_focused  {  margin-top: 6px; color:Blue;  width: 320px;  background-color: #f0e68c; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+input.subject_second_input  {  margin-top: 6px; color:Blue;  width: 100px;  border-style:solid; border-width: 1px; border-color: #7f9db9; }
+input.subject_second_input_focused  {  margin-top: 6px; color:Blue;  width: 100px;  background-color: #f0e68c; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+
+input.genre_first_input  {  margin-top: 6px; color:Blue;  width: 220px;  border-style:solid; border-width: 1px; border-color: #7f9db9; }
+input.genre_first_input_focused  {  margin-top: 6px; color:Blue;  width: 220px;  background-color: #f0e68c; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+input.genre_second_input  {  margin-top: 6px; color:Blue;  width: 100px;  border-style:solid; border-width: 1px; border-color: #7f9db9; }
+input.genre_second_input_focused  {  margin-top: 6px; color:Blue;  width: 100px;  background-color: #f0e68c; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+
+input.identifier_first_input  {  margin-top: 6px; color:Blue;  width: 150px;  border-style:solid; border-width: 1px; border-color: #7f9db9; }
+input.identifier_first_input_focused  {  margin-top: 6px; color:Blue;  width: 150px;  background-color: #f0e68c; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+input.identifier_second_input  {  margin-top: 6px; color:Blue;  width: 100px;  border-style:solid; border-width: 1px; border-color: #7f9db9; }
+input.identifier_second_input_focused  {  margin-top: 6px; color:Blue;  width: 100px;  background-color: #f0e68c; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+
+input.temporal_input  {  color:Blue;  width: 500px; margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+input.temporal_input_focused  {  color:Blue;  width: 500px; margin-top: 6px; background-color: #f0e68c; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+
+input.complex_temporal_year_input  {  color:Blue;  width: 50px; margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+input.complex_temporal_year_input_focused  {  color:Blue;  width: 50px; margin-top: 6px; background-color: #f0e68c; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+input.complex_temporal_period_input  {  color:Blue;  width: 200px; margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+input.complex_temporal_period_input_focused  {  color:Blue;  width: 200px; margin-top: 6px; background-color: #f0e68c; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+
+
+input.bibid_input  {  color:Blue;  width: 100px; margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+input.bibid_input_focused  {  color:Blue;  width: 100px; margin-top: 6px; background-color: #f0e68c; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+
+input.vid_input  {  color:Blue;  width: 60px; margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+input.vid_input_focused  {  color:Blue;  width: 60px; margin-top: 6px; background-color: #f0e68c; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+
+textarea.rights_mgmt_input  {  color:Blue;  margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; FONT-FAMILY: Arial, sans-serif; }
+textarea.rights_mgmt_input_focused  {  color:Blue;   margin-top: 6px; background-color: #f0e68c; border-style:solid; border-width: 1px; border-color: #7f9db9; FONT-FAMILY: Arial, sans-serif; }
+
+input.holding_input  {  color:Blue;  width: 410px; margin-left: 10px;  margin-top: 6px; margin-bottom: 1px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+input.holding_input_focused  {  color:Blue;  width: 410px; margin-left: 10px;  margin-top: 6px; margin-bottom: 1px; background-color: #f0e68c; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+select.holding_select { color:Blue; width: 80px; margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+select.holding_select_focused { color:Blue; width: 80px; margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+
+
+input.source_input  {  color:Blue;  width: 410px; margin-left: 10px;  margin-top: 6px; margin-bottom: 1px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+input.source_input_focused  {  color:Blue;  width: 410px; margin-left: 10px;  margin-top: 6px; margin-bottom: 1px; background-color: #f0e68c; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+select.source_select { color:Blue; width: 80px; margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+select.source_select_focused { color:Blue; width: 80px; margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+
+
+input.collection_input  {  color:Blue;  width: 60px; margin-right: 10px; margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+input.collection_input_focused  {  color:Blue;  width: 60px; margin-right: 10px; margin-top: 6px; background-color: #f0e68c; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+
+input.subcollection_input  {  color:Blue;  width: 60px; margin-right: 10px; margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+input.subcollection_input_focused  {  color:Blue;  width: 60px; margin-right: 10px; margin-top: 6px; background-color: #f0e68c; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+
+input.interface_input  {  color:Blue;  width: 60px; margin-right: 10px; margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+input.interface_input_focused  {  color:Blue;  width: 60px; margin-right: 10px; margin-top: 6px; background-color: #f0e68c; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+
+input.wordmark_input  {  color:Blue;  width: 60px; margin-right: 10px; margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+input.wordmark_input_focused  {  color:Blue;  width: 60px; margin-right: 10px; margin-top: 6px; background-color: #f0e68c; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+
+select.record_status_select { color:Blue; width: 160px; margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+select.record_status_select_focused { color:Blue; width: 160px; margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+select.record_status_select_init { color:Gray; width: 160px; margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+
+select.encoding_level_select { color:Blue; width: 65px; margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+select.encoding_level_select_focused { color:Blue; width: 65px; margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+select.encoding_level_select_init { color:Gray; width: 65px; margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+
+input.record_origin_input  {  color:Blue;  width: 300px; margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+input.record_origin_input_focused  {  color:Blue;  width: 300px; margin-top: 6px; background-color: #f0e68c; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+
+input.creation_note_input  {  color:Blue;  width: 500px; margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+input.creation_note_input_focused  {  color:Blue;  width: 500px; margin-top: 6px; background-color: #f0e68c; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+
+input.target_audience_input  {  color:Blue;  width: 150px; margin-right: 10px; margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+input.target_audience_input_focused  {  color:Blue;  width: 150px; margin-right: 10px; margin-top: 6px; background-color: #f0e68c; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+
+input.complex_publisher_name_input  {  color:Blue;  width: 455px; margin-right: 10px; margin-top: 14px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+input.complex_publisher_name_input_focused  {  color:Blue;  width: 455px; margin-right: 10px; margin-top: 14px; background-color: #f0e68c; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+
+input.complex_publisher_location_input  {  color:Blue;  width: 125px; margin-right: 10px; margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+input.complex_publisher_location_input_focused  {  color:Blue;  width: 125px; margin-right: 10px; margin-top: 6px; background-color: #f0e68c; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+
+input.complex_manufacturer_name_input  {  color:Blue;  width: 455px; margin-right: 10px; margin-top: 14px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+input.complex_manufacturer_name_input_focused  {  color:Blue;  width: 455px; margin-right: 10px; margin-top: 14px; background-color: #f0e68c; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+
+input.complex_manufacturer_location_input  {  color:Blue;  width: 125px; margin-right: 10px; margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+input.complex_manufacturer_location_input_focused  {  color:Blue;  width: 125px; margin-right: 10px; margin-top: 6px; background-color: #f0e68c; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+
+input.preferences_small_input  {  color:Blue;  width: 170px; margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+input.preferences_small_input_focused  {  color:Blue;  width: 170px; margin-top: 6px; background-color: #f0e68c; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+
+input.preferences_medium_input  {  color:Blue;  width: 275px; margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+input.preferences_medium_input_focused  {  color:Blue;  width: 275px; margin-top: 6px; background-color: #f0e68c; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+
+input.preferences_large_input  {  color:Blue;  width: 500px; margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+input.preferences_large_input_focused  {  color:Blue;  width: 500px; margin-top: 6px; background-color: #f0e68c; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+
+select.preferences_language_select { color:Blue; width: 125px; margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+select.preferences_language_select_focused { color:Blue; width: 125px; margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+select.preferences_language_select_init { color:Gray; width: 125px; margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+
+input.preferences_large_input  {  color:Blue;  width: 500px; margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+input.preferences_large_input_focused  {  color:Blue;  width: 500px; margin-top: 6px; background-color: #f0e68c; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+
+input.username_input  {  color:Blue;  width: 180px; margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+input.username_input_focused  {  color:Blue;  width: 180px; margin-top: 6px; background-color: #f0e68c; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+
+input.password_input  {  color:Blue;  width: 180px; margin-top: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+input.password_input_focused  {  color:Blue;  width: 180px; margin-top: 6px; background-color: #f0e68c; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+
+textarea.preference_rights_input  {  color:Blue;  width: 450px; margin-bottom: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; FONT-FAMILY: Arial, sans-serif;}
+textarea.preference_rights_input_focused  {  color:Blue;  width: 450px; margin-bottom: 6px; background-color: #f0e68c; border-style:solid; border-width: 1px; border-color: #7f9db9; FONT-FAMILY: Arial, sans-serif;}
+
+input.upload_label_input {  color:Blue;  width: 400px; margin-bottom: 6px; border-style:solid; border-width: 1px; border-color: #7f9db9; }
+input.upload_label_input_focused {  color:Blue;  4idth: 500px; margin-bottom: 6px; background-color: #f0e68c; border-style:solid; border-width: 1px; border-color: #7f9db9; 
+
+
+.hidden_progress 
+{ 
+	padding: 0px;
+	width: 32px;
+	height: 32px;
+}
+
+
+.shown_progress
+{ 
+	background-image: url( http://128.227.223.117/UFDC/default/images/spinner.gif );
+	cursor: wait;
+	padding: 0px;
+	width: 32px;
+	height: 32px;
+}

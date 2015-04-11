@@ -1,0 +1,136 @@
+
+/** UFDC Header-Specific Styles (many copied from Public.css)   **/
+#ufheader { font-family: Arial, Helvetica, sans-serif;	margin: 0;	padding: 0;	width: 100%; height: 35px; FONT-SIZE: small; text-align:left; }	
+.logo { background-image: url( wordmark/blue12.gif ); 	}
+.logo a:link { border: 0;}
+.UfdcHeaderNavLinks { PADDING-RIGHT: 20px; 	border-top:3px solid #ccc;  font-size: 0.85em;
+	border-bottom: 1px solid #ccc; PADDING-LEFT: 10px; COLOR: #777777; BACKGROUND-COLOR: #eee; TEXT-DECORATION: none; }
+.UfdcHeaderNavLinks A:link { COLOR: #777777; TEXT-DECORATION: none;  }
+.UfdcHeaderNavLinks A:visited { COLOR: #777777; TEXT-DECORATION: none;  }
+.UfdcHeaderNavLinks A:hover { COLOR: #777777; TEXT-DECORATION: underline;  }
+.firstLinks { 
+	background-image: url( wordmark/blue12.gif ); 
+	text-align: right; white-space: nowrap; padding: 0 20px 0 0; background-color: #0021a5;  
+}
+
+#banner {
+	width:100%;
+	background:#4593bf url( wordmark/blue12.gif) repeat-x;
+	height: 30px;
+	position:relative;
+	margin:0;
+	padding:0;
+	border-bottom:1px solid #ccc;
+	}
+
+h1#uflogo {
+	margin:0;
+	padding:0;
+	float:left;
+	width:45px;
+	height:39px;
+	overflow:hidden;
+	position:relative;
+}
+
+h1#uflogo span {
+	display:block;
+	position:absolute;
+	left:0;
+	top:0;
+	z-index:11;
+	width:45px;
+	height:39px;
+	margin:0;
+	padding:0;
+	background:url( wordmark/uf-uf9.gif) top left no-repeat;
+			cursor:pointer;
+}
+
+h1#ufdclogo {
+	margin:0;
+	padding:0;
+	float:right;
+	width:350px;
+	height:39px;
+	overflow:hidden;
+	position:relative;
+}
+
+h1#ufdclogo span {
+	display:block;
+	position:absolute;
+	left:0;
+	top:0;
+	z-index:11;
+	width:350px;
+	height:39px;
+	margin:0;
+	padding:0;
+	background:url( wordmark/ufdc.jpg) top right no-repeat;
+			cursor:pointer;
+}
+
+h1#liblogo {
+	float:left;
+	margin:0;
+	padding:0;
+	width:246px;
+	height:39px;
+	overflow:hidden;
+	position:relative;
+}	
+
+h1#liblogo span {
+	display:block;
+	position:absolute;
+	left:0;
+	top:0;
+	z-index:11;
+	width:246px;
+	height:39px;
+	margin:0;
+	padding:0;
+	background:url( wordmark/uf-uflib9.gif) top left no-repeat;
+		cursor:pointer;
+}
+
+/** UFDC Footer-Specific Styles (many copied from Public.css)  **/
+#footer{ clear: both;  width: 100%;  border-top: 1px solid #ccc;  background-color:#eee;  border-bottom: 1px solid #ccc; text-align:center; font-size: small; }
+#footer p{ display: inline;  font-family: Arial, Helvetica, sans-serif; font-size: 0.9em; color: #787878; padding: 0 0 0 10px; }
+#footer a{ font-size: 0.9em; color: #787878; text-decoration: none; }
+#footer a:hover{ color: #000; text-decoration: underline; }
+#UfdcWordmark { padding: 10px 15px 0px 0px; FLOAT: right; }
+#UfdcCopyright { Padding: 10px 0px 10px 10px; FONT-SIZE: 10px;  COLOR: #787878;  FONT-FAMILY: Arial, Helvetica, sans-serif; text-align:left; }
+#UfdcCopyright a { FONT-SIZE: 10px; COLOR: #787878; TEXT-DECORATION: none }
+#UfdcCopyright a:hover { FONT-SIZE: 10px; COLOR: #000; TEXT-DECORATION: underline; }
+	
+.UfdcHelpText p { margin-left: 10px; padding-left: 10px;  }
+.UfdcHelpText h1 { margin-top: 10px; padding-top: 10px;  }
+
+.SobekHomeBannerMain
+{
+	background-image: url( http://ufdcweb1.uflib.ufl.edu/ufdc/design/aggregations/all/front_banner.jpg);
+	width: 550px;
+	height: 230px;
+}
+
+.tab
+{
+	text-align:left; background-image: url( tabs/c.gif ); height:15px; color: White; font-size:smaller; margin: 2px 0px 0px 0px; padding: 0px 0px 3px 0px; vertical-align:top; text-decoration: none; font-weight:bold;
+}
+
+.tab a
+{
+	text-decoration:none;
+}
+
+.tab a:hover
+{
+	text-decoration:none;
+}
+
+.tab_s
+{
+	text-align:left; background-image: url( tabs/c_s.gif ); height:13px; color: White; font-size:smaller; margin: 2px 0px 0px 0px; padding: 0px 0px 3px 0px; vertical-align:top; font-weight:bold;
+}

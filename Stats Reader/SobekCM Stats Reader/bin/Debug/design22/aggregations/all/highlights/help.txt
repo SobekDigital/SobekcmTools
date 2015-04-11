@@ -1,0 +1,26 @@
+HELP FOR CREATING HIGHLIGHTS.XML FILES
+
+    This directory will hold the XML file that includes all of the highlight
+information for this Collection Group.  This object will display on the home 
+page.  This file contains the information for the image itself and the link to 
+the resource.  Text can be included to display under the image and a tool tip 
+is also available.  The image to be displayed should also be placed in this 
+directory. 
+
+An example XML file appears below:
+
+<?xml version="1.0" standalone="yes" ?>
+<Highlight_Set>
+	<Highlight>
+		<ImageSource>UF00026638thm.jpg</ImageSource>
+		<Link>/juv&i=8</Link>
+		<ToolTip>Grammar in Rhyme</ToolTip>
+		<Text>Highlighted Item</Text>
+	</Highlight>
+	<Highlight>
+		<ImageSource>UF00026648thm.jpg</ImageSource>
+		<Link>/juv&bib=UF00026648&vid=00001</Link>
+		<ToolTip>Santa Claus and his works</ToolTip>
+		<Text>Highlighted Item</Text>
+	</Highlight>
+</Highlight_Set>

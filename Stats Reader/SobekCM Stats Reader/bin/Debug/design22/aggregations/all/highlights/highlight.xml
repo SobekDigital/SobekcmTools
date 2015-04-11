@@ -1,0 +1,27 @@
+<?xml version="1.0" standalone="yes"?>
+<Highlight_Set>
+  <xs:schema id="Highlight_Set" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="Highlight_Set" msdata:IsDataSet="true">
+      <xs:complexType>
+        <xs:choice maxOccurs="unbounded">
+          <xs:element name="Highlight">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="ImageSource" type="xs:string" minOccurs="0" />
+                <xs:element name="Link" type="xs:string" minOccurs="0" />
+                <xs:element name="ToolTip" type="xs:string" minOccurs="0" />
+                <xs:element name="Text" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <Highlight>
+    <ImageSource>juv.jpg</ImageSource>
+    <Link>?coll=juv</Link>
+    <ToolTip>Baldwin Children's Literature Collection</ToolTip>
+    <Text>Highlighted Collection</Text>
+  </Highlight>
+</Highlight_Set>

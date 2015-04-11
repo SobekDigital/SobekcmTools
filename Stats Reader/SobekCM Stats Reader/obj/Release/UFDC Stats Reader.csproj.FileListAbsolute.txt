@@ -1,0 +1,30 @@
+C:\Documents and Settings\marsull\Desktop\UFDC Stats Reader\UFDC Stats Reader\bin\Release\UFDC Stats Reader.exe
+C:\Documents and Settings\marsull\Desktop\UFDC Stats Reader\UFDC Stats Reader\bin\Release\UFDC Stats Reader.pdb
+C:\Documents and Settings\marsull\Desktop\UFDC Stats Reader\UFDC Stats Reader\obj\Release\ResolveAssemblyReference.cache
+C:\Documents and Settings\marsull\Desktop\UFDC Stats Reader\UFDC Stats Reader\obj\Release\UFDC Stats Reader.exe
+C:\Documents and Settings\marsull\Desktop\UFDC Stats Reader\UFDC Stats Reader\obj\Release\UFDC Stats Reader.pdb
+C:\Documents and Settings\Mark\Desktop\STATS\UFDC Stats Reader\UFDC Stats Reader\obj\Release\UFDC Stats Reader.exe
+C:\Documents and Settings\Mark\Desktop\STATS\UFDC Stats Reader\UFDC Stats Reader\obj\Release\UFDC Stats Reader.pdb
+C:\Documents and Settings\msulliva\Desktop\WEB STATS\Version 1.2\UFDC Stats Reader\obj\Release\UFDC Stats Reader.exe
+C:\Documents and Settings\msulliva\Desktop\WEB STATS\Version 1.2\UFDC Stats Reader\obj\Release\UFDC Stats Reader.pdb
+C:\Documents and Settings\msulliva\Desktop\WEB STATS\Version 1.2\UFDC Stats Reader\bin\Release\UFDC Stats Reader.exe
+C:\Documents and Settings\msulliva\Desktop\WEB STATS\Version 1.2\UFDC Stats Reader\bin\Release\UFDC Stats Reader.pdb
+C:\Documents and Settings\msulliva\Desktop\WEB STATS\Version 1.2\UFDC Stats Reader\obj\Release\ResolveAssemblyReference.cache
+C:\Documents and Settings\msulliva\Desktop\WEB STATS\Version 1.4\UFDC Stats Reader\obj\Release\UFDC Stats Reader.exe
+C:\Documents and Settings\msulliva\Desktop\WEB STATS\Version 1.4\UFDC Stats Reader\obj\Release\UFDC Stats Reader.pdb
+C:\Users\msulliva\Desktop\WEB STATS\Version 1.6\UFDC Stats Reader\bin\Release\UFDC Stats Reader.exe.config
+C:\Users\msulliva\Desktop\WEB STATS\Version 1.6\UFDC Stats Reader\obj\Release\UFDC Stats Reader.exe
+C:\Users\msulliva\Desktop\WEB STATS\Version 1.6\UFDC Stats Reader\obj\Release\UFDC Stats Reader.pdb
+C:\Users\msulliva\Desktop\WEB STATS\Version 1.6\UFDC Stats Reader\bin\Release\UFDC Stats Reader.exe
+C:\Users\msulliva\Desktop\WEB STATS\Version 1.6\UFDC Stats Reader\bin\Release\UFDC Stats Reader.pdb
+C:\Users\msulliva\Desktop\WEB STATS\Version 1.6\UFDC Stats Reader\bin\Release\SobekCM_Library.dll
+C:\Users\msulliva\Desktop\WEB STATS\Version 1.6\UFDC Stats Reader\bin\Release\Microsoft.ApplicationBlocks.Data.dll
+C:\Users\msulliva\Desktop\WEB STATS\Version 1.6\UFDC Stats Reader\bin\Release\FileUploadLibrary.dll
+C:\Users\msulliva\Desktop\WEB STATS\Version 1.6\UFDC Stats Reader\bin\Release\SobekCM_Tools.dll
+C:\Users\msulliva\Desktop\WEB STATS\Version 1.6\UFDC Stats Reader\bin\Release\SobekCM_Bib_Package.dll
+C:\Users\msulliva\Desktop\WEB STATS\Version 1.6\UFDC Stats Reader\bin\Release\SobekCM_Library.pdb
+C:\Users\msulliva\Desktop\WEB STATS\Version 1.6\UFDC Stats Reader\bin\Release\SobekCM_Library.xml
+C:\Users\msulliva\Desktop\WEB STATS\Version 1.6\UFDC Stats Reader\bin\Release\FileUploadLibrary.pdb
+C:\Users\msulliva\Desktop\WEB STATS\Version 1.6\UFDC Stats Reader\bin\Release\FileUploadLibrary.xml
+C:\Users\msulliva\Desktop\WEB STATS\Version 1.6\UFDC Stats Reader\bin\Release\SobekCM_Bib_Package.xml
+C:\Users\msulliva\Desktop\WEB STATS\Version 1.6\UFDC Stats Reader\obj\Release\ResolveAssemblyReference.cache

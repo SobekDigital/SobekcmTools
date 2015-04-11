@@ -1,0 +1,6 @@
+C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT_WiX_Installer\bin\Release\SMaRT_WiX_Installer.msi
+C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT_WiX_Installer\bin\Release\SMaRT_WiX_Installer.wixpdb
+obj\Release\Product.wixobj
+obj\Release\SMaRT_WiX_Installer.wixproj.BindContentsFileListnull.txt
+obj\Release\SMaRT_WiX_Installer.wixproj.BindOutputsFileListnull.txt
+obj\Release\SMaRT_WiX_Installer.wixproj.BindBuiltOutputsFileListnull.txt

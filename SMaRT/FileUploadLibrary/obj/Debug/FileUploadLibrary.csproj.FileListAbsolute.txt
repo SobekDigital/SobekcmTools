@@ -1,0 +1,5 @@
+C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\FileUploadLibrary\bin\Debug\FileUploadLibrary.XML
+C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\FileUploadLibrary\bin\Debug\FileUploadLibrary.dll
+C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\FileUploadLibrary\bin\Debug\FileUploadLibrary.pdb
+C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\FileUploadLibrary\obj\Debug\FileUploadLibrary.dll
+C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\FileUploadLibrary\obj\Debug\FileUploadLibrary.pdb

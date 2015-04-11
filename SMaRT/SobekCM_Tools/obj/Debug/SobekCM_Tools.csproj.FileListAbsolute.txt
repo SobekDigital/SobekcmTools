@@ -1,0 +1,9 @@
+C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SobekCM_Tools\bin\Debug\SobekCM_Tools.XML
+C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SobekCM_Tools\bin\Debug\SobekCM_Tools.dll
+C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SobekCM_Tools\bin\Debug\SobekCM_Tools.pdb
+C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SobekCM_Tools\bin\Debug\Microsoft.ApplicationBlocks.Data.dll
+C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SobekCM_Tools\obj\Debug\SobekCM_Tools.csprojResolveAssemblyReference.cache
+C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SobekCM_Tools\obj\Debug\SobekCM.Tools.Properties.Resources.resources
+C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SobekCM_Tools\obj\Debug\SobekCM_Tools.csproj.GenerateResource.Cache
+C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SobekCM_Tools\obj\Debug\SobekCM_Tools.dll
+C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SobekCM_Tools\obj\Debug\SobekCM_Tools.pdb

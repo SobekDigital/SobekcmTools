@@ -1,0 +1,204 @@
+BODY  	
+{
+	PADDING: 0px 0px 0px 0px; MARGIN: 0px; font-family:Arial, Helvetica, sans-serif;
+	width: 100%;
+	background:#fff;
+	color:#000000;	
+	}
+
+h3.ile {
+color: #4f81bd;
+font-size: 1.4em;
+font-weight: normal;
+margin-bottom: -14px;
+}
+
+p.ile_periodicals {
+	font-size: 1.2em;}
+	
+.ile_margintop_minus10 {margin-top: -17px}
+
+#chron7 a {display: block; height: 214px; padding: 0; background:transparent url(/ufdc/design/aggregations/ile/html/info/chron_a_hover_1.jpg) no-repeat 0 0;
+text-decoration: none;}
+#chron7 a:hover {background-position: 0 -215px;}
+
+#chron1 a {display: block; height: 214px; padding: 0; background:transparent url(/ufdc/design/collections/dloc/sub/ile/html/info/chron_a_hover_1.jpg) no-repeat 0 0;
+text-decoration: none;}
+#chron1 a:hover {background-position: 0 -215px;}
+
+#chron2 a {display: block; height: 214px; padding: 0; background:transparent url(/ufdc/design/aggregations/ile/html/info/chron_a_hover_2.jpg) no-repeat 0 0;
+text-decoration: none;}
+#chron2 a:hover {background-position: 0 -215px;}
+#chron3 a {display: block; height: 214px; padding: 0; background:transparent url(/ufdc/design/aggregations/ile/html/info/chron_a_hover_3.jpg) no-repeat 0 0;
+text-decoration: none;}
+#chron3 a:hover {background-position: 0 -215px;}
+#chron4 a {display: block; height: 214px; padding: 0; background:transparent url(/ufdc/design/aggregations/ile/html/info/chron_a_hover_4.jpg) no-repeat 0 0;
+text-decoration: none;}
+#chron4 a:hover {background-position: 0 -215px;}
+#chron5 a {display: block; height: 214px; padding: 0; background:transparent url(/ufdc/design/aggregations/ile/html/info/chron_a_hover_5a.jpg) no-repeat 0 0;
+text-decoration: none;}
+#chron5 a:hover {background-position: 0 -215px;}
+#chron6 a {display: block; height: 214px; padding: 0; background:transparent url(/ufdc/design/aggregations/ile/html/info/chron_a_hover_6.jpg) no-repeat 0 0;
+text-decoration: none;}
+#chron6 a:hover {background-position: 0 -215px;}
+
+
+.redfont {color: #ff0000;}
+.whitefont_courier {color: #FFFFFF;
+	font-family:"Cambri", Arial;
+	text-align:right;} 
+.whitefont_arial {color: #FFFFFF;
+	font-family:"Cambri", Arial;} 
+
+	
+.whitefont a:link {color: #ffffff;}
+.whitefont a:visited {color: #ffffff;}
+
+/************** DLOC SPECIFIC STYLES **********/
+
+/* languages at top right */
+.dloclanguageOptions {
+    margin-top: 0px;
+    padding: 0px;
+    margin-left: 0px;
+    height: 13px;
+    vertical-align:middle;
+    text-align: right;
+	font-size: 8pt; 
+	width: 754px; }
+	
+.dloclanguages li {
+	text-transform:lowercase;
+    vertical-align:middle;
+    background-color: #fff;
+	font-size: 8pt; }
+
+.dlocenglishLink {    margin-left: 0px;}
+.dlocspanishLink {    margin-left: 0px;}
+.dlocfrenchLink {     margin-left: 0px;} 
+
+    
+#dlocheader {
+	font-family: Arial, Helvetica, sans-serif;
+	/*color: #fff;
+	*/
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	color: White;
+	height: 38px;
+	border-bottom: 2px solid #000066;
+	}
+	
+.dloclogo {
+
+	text-align: left;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: medium;
+	font-weight: bold;
+	color: White;
+	padding: 0 0 0 17px;
+	background-color: #0172b8;
+	}
+	
+.dloclogo a:link {
+	color:White;
+	text-decoration: none;
+	}
+.dloclogo a:visited {
+	color: White;
+	text-decoration: none;
+	}
+	
+ .dloclogo a:hover {
+	color: White;
+	text-decoration: none;
+	}
+
+.firstLinks_dloc {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: medium;
+	font-weight: bold;
+	color: White;
+	text-align: left;
+	white-space: nowrap;
+	padding: 0 17px 0 10px;
+	background-color: #0172b8;
+	height: 27px;
+	}
+
+.firstLinks_dloc a:link {
+	color:White;
+	text-decoration: none;
+	}
+.firstLinks_dloc a:visited {
+	color: White;
+	text-decoration: none;
+	}
+	
+ .firstLinks_dloc a:hover {
+	color: White;
+	text-decoration: none;
+	}
+	
+	.firstLinks_sm {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: small;
+	font-weight: bold;
+	color: White;
+	text-align: right;
+	white-space: nowrap;
+	padding: 0 17px 0 10px;
+	background-color: #0172b8;
+	height: 27px;
+	}
+
+.firstLinks_sm a:link {
+	color:White;
+	text-decoration: none;
+	}
+.firstLinks_sm a:visited {
+	color: White;
+	text-decoration: none;
+	}
+	
+ .firstLinks_sm a:hover {
+	color: White;
+	text-decoration: none;
+	}
+	
+	
+.dlocfooter {  font: 8pt Arial, sans-serif;
+    color: #FFFFFF;
+    text-align:right;
+    margin:0px;
+    background-color: #0172b8;}
+	
+.dlocfooter a:link, .dlocfooter a:visited {
+    color: #fff;
+    text-decoration: none;}
+    
+ .dlocfooter a:hover {
+    color: #fff;
+    text-decoration: underline; }
+    
+    
+.tab
+{
+	text-align:left; background-image: url( tabs/c.gif ); height:13px; color: White; font-size:smaller; margin: 2px 0px 0px 0px; padding: 0px 0px 3px 0px; vertical-align:top; font-weight:bold; text-decoration: none;
+}
+
+.tab a
+{
+	text-decoration:none;
+}
+
+.tab a:hover
+{
+	text-decoration:none;
+}
+
+.tab_s
+{
+	text-align:left; background-image: url( tabs/c_s.gif ); height:13px; color: #0172b8; font-size:smaller; margin: 2px 0px 0px 0px; padding: 0px 0px 3px 0px; vertical-align:top; font-weight:bold;
+}
