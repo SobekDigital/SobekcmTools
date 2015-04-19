@@ -1,0 +1,2043 @@
+Class	Method	English Term	Translated Term	Translated Term	Remarks	Example URL
+General		my			"Used to preface the system code, i.e., myDLOC, myUFDC, etc.."	
+General		Close			Used anytime a pop-up form should be closed	
+General		Search			Used for any search boxes as button name	
+General		Help			Anytime a button is provided for help on a particular function	
+General		Submit			For submit buttons	
+General		Save				
+General		Cancel			For cancel buttons	
+General		Sort by			Used as a prompt for sorting results by something	
+General		First Page				
+General		Previous Page				
+General		Next Page				
+General		Last Page				
+General		First				
+General		Previous				
+General		Next				
+General		Last				
+General		January				
+General		February				
+General		March				
+General		April 				
+General		May 				
+General		June				
+General		July 				
+General		August				
+General		September				
+General		October				
+General		November				
+General		December				
+General		Unknown				
+General		Error				
+General		Total			"Used in a variety of places when displayed tables of numbers for usage or item count, etc.."	
+General		BibID			Bibliographic Identifier	
+General		VID			Volume identifier	
+General		one				
+General		two				
+General		three				
+General		four				
+General		five				
+General		six				
+General		seven				
+General		eight				
+General		nine				
+General		ten				
+General		eleven				
+General		twelve				
+General		Print			For action buttons at aggregation or item level	
+General		Send			For action buttons at aggregation or item level	
+General		Share			For action buttons at aggregation or item level	
+General		Describe			For action buttons at aggregation or item level	
+General		Add			For action buttons at aggregation or item level	
+General		Remove			For action buttons at aggregation or item level	
+General		Missing Image			"Used as an alt tag for images, appears if the image is not existing"	
+General		Missing Banner			"Used as the alt tag for the collection banners, appears if the benner is not existing"	
+General		My Library			"Text for tabs under myUFDC, myDLOC, etc.."	
+General		My Account			"Text for tabs under myUFDC, myDLOC, etc.."	
+General		Internal			"Text for tabs under myUFDC, myDLOC, etc.."	
+General		System Admin			"Text for tabs under myUFDC, myDLOC, etc.."	
+General		Portal Admin			"Portal is the word we use for a particular URL. - Text for tabs under myUFDC, myDLOC, etc.."	
+General		ACTIONS			Table 	
+General		delete				
+General		view				
+General		{0} is a required field			Used for any form where a required field is left out	
+General		The following errors were detected:			Used for any form where validation fails	
+						
+Html_MainWriter	Get_Page_Title	%1 Item			"Very rarely used for the title of the web page ( i.e., ""dLOC Item"" )"	
+Html_MainWriter	Get_Page_Title	%1 Home			"Used for title of web page (i.e.,  ""dLOC - Home"" )"	
+Html_MainWriter	Get_Page_Title	%1 Search			"Used for title of web page (i.e., ""dLOC - Search"" )"	
+Html_MainWriter	Get_Page_Title	%1 Search Results			"Used for title of web page (i.e., ""dLOC - Search Results"" )"	
+Html_MainWriter	Get_Page_Title	%1 Preferences			"Used for title of web page (i.e., ""dLOC - Preferences )"	
+Html_MainWriter	Get_Page_Title	%1 Contact Us			"Used for title of web page (i.e., ""dLOC - Contact Us"" )"	
+Html_MainWriter	Get_Page_Title	%1 Contact Sent			"Used for title of web page (i.e., ""dLOC - Contact Sent"" )"	
+Html_MainWriter	Get_Page_Title	%1 Error			"Used for title of web page (i.e., ""dLOC Error )"	
+Html_MainWriter		Log Out				
+Html_MainWriter		%1's %2 				
+						
+						
+URL_Email_Helper	Send_Email	%1 wanted you to see these search results on %2.			"%1=username, %2=SobekCM instance abbreviation (like UFDC, dLOC). When someone emails any search result page from the system"	
+URL_Email_Helper	Send_Email	%1 wanted you to see these search results on %2 and included the following comments.			When someone emails any search result page from the system and includes comments	
+URL_Email_Helper	Send_Email	%1 wanted you to see this page on %2.			When someone emails any other web page from the system	
+URL_Email_Helper	Send_Email	%1 wanted you to see this page on %2 and included the following comments.			When someone emails any other web page from the system and includes comments	
+URL_Email_Helper	Send_Email	Item from %1			"Used as the subject line of that email.  ""Item from dLOC"""	
+URL_Email_Helper	Send_Email	Search results from %1			"Used as the subject line of that email. ""Search results from dLOC"""	
+URL_Email_Helper	Send_Email	Page from %1			"Used as the subject line of that email.  ""Page from dLOC"""	
+URL_Email_Helper		"%1,%2 from %3"				
+URL_Email_Helper		%1 wanted you to see this %2 on %3 and included the following comments				
+URL_Email_Helper		%1 wanted you to see this on %2				
+URL_Email_Helper		Title: %1				
+						
+Item_Email_Helper	Send_Email	%1 wanted you to see this item on %2.			"%1=username, %2=SobekCM instance abbreviation (like UFDC, dLOC). When someone emails an item from the system"	
+Item_Email_Helper	Send_Email	%1 wanted you to see this item on %2 and included the following comments.			"%1=username, %2=SobekCM instance abbreviation (like UFDC, dLOC). When someone emails an item from the system"	
+Item_Email_Helper	Send_Email	ITEM INFORMATION				
+Item_Email_Helper		BLOCKED THUMBNAIL IMAGE				
+Item_Email_Helper		Uniform Title: %1				
+Item_Email_Helper		Alternate Title: %1				
+Item_Email_Helper		Translated Title: %1				
+Item_Email_Helper		Abbreviated Title: %1				
+Item_Email_Helper		Creator: %1				
+Item_Email_Helper		Publisher: %1				
+Item_Email_Helper		Date: %1				
+Item_Email_Helper		Description: %1				
+Item_Email_Helper		Subject: %1				
+Item_Email_Helper		Genre: %1				
+Item_Email_Helper		Spatial Coverage: %1				
+Item_Email_Helper		Rights: %1				
+Item_Email_Helper		Series Title: %1				
+						
+Usage_Stats_Email_Helper	Send_Individual_Usage_Email	Usage statistics for your materials ( %1 )			"%1 = Date (i.e., ""February 2012""), Subject of the email when emailing mothly usage reports."	
+Usage_Stats_Email_Helper	Send_Individual_Usage_Email	Below are the details for your top 10 items.  See the link below to view usage statistics for all %1 of your items.			%1 = total number of items submitted by this person/institution	
+Usage_Stats_Email_Helper	Send_Individual_Usage_Email	%1 views			%1 = number of views that month	
+Usage_Stats_Email_Helper	Send_Individual_Usage_Email	Total to date ( since %1 )			%1=date added to repository.  Label for the total number of views since the item was added to the repository.	
+Usage_Stats_Email_Helper		"You are receiving this message because you are a contributor to a digital library or a collection supported by the UF Libraries, including the Institutional Repository (IR@UF), the UF Digital Collections (UFDC), the Digital Library of the Caribbean (dLOC), and many others. If you do not wish to receive future messages, please <a href=\""http://ufdc.ufl.edu/my/preferences\"">edit your account preferences</a> online or send an email to <a href=\""mailto:ufdc@uflib.ufl.edu\"">ufdc@uflib.ufl.edu</a>. </p>"" + ""<p><strong>Usage statistics for your materials ( <%DATE%> )</strong></p>"" + ""<p><%NAME%>,</p>"" + ""<p>Thank you for sharing materials that will be accessible online and for supporting worldwide open access to scholarly, creative, and other works.  This is a usage report for the shared materials.</p>"" + ""<p>Your items have been viewed <%TOTAL%> times since they were added and were viewed <%MONTHLY%> times this month</p>"" + ""<%ITEMS%>"" + ""<p><em><a href=\""http://ufdc.ufl.edu/my/stats/<%YEAR%><%MONTH%>d\"">Click here to see the usage statistics for all of your items. &gt;&gt;</a></em></p>"" + ""<p>Thank you for sharing these materials.  Please contact us with any questions ( <a href=\""mailto:ufdc@uflib.ufl.edu\"">ufdc@uflib.ufl.edu</a> or 352-273-2900)."				
+						
+Aggregation_HtmlSubwriter		Aggregation_HtmlSubwriter				
+Aggregation_HtmlSubwriter		Removed aggregation from your home page				
+Aggregation_HtmlSubwriter		Your email has been sent				
+Aggregation_HtmlSubwriter	Add_Internal_Header_HTML	Hide Internal Header			"Used in the internal header, when an internal user is logged on"	
+Aggregation_HtmlSubwriter	Add_Internal_Header_HTML	View Private Items			"Used in the internal header, when an internal user is logged on"	
+Aggregation_HtmlSubwriter	Add_Internal_Header_HTML	View Item Count			"Used in the internal header, when an internal user is logged on"	
+Aggregation_HtmlSubwriter	Add_Internal_Header_HTML	View Usage Statistics			"Used in the internal header, when an internal user is logged on"	
+Aggregation_HtmlSubwriter	Add_Internal_Header_HTML	Edit Administrative Information			"Used in the internal header, when an internal user is logged on"	
+Aggregation_HtmlSubwriter	Add_Internal_Header_HTML	View Administrative Information			"Used in the internal header, when an internal user is logged on"	
+Aggregation_HtmlSubwriter	Add_Internal_Header_HTML	Help regarding this header			"Used in the internal header, when an internal user is logged on"	
+Aggregation_HtmlSubwriter	Add_Internal_Header_HTML	Perform search			"Used in the internal header, when an internal user is logged on"	
+Aggregation_HtmlSubwriter	Add_Internal_Header_HTML	Show Internal Header			"Used in the internal header, when an internal user is logged on"	
+Aggregation_HtmlSubwriter		Close				
+Aggregation_HtmlSubwriter	Write_HTML	Send this collection to a friend			Used when a user chooses to send an email from the collection home page	
+Aggregation_HtmlSubwriter	Write_HTML	Enter the email information below			Prompt for emailing	
+Aggregation_HtmlSubwriter	Write_HTML	To:			Where user enters the email address(es) to send to	
+Aggregation_HtmlSubwriter	Write_HTML	Comments:			Prompt for user comments	
+Aggregation_HtmlSubwriter	Write_HTML	Format:			Prompt for whether to send HTML or Plain text email	
+Aggregation_HtmlSubwriter	Write_HTML	HTML				
+Aggregation_HtmlSubwriter	Write_HTML	Plain text				
+Aggregation_HtmlSubwriter	Write_HTML	Send			Button name for sending the email	
+Aggregation_HtmlSubwriter		Cancel				
+Aggregation_HtmlSubwriter	Write_HTML	Show Collection Groups			Part of deprecated code for the old menu	
+Aggregation_HtmlSubwriter	Write_HTML	Show Collections			Part of deprecated code for the old menu	
+Aggregation_HtmlSubwriter	Write_HTML	Show SubCollections			Part of deprecated code for the old menu	
+Aggregation_HtmlSubwriter	Write_HTML	Hide Collection Groups			Part of deprecated code for the old menu	
+Aggregation_HtmlSubwriter	Write_HTML	Hide Collections			Part of deprecated code for the old menu	
+Aggregation_HtmlSubwriter	Write_HTML	Hide SubCollections			Part of deprecated code for the old menu	
+Aggregation_HtmlSubwriter	Write_HTML	Select collection groups to include in search			Part of deprecated code for the old menu	
+Aggregation_HtmlSubwriter	Write_HTML	Select collections to include in search			Part of deprecated code for the old menu	
+Aggregation_HtmlSubwriter	Write_HTML	Select subcollections to include in search			Part of deprecated code for the old menu	
+Aggregation_HtmlSubwriter		Print this page				
+Aggregation_HtmlSubwriter		Send this to someone				
+Aggregation_HtmlSubwriter		PRINT				
+Aggregation_HtmlSubwriter		SEND				
+Aggregation_HtmlSubwriter		Remove this from my collections home page				
+Aggregation_HtmlSubwriter		REMOVE				
+Aggregation_HtmlSubwriter		Add this to my collections home page				
+Aggregation_HtmlSubwriter		ADD				
+Aggregation_HtmlSubwriter		Save this to my collections home page				
+Aggregation_HtmlSubwriter		Share this collection				
+Aggregation_HtmlSubwriter		All collections				
+Aggregation_HtmlSubwriter		Collapse All				
+Aggregation_HtmlSubwriter		Expand All				
+Aggregation_HtmlSubwriter		Do not apply changes				
+Aggregation_HtmlSubwriter		Save changes to this aggregation home page text				
+Aggregation_HtmlSubwriter		Save				
+Aggregation_HtmlSubwriter		Edit this home text				
+Aggregation_HtmlSubwriter		edit content				
+Aggregation_HtmlSubwriter		LIST VIEW				
+Aggregation_HtmlSubwriter		BRIEF VIEW				
+Aggregation_HtmlSubwriter		TREE VIEW				
+Aggregation_HtmlSubwriter		THUMBNAIL VIEW				
+Aggregation_HtmlSubwriter		"Welcome to your personalized %1 home page. This page displays any collections you have added, as well as any of your bookshelves you have made public."				
+Aggregation_HtmlSubwriter		You do not have any collections added to your home page.				
+Aggregation_HtmlSubwriter		"To add a collection, use the %1 button from that collection's home page."				
+Aggregation_HtmlSubwriter		make private				
+Aggregation_HtmlSubwriter		My Public Bookshelves				
+Aggregation_HtmlSubwriter		My Links				
+Aggregation_HtmlSubwriter		Go to my %1 home				
+Aggregation_HtmlSubwriter		Go to my bookshelf				
+Aggregation_HtmlSubwriter		Go to my saved searches				
+Aggregation_HtmlSubwriter		My Library				
+Aggregation_HtmlSubwriter		My Saved Searches				
+Aggregation_HtmlSubwriter		Partners and Contributing Institutions				
+Aggregation_HtmlSubwriter	Write_HTML	Home			Tabs on aggregation home page - return to aggregation home page	
+Aggregation_HtmlSubwriter	Write_HTML	All Items			Tabs on aggregation home page - shows all items in the aggregation	
+Aggregation_HtmlSubwriter	Write_HTML	New Items			Tabs on aggregation home page - Shows items recently added to the aggregation	
+Aggregation_HtmlSubwriter	Write_HTML	My Collections			Tabs on aggregation home page - Goes to a list of the collections user has added to their home page	
+Aggregation_HtmlSubwriter	Write_HTML	Browse Partners			Tabs on aggregation home page - Browse the list of partners	
+Aggregation_HtmlSubwriter	Write_HTML	Browse By			Tabs on aggregation home page - Metadata browse tab	
+Aggregation_HtmlSubwriter	Write_HTML	Map Browse			Tabs on aggregation home page - Browse items in the collection on a map interface	
+Aggregation_HtmlSubwriter	add_home_html	Partners collaborating and contributing to digital collections and libraries include:			Used for the automatic partner browse from the library home page.  	http://ufdc.ufl.edu/partners   (includes dLOC contributors)
+						
+Aggregation_Nav_Bar_HTML_Factory	Get_Nav_Bar_HTML	Advanced Search			Tabs on aggregation home page - based on search types available	
+Aggregation_Nav_Bar_HTML_Factory	Get_Nav_Bar_HTML	Basic Search			Tabs on aggregation home page - based on search types available	
+Aggregation_Nav_Bar_HTML_Factory	Get_Nav_Bar_HTML	Map Search			Tabs on aggregation home page - based on search types available	
+Aggregation_Nav_Bar_HTML_Factory	Get_Nav_Bar_HTML	Newspaper Search			Tabs on aggregation home page - based on search types available	
+Aggregation_Nav_Bar_HTML_Factory	Get_Nav_Bar_HTML	Text Search			Tabs on aggregation home page - based on search types available	
+Aggregation_Nav_Bar_HTML_Factory		Display Text				
+						
+Advanced_Search_AggregationViewer	Add_Search_Box_HTML	Search for:			Text for within the advanced search box	http://www.dloc.com/advanced
+Advanced_Search_AggregationViewer	Add_Search_Box_HTML	in			Text for within the advanced search box	http://www.dloc.com/advanced
+Advanced_Search_AggregationViewer		Search				
+Advanced_Search_AggregationViewer	Add_Search_Box_HTML	Search Options			Text for within the advanced search box	http://www.dloc.com/advanced
+Advanced_Search_AggregationViewer	Add_Search_Box_HTML	Precision			Text for within the advanced search box	http://www.dloc.com/advanced
+Advanced_Search_AggregationViewer	Add_Search_Box_HTML	Contains exactly the search terms			Text for within the advanced search box	http://www.dloc.com/advanced
+Advanced_Search_AggregationViewer	Add_Search_Box_HTML	Contains any form of the search terms			Text for within the advanced search box	http://www.dloc.com/advanced
+Advanced_Search_AggregationViewer	Add_Search_Box_HTML	Contains the search term or terms of similar meaning			Text for within the advanced search box	http://www.dloc.com/advanced
+Advanced_Search_AggregationViewer	Add_Search_Box_HTML	and			Drop down selections for advanced search	http://www.dloc.com/advanced
+Advanced_Search_AggregationViewer	Add_Search_Box_HTML	or			Drop down selections for advanced search	http://www.dloc.com/advanced
+Advanced_Search_AggregationViewer	Add_Search_Box_HTML	and not			Drop down selections for advanced search	http://www.dloc.com/advanced
+						
+Basic_Search_AggregationViewer	Add_Search_Box_HTML	Search Collection			Used for the basic search usually on the home page	http://www.dloc.com/pcm
+Basic_Search_AggregationViewer	Add_Search_Box_HTML	Include non-public items			Used for admins to be able to search private or dark items	
+						
+dLOC_Search_AggregationViewer	Add_Search_Box_HTML	Search full text			"Used for searching full text in dLOC, excludes newspaper text"	http://www.dloc.com/text
+dLOC_Search_AggregationViewer	Add_Search_Box_HTML	Include newspapers?			"Used for searching full text in dLOC, excludes newspaper text"	http://www.dloc.com/text
+dLOC_Search_AggregationViewer		Go				
+						
+Full_Text_Search_AggregationViewer	Add_Search_Box_HTML	Search full text			Standard full text search interface	http://www.dloc.com/pcm/text
+Full_Text_Search_AggregationViewer		Go				
+						
+Item_Count_AggregationViewer		Resource Count in Aggregation				
+Item_Count_AggregationViewer	Add_Secondary_HTML	"Below is the number of titles and items for all items within this aggregation, including currently online items as well as items in process."			From the admin view of the number of items within the collection. Accessible from the admin internal header.	
+Item_Count_AggregationViewer	Add_Secondary_HTML	Last Milestone			From the admin view of the number of items within the collection. Accessible from the admin internal header.	
+Item_Count_AggregationViewer	Add_Secondary_HTML	Title Count			From the admin view of the number of items within the collection. Accessible from the admin internal header.	
+Item_Count_AggregationViewer	Add_Secondary_HTML	Item Count			From the admin view of the number of items within the collection. Accessible from the admin internal header.	
+Item_Count_AggregationViewer	Add_Secondary_HTML	Page Count			From the admin view of the number of items within the collection. Accessible from the admin internal header.	
+Item_Count_AggregationViewer	Add_Secondary_HTML	File Count			From the admin view of the number of items within the collection. Accessible from the admin internal header.	
+						
+Map_Browse_AggregationViewer	add_single_point	( %1 issues )			"i.e., ( 12 issues ). Used when the content type is newspaper Used in the popup window when you select a point in a map browse"	http://ufdc.ufl.edu/fdnl1/geography/
+Map_Browse_AggregationViewer	add_single_point	( %1 volumes )			"i.2., ( 12 volumes ). Used when not newspapers.  Used in the popup window when you select a point in a map browse"	http://ufdc.ufl.edu/fdnl1/geography/
+Map_Browse_AggregationViewer	add_single_point	Click here for more information about this title			Used in the popup window when you select a point in a map browse	http://ufdc.ufl.edu/fdnl1/geography/
+Map_Browse_AggregationViewer	add_single_point	Click here for more information about these %1 titles			%1 = number of titles.  Used in the popup window when you select a point in a map browse	http://ufdc.ufl.edu/fdnl1/geography/
+Map_Browse_AggregationViewer	Add_Search_Box_HTML	Select a point below to view the items from or about that location.			Appears in the search box during geographic browse	http://ufdc.ufl.edu/fdnl1/geography/
+Map_Browse_AggregationViewer	Add_Search_Box_HTML	"Press the SHIFT button, and then drag a box on the map to zoom in."			Appears in the search box during geographic browse	http://ufdc.ufl.edu/fdnl1/geography/
+Map_Search_AggregationViewer	Add_Search_Box_HTML	 1. Use the <i>Select Area</i> button and click to select opposite corners to draw a search box on the map 			Instructions for map searching when only SELECT AREA is available	
+Map_Search_AggregationViewer	Add_Search_Box_HTML	1. Use one of the methods below to define your geographic search:			Instructions for map searching with area and point searching	http://ufdc.ufl.edu/aerials/map
+Map_Search_AggregationViewer	Add_Search_Box_HTML	2. Press the <i>Search</i> button to see results			Instructions for map searching when only SELECT AREA is available	
+Map_Search_AggregationViewer	Add_Search_Box_HTML	"a. Enter an address and press <i>Find Address</i> to locate, <i>or</i>"			Instructions for map searching with area and point searching	http://ufdc.ufl.edu/aerials/map
+Map_Search_AggregationViewer		Actions			Content menubar innerHTML added from the JS file	
+Map_Search_AggregationViewer	Add_Search_Box_HTML	Address			For map searching	http://ufdc.ufl.edu/aerials/map
+Map_Search_AggregationViewer		Address: This is the nearest address of the point you selected.			Tooltips set from the sobekcm_map_editor.js file	
+Map_Search_AggregationViewer		Applied				
+Map_Search_AggregationViewer		Apply				
+Map_Search_AggregationViewer		Apply Changes (Make Changes Public)				
+Map_Search_AggregationViewer	Add_Search_Box_HTML	"b. Press the <i>Select Area</i> button and click to select two opposite corners, <i>or</i>"			Instructions for map searching with area and point searching	http://ufdc.ufl.edu/aerials/map
+Map_Search_AggregationViewer		Block/Lot: Toggle Block/Lot Map Layer			Tooltips set from the sobekcm_map_editor.js file	
+Map_Search_AggregationViewer	Add_Search_Box_HTML	c. Press the <i>Select Point</i> button and click to select a single point			Instructions for map searching with area and point searching	http://ufdc.ufl.edu/aerials/map
+Map_Search_AggregationViewer		Cancel Editing			Content menubar innerHTML added from the JS file	
+Map_Search_AggregationViewer		Canceling...				
+Map_Search_AggregationViewer		Cannot Convert				
+Map_Search_AggregationViewer		Cannot Zoom in further				
+Map_Search_AggregationViewer		Cannot Zoom out Further				
+Map_Search_AggregationViewer		Center on Current Location			Content menubar innerHTML added from the JS file	
+Map_Search_AggregationViewer		Center On Your Current Position			Tooltips set from the sobekcm_map_editor.js file	
+Map_Search_AggregationViewer		Circle				
+Map_Search_AggregationViewer		Circle: Place a Circle			Tooltips set from the sobekcm_map_editor.js file	
+Map_Search_AggregationViewer		Clear Point Of Interest Set			Tooltips set from the sobekcm_map_editor.js file	
+Map_Search_AggregationViewer	Add_Search_Box_HTML	Click here to view instructions for this search interface			Reveals instructions for map searching	
+Map_Search_AggregationViewer		Clockwise			Content menubar innerHTML added from the JS file	
+Map_Search_AggregationViewer		Complete Editing			Content menubar innerHTML added from the JS file	
+Map_Search_AggregationViewer		Completed				
+Map_Search_AggregationViewer		Controls			Content menubar innerHTML added from the JS file	
+Map_Search_AggregationViewer		Controls: Toggle Map Controls			Tooltips set from the sobekcm_map_editor.js file	
+Map_Search_AggregationViewer		Convert This To a Map Overlay			Tooltips set from the sobekcm_map_editor.js file	
+Map_Search_AggregationViewer		Convert to Overlay			Content menubar innerHTML added from the JS file	
+Map_Search_AggregationViewer		Converted Item to Overlay				
+Map_Search_AggregationViewer		Coordinate Data removed for				
+Map_Search_AggregationViewer		Coordinates Copied to Clipboard				
+Map_Search_AggregationViewer		Coordinates Viewer Frozen				
+Map_Search_AggregationViewer		Coordinates Viewer Unfrozen				
+Map_Search_AggregationViewer		Coordinates: This is the selected Latitude and Longitude of the point you selected.			Tooltips set from the sobekcm_map_editor.js file	
+Map_Search_AggregationViewer		Could not find location. Either the format you entered is invalid or the location is outside of the map bounds.				
+Map_Search_AggregationViewer		Could not find within bounds				
+Map_Search_AggregationViewer		Counter-Clockwise			Content menubar innerHTML added from the JS file	
+Map_Search_AggregationViewer		Custom			Content menubar innerHTML added from the JS file	
+Map_Search_AggregationViewer		Default: Pan Map To Default			Tooltips set from the sobekcm_map_editor.js file	
+Map_Search_AggregationViewer		Delete			Content menubar innerHTML added from the JS file	
+Map_Search_AggregationViewer		Delete Coordinate Data for Overlay				
+Map_Search_AggregationViewer		Delete Geographic Location			Tooltips set from the sobekcm_map_editor.js file	
+Map_Search_AggregationViewer		Delete POI				
+Map_Search_AggregationViewer		Delete Search Result				
+Map_Search_AggregationViewer		Deleted				
+Map_Search_AggregationViewer		Description (Optional)				
+Map_Search_AggregationViewer		Did not Reset Page				
+Map_Search_AggregationViewer		Documentation			Content menubar innerHTML added from the JS file	
+Map_Search_AggregationViewer		Down: Pan Map Down			Tooltips set from the sobekcm_map_editor.js file	
+Map_Search_AggregationViewer		Edit Location			Content menubar innerHTML added from the JS file	
+Map_Search_AggregationViewer		Edit Location By Dragging Existing Marker				
+Map_Search_AggregationViewer		Edit this Overlay				
+Map_Search_AggregationViewer		Edit this POI				
+Map_Search_AggregationViewer		Editing				
+Map_Search_AggregationViewer	Add_Search_Box_HTML	"Enter address ( i.e., 12 Main Street, Gainesville Florida )"			Prompt for finding by address.	http://ufdc.ufl.edu/aerials/map
+Map_Search_AggregationViewer		Error Addign other Listeners				
+Map_Search_AggregationViewer		ERROR Failed Adding Textual Content				
+Map_Search_AggregationViewer		ERROR Failed Adding Titles				
+Map_Search_AggregationViewer		Error: Description cannot contain a ~ or |				
+Map_Search_AggregationViewer		Error: Overlay image source cannot contain a ~ or |				
+Map_Search_AggregationViewer		File			Tooltips set from the sobekcm_map_editor.js file	
+Map_Search_AggregationViewer		Find a Location			Content menubar innerHTML added from the JS file	
+Map_Search_AggregationViewer	Add_Search_Box_HTML	Find Address			For map searching	http://ufdc.ufl.edu/aerials/map
+Map_Search_AggregationViewer		Find Location			Content menubar innerHTML added from the JS file	
+Map_Search_AggregationViewer		Finding your location				
+Map_Search_AggregationViewer		geocoder failed due to:				
+Map_Search_AggregationViewer		Geolocation Service Failed.				
+Map_Search_AggregationViewer		Help			Content menubar innerHTML added from the JS file	
+Map_Search_AggregationViewer	Add_Search_Box_HTML	Hide Coordinates				http://ufdc.ufl.edu/aerials/map
+Map_Search_AggregationViewer		Hiding				
+Map_Search_AggregationViewer		Hiding Overlays				
+Map_Search_AggregationViewer		Hiding POIs				
+Map_Search_AggregationViewer		Hybrid			Content menubar innerHTML added from the JS file	
+Map_Search_AggregationViewer		Hybrid: Toggle Hybrid Map Layer			Tooltips set from the sobekcm_map_editor.js file	
+Map_Search_AggregationViewer		In: Zoom Map In			Tooltips set from the sobekcm_map_editor.js file	
+Map_Search_AggregationViewer		Item Geographic Location Deleted				
+Map_Search_AggregationViewer		Item Location Converted to Listing Overlays				
+Map_Search_AggregationViewer		Item Relocation Reset!				
+Map_Search_AggregationViewer		Item Saved!				
+Map_Search_AggregationViewer	Add_Search_Box_HTML	Latitude				
+Map_Search_AggregationViewer		Layers			Content menubar innerHTML added from the JS file	
+Map_Search_AggregationViewer		Left: Pan Map Left			Tooltips set from the sobekcm_map_editor.js file	
+Map_Search_AggregationViewer		Line			Content menubar innerHTML added from the JS file	
+Map_Search_AggregationViewer		Line: Place a Line			Tooltips set from the sobekcm_map_editor.js file	
+Map_Search_AggregationViewer	Add_Search_Box_HTML	Locate			For map searching	http://ufdc.ufl.edu/aerials/map
+Map_Search_AggregationViewer		Locate: Find A Location On The Map			Tooltips set from the sobekcm_map_editor.js file	
+Map_Search_AggregationViewer	Add_Search_Box_HTML	Longitude				
+Map_Search_AggregationViewer		Manage Location			Content menubar innerHTML added from the JS file	
+Map_Search_AggregationViewer		Manage Location Details			Tooltips set from the sobekcm_map_editor.js file	
+Map_Search_AggregationViewer		Manage Map Coverage			Tooltips set from the sobekcm_map_editor.js file	
+Map_Search_AggregationViewer		Manage Overlay			Content menubar innerHTML added from the JS file	
+Map_Search_AggregationViewer		Manage Overlays			Content menubar innerHTML added from the JS file	
+Map_Search_AggregationViewer		Manage POI			Content menubar innerHTML added from the JS file	
+Map_Search_AggregationViewer		Manage Points of Interest			Tooltips set from the sobekcm_map_editor.js file	
+Map_Search_AggregationViewer		Manage POIs			Content menubar innerHTML added from the JS file	
+Map_Search_AggregationViewer		Map Controls			Content menubar innerHTML added from the JS file	
+Map_Search_AggregationViewer		Marker			Content menubar innerHTML added from the JS file	
+Map_Search_AggregationViewer		Marker: Place a Point			Tooltips set from the sobekcm_map_editor.js file	
+Map_Search_AggregationViewer	Add_Search_Box_HTML	more help			For more instructions	http://ufdc.ufl.edu/aerials/map
+Map_Search_AggregationViewer		Nearest Address			Content menubar innerHTML added from the JS file	
+Map_Search_AggregationViewer		Not Cleared				
+Map_Search_AggregationViewer		Nothing Happened!				
+Map_Search_AggregationViewer		Nothing to Delete				
+Map_Search_AggregationViewer		Nothing to Hide				
+Map_Search_AggregationViewer		Nothing to Reset				
+Map_Search_AggregationViewer		Nothing to Save				
+Map_Search_AggregationViewer		Nothing to Search				
+Map_Search_AggregationViewer		Nothing to Toggle				
+Map_Search_AggregationViewer		Out: Zoom Map Out			Tooltips set from the sobekcm_map_editor.js file	
+Map_Search_AggregationViewer		Overall Geographic Data Deleted				
+Map_Search_AggregationViewer		Overlay Editing Turned Off				
+Map_Search_AggregationViewer		Overlay Editing Turned On				
+Map_Search_AggregationViewer		Overlay Saved!				
+Map_Search_AggregationViewer		Overlays Reset!				
+Map_Search_AggregationViewer		Pan			Content menubar innerHTML added from the JS file	
+Map_Search_AggregationViewer		Place			Content menubar innerHTML added from the JS file	
+Map_Search_AggregationViewer		POI Set Cleared!				
+Map_Search_AggregationViewer		POI Set Saved!				
+Map_Search_AggregationViewer	Add_Search_Box_HTML	Point 1				
+Map_Search_AggregationViewer	Add_Search_Box_HTML	Point 2				
+Map_Search_AggregationViewer		Polygon			Content menubar innerHTML added from the JS file	
+Map_Search_AggregationViewer		Polygon: Place a Polygon			Tooltips set from the sobekcm_map_editor.js file	
+Map_Search_AggregationViewer		Rectangle			Content menubar innerHTML added from the JS file	
+Map_Search_AggregationViewer		rectangle: Place a rectangle			Tooltips set from the sobekcm_map_editor.js file	
+Map_Search_AggregationViewer		Removed				
+Map_Search_AggregationViewer		Report a Problem			Content menubar innerHTML added from the JS file	
+Map_Search_AggregationViewer		Report a Sobek Error				
+Map_Search_AggregationViewer		Reset			Content menubar innerHTML added from the JS file	
+Map_Search_AggregationViewer		Reset All Changes			Content menubar innerHTML added from the JS file	
+Map_Search_AggregationViewer		Reset All Overlay Changes			Tooltips set from the sobekcm_map_editor.js file	
+Map_Search_AggregationViewer		Reset Location			Content menubar innerHTML added from the JS file	
+Map_Search_AggregationViewer		Reset Location Changes			Tooltips set from the sobekcm_map_editor.js file	
+Map_Search_AggregationViewer		Reset Me				
+Map_Search_AggregationViewer		Reset Overlays			Content menubar innerHTML added from the JS file	
+Map_Search_AggregationViewer		Reset POIs			Content menubar innerHTML added from the JS file	
+Map_Search_AggregationViewer		Reset: Click to Reset Rotation			Tooltips set from the sobekcm_map_editor.js file	
+Map_Search_AggregationViewer		Reset: Reset Map To Defaults			Tooltips set from the sobekcm_map_editor.js file	
+Map_Search_AggregationViewer		Reset: Reset Map Type			Tooltips set from the sobekcm_map_editor.js file	
+Map_Search_AggregationViewer		Reset: Reset Zoom Level			Tooltips set from the sobekcm_map_editor.js file	
+Map_Search_AggregationViewer		Reseting Page				
+Map_Search_AggregationViewer		Resetting Overlays				
+Map_Search_AggregationViewer		Resetting POIs				
+Map_Search_AggregationViewer		Returned to Bounds!				
+Map_Search_AggregationViewer		Right: Pan Map Right			Tooltips set from the sobekcm_map_editor.js file	
+Map_Search_AggregationViewer		Roadmap			Content menubar innerHTML added from the JS file	
+Map_Search_AggregationViewer		Roadmap: Toggle Road Map Layer			Tooltips set from the sobekcm_map_editor.js file	
+Map_Search_AggregationViewer		Rotate			Content menubar innerHTML added from the JS file	
+Map_Search_AggregationViewer		Rotate: Edit the rotation value			Tooltips set from the sobekcm_map_editor.js file	
+Map_Search_AggregationViewer		Satellite			Content menubar innerHTML added from the JS file	
+Map_Search_AggregationViewer		Satellite: Toggle Satellite Map Layer			Tooltips set from the sobekcm_map_editor.js file	
+Map_Search_AggregationViewer		Save				
+Map_Search_AggregationViewer		Save description				
+Map_Search_AggregationViewer		Save Location Changes			Tooltips set from the sobekcm_map_editor.js file	
+Map_Search_AggregationViewer		Save Overlay Changes			Tooltips set from the sobekcm_map_editor.js file	
+Map_Search_AggregationViewer		Save Point Of Interest Set			Tooltips set from the sobekcm_map_editor.js file	
+Map_Search_AggregationViewer		save this Description				
+Map_Search_AggregationViewer		Save to Temporary File				
+Map_Search_AggregationViewer		Saved				
+Map_Search_AggregationViewer		Saving...				
+Map_Search_AggregationViewer	Add_Search_Box_HTML	Search Coordinates			When user has selected to show the coordinates selected	
+Map_Search_AggregationViewer	Add_Search_Box_HTML	Select Area			For map searching	http://ufdc.ufl.edu/aerials/map
+Map_Search_AggregationViewer	Add_Search_Box_HTML	Select Point			For map searching	http://ufdc.ufl.edu/aerials/map
+Map_Search_AggregationViewer		Select the area to Draw the Overlay				
+Map_Search_AggregationViewer		Selected Lat/Long			Content menubar innerHTML added from the JS file	
+Map_Search_AggregationViewer	Add_Search_Box_HTML	Show Coordinates				http://ufdc.ufl.edu/aerials/map
+Map_Search_AggregationViewer		Showing				
+Map_Search_AggregationViewer		Showing Overlays				
+Map_Search_AggregationViewer		Showing POIs				
+Map_Search_AggregationViewer		Tenth Degree Left: Click to Rotate a Tenth Degree Counter-Clockwise			Tooltips set from the sobekcm_map_editor.js file	
+Map_Search_AggregationViewer		Tenth Degree Right: Click to Rotate a Tenth Degree Clockwise			Tooltips set from the sobekcm_map_editor.js file	
+Map_Search_AggregationViewer		Terrain			Content menubar innerHTML added from the JS file	
+Map_Search_AggregationViewer		Terrain: Toggle Terrain Map Layer			Tooltips set from the sobekcm_map_editor.js file	
+Map_Search_AggregationViewer		"This will delete all of the POIs, are you sure?"				
+Map_Search_AggregationViewer		"This will delete the geogarphic coodinate data for this item, are you sure?"				
+Map_Search_AggregationViewer		"This will delete the geographic coordinate data for this overlay, are you sure?"				
+Map_Search_AggregationViewer		Toggle All Map Overlays			Content menubar innerHTML added from the JS file	
+Map_Search_AggregationViewer		Toggle All Overlays On Map			Tooltips set from the sobekcm_map_editor.js file	
+Map_Search_AggregationViewer		Toggle All POIs On Map			Tooltips set from the sobekcm_map_editor.js file	
+Map_Search_AggregationViewer		Toggle on Map				
+Map_Search_AggregationViewer		Toggle POIs on Map			Content menubar innerHTML added from the JS file	
+Map_Search_AggregationViewer		Toolbar			Content menubar innerHTML added from the JS file	
+Map_Search_AggregationViewer		Toolbar: Toggle the Toolbar			Tooltips set from the sobekcm_map_editor.js file	
+Map_Search_AggregationViewer		Toolbox			Content menubar innerHTML added from the JS file	
+Map_Search_AggregationViewer		Toolbox: Toggle Toolbox			Tooltips set from the sobekcm_map_editor.js file	
+Map_Search_AggregationViewer		Transparency			Content menubar innerHTML added from the JS file	
+Map_Search_AggregationViewer		Transparency: Set the transparency of this Overlay			Tooltips set from the sobekcm_map_editor.js file	
+Map_Search_AggregationViewer		Up: Pan Map Up			Tooltips set from the sobekcm_map_editor.js file	
+Map_Search_AggregationViewer		Use Search Result As Location			Tooltips set from the sobekcm_map_editor.js file	
+Map_Search_AggregationViewer		Using Search Results as Location				
+Map_Search_AggregationViewer		View			Content menubar innerHTML added from the JS file	
+Map_Search_AggregationViewer		Warning! This will erase any changes you have made. Do you still want to proceed?				
+Map_Search_AggregationViewer		Working...				
+Map_Search_AggregationViewer		Zoom			Content menubar innerHTML added from the JS file	
+Map_Search_AggregationViewer		Zoom In			Content menubar innerHTML added from the JS file	
+Map_Search_AggregationViewer		Zoom Out			Content menubar innerHTML added from the JS file	
+						
+Metadata_Browse_AggregationViewer	Add_Search_Box_HTML	Browse by %1			"i.e., Browse by Title.  When metadata browsing, appears in gray box at top"	http://www.dloc.com/l/browseby/country
+Metadata_Browse_AggregationViewer	Add_Secondary_HTML	Browse By:			Text on the facet box to the left	http://www.dloc.com/l/browseby/country/1
+Metadata_Browse_AggregationViewer	Add_Secondary_HTML	Public Browses			Then all public browses are lists	http://www.dloc.com/l/browseby/country/1
+Metadata_Browse_AggregationViewer	Add_Secondary_HTML	Internal Browses			Only shows up if logged on as internal user	http://www.dloc.com/l/browseby/country/1
+Metadata_Browse_AggregationViewer	Add_Secondary_HTML	Select a metadata field to browse by from the list on the left			Instructions appears sometimes	
+Metadata_Browse_AggregationViewer	Add_Secondary_HTML	NO MATCHING VALUES			Displays if there no metadata values returned in the browse	
+						
+Newspaper_Search_AggregationViewer	Add_Search_Box_HTML	Search for:			Used in search box for newspaper-specific searches	http://dloc.com/fdnl
+Newspaper_Search_AggregationViewer	Add_Search_Box_HTML	in			Used in search box for newspaper-specific searches	
+Newspaper_Search_AggregationViewer	Add_Search_Box_HTML	Full Citation			Used in search box for newspaper-specific searches	
+Newspaper_Search_AggregationViewer	Add_Search_Box_HTML	Full Text			Used in search box for newspaper-specific searches	
+Newspaper_Search_AggregationViewer	Add_Search_Box_HTML	Newspaper Title			Used in search box for newspaper-specific searches	
+Newspaper_Search_AggregationViewer	Add_Search_Box_HTML	Location			Used in search box for newspaper-specific searches	
+Newspaper_Search_AggregationViewer		Go				
+						
+No_Search_AggregationViewer	Add_Search_Box_HTML	%1 Home			%1=collection name.  Used in rare case that no search is selected for the collection home	
+						
+Private_Items_AggregationViewer	Add_Search_Box_HTML	BibID / VID			"Sort by options for the administrative view on all non-public items, accessible from the internal header in aggregations"	
+Private_Items_AggregationViewer	Add_Search_Box_HTML	Title / VID			"Sort by options for the administrative view on all non-public items, accessible from the internal header in aggregations"	
+Private_Items_AggregationViewer	Add_Search_Box_HTML	Last Activity Date (most recent first)			"Sort by options for the administrative view on all non-public items, accessible from the internal header in aggregations"	
+Private_Items_AggregationViewer	Add_Search_Box_HTML	Last Milestone Date (most recent first)			"Sort by options for the administrative view on all non-public items, accessible from the internal header in aggregations"	
+Private_Items_AggregationViewer	Add_Search_Box_HTML	Last Activity Date (oldest first)			"Sort by options for the administrative view on all non-public items, accessible from the internal header in aggregations"	
+Private_Items_AggregationViewer	Add_Search_Box_HTML	Last Milestone Date (oldest first)			"Sort by options for the administrative view on all non-public items, accessible from the internal header in aggregations"	
+Private_Items_AggregationViewer	Add_Search_Box_HTML	Private and Dark Items			Title for the administrative view on all non-public items	
+Private_Items_AggregationViewer	Add_Secondary_HTML	ERROR PULLING INFORMATION FROM DATABASE				
+Private_Items_AggregationViewer	Add_Secondary_HTML	This collection does not include any PRIVATE or DARK items.				
+Private_Items_AggregationViewer	Add_Secondary_HTML	Below is the list of all items linked to this aggregation which are either private (in process) or dark.				
+Private_Items_AggregationViewer	Add_Secondary_HTML	There is only one matching item.				
+Private_Items_AggregationViewer	Add_Secondary_HTML	There are a total of %1 titles.				
+Private_Items_AggregationViewer	Add_Secondary_HTML	There are a total of %1 items in one title.				
+Private_Items_AggregationViewer	Add_Secondary_HTML	There are a total of %1 items in %2 titles.				
+Private_Items_AggregationViewer	Add_Secondary_HTML	Title				
+Private_Items_AggregationViewer	Add_Secondary_HTML	Last Activity				
+Private_Items_AggregationViewer	Add_Secondary_HTML	Last Milestone				
+Private_Items_AggregationViewer	Add_Secondary_HTML	Dated %1			Used for publication date display ( to differentiate from milestone dates)	
+Private_Items_AggregationViewer	Add_Secondary_HTML	record created			Name of the last milestons performed	
+Private_Items_AggregationViewer	Add_Secondary_HTML	scanned			Name of the last milestons performed	
+Private_Items_AggregationViewer	Add_Secondary_HTML	processed			Name of the last milestons performed	
+Private_Items_AggregationViewer	Add_Secondary_HTML	quality control			Name of the last milestons performed	
+Private_Items_AggregationViewer	Add_Secondary_HTML	online completed			Name of the last milestons performed	
+Private_Items_AggregationViewer	Add_Secondary_HTML	unknown milestone			Name of the last milestons performed	
+Private_Items_AggregationViewer	Add_Secondary_HTML	% days ago			"i.e., '32 days ago'. - time since last milestone or activity"	
+Private_Items_AggregationViewer		First Page				
+Private_Items_AggregationViewer		Previous Page				
+Private_Items_AggregationViewer		Next Page				
+Private_Items_AggregationViewer		Last Page				
+Private_Items_AggregationViewer		%1 volumes out of %2 total volumes				
+						
+Rotating_Highlight_Search_AggregationViewer	Add_Search_Box_HTML	Search Collection:			On the special rotating image search box on home pages	http://www.dloc.com
+						
+Usage_Statistics_AggregationViewer	Add_Search_Box_HTML	History of Collection-Level Usage			Admin view on usage statistics for aggregation from internal header	
+Usage_Statistics_AggregationViewer	Add_Search_Box_HTML	History of Item Usage			Admin view on usage statistics for aggregation from internal header	
+Usage_Statistics_AggregationViewer	Add_Search_Box_HTML	Most Accessed Titles			Admin view on usage statistics for aggregation from internal header	
+Usage_Statistics_AggregationViewer	Add_Search_Box_HTML	Most Accessed Items			Admin view on usage statistics for aggregation from internal header	
+Usage_Statistics_AggregationViewer	Add_Search_Box_HTML	Definitions of Terms Used			Admin view on usage statistics for aggregation from internal header	
+Usage_Statistics_AggregationViewer	Add_Secondary_HTML	Collection Views			Admin view on usage statistics for aggregation from internal header	
+Usage_Statistics_AggregationViewer	Add_Secondary_HTML	Item Views			Admin view on usage statistics for aggregation from internal header	
+Usage_Statistics_AggregationViewer	Add_Secondary_HTML	Top Titles			Admin view on usage statistics for aggregation from internal header	
+Usage_Statistics_AggregationViewer	Add_Secondary_HTML	Top Items			Admin view on usage statistics for aggregation from internal header	
+Usage_Statistics_AggregationViewer	Add_Secondary_HTML	Definitions			Admin view on usage statistics for aggregation from internal header	
+Usage_Statistics_AggregationViewer	add_collection_usage_history	Usage history for this collection is displayed below. This history includes just the top-level views of the collection.			Admin view on usage statistics for aggregation from internal header	
+Usage_Statistics_AggregationViewer		Definitions page provides more details about the statistics and words used below.			Admin view on usage statistics for aggregation from internal header	
+Usage_Statistics_AggregationViewer	add_collection_usage_history	Date			Admin view on usage statistics for aggregation from internal header	
+Usage_Statistics_AggregationViewer	add_collection_usage_history	Total Views			Admin view on usage statistics for aggregation from internal header	
+Usage_Statistics_AggregationViewer	add_collection_usage_history	Visits			Admin view on usage statistics for aggregation from internal header	
+Usage_Statistics_AggregationViewer	add_collection_usage_history	Main Pages			Admin view on usage statistics for aggregation from internal header	
+Usage_Statistics_AggregationViewer	add_collection_usage_history	Browses				
+Usage_Statistics_AggregationViewer	add_collection_usage_history	Search Results				
+Usage_Statistics_AggregationViewer	add_collection_usage_history	Title Views				
+Usage_Statistics_AggregationViewer	add_item_usage_history	Usage history for the items within this collection are displayed below.				
+Usage_Statistics_AggregationViewer	add_item_usage_history	JPEG Views				
+Usage_Statistics_AggregationViewer	add_item_usage_history	Zoomable Views				
+Usage_Statistics_AggregationViewer	add_item_usage_history	Citation Views				
+Usage_Statistics_AggregationViewer	add_item_usage_history	Thumbnail Views				
+Usage_Statistics_AggregationViewer	add_item_usage_history	Text Searches				
+Usage_Statistics_AggregationViewer	add_item_usage_history	Flash Views			Items which are utilizing Adobe Flash files	
+Usage_Statistics_AggregationViewer	add_item_usage_history	Map Views				
+Usage_Statistics_AggregationViewer	add_item_usage_history	Download Views			Views on the page which lists the downloads	
+Usage_Statistics_AggregationViewer	add_item_usage_history	Static Views			"Views on the static pages, which is how search engines index system"	
+Usage_Statistics_AggregationViewer	add_items_by_collection	The most commonly utilized items for this collection appear below.				
+Usage_Statistics_AggregationViewer		Title				
+Usage_Statistics_AggregationViewer		Views				
+Usage_Statistics_AggregationViewer	add_titles_by_collection	The most commonly utilized titles by collection appear below.				
+Usage_Statistics_AggregationViewer		%1 Statistics				
+Usage_Statistics_AggregationViewer		Collection Hierarchy				
+Usage_Statistics_AggregationViewer		Collection Groups				
+Usage_Statistics_AggregationViewer		Collections				
+Usage_Statistics_AggregationViewer		SubCollections				
+Usage_Statistics_AggregationViewer		Titles and Items				
+Usage_Statistics_AggregationViewer		BibID				
+Usage_Statistics_AggregationViewer		VID				
+						
+Contact_HtmlSubwriter	constructor	The following information is collected to allow us better serve your needs.			Included in emails sent from the system via the 'Contact Us' feature	
+Contact_HtmlSubwriter	constructor	PERSONAL INFORMATION				
+Contact_HtmlSubwriter	constructor	Name:				
+Contact_HtmlSubwriter	constructor	Email:				
+Contact_HtmlSubwriter	constructor	[ %1 Submission ]			"Included at the end of the subject line for emails sent ( i.e., ""[ dLOC Submission ]"")"	
+Contact_HtmlSubwriter		Submit				
+Contact_HtmlSubwriter		Cancel				
+Contact_HtmlSubwriter	Write_HTML	Your email has been sent.			Prompts for the automatic contact us form in the system	http://www.dloc.com/dloc1/contact
+Contact_HtmlSubwriter	Write_HTML	Click here to return to the digital collection home			Prompts for the automatic contact us form in the system	http://www.dloc.com/dloc1/contact
+Contact_HtmlSubwriter	Write_HTML	Click here to close this tab in your browser			Prompts for the automatic contact us form in the system	http://www.dloc.com/dloc1/contact
+Contact_HtmlSubwriter	Write_HTML	Contact Us			Prompts for the automatic contact us form in the system	http://www.dloc.com/dloc1/contact
+Contact_HtmlSubwriter	Write_HTML	Please complete the following required fields:			Prompts for the automatic contact us form in the system	http://www.dloc.com/dloc1/contact
+Contact_HtmlSubwriter	Write_HTML	Enter a subject here:			Prompts for the automatic contact us form in the system	http://www.dloc.com/dloc1/contact
+Contact_HtmlSubwriter	Write_HTML	Describe your question or problem here:			Prompts for the automatic contact us form in the system	http://www.dloc.com/dloc1/contact
+Contact_HtmlSubwriter	Write_HTML	"May we contact you?  If so, please provide the following information:"			Prompts for the automatic contact us form in the system	http://www.dloc.com/dloc1/contact
+Contact_HtmlSubwriter	Write_HTML	Enter your name here:			Prompts for the automatic contact us form in the system	http://www.dloc.com/dloc1/contact
+Contact_HtmlSubwriter	Write_HTML	Enter your e-mail address here:			Prompts for the automatic contact us form in the system	http://www.dloc.com/dloc1/contact
+						
+Error_HtmlSubwriter	Write_HTML	The item indicated was not valid.			"Used when an item was indicated, but not valid"	
+Error_HtmlSubwriter	Write_HTML	Click here to report an error.			"Used when an item was indicated, but not valid"	
+Error_HtmlSubwriter	Write_HTML	Unknown error occurred.			Used for an unexpected error being encountered	
+Error_HtmlSubwriter	Write_HTML	We apologize for the inconvenience.			Used for an unexpected error being encountered	
+Error_HtmlSubwriter	Write_HTML	Click here to return to the library.			Used for an unexpected error being encountered	
+Error_HtmlSubwriter	Write_HTML	Click here to report the problem.			Used for an unexpected error being encountered	
+						
+Internal_HtmlSubwriter	Write_HTML	Collection Hierarchy			"Internal view, must be logged on as internal user."	put /internal at the end of your base URL
+Internal_HtmlSubwriter	Write_HTML	Active and Inactive Collections			"Internal view, must be logged on as internal user."	put /internal at the end of your base URL
+Internal_HtmlSubwriter	Write_HTML	New Items			"Internal view, must be logged on as internal user."	put /internal at the end of your base URL
+Internal_HtmlSubwriter	Write_HTML	Newly Added or Modified Items			"Internal view, must be logged on as internal user."	put /internal at the end of your base URL
+Internal_HtmlSubwriter	Write_HTML	Memory Management			"Internal view, must be logged on as internal user."	put /internal at the end of your base URL
+Internal_HtmlSubwriter	Write_HTML	Current Memory Profile			"Internal view, must be logged on as internal user."	put /internal at the end of your base URL
+Internal_HtmlSubwriter	Write_HTML	Wordmarks			"Internal view, must be logged on as internal user."	put /internal at the end of your base URL
+Internal_HtmlSubwriter	Write_HTML	Build Failures			"Internal view, must be logged on as internal user."	put /internal at the end of your base URL
+Internal_HtmlSubwriter	Write_HTML	Build Failure Logs			"Internal view, must be logged on as internal user."	put /internal at the end of your base URL
+Internal_HtmlSubwriter	Write_HTML	Internal Users Only			If unauthorized for this view	
+Internal_HtmlSubwriter	Write_HTML	You are not authorized to access this view.			"Internal view, must be logged on as internal user."	put /internal at the end of your base URL
+Internal_HtmlSubwriter	Write_HTML	Click here to return to the digital library home page.				
+						
+Internal_HtmlSubwriter	add_build_failures	The data below shows errors which occurred while loading new items through the builder.  These can be displayed by month and year below by selecting the start and end month.  These failures will continue to display until they are manually cleared or until the item successfully loads after the failure or warning.			When listing build failures within the internal view	put /internal/failures at the end of your base URL
+Internal_HtmlSubwriter	add_build_failures	Selected Date Range			When listing build failures within the internal view	put /internal/failures at the end of your base URL
+Internal_HtmlSubwriter	add_build_failures	"The failures and warnings which were encountered during build are searchable below, by month:"			When listing build failures within the internal view	put /internal/failures at the end of your base URL
+Internal_HtmlSubwriter	add_build_failures	From:			When listing build failures within the internal view	put /internal/failures at the end of your base URL
+Internal_HtmlSubwriter	add_build_failures	To:			When listing build failures within the internal view	put /internal/failures at the end of your base URL
+Internal_HtmlSubwriter	add_build_failures	"To change the date shown, choose your dates above and hit the GO button."			When listing build failures within the internal view	put /internal/failures at the end of your base URL
+Internal_HtmlSubwriter	add_build_failures	Build Failures and Warnings			When listing build failures within the internal view	put /internal/failures at the end of your base URL
+Internal_HtmlSubwriter	add_build_failures	No uncleared warnings or failures for the selected date range.			When listing build failures within the internal view	put /internal/failures at the end of your base URL
+Internal_HtmlSubwriter	add_build_failures	METS Type			"Type of METS file ( i.e., New, Delete, etc..)"	put /internal/failures at the end of your base URL
+Internal_HtmlSubwriter	add_build_failures	Description			Header for the column describing the failure	put /internal/failures at the end of your base URL
+						
+Internal_HtmlSubwriter	add_cache_html	GLOBAL VALUES			When displaying the list of items in the local web server cache	put /internal/cache at the end of your base URL
+Internal_HtmlSubwriter	add_cache_html	APPLICATION STATE VALUES			When displaying the list of items in the local web server cache	put /internal/cache at the end of your base URL
+Internal_HtmlSubwriter	add_cache_html	LOCALLY CACHED OBJECTS			When displaying the list of items in the local web server cache	put /internal/cache at the end of your base URL
+Internal_HtmlSubwriter	add_cache_html	REMOTELY CACHED OBJECTS			When displaying the list of items in the local web server cache	put /internal/cache at the end of your base URL
+Internal_HtmlSubwriter	add_cache_html	SESSION STATE VALUES			When displaying the list of items in the local web server cache	put /internal/cache at the end of your base URL
+Internal_HtmlSubwriter	add_cache_html	INSTANCE NAME			When displaying the list of items in the local web server cache	put /internal/cache at the end of your base URL
+Internal_HtmlSubwriter	add_cache_html	KEY			When displaying the list of items in the local web server cache	put /internal/cache at the end of your base URL
+Internal_HtmlSubwriter	add_cache_html	OBJECT			When displaying the list of items in the local web server cache	put /internal/cache at the end of your base URL
+Internal_HtmlSubwriter	add_cache_html	UNKNOWN OBJECT TYPE			When displaying the list of items in the local web server cache	put /internal/cache at the end of your base URL
+Internal_HtmlSubwriter	add_cache_html	( none )			Used when no matching value in the cache	put /internal/cache at the end of your base URL
+						
+Internal_HtmlSubwriter	add_single_aggregation_html	Select one of the aggregation types below to view information about all aggregations of that type.			Currently this view is not linked to?	
+Internal_HtmlSubwriter	add_single_aggregation_html	All Aggregation Types			Currently this view is not linked to?	
+Internal_HtmlSubwriter	add_single_aggregation_html	Parent Aggregations			Header for listing parents of an aggregation	
+Internal_HtmlSubwriter	add_single_aggregation_html	Child Aggregations			Header for listing all child aggregations	
+Internal_HtmlSubwriter	add_single_aggregation_html	Active Aggregations			For dividing list between active and inactive aggregations	
+Internal_HtmlSubwriter	add_single_aggregation_html	Inactive Aggregations			For dividing list between active and inactive aggregations	
+						
+Internal_HtmlSubwriter	add_aggregations_master_list_html	"Below is the complete master list of all aggregations within this library.  This includes all active aggregations, as well as all hidden or inactive collections."			For listing all aggregations in the system	put /internal/aggregations at the end of your base URL
+Internal_HtmlSubwriter	add_aggregations_master_list_html	Click here to sort by DATE ADDED			For listing all aggregations in the system	put /internal/aggregations at the end of your base URL
+Internal_HtmlSubwriter	add_aggregations_master_list_html	Click here to sort by CODE			For listing all aggregations in the system	put /internal/aggregations at the end of your base URL
+Internal_HtmlSubwriter	add_aggregations_master_list_html	SobekCM Code			For listing all aggregations in the system	put /internal/aggregations at the end of your base URL
+Internal_HtmlSubwriter	add_aggregations_master_list_html	Type			For listing all aggregations in the system	put /internal/aggregations at the end of your base URL
+Internal_HtmlSubwriter	add_aggregations_master_list_html	Name			For listing all aggregations in the system	put /internal/aggregations at the end of your base URL
+Internal_HtmlSubwriter	add_aggregations_master_list_html	Date Added			For listing all aggregations in the system	put /internal/aggregations at the end of your base URL
+						
+Internal_HtmlSubwriter	add_new_item_html	METS TYPE			"Type of METS file ( i.e., New, Delete, etc..) - List of all recently added or changed items in system"	put /internal/new at the end of your base URL
+Internal_HtmlSubwriter	add_new_item_html	USER			List of all recently added or changed items in system	put /internal/new at the end of your base URL
+Internal_HtmlSubwriter	add_new_item_html	ALL			List of all recently added or changed items in system	put /internal/new at the end of your base URL
+Internal_HtmlSubwriter	add_new_item_html	ONLINE EDITS			List of all recently added or changed items in system	put /internal/new at the end of your base URL
+Internal_HtmlSubwriter	add_new_item_html	ONLINE SUBMITS			List of all recently added or changed items in system	put /internal/new at the end of your base URL
+Internal_HtmlSubwriter	add_new_item_html	VISIBILITY CHANGES			List of all recently added or changed items in system	put /internal/new at the end of your base URL
+Internal_HtmlSubwriter	add_new_item_html	BULK LOADED			List of all recently added or changed items in system	put /internal/new at the end of your base URL
+Internal_HtmlSubwriter	add_new_item_html	POST-PROCESSED			List of all recently added or changed items in system	put /internal/new at the end of your base URL
+Internal_HtmlSubwriter	add_new_item_html	NO NEW ITEMS			List of all recently added or changed items in system	put /internal/new at the end of your base URL
+Internal_HtmlSubwriter	add_new_item_html	There have been an unusually large number of updates over the last week.			List of all recently added or changed items in system	put /internal/new at the end of your base URL
+Internal_HtmlSubwriter	add_new_item_html	Select the update type tab above to view the details.			List of all recently added or changed items in system	put /internal/new at the end of your base URL
+Internal_HtmlSubwriter	add_new_item_html	NO INFORMATION FOR YOUR SELECTION				
+						
+LegacyUrl_HtmlSubwriter	Write_HTML	Deprecated URL detected			Used if an old-style URL is used with ?i=#### in the URL	http://www.dloc.com/?i=23333
+LegacyUrl_HtmlSubwriter	Write_HTML	The URL you entered is a legacy URL.  Support for this URL will end shortly.			Used if an old-style URL is used with ?i=#### in the URL	http://www.dloc.com/?i=23333
+LegacyUrl_HtmlSubwriter	Write_HTML	Please update your records to the new URL below:			Used if an old-style URL is used with ?i=#### in the URL	http://www.dloc.com/?i=23333
+						
+Preferences_HtmlSubwriter	Write_HTML	Preferences			Allows user to enter their preferences for some display options	http://www.dloc.com/l/preferences  (when logged on)
+Preferences_HtmlSubwriter	Write_HTML	Language:			Allows user to enter their preferences for some display options	http://www.dloc.com/l/preferences  (when logged on)
+Preferences_HtmlSubwriter	Write_HTML	Return			Allows user to enter their preferences for some display options	http://www.dloc.com/l/preferences  (when logged on)
+Preferences_HtmlSubwriter	Write_HTML	Default View:			Allows user to enter their preferences for some display options	http://www.dloc.com/l/preferences  (when logged on)
+Preferences_HtmlSubwriter	Write_HTML	Default Sort:			Allows user to enter their preferences for some display options	http://www.dloc.com/l/preferences  (when logged on)
+						
+Print_Item_HtmlSubwriter	Write_HTML	Title:			Creates a simpler page for printing purposes when printing an item	
+Print_Item_HtmlSubwriter	Write_HTML	URL:			Creates a simpler page for printing purposes when printing an item	
+Print_Item_HtmlSubwriter	Write_HTML	Site:			"(i.e., label for name of site, as in Site: Digital Library of the Carribea)  Creates a simpler page for printing purposes when printing an item"	
+						
+Public_Folder_HtmlSubwriter	Write_HTML	Public Bookshelf			"If a user makes their bookshelf public, this is used to display it"	
+Public_Folder_HtmlSubwriter		%1 Home				
+						
+Search_Results_HtmlSubwriter	Write_HTML	Modify your search			Used as main tabs when viewing search results	
+Search_Results_HtmlSubwriter	Write_HTML	New Search			Used as main tabs when viewing search results	
+						
+Statistics_HtmlSubwriter	Write_HTML	Item Count			Allows usage stats and item counts to be displayed	http://dloc.com/statistics
+Statistics_HtmlSubwriter	Write_HTML	Usage Statistics			Allows usage stats and item counts to be displayed	http://dloc.com/statistics
+Statistics_HtmlSubwriter	Write_HTML	Recent Searches			Allows usage stats and item counts to be displayed	http://dloc.com/statistics
+Statistics_HtmlSubwriter	Write_HTML	Resource count in %1			%1 = code for SobekCM instance.  Allows usage stats and item counts to be displayed	http://dloc.com/statistics
+Statistics_HtmlSubwriter	Write_HTML	Recent searches in %1			%1 = code for SobekCM instance.  Allows usage stats and item counts to be displayed	http://dloc.com/statistics
+Statistics_HtmlSubwriter	Write_HTML	Usage statistics for %1			%1 = code for SobekCM instance.  Allows usage stats and item counts to be displayed	http://dloc.com/statistics
+Statistics_HtmlSubwriter	Write_HTML	Standard View				http://dloc.com/statistics
+Statistics_HtmlSubwriter	Write_HTML	FYTD Growth View			FYTD = Fiscal Year To Date	http://dloc.com/statistics
+Statistics_HtmlSubwriter	Write_HTML	Arbitrary Dates			Allows admin to select any arbitrary dates for stats	http://dloc.com/statistics
+Statistics_HtmlSubwriter	Write_HTML	Overall Stats			Tabs for different views on usage 	http://dloc.com/stats/usage
+Statistics_HtmlSubwriter	Write_HTML	Collections by Date			Tabs for different views on usage 	
+Statistics_HtmlSubwriter	Write_HTML	Item Views by Date			Tabs for different views on usage 	
+Statistics_HtmlSubwriter	Write_HTML	Collection History			Tabs for different views on usage 	
+Statistics_HtmlSubwriter	Write_HTML	Top Titles			Tabs for different views on usage 	
+Statistics_HtmlSubwriter	Write_HTML	Definitions			Tabs for different views on usage 	
+Statistics_HtmlSubwriter		Browse Partners				
+Statistics_HtmlSubwriter		Advanced Search				
+Statistics_HtmlSubwriter	add_items_by_collection	The most commonly accessed items by collection appear below.				http://dloc.com/stats/usage/items/top
+Statistics_HtmlSubwriter		The Definitions page provides more details about the statistics and words used below.				http://dloc.com/stats/usage/items/top
+Statistics_HtmlSubwriter		Selected Collection				http://dloc.com/stats/usage/items/top
+Statistics_HtmlSubwriter	Write_HTML	The most commonly accessed items below are displayed for the following collection:				http://dloc.com/stats/usage/items/top
+Statistics_HtmlSubwriter		From:			Prompt for the dropdown list of all colections	http://dloc.com/stats/usage/items/top
+Statistics_HtmlSubwriter		"To change the collection shown, choose the collection above and hit the GO button."				http://dloc.com/stats/usage/items/top
+Statistics_HtmlSubwriter	add_items_by_collection	Most Accessed Items				http://dloc.com/stats/usage/items/top
+Statistics_HtmlSubwriter	add_items_by_collection	The data below shows the most commonly accessed items within the collection above.				http://dloc.com/stats/usage/items/top
+Statistics_HtmlSubwriter	add_items_by_collection	Click here to view the most commonly accessed TITLES				http://dloc.com/stats/usage/items/top
+Statistics_HtmlSubwriter	add_items_by_collection	Views				http://dloc.com/stats/usage/items/top
+Statistics_HtmlSubwriter	add_titles_by_collection	The most commonly utilized titles by collection appear below.				http://dloc.com/stats/usage/titles/top
+Statistics_HtmlSubwriter	add_titles_by_collection	The most commonly accessed titles below are displayed is for the following collection:				http://dloc.com/stats/usage/titles/top
+Statistics_HtmlSubwriter	add_titles_by_collection	Most Accessed Titles				http://dloc.com/stats/usage/titles/top
+Statistics_HtmlSubwriter	add_titles_by_collection	The data below shows the most commonly accessed titles within the collection above.				http://dloc.com/stats/usage/titles/top
+Statistics_HtmlSubwriter	add_titles_by_collection	Click here to view the most commonly accessed ITEMS				http://dloc.com/stats/usage/titles/top
+Statistics_HtmlSubwriter	add_usage_by_date_text	"Below is the collection and item-level details for your provided date range in comma-seperated value form.  To use the data below, cut and paste it into a CSV or text file.  The resulting file can be opened in a variety of applications, including OpenOffice and Microsoft Excel."				http://dloc.com/stats/usage/history/text/textallAFRICA1
+Statistics_HtmlSubwriter		Select Collection				
+Statistics_HtmlSubwriter		By Name				
+Statistics_HtmlSubwriter	add_item_views_by_date	Below are the details about the specialized views for items aggregated at the collection levels.				http://ufdc.ufl.edu/stats/usage/items
+Statistics_HtmlSubwriter	add_item_views_by_date	"For the number of times collections were viewed or searched, see Collections by Date."				http://ufdc.ufl.edu/stats/usage/items
+Statistics_HtmlSubwriter		Selected Date Range				http://ufdc.ufl.edu/stats/usage/items
+Statistics_HtmlSubwriter	add_item_views_by_date	The usage for all items appears below for the following date range:				http://ufdc.ufl.edu/stats/usage/items
+Statistics_HtmlSubwriter		To:				http://ufdc.ufl.edu/stats/usage/items
+Statistics_HtmlSubwriter		"To change the date shown, choose your dates above and hit the GO button."				http://ufdc.ufl.edu/stats/usage/items
+Statistics_HtmlSubwriter		Summary by Collection				http://ufdc.ufl.edu/stats/usage/items
+Statistics_HtmlSubwriter		NO USAGE STATISTICS EXIST FOR YOUR SELECTION				http://ufdc.ufl.edu/stats/usage/items
+Statistics_HtmlSubwriter		Export as CSV				http://ufdc.ufl.edu/stats/usage/items
+Statistics_HtmlSubwriter		JPEG Views				http://ufdc.ufl.edu/stats/usage/items
+Statistics_HtmlSubwriter		Zoomable Views				http://ufdc.ufl.edu/stats/usage/items
+Statistics_HtmlSubwriter		Citation Views				http://ufdc.ufl.edu/stats/usage/items
+Statistics_HtmlSubwriter		Thumbnail Views				http://ufdc.ufl.edu/stats/usage/items
+Statistics_HtmlSubwriter		Text Searches				http://ufdc.ufl.edu/stats/usage/items
+Statistics_HtmlSubwriter		Flash Views			Items which are utilizing Adobe Flash files	http://ufdc.ufl.edu/stats/usage/items
+Statistics_HtmlSubwriter		Map Views				http://ufdc.ufl.edu/stats/usage/items
+Statistics_HtmlSubwriter		Download Views			Views on the page which lists the downloads	http://ufdc.ufl.edu/stats/usage/items
+Statistics_HtmlSubwriter		Static Views			"Views on the static pages, which is how search engines index system"	http://ufdc.ufl.edu/stats/usage/items
+Statistics_HtmlSubwriter		Collections				
+Statistics_HtmlSubwriter		Type				
+Statistics_HtmlSubwriter		Terms				
+Statistics_HtmlSubwriter		Time				
+Statistics_HtmlSubwriter		Title				
+Statistics_HtmlSubwriter		NUMBER				
+Statistics_HtmlSubwriter	add_collections_by_date	"The data below shows details for the views that occurred at each level of the collection hierarchy (Collection Groups, Collections, SubCollections)."				http://ufdc.ufl.edu/stats/usage/collections
+Statistics_HtmlSubwriter	add_collections_by_date	These statistics show the number of times users:				http://ufdc.ufl.edu/stats/usage/collections
+Statistics_HtmlSubwriter	add_collections_by_date	navigated to the collection main pages				http://ufdc.ufl.edu/stats/usage/collections
+Statistics_HtmlSubwriter	add_collections_by_date	browsed the items or information about the collection				http://ufdc.ufl.edu/stats/usage/collections
+Statistics_HtmlSubwriter	add_collections_by_date	performed searches against the items contained in the collection				http://ufdc.ufl.edu/stats/usage/collections
+Statistics_HtmlSubwriter	add_collections_by_date	viewed titles and items contained within the collection				http://ufdc.ufl.edu/stats/usage/collections
+Statistics_HtmlSubwriter	add_collections_by_date	"For the specialized item-level view details, see Item Views by Date."				http://ufdc.ufl.edu/stats/usage/collections
+Statistics_HtmlSubwriter	add_collections_by_date	The usage for all the collections appears below for the following data range:				http://ufdc.ufl.edu/stats/usage/collections
+Statistics_HtmlSubwriter	add_collections_by_date	GROUP CODE			Header for table	http://ufdc.ufl.edu/stats/usage/collections
+Statistics_HtmlSubwriter	add_collections_by_date	COLL CODE			Short for Collection Code - Header for table	http://ufdc.ufl.edu/stats/usage/collections
+Statistics_HtmlSubwriter	add_collections_by_date	SUB CODE			Short for Subcollection Code - Header for table	http://ufdc.ufl.edu/stats/usage/collections
+Statistics_HtmlSubwriter		TOTAL VIEWS			Header for table	http://ufdc.ufl.edu/stats/usage/collections
+Statistics_HtmlSubwriter		VISITS			Header for table	http://ufdc.ufl.edu/stats/usage/collections
+Statistics_HtmlSubwriter		MAIN PAGES			Header for table	http://ufdc.ufl.edu/stats/usage/collections
+Statistics_HtmlSubwriter		BROWSES			Header for table	http://ufdc.ufl.edu/stats/usage/collections
+Statistics_HtmlSubwriter		SEARCH RESULTS			Header for table	http://ufdc.ufl.edu/stats/usage/collections
+Statistics_HtmlSubwriter		TITLE VIEWS			Header for table	http://ufdc.ufl.edu/stats/usage/collections
+Statistics_HtmlSubwriter		ITEM VIEWS			Header for table	http://ufdc.ufl.edu/stats/usage/collections
+Statistics_HtmlSubwriter	add_collections_by_date	ALL COLLECTION GROUPS			Row header in table	http://ufdc.ufl.edu/stats/usage/collections
+Statistics_HtmlSubwriter	add_collection_history	Usage history for a single collection is displayed below. This history includes views of the collection and views of the items within the collections.				http://ufdc.ufl.edu/stats/usage/history
+Statistics_HtmlSubwriter	add_collection_history	The usage displayed is for the following collection:				http://ufdc.ufl.edu/stats/usage/history
+Statistics_HtmlSubwriter	add_collection_history	The data below shows the collection history for the selected collection.  The first table shows the summary of all views of this collection and items contained in the collection.  The second table includes the details for specialized item-level views.				http://ufdc.ufl.edu/stats/usage/history
+Statistics_HtmlSubwriter	add_collection_history_text	"Below is the history collection information included in comma-seperated value form.  To use the data below, cut and paste it into a CSV or text file.  The resulting file can be opened in a variety of applications, including OpenOffice and Microsoft Excel."				
+Statistics_HtmlSubwriter		MONTH				
+Statistics_HtmlSubwriter		Titles and Items				
+Statistics_HtmlSubwriter	add_overall_usage	Below are the most up to date numbers for overall utilization of %1.  The first table shows the summary of views against all collections.  The second table includes the details for specialized item-level views.			%1 = abbreviation for system.  For overall usage page	http://ufdc.ufl.edu/stats/usage
+Statistics_HtmlSubwriter	add_item_count_html	NO ITEM COUNT AVAILABLE				http://ufdc.ufl.edu/stats/itemcount
+Statistics_HtmlSubwriter	add_item_count_html	Below are the number of items in each collection and subcollection.				http://ufdc.ufl.edu/stats/itemcount
+Statistics_HtmlSubwriter	add_item_count_html	TITLES			Header for table	http://ufdc.ufl.edu/stats/itemcount
+Statistics_HtmlSubwriter	add_item_count_html	ITEMS			Header for table	http://ufdc.ufl.edu/stats/itemcount
+Statistics_HtmlSubwriter	add_item_count_html	PAGES			Header for table	http://ufdc.ufl.edu/stats/itemcount
+Statistics_HtmlSubwriter	add_item_count_html	FYTD TITLES			"If in Fiscal Year to Date mode, header for table"	http://ufdc.ufl.edu/stats/itemcount
+Statistics_HtmlSubwriter	add_item_count_html	FYTD ITEMS			"If in Fiscal Year to Date mode, header for table"	http://ufdc.ufl.edu/stats/itemcount
+Statistics_HtmlSubwriter	add_item_count_html	FYTD PAGES			"If in Fiscal Year to Date mode, header for table"	http://ufdc.ufl.edu/stats/itemcount
+Statistics_HtmlSubwriter		List View				
+Statistics_HtmlSubwriter		Brief View				
+Statistics_HtmlSubwriter		Tree View				
+Statistics_HtmlSubwriter		BibID				
+Statistics_HtmlSubwriter		VID				
+Statistics_HtmlSubwriter		The following terms are defined below:				
+Statistics_HtmlSubwriter		Collection Hierarchy				
+Statistics_HtmlSubwriter		Collection Groups				
+Statistics_HtmlSubwriter		SubCollections				
+Statistics_HtmlSubwriter		NO STATISTICS FOUND FOR THAT DATE RANGE				
+Statistics_HtmlSubwriter	add_item_count_textual	"Below is the item count with fiscal year to date information included in comma-seperated value form.  To use the data below, cut and paste it into a CSV or text file.  The resulting file can be opened in a variety of applications, including OpenOffice and Microsoft Excel."			For exporting the item count information as CSV	http://ufdc.ufl.edu/stats/itemcount/text
+Statistics_HtmlSubwriter		Defined Terms				
+Statistics_HtmlSubwriter		CODES				
+Statistics_HtmlSubwriter		NAME				
+Statistics_HtmlSubwriter		TOTAL				
+Statistics_HtmlSubwriter	add_item_count_arbitrary_html	"This option allows the complete title count, item count, and page count to be viewed for a previous time and to additionally see the growth between two arbitrary dates."				http://ufdc.ufl.edu/stats/itemcount/arbitrary
+Statistics_HtmlSubwriter	add_item_count_arbitrary_html	"The title count, item count, and page count appear below for the following two arbitrary dates:"				http://ufdc.ufl.edu/stats/itemcount/arbitrary
+Statistics_HtmlSubwriter	add_item_count_arbitrary_html	"To change the dates shown, choose your dates above and hit the GO button."				http://ufdc.ufl.edu/stats/itemcount/arbitrary
+Statistics_HtmlSubwriter	add_item_count_arbitrary_html	Item Count and Growth				http://ufdc.ufl.edu/stats/itemcount/arbitrary
+Statistics_HtmlSubwriter	add_item_count_arbitrary_html	"Below are the number of titles, items, and pages in each collection and subcollection.  The &quot;INITIAL&quot; values are the values that were present at midnight on %1 before any new items were processed that day."			%1 = first date selected	http://ufdc.ufl.edu/stats/itemcount/arbitrary
+Statistics_HtmlSubwriter	add_item_count_arbitrary_html	" The &quot;ADDED&quot; values are the number of titles, items, and pages that were added between %1 and %2 inclusive."			%2 = second date selected	http://ufdc.ufl.edu/stats/itemcount/arbitrary
+Statistics_HtmlSubwriter	add_item_count_arbitrary_html	INITIAL TITLES				http://ufdc.ufl.edu/stats/itemcount/arbitrary
+Statistics_HtmlSubwriter	add_item_count_arbitrary_html	INITIAL ITEMS				http://ufdc.ufl.edu/stats/itemcount/arbitrary
+Statistics_HtmlSubwriter	add_item_count_arbitrary_html	INITIAL PAGES				http://ufdc.ufl.edu/stats/itemcount/arbitrary
+						
+Item_HtmlSubwriter	constructor	Error encountered while sending email			Used when sending an email about a particular item	
+Item_HtmlSubwriter		Error encountered while trying to save to your bookshelf				
+Item_HtmlSubwriter	constructor	Your email has been sent			Used when sending an email about a particular item	
+Item_HtmlSubwriter	constructor	Item was saved to your bookshelf.			Used when adding a book to your bookshelf	
+Item_HtmlSubwriter	constructor	ERROR encountered while trying to save to your bookshelf.			Used when adding a book to your bookshelf	
+Item_HtmlSubwriter	constructor	Item was removed from your bookshelves.			Used when removing a book from your bookshelf	
+Item_HtmlSubwriter	constructor	ERROR encountered while trying to remove item from your bookshelves.			Used when removing a book from your bookshelf	
+Item_HtmlSubwriter		MATCHING PAGES			If there are matching pages (show in left nav bar) - deprecated?	
+Item_HtmlSubwriter		MATCHING TILES			If the results are from an aerial photograph item - deprecated?	
+Item_HtmlSubwriter		SHOW TABLE OF CONTENTS				
+Item_HtmlSubwriter		HIDE				
+Item_HtmlSubwriter		TABLE OF CONTENTS				
+Item_HtmlSubwriter		HIDE TABLE OF CONTENTS				
+Item_HtmlSubwriter		View Work Log				
+Item_HtmlSubwriter		Private Resource				
+Item_HtmlSubwriter		Public Resource				
+Item_HtmlSubwriter		Accession number				
+Item_HtmlSubwriter		Usage Statistics				
+Item_HtmlSubwriter		MARC View				
+Item_HtmlSubwriter		Metadata				
+Item_HtmlSubwriter		Tree View				
+Item_HtmlSubwriter		Thumbnails				
+Item_HtmlSubwriter		List View				
+Item_HtmlSubwriter		Manage Download Files				
+Item_HtmlSubwriter		Edit Item Behaviors				
+Item_HtmlSubwriter		Manage Pages and Divisions				
+Item_HtmlSubwriter		Manage Geo-Spatial Data				
+Item_HtmlSubwriter		beta				
+Item_HtmlSubwriter		View Tracking Sheet				
+Item_HtmlSubwriter		Mass Update Item Behaviors				
+Item_HtmlSubwriter		First Page				
+Item_HtmlSubwriter		Edit Item Group Behaviors				
+Item_HtmlSubwriter		Previous Page				
+Item_HtmlSubwriter		Next Page				
+Item_HtmlSubwriter		Last Page				
+Item_HtmlSubwriter		Next				
+Item_HtmlSubwriter		Last				
+Item_HtmlSubwriter		First				
+Item_HtmlSubwriter		Previous				
+Item_HtmlSubwriter	Add_Internal_Header_HTML	Edit Metadata			Used in the item-level internal header	
+Item_HtmlSubwriter	Add_Internal_Header_HTML	Edit Behaviors			Used in the item-level internal header	
+Item_HtmlSubwriter	Add_Internal_Header_HTML	Change Access Restriction			Used in the item-level internal header	
+Item_HtmlSubwriter	Add_Internal_Header_HTML	Public Item			Used in the item-level internal header	
+Item_HtmlSubwriter	Add_Internal_Header_HTML	Private Item			Used in the item-level internal header	
+Item_HtmlSubwriter	Add_Internal_Header_HTML	Dark Item			Used in the item-level internal header	
+Item_HtmlSubwriter	Add_Internal_Header_HTML	Restricted Item			Used in the item-level internal header	
+Item_HtmlSubwriter	Add_Internal_Header_HTML	View Work History			Used in the item-level internal header	
+Item_HtmlSubwriter	Add_Internal_Header_HTML	Manage Files			Used in the item-level internal header	
+Item_HtmlSubwriter	Add_Internal_Header_HTML	Perform QC			QC = Quality Control	
+Item_HtmlSubwriter	Add_Internal_Header_HTML	Perform Quality Control			Used in the item-level internal header	
+Item_HtmlSubwriter	Add_Internal_Header_HTML	Comments			Used in the item-level internal header	
+Item_HtmlSubwriter	Add_Internal_Header_HTML	Save new internal comments			Used in the item-level internal header	
+Item_HtmlSubwriter	Add_Internal_Header_HTML	SET ACCESS RESTRICTIONS			Used in the item-level internal header	
+Item_HtmlSubwriter	Add_Internal_Header_HTML	Make item public			Used in the item-level internal header	
+Item_HtmlSubwriter	Add_Internal_Header_HTML	Add IP restriction to this item			Used in the item-level internal header	
+Item_HtmlSubwriter	Add_Internal_Header_HTML	Make item private			Used in the item-level internal header	
+Item_HtmlSubwriter	Add_Internal_Header_HTML	Delete this item			Used in the item-level internal header	
+Item_HtmlSubwriter	Add_Internal_Header_HTML	Cancel changes			Used in the item-level internal header	
+Item_HtmlSubwriter	Add_Internal_Header_HTML	Add Volume			Used in the title-level internal header	
+Item_HtmlSubwriter	Add_Internal_Header_HTML	Auto-Fill Volumes			Used in the title-level internal header	
+Item_HtmlSubwriter	Add_Internal_Header_HTML	Edit Serial Hierarchy			Used in the title-level internal header	
+Item_HtmlSubwriter	Add_Internal_Header_HTML	Mass Update Volumes			Used in the title-level internal header	
+Item_HtmlSubwriter	Add_Internal_Header_HTML	Hide Internal Header				
+Item_HtmlSubwriter	Add_Internal_Header_HTML	Show Internal Header				
+Item_HtmlSubwriter		Container List			When displaying finding guides which have a section called 'container list'	
+Item_HtmlSubwriter		DARK ITEM				
+Item_HtmlSubwriter		PRIVATE ITEM				
+Item_HtmlSubwriter		Digitization of this item is currently in progress.				
+Item_HtmlSubwriter		Go To:			Prompt for selecting page from the drop down	
+						
+						
+						
+						
+						
+						
+AddRemove_Fragment_ItemViewer	Add_Main_Viewer_Section	Add this Item to your Bookshelf			Title for the pop-up form for adding an item to a bookshelf	
+AddRemove_Fragment_ItemViewer	Add_Main_Viewer_Section	Enter notes for this item in your bookshelf			Pop-up form for adding an item to a bookshelf	
+AddRemove_Fragment_ItemViewer	Add_Main_Viewer_Section	Bookshelf:			Pop-up form for adding an item to a bookshelf	
+AddRemove_Fragment_ItemViewer	Add_Main_Viewer_Section	My Bookshelf			Pop-up form for adding an item to a bookshelf	
+AddRemove_Fragment_ItemViewer	Add_Main_Viewer_Section	Notes:			Pop-up form for adding an item to a bookshelf	
+AddRemove_Fragment_ItemViewer		Open bookshelf in new window				
+AddRemove_Fragment_ItemViewer		Cancel				
+AddRemove_Fragment_ItemViewer		Save				
+AddRemove_Fragment_ItemViewer		Send				
+						
+Describe_Fragment_ItemViewer	Add_Main_Viewer_Section	Add Item Description			Title for the pop-up form for adding a description to an item	
+Describe_Fragment_ItemViewer	Add_Main_Viewer_Section	Enter a description or notes to add to this item			Pop-up form for adding a description to an item	
+Describe_Fragment_ItemViewer	Add_Main_Viewer_Section	Notes:			Pop-up form for adding a description to an item	
+Describe_Fragment_ItemViewer		Close				
+						
+PrintForm_Fragment_ItemViewer	Add_Main_Viewer_Section	Print Options			Title for the pop-up form for printing an item	
+PrintForm_Fragment_ItemViewer	Add_Main_Viewer_Section	Include brief citation?			Pop-up form for printing an item	
+PrintForm_Fragment_ItemViewer	Add_Main_Viewer_Section	Full citation			Pop-up form for printing an item	
+PrintForm_Fragment_ItemViewer	Add_Main_Viewer_Section	Citation only			Pop-up form for printing an item	
+PrintForm_Fragment_ItemViewer	Add_Main_Viewer_Section	Print thumbnails			Pop-up form for printing an item	
+PrintForm_Fragment_ItemViewer	Add_Main_Viewer_Section	Print current view			Pop-up form for printing an item	
+PrintForm_Fragment_ItemViewer	Add_Main_Viewer_Section	Print current page			Pop-up form for printing an item	
+PrintForm_Fragment_ItemViewer	Add_Main_Viewer_Section	Print all pages			Pop-up form for printing an item	
+PrintForm_Fragment_ItemViewer	Add_Main_Viewer_Section	Print a range of pages			Pop-up form for printing an item	
+PrintForm_Fragment_ItemViewer	Add_Main_Viewer_Section	from			As in FROM page 2 TO page 3 - Pop-up form for printing an item	
+PrintForm_Fragment_ItemViewer	Add_Main_Viewer_Section	to			As in FROM page 2 TO page 3 - Pop-up form for printing an item	
+PrintForm_Fragment_ItemViewer	Add_Main_Viewer_Section	Print			Title for the print button	
+PrintForm_Fragment_ItemViewer		Close				
+PrintForm_Fragment_ItemViewer		Cancel				
+PrintForm_Fragment_ItemViewer		Select the options below to print this item				
+						
+Send_Fragment_ItemViewer	Add_Main_Viewer_Section	Send this Item to a Friend			Title for the pop-up form for emailing an item	
+Send_Fragment_ItemViewer	Add_Main_Viewer_Section	Enter the email information below			Pop-up form for emailing an item	
+Send_Fragment_ItemViewer	Add_Main_Viewer_Section	To:			Pop-up form for emailing an item	
+Send_Fragment_ItemViewer	Add_Main_Viewer_Section	Comments:			Pop-up form for emailing an item	
+Send_Fragment_ItemViewer	Add_Main_Viewer_Section	Format:			Pop-up form for emailing an item	
+Send_Fragment_ItemViewer	Add_Main_Viewer_Section	HTML:			Send the email as HTML format	
+Send_Fragment_ItemViewer	Add_Main_Viewer_Section	Text:			Send the email plain text format	
+Send_Fragment_ItemViewer	Add_Main_Viewer_Section	Send			Title for the send button	
+Send_Fragment_ItemViewer	Add_Main_Viewer_Section	You must wait %1 seconds between sending emails.				
+Send_Fragment_ItemViewer	Add_Main_Viewer_Section	You cannot send to more than %1 email addresses simultaneously.				
+Send_Fragment_ItemViewer	Add_Main_Viewer_Section	You have reached your daily quota for emails.				
+Send_Fragment_ItemViewer		Close				
+Send_Fragment_ItemViewer		Plain Text				
+Send_Fragment_ItemViewer		Cancel				
+						
+Share_Fragment_ItemViewer	Add_Main_Viewer_Section	Add to favorites			Hover over for adding the current URL to your favorites in your browser	
+						
+Checked_Out_ItemViewer	Add_Main_Viewer_Section	The item you have requested contains copyright material and is reserved for single-use.  <br /><br />Someone has currently checked out this digital copy for viewing.  <br /><br />Please try again in several minutes.			If an item is marked for single use and someone else is already using the item	
+						
+Citation_ItemViewer	Add_Main_Viewer_Section	Standard View			Sub-option under the citation on the item-level nav menu	http://www.dloc.com/AA00010915/00001/usage
+						
+Citation_ItemViewer	Add_Main_Viewer_Section	MARC View			Sub-option under the citation on the item-level nav menu	http://www.dloc.com/AA00010915/00001/usage
+						
+Citation_ItemViewer	Add_Main_Viewer_Section	Metadata			Sub-option under the citation on the item-level nav menu	http://www.dloc.com/AA00010915/00001/usage
+						
+Citation_ItemViewer	Add_Main_Viewer_Section	Usage Statistics			Sub-option under the citation on the item-level nav menu	http://www.dloc.com/AA00010915/00001/usage
+Citation_ItemViewer	Statistics_String	This item was has been viewed %1 times within %2 visits.  Below are the details for overall usage for this item within this library.			For viewing the item usage statistics	http://www.dloc.com/AA00010915/00001/usage
+Citation_ItemViewer	Statistics_String	"For definitions of these terms, see the definitions on the main statistics page."			For viewing the item usage statistics	http://www.dloc.com/AA00010915/00001/usage
+Citation_ItemViewer		Date				
+Citation_ItemViewer		Views				
+Citation_ItemViewer		Visits				
+Citation_ItemViewer		JPEG				
+Citation_ItemViewer		Zoomable				
+Citation_ItemViewer		Citation				
+Citation_ItemViewer		Thumbnail				
+Citation_ItemViewer		Text				
+Citation_ItemViewer		Flash				
+Citation_ItemViewer		Map				
+Citation_ItemViewer		Download				
+Citation_ItemViewer		Static				
+Citation_ItemViewer		%1 STATISTICS				
+Citation_ItemViewer		Total				
+Citation_ItemViewer		View Finding Aid (EAD)				
+Citation_ItemViewer		Missing Image				
+Citation_ItemViewer	Metadata_String	"The data (or metadata) about this digital resource is available in a variety of metadata formats. For more information about these formats, see the <a href=""http://ufdc.ufl.edu/sobekcm/metadata"">Metadata Section</a> of the <a href=""http://ufdc.ufl.edu/sobekcm/"">Technical Aspects</a> information."			Main text at the top of the metadata section	http://ufdc.ufl.edu/UF00082548/00001/metadata
+Citation_ItemViewer	Metadata_String	View Complete METS/MODS			Link for the METS/MODS file	http://ufdc.ufl.edu/UF00082548/00001/metadata
+Citation_ItemViewer	Metadata_String	"This metadata file is the source metadata file submitted along with all the digital resource files. This contains all of the citation and processing information used to build this resource. This file follows the established <a href=""http://www.loc.gov/standards/mets/"">Metadata Encoding and Transmission Standard</a> (METS) and <a href=""http://www.loc.gov/standards/mods/"">Metadata Object Description Schema</a> (MODS). This METS/MODS file was just read when this item was loaded into memory and used to display all the information in the standard view and marc view within the citation."			Information about the METS/MODS file	http://ufdc.ufl.edu/UF00082548/00001/metadata
+Citation_ItemViewer	Metadata_String	View MARC XML File			Link for the MarcXML file	http://ufdc.ufl.edu/UF00082548/00001/metadata
+Citation_ItemViewer	Metadata_String	"The entered metadata is also converted to MARC XML format, for interoperability with other library catalog systems.  This represents the same data available in the <a href=""%1"">MARC VIEW</a> except this is a static XML file.  This file follows the <a href=""http://www.loc.gov/standards/marcxml/"">MarcXML Schema</a>."			Information about the MarcXML file	http://ufdc.ufl.edu/UF00082548/00001/metadata
+Citation_ItemViewer	Metadata_String	View TEI/Text File			Link for the (optional) TEI file	http://ufdc.ufl.edu/UF00082548/00001/metadata
+Citation_ItemViewer	Metadata_String	"The full-text of this item is also available in the established standard <a href=""http://www.tei-c.org/index.xml"">Text Encoding Initiative</a> (TEI) downloadable file."			Information about the (optional) TEI file	http://ufdc.ufl.edu/UF00082548/00001/metadata
+						
+Citation_ItemViewer	MARC_String	The record above was auto-generated from the METS file.			Note below the MARC records	http://ufdc.ufl.edu/UF00082548/00001/marc
+						
+Citation_ItemViewer	Standard_String	Material Information			Heading for basic material information	http://ufdc.ufl.edu/l/UF00082548/00001/citation
+Citation_ItemViewer	Standard_String	Notes			Heading for the list of notes	http://ufdc.ufl.edu/l/UF00082548/00001/citation
+Citation_ItemViewer	Standard_String	Subjects			Heading for the list of subjects	http://ufdc.ufl.edu/l/UF00082548/00001/citation
+Citation_ItemViewer	Standard_String	Record Information			Heading for th Information about the record itself	http://ufdc.ufl.edu/l/UF00082548/00001/citation
+Citation_ItemViewer	Standard_String	Related Items			Heading for the list of any related items	http://ufdc.ufl.edu/l/UF00082548/00001/citation
+Citation_ItemViewer	Standard_String	%1 Membership			%1=abbrevation of system.  Lists aggregations under which this item appears	
+Citation_ItemViewer	Standard_String	System Admin Information			Keys for this item from the database	
+Citation_ItemViewer	Standard_String	METS Information			Heading for information about the last METS file	
+						
+Download_ItemViewer	Add_Main_Viewer_Section	This item has the following downloads:			If there are pages and also downloads	
+Download_ItemViewer	Add_Main_Viewer_Section	This item is only available as the following downloads:			If there are only downloads for this item (no pages)	http://ufdc.ufl.edu/l/IR00001586/00001/downloads
+Download_ItemViewer		"To download, right click on the tile name below, select 'Save Link As...' and save the JPEG2000 to your local computer."				
+Download_ItemViewer		"To download, right click on the tile name below, select 'Save Target As...' and save the JPEG2000 to your local computer. "				
+Download_ItemViewer		The following tiles are available for download:				
+						
+EAD_Container_List_ItemViewer	Add_Main_Viewer_Section	Container List			Title for the list of all containers in this finding guide / EAD	
+						
+EAD_Description_ItemViewer	Add_Main_Viewer_Section	Archival Description			Title for the archival description viewer	
+						
+EmbeddedVideo_ItemViewer	Add_Main_Viewer_Section	Streaming Video			Title for the stream video viewer	
+						
+GnuBooks_PageTurner_ItemViewer	Add_Main_Viewer_Section	Return to Item				http://ufdc.ufl.edu/l/UF00082548/00001/pageturner#page/1
+GnuBooks_PageTurner_ItemViewer	Add_Main_Viewer_Section	Zoom				
+GnuBooks_PageTurner_ItemViewer		Book Turner presentations require a Javascript-enabled browser.				
+						
+Google_Map_ItemViewer	Add_Main_Viewer_Section	The following results match your geographic search and also appear on the navigation bar to the left:				"http://ufdc.ufl.edu/l/UF00071726/00019?coord=29.6450422,-82.34721339999998,,"
+Google_Map_ItemViewer	Add_Main_Viewer_Section	Sheet			Used for 'Sheet 4' - for everything except aerials	"http://ufdc.ufl.edu/l/UF00071726/00019?coord=29.6450422,-82.34721339999998,,"
+Google_Map_ItemViewer	Add_Main_Viewer_Section	Tile			Used for 'Tile 3' - for aerial photography	"http://ufdc.ufl.edu/l/UF00071726/00019?coord=29.6450422,-82.34721339999998,,"
+Google_Map_ItemViewer	Add_Main_Viewer_Section	Zoom to extent			Zooms to the entire extent of the map sets	"http://ufdc.ufl.edu/l/UF00071726/00019?coord=29.6450422,-82.34721339999998,,"
+Google_Map_ItemViewer	Add_Main_Viewer_Section	Zoom to matches			Zooms in to just the matching sheets/tiles	"http://ufdc.ufl.edu/l/UF00071726/00019?coord=29.6450422,-82.34721339999998,,"
+Google_Map_ItemViewer	Add_Main_Viewer_Section	There were no matches within this item for your geographic search.				"http://ufdc.ufl.edu/l/UF00071726/00019?coord=29.6450422,-82.34721339999998,,"
+Google_Map_ItemViewer	Add_Main_Viewer_Section	Click here to search other items in the current collection				"http://ufdc.ufl.edu/l/UF00071726/00019?coord=29.6450422,-82.34721339999998,,"
+Google_Map_ItemViewer	Add_Main_Viewer_Section	Modify item search				"http://ufdc.ufl.edu/l/UF00071726/00019?coord=29.6450422,-82.34721339999998,,"
+Google_Map_ItemViewer	Add_Main_Viewer_Section	Modify search within flight			Special text for aerial photography sets	"http://ufdc.ufl.edu/l/UF00071726/00019?coord=29.6450422,-82.34721339999998,,"
+Google_Map_ItemViewer	Add_Main_Viewer_Section	Select the <i>Select Area</i> button below to draw a search box on the map or enter an address and press Find Address.				"http://ufdc.ufl.edu/l/UF00071726/00019/mapsearch?coord=29.6450422,-82.34721339999998,,"
+Google_Map_ItemViewer		Search				
+Google_Map_ItemViewer		Search all flights				
+Google_Map_ItemViewer		Search entire collection				
+Google_Map_ItemViewer	Add_Main_Viewer_Section	Press the <i>Search</i> button to see results				"http://ufdc.ufl.edu/l/UF00071726/00019/mapsearch?coord=29.6450422,-82.34721339999998,,"
+Google_Map_ItemViewer	Add_Main_Viewer_Section	Address:				"http://ufdc.ufl.edu/l/UF00071726/00019/mapsearch?coord=29.6450422,-82.34721339999998,,"
+Google_Map_ItemViewer	Add_Main_Viewer_Section	"Enter address ( i.e., 12 Main Street, Gainesville Florida )"				"http://ufdc.ufl.edu/l/UF00071726/00019/mapsearch?coord=29.6450422,-82.34721339999998,,"
+Google_Map_ItemViewer	Add_Main_Viewer_Section	Find Address				"http://ufdc.ufl.edu/l/UF00071726/00019/mapsearch?coord=29.6450422,-82.34721339999998,,"
+Google_Map_ItemViewer	Add_Main_Viewer_Section	PRESS TO SELECT AREA				"http://ufdc.ufl.edu/l/UF00071726/00019/mapsearch?coord=29.6450422,-82.34721339999998,,"
+Google_Map_ItemViewer	Add_Main_Viewer_Section	PRESS TO SELECT POINT				"http://ufdc.ufl.edu/l/UF00071726/00019/mapsearch?coord=29.6450422,-82.34721339999998,,"
+Google_Map_ItemViewer	Add_Main_Viewer_Section	SELECT THE FIRST POINT			When doing an area search	"http://ufdc.ufl.edu/l/UF00071726/00019/mapsearch?coord=29.6450422,-82.34721339999998,,"
+Google_Map_ItemViewer	Add_Main_Viewer_Section	SELECT THE SECOND POINT			When doing an area search	"http://ufdc.ufl.edu/l/UF00071726/00019/mapsearch?coord=29.6450422,-82.34721339999998,,"
+Google_Map_ItemViewer	Add_Main_Viewer_Section	SELECT A POINT ON THE MAP				"http://ufdc.ufl.edu/l/UF00071726/00019/mapsearch?coord=29.6450422,-82.34721339999998,,"
+						
+HTML_Map_ItemViewer	Add_Main_Viewer_Section	Click on a sheet in the map to view a sheet			Used to display a map which is clickable to get to each subsequent page	
+						
+HTML_ItemViewer		Unable to pull html view for item				
+HTML_ItemViewer		We apologize for the inconvenience.				
+HTML_ItemViewer		Click here to report the problem.				
+HTML_ItemViewer		Unable to pull html view for item %1				
+						
+Aware_JP2_ItemViewer		Zoom Out			Buttons used when zooming in and out on an image in the Aware JP2 server	"http://ufdc.ufl.edu/l/UF00071726/00019/1x?coord=29.6450422,-82.34721339999998,,&vo=12"
+Aware_JP2_ItemViewer		Zoom to Level			Buttons used when zooming in and out on an image in the Aware JP2 server	"http://ufdc.ufl.edu/l/UF00071726/00019/1x?coord=29.6450422,-82.34721339999998,,&vo=12"
+Aware_JP2_ItemViewer		Current Zoom			Buttons used when zooming in and out on an image in the Aware JP2 server	"http://ufdc.ufl.edu/l/UF00071726/00019/1x?coord=29.6450422,-82.34721339999998,,&vo=12"
+Aware_JP2_ItemViewer		Zoom In			Buttons used when zooming in and out on an image in the Aware JP2 server	"http://ufdc.ufl.edu/l/UF00071726/00019/1x?coord=29.6450422,-82.34721339999998,,&vo=12"
+Aware_JP2_ItemViewer		Rotate Clockwise			Buttons used when zooming in and out on an image in the Aware JP2 server	"http://ufdc.ufl.edu/l/UF00071726/00019/1x?coord=29.6450422,-82.34721339999998,,&vo=12"
+Aware_JP2_ItemViewer		Rotate Counter Clockwise			Buttons used when zooming in and out on an image in the Aware JP2 server	"http://ufdc.ufl.edu/l/UF00071726/00019/1x?coord=29.6450422,-82.34721339999998,,&vo=12"
+Aware_JP2_ItemViewer		Pan Up			Buttons used when zooming in and out on an image in the Aware JP2 server	"http://ufdc.ufl.edu/l/UF00071726/00019/1x?coord=29.6450422,-82.34721339999998,,&vo=12"
+Aware_JP2_ItemViewer		Pan Down			Buttons used when zooming in and out on an image in the Aware JP2 server	"http://ufdc.ufl.edu/l/UF00071726/00019/1x?coord=29.6450422,-82.34721339999998,,&vo=12"
+Aware_JP2_ItemViewer		Pan Left			Buttons used when zooming in and out on an image in the Aware JP2 server	"http://ufdc.ufl.edu/l/UF00071726/00019/1x?coord=29.6450422,-82.34721339999998,,&vo=12"
+Aware_JP2_ItemViewer		Pan Right			Buttons used when zooming in and out on an image in the Aware JP2 server	"http://ufdc.ufl.edu/l/UF00071726/00019/1x?coord=29.6450422,-82.34721339999998,,&vo=12"
+Aware_JP2_ItemViewer		Click on Thumbnail to Recenter Image			Text under the thumbnail in the nav menu	"http://ufdc.ufl.edu/l/UF00071726/00019/1x?coord=29.6450422,-82.34721339999998,,&vo=12"
+Aware_JP2_ItemViewer		THUMBNAIL			Title for the thumbnail in the nav menu	"http://ufdc.ufl.edu/l/UF00071726/00019/1x?coord=29.6450422,-82.34721339999998,,&vo=12"
+Aware_JP2_ItemViewer		Small size view				
+Aware_JP2_ItemViewer		Medium size view				
+Aware_JP2_ItemViewer		Medium-large size view				
+Aware_JP2_ItemViewer		Large size view				
+Aware_JP2_ItemViewer		"To download, right click here, select 'Save Target As...' and save the JPEG2000 to your local computer."				
+Aware_JP2_ItemViewer		JPEG2000 IMAGE NOT FOUND IN DATABASE!				
+						
+MultiVolumes_ItemViewer		All Issues			For item-level nav menu 	http://ufdc.ufl.edu/l/UF00071726/00019/allvolumes3
+MultiVolumes_ItemViewer		Related Maps			For item-level nav menu 	http://ufdc.ufl.edu/l/UF00071726/00019/allvolumes3
+MultiVolumes_ItemViewer		MISSING THUMBNAIL				
+MultiVolumes_ItemViewer		Related Map sets				
+MultiVolumes_ItemViewer		Related Flights			For item-level nav menu 	http://ufdc.ufl.edu/l/UF00071726/00019/allvolumes3
+MultiVolumes_ItemViewer		All Volumes			For item-level nav menu 	http://ufdc.ufl.edu/l/UF00071726/00019/allvolumes3
+MultiVolumes_ItemViewer		Tree View			Sub-option under the all volumes on the item-level nav menu	http://ufdc.ufl.edu/l/UF00071726/00019/allvolumes3
+MultiVolumes_ItemViewer		Thumbnails			Sub-option under the all volumes on the item-level nav menu	http://ufdc.ufl.edu/l/UF00071726/00019/allvolumes3
+MultiVolumes_ItemViewer		List View			Sub-option under the all volumes on the item-level nav menu	http://ufdc.ufl.edu/l/UF00071726/00019/allvolumes3
+MultiVolumes_ItemViewer		Level 1			First level of the serial hierarchy	http://ufdc.ufl.edu/l/UF00071726/00019/allvolumes3
+MultiVolumes_ItemViewer		Level 2			Second level of the serial hierarchy	http://ufdc.ufl.edu/l/UF00071726/00019/allvolumes3
+MultiVolumes_ItemViewer		Level 3			Third level of the serial hierarchy	http://ufdc.ufl.edu/l/UF00071726/00019/allvolumes3
+MultiVolumes_ItemViewer		Access			"Access restrictions ( private, public, restricted, etc ..)"	http://ufdc.ufl.edu/l/UF00071726/00019/allvolumes3
+MultiVolumes_ItemViewer		public				
+MultiVolumes_ItemViewer		private				
+MultiVolumes_ItemViewer		restricted				
+MultiVolumes_ItemViewer		dark				
+						
+PDF_ItemViewer		Download this PDF				http://ufdc.ufl.edu/l/IR00001586
+						
+QC_ItemViewer		% Thumbnails per page			Number of thumbnails to show per page	http://ufdc.ufl.edu/l/UF00082548/00001/qc
+QC_ItemViewer		All Thumbnails			Show all thumbnails on one page	
+QC_ItemViewer		Go to thumbnail:				
+QC_ItemViewer		Page				
+QC_ItemViewer		Division				
+QC_ItemViewer		Pagination				
+QC_ItemViewer		Small thumbnails			Used for hover over for thumbnail sizes	
+QC_ItemViewer		Medium thumbnails			Used for hover over for thumbnail sizes	
+QC_ItemViewer		Large thumbnails			Used for hover over for thumbnail sizes	
+QC_ItemViewer		Overcropped				
+QC_ItemViewer		Image Quality Error				
+QC_ItemViewer		Technical Specification Error				
+QC_ItemViewer		Other (specify)				
+QC_ItemViewer		Undercropped				
+QC_ItemViewer		Orientation error				
+QC_ItemViewer		Skew error				
+QC_ItemViewer		Blur needed				
+QC_ItemViewer		Unblur needed				
+QC_ItemViewer		Thumbnail size				
+QC_ItemViewer		Missing icon				
+QC_ItemViewer		Standard cursor				
+QC_ItemViewer		Choose main thumbnail				
+QC_ItemViewer		Move multiple pages				
+QC_ItemViewer		Delete multiple pages				
+QC_ItemViewer		Resource				
+QC_ItemViewer		Edit				
+QC_ItemViewer		Save				
+QC_ItemViewer		Complete				
+QC_ItemViewer		Cancel				
+QC_ItemViewer		Clear Pagination				
+QC_ItemViewer		Clear All & Reorder Pages				
+QC_ItemViewer		Settings				
+QC_ItemViewer		Automatic numbering				
+QC_ItemViewer		No automatic numbering				
+QC_ItemViewer		Within same division				
+QC_ItemViewer		Entire document				
+QC_ItemViewer		Drag & drop pages				
+QC_ItemViewer		Enabled				
+QC_ItemViewer		Enabled with confirmation				
+QC_ItemViewer		Disabled				
+QC_ItemViewer		View				
+QC_ItemViewer		View METS				
+QC_ItemViewer		View QC History				
+QC_ItemViewer		View Directory				
+QC_ItemViewer		Help				
+QC_ItemViewer		Check for the beginning of a new division type				
+QC_ItemViewer		View technical image information				
+QC_ItemViewer		Delete this page and related files				
+QC_ItemViewer		Open this page in a new window				
+QC_ItemViewer		Mark an error on this page image				
+QC_ItemViewer		Missing thumbnail				
+QC_ItemViewer		MOVE SELECTED PAGES				
+QC_ItemViewer		Before				
+QC_ItemViewer		After				
+QC_ItemViewer		PREVIEW				
+QC_ItemViewer		Cancel this move				
+QC_ItemViewer		SUBMIT				
+QC_ItemViewer		CANCEL				
+QC_ItemViewer		FILE ERROR				
+QC_ItemViewer		Recapture required				
+QC_ItemViewer		Processing required				
+QC_ItemViewer		No File error				
+QC_ItemViewer		Save this error				
+QC_ItemViewer		Critical Volume error				
+QC_ItemViewer		No Volume Error				
+QC_ItemViewer		Invalid Images				
+QC_ItemViewer		Incorrect Volume				
+QC_ItemViewer		Save the resource and apply your changes				
+QC_ItemViewer		Upload new page image files				
+QC_ItemViewer		Comments:				
+QC_ItemViewer		Go to:				
+						
+Related_Images_ItemViewer		% Thumbnails per page			Number of thumbnails to show per page	
+Related_Images_ItemViewer		All Thumbnails			Show all thumbnails on one page	
+Related_Images_ItemViewer		Go to thumbnail:				
+Related_Images_ItemViewer		Page			Default term used for drop-down to go to a thumbnail (if no page label)	
+Related_Images_ItemViewer		Small thumbnails			Used for hover over for thumbnail sizes	
+Related_Images_ItemViewer		Medium thumbnails			Used for hover over for thumbnail sizes	
+Related_Images_ItemViewer		Large thumbnails			Used for hover over for thumbnail sizes	
+Related_Images_ItemViewer		Switch to small thumbnails				
+Related_Images_ItemViewer		Switch to medium thumbnails				
+Related_Images_ItemViewer		Switch to large thumbnails				
+Related_Images_ItemViewer		Small				
+Related_Images_ItemViewer		Medium				
+Related_Images_ItemViewer		Large				
+Related_Images_ItemViewer		MISSING THUMBNAIL				
+						
+YouTube_Embedded_Video_ItemViewer		Streaming Video			Title for the YouTube stream video viewer	
+						
+Text_Search_ItemViewer	Add_Main_Viewer_Section	Search this document			Searching for full text within a single document	
+Text_Search_ItemViewer	Add_Main_Viewer_Section	Your search within this document for 			Searching for full text within a single document	http://ufdc.ufl.edu/l/UF00082548/00001/search?search=tommy
+Text_Search_ItemViewer	Add_Main_Viewer_Section	AND			Searching for full text within a single document	http://ufdc.ufl.edu/l/UF00082548/00001/search?search=tommy
+Text_Search_ItemViewer	Add_Main_Viewer_Section	OR 			Searching for full text within a single document	http://ufdc.ufl.edu/l/UF00082548/00001/search?search=tommy
+Text_Search_ItemViewer	Add_Main_Viewer_Section	AND NOT			Searching for full text within a single document	http://ufdc.ufl.edu/l/UF00082548/00001/search?search=tommy
+Text_Search_ItemViewer	Add_Main_Viewer_Section	resulted in			Searching for full text within a single document	http://ufdc.ufl.edu/l/UF00082548/00001/search?search=tommy
+Text_Search_ItemViewer	Add_Main_Viewer_Section	matching pages			Searching for full text within a single document	http://ufdc.ufl.edu/l/UF00082548/00001/search?search=tommy
+Text_Search_ItemViewer	Add_Main_Viewer_Section	no matching pages			Searching for full text within a single document	http://ufdc.ufl.edu/l/UF00082548/00001/search?search=tommy
+Text_Search_ItemViewer	Add_Main_Viewer_Section	You can expand your results by searching for			Searching for full text within a single document	http://ufdc.ufl.edu/l/UF00082548/00001/search?search=tommy
+Text_Search_ItemViewer	Add_Main_Viewer_Section	You can restrict your results by searching for			Searching for full text within a single document	http://ufdc.ufl.edu/l/UF00082548/00001/search?search=tommy
+Text_Search_ItemViewer		First Page				
+Text_Search_ItemViewer		Previous Page				
+Text_Search_ItemViewer		Next Page				
+Text_Search_ItemViewer		Last Page				
+Text_Search_ItemViewer		First				
+Text_Search_ItemViewer		Previous				
+Text_Search_ItemViewer		Next				
+Text_Search_ItemViewer		Last				
+						
+Tracking_ItemViewer	Add_Main_Viewer_Section	Tracking Information			Title 	http://ufdc.ufl.edu/l/UF00082548/00001/milestones?
+Tracking_ItemViewer		Milestones			Tab for tracking sub-mode view	
+Tracking_ItemViewer		History			Tab for tracking sub-mode view	
+Tracking_ItemViewer		Media			Tab for tracking sub-mode view	
+Tracking_ItemViewer		Archives			Tab for tracking sub-mode view	
+Tracking_ItemViewer		Directory			Tab for tracking sub-mode view	
+						
+Tracking_ItemViewer	History_String	ITEM HAS NO HISTORY				http://ufdc.ufl.edu/UF00082548/00001/tracking
+Tracking_ItemViewer	History_String	ITEM HISTORY				
+Tracking_ItemViewer	History_String	Workflow Name				
+Tracking_ItemViewer	History_String	Completed Date				
+Tracking_ItemViewer	History_String	User				
+Tracking_ItemViewer	History_String	Location / Notes				
+						
+Tracking_ItemViewer	Media_String	ITEM IS NOT ARCHIVED TO MEDIA			Section for recording DVD/CD info for archiving purposes	http://ufdc.ufl.edu/UF00082548/00001/media
+Tracking_ItemViewer	Media_String	CD/DVD ARCHIVE				
+Tracking_ItemViewer	Media_String	CD Number				
+Tracking_ItemViewer	Media_String	File Range				
+Tracking_ItemViewer	Media_String	Images				
+Tracking_ItemViewer	Media_String	Size				
+Tracking_ItemViewer	Media_String	Date Burned				
+						
+Tracking_ItemViewer	Archives_String	ITEM HAS NO ARCHIVE INFORMATION				
+Tracking_ItemViewer	Archives_String	ARCHIVED FILE INFORMATION				
+Tracking_ItemViewer	Archives_String	Filename				
+Tracking_ItemViewer	Archives_String	Last Write Date				
+Tracking_ItemViewer	Archives_String	Archived Date				
+						
+Tracking_ItemViewer	Directory_String	PAGE FILES			Displays all the files related to a digital resource	
+Tracking_ItemViewer	Directory_String	Name			Used when displaying the directory of files for this digital resource	
+Tracking_ItemViewer	Directory_String	Date Modified			Used when displaying the directory of files for this digital resource	
+Tracking_ItemViewer	Directory_String	Type			Used when displaying the directory of files for this digital resource	
+Tracking_ItemViewer	Directory_String	METADATA FILES			Used when displaying the directory of files for this digital resource	
+Tracking_ItemViewer	Directory_String	OTHER FILES			Used when displaying the directory of files for this digital resource	
+Tracking_ItemViewer	Directory_String	JPEG image			Used when displaying the directory of files for this digital resource	
+Tracking_ItemViewer	Directory_String	Thumbnail image			Used when displaying the directory of files for this digital resource	
+Tracking_ItemViewer	Directory_String	Archival TIFF image			Used when displaying the directory of files for this digital resource	
+Tracking_ItemViewer	Directory_String	JPEG2000 Zoomable image			Used when displaying the directory of files for this digital resource	
+Tracking_ItemViewer	Directory_String	Adobe Acrobat Document			Used when displaying the directory of files for this digital resource	
+Tracking_ItemViewer	Directory_String	Text file			Used when displaying the directory of files for this digital resource	
+Tracking_ItemViewer	Directory_String	Microsoft Office Excel Worksheet			Used when displaying the directory of files for this digital resource	
+Tracking_ItemViewer	Directory_String	Microsoft Office Word Document			Used when displaying the directory of files for this digital resource	
+Tracking_ItemViewer	Directory_String	Microsoft Office Powerpoint Presentation			Used when displaying the directory of files for this digital resource	
+Tracking_ItemViewer	Directory_String	Shockwave Flash Object			Used when displaying the directory of files for this digital resource	
+Tracking_ItemViewer	Directory_String	Citation-only METS File			Used when displaying the directory of files for this digital resource	
+Tracking_ItemViewer	Directory_String	MARC XML File			Used when displaying the directory of files for this digital resource	
+Tracking_ItemViewer	Directory_String	SobekCM Service METS File			Used when displaying the directory of files for this digital resource	
+Tracking_ItemViewer	Directory_String	XML Document			Used when displaying the directory of files for this digital resource	
+Tracking_ItemViewer	Directory_String	User-submitted METS File			Used when displaying the directory of files for this digital resource	
+Tracking_ItemViewer	Directory_String	Previous METS File Version			Used when displaying the directory of files for this digital resource	
+Tracking_ItemViewer	Directory_String	Backup File			Used when displaying the directory of files for this digital resource	
+Tracking_ItemViewer	Directory_String	FDA Ingest Report			FDA is what we use for long-term preservation	
+						
+Tracking_ItemViewer	Milestones_String	DIGITIZATION MILESTONES			Used when showing the digitization milestones	http://ufdc.ufl.edu/UF00082548/00001/milestones
+Tracking_ItemViewer	Milestones_String	Digital Acquisition			Used when showing the digitization milestones	
+Tracking_ItemViewer	Milestones_String	Post-Acquisition Processing			Used when showing the digitization milestones	
+Tracking_ItemViewer	Milestones_String	Quality Control Performed			Used when showing the digitization milestones	
+Tracking_ItemViewer	Milestones_String	Online Complete			Used when showing the digitization milestones	
+Tracking_ItemViewer	Milestones_String	PHYSICAL MATERIAL MILESTONES			Used when showing the digitization milestones	
+Tracking_ItemViewer	Milestones_String	Materials Received			Used when showing the digitization milestones	
+Tracking_ItemViewer	Milestones_String	Disposition Date			Date the physical materials left the office after digitization	
+Tracking_ItemViewer	Milestones_String	Tracking Box			Used when showing the digitization milestones	
+Tracking_ItemViewer	Milestones_String	Born Digital			Used when showing the digitization milestones	
+Tracking_ItemViewer	Milestones_String	Disposition Advice			Used when showing the digitization milestones	
+Tracking_ItemViewer	Milestones_String	Locally Stored on CD or Tape			Used when showing the digitization milestones	
+Tracking_ItemViewer	Milestones_String	Archived Remotely (FDA)			FDA = Florida Digital Archive (also used for dLOC)	
+Tracking_ItemViewer	Milestones_String	NOT ARCHIVED				
+Tracking_ItemViewer		PHYSICAL MATERIAL RELATED FIELDS				
+Tracking_ItemViewer		ARCHIVING MILESTONES				
+						
+abstract_ResultsViewer	Add_Issue_Tree	issue			"In the search result, if a title is all newspaper, use 'issue' and 'issues'"	
+abstract_ResultsViewer	Add_Issue_Tree	issues			"In the search result, if a title is all newspaper, use 'issue' and 'issues'"	
+abstract_ResultsViewer	Add_Issue_Tree	flight line			"In the search result, if a title is all aerial photography use 'flight line' and 'flight lines'"	
+abstract_ResultsViewer	Add_Issue_Tree	flight lines			"In the search result, if a title is all aerial photography use 'flight line' and 'flight lines'"	
+abstract_ResultsViewer	Add_Issue_Tree	map set			"In the search result, if a title is all maps use 'map set' and 'map sets'"	
+abstract_ResultsViewer	Add_Issue_Tree	map sets			"In the search result, if a title is all maps use 'map set' and 'map sets'"	
+abstract_ResultsViewer	Add_Issue_Tree	photograph set			"In the search result, if a title is all newspaper, use 'photographic set' and 'photographic sets'"	
+abstract_ResultsViewer	Add_Issue_Tree	photograph sets			"In the search result, if a title is all newspaper, use 'photographic set' and 'photographic sets'"	
+abstract_ResultsViewer	Add_Issue_Tree	video			"In the search result, if a title is all videos use 'video' and 'videos'"	
+abstract_ResultsViewer	Add_Issue_Tree	videos			"In the search result, if a title is all videos use 'video' and 'videos'"	
+abstract_ResultsViewer	Add_Issue_Tree	audio item			"In the search result, if a title is all audio use 'audio item' and 'audio items'"	
+abstract_ResultsViewer	Add_Issue_Tree	audio items			"In the search result, if a title is all audio use 'audio item' and 'audio items'"	
+abstract_ResultsViewer		audio				
+abstract_ResultsViewer		audios				
+abstract_ResultsViewer	Add_Issue_Tree	artifact			"In the search result, if a title is all artifacts use 'artifact' and 'artifacts'"	
+abstract_ResultsViewer	Add_Issue_Tree	artifacts			"In the search result, if a title is all artifacts use 'artifact' and 'artifacts'"	
+abstract_ResultsViewer	Add_Issue_Tree	item			"In the search result, if a title is all newspaper, use 'item' and 'itens'"	
+abstract_ResultsViewer	Add_Issue_Tree	items			"In the search result, if a title is all newspaper, use 'item' and 'itens'"	
+						
+PagedResults_HtmlSubwriter	constructor	Search has been saved to your saved searches.			Message when a user saves a search from the search results screen	
+PagedResults_HtmlSubwriter	constructor	ERROR encountered while saving your search!			Error occurs during save!	
+PagedResults_HtmlSubwriter	constructor	Your email has been sent			Message when a user sends search results via email to a friend	
+PagedResults_HtmlSubwriter		ERROR encountered while saving!				
+PagedResults_HtmlSubwriter		Title				
+PagedResults_HtmlSubwriter		Rank				
+PagedResults_HtmlSubwriter		BibID Ascending				
+PagedResults_HtmlSubwriter		BibID Descending				
+PagedResults_HtmlSubwriter		Date Ascending				
+PagedResults_HtmlSubwriter		Date Descending				
+						
+PagedResults_HtmlSubwriter		Date Added			Sort value (rest are standard metadata terms)	
+PagedResults_HtmlSubwriter		Bookshelf View				
+PagedResults_HtmlSubwriter		Brief View				
+PagedResults_HtmlSubwriter		Map View				
+PagedResults_HtmlSubwriter		Table View				
+PagedResults_HtmlSubwriter		Thumbnail View				
+PagedResults_HtmlSubwriter		Export				
+PagedResults_HtmlSubwriter		{0} - {1} of {2} matching titles				
+PagedResults_HtmlSubwriter		{0} - {1} of {2} matching coordinates				
+PagedResults_HtmlSubwriter		{0} - {1} of {2} matching flights				
+PagedResults_HtmlSubwriter		Public Bookshelf				
+PagedResults_HtmlSubwriter		Browse				
+PagedResults_HtmlSubwriter		Search				
+PagedResults_HtmlSubwriter		{1} items for export			"i.e., 12 items for export"	
+PagedResults_HtmlSubwriter		Add this to your Saved Searches			Title for the saved searches pop-up form	
+PagedResults_HtmlSubwriter		Enter notes for this public bookshelf			Prompt for adding notes to a public bookshelf during save	
+PagedResults_HtmlSubwriter		Enter notes for this browse			Prompt for adding notes to a browse during save	
+PagedResults_HtmlSubwriter		Enter notes for this search			Prompt for adding notes to a search during save	
+PagedResults_HtmlSubwriter		Description:			Add description to the saved search	
+PagedResults_HtmlSubwriter		and			Used to recreate the user's search in clear language	http://www.dloc.com/results/?t=haiti
+PagedResults_HtmlSubwriter		or			Used to recreate the user's search in clear language	http://www.dloc.com/results/?t=haiti
+PagedResults_HtmlSubwriter		not			Used to recreate the user's search in clear language	http://www.dloc.com/results/?t=haiti
+PagedResults_HtmlSubwriter		resulted in no matching records.			Used to recreate the user's search in clear language	http://www.dloc.com/results/?t=haiti
+PagedResults_HtmlSubwriter		resulted in one matching record.			Used to recreate the user's search in clear language	http://www.dloc.com/results/?t=haiti
+PagedResults_HtmlSubwriter		resulted in {0} matching records.			Used to recreate the user's search in clear language	http://www.dloc.com/results/?t=haiti
+PagedResults_HtmlSubwriter		resulted in one item in 			Used to recreate the user's search in clear language	http://www.dloc.com/results/?t=haiti
+PagedResults_HtmlSubwriter		resulted in {0} items in			Used to recreate the user's search in clear language	http://www.dloc.com/results/?t=haiti
+PagedResults_HtmlSubwriter		one title			Used to recreate the user's search in clear language	http://www.dloc.com/results/?t=haiti
+PagedResults_HtmlSubwriter		titles			Used to recreate the user's search in clear language	http://www.dloc.com/results/?t=haiti
+PagedResults_HtmlSubwriter		resulted in no matching flights.			Used to recreate the user's search in clear language	http://www.dloc.com/results/?t=haiti
+PagedResults_HtmlSubwriter		resulted in one matching flight.			Used to recreate the user's search in clear language	http://www.dloc.com/results/?t=haiti
+PagedResults_HtmlSubwriter		resulted in {0} matching flights.			Used to recreate the user's search in clear language	http://www.dloc.com/results/?t=haiti
+PagedResults_HtmlSubwriter		resulted in one flight in 			Used to recreate the user's search in clear language	http://www.dloc.com/results/?t=haiti
+PagedResults_HtmlSubwriter		resulted in {0} flights in 			Used to recreate the user's search in clear language	http://www.dloc.com/results/?t=haiti
+PagedResults_HtmlSubwriter		one county			Used to recreate the user's search in clear language	http://www.dloc.com/results/?t=haiti
+PagedResults_HtmlSubwriter		counties			Used to recreate the user's search in clear language	http://www.dloc.com/results/?t=haiti
+PagedResults_HtmlSubwriter		Your search of {0} for 			Used to recreate the user's search in clear language	http://www.dloc.com/results/?t=haiti
+PagedResults_HtmlSubwriter		Your geographic search of {0}			Used to recreate the user's search in clear language	http://www.dloc.com/results/?t=haiti
+PagedResults_HtmlSubwriter		in 			Used to recreate the user's search in clear language	http://www.dloc.com/results/?t=haiti
+PagedResults_HtmlSubwriter		NARROW RESULTS BY			Title on the facet column	http://www.dloc.com/results/?t=haiti
+PagedResults_HtmlSubwriter		Show More			Used in the facet colum	http://www.dloc.com/results/?t=haiti
+PagedResults_HtmlSubwriter		Show Less			Used in the facet colum	http://www.dloc.com/results/?t=haiti
+PagedResults_HtmlSubwriter		Sort alphabetically			Used in the facet colum	http://www.dloc.com/results/?t=haiti
+PagedResults_HtmlSubwriter		Sort by frequency			Used in the facet colum	http://www.dloc.com/results/?t=haiti
+PagedResults_HtmlSubwriter		Sort by				
+PagedResults_HtmlSubwriter		BRIEF				
+PagedResults_HtmlSubwriter		THUMB				
+PagedResults_HtmlSubwriter		Enter the email inforamtion below				
+PagedResults_HtmlSubwriter		To:				
+PagedResults_HtmlSubwriter		Comments:				
+PagedResults_HtmlSubwriter		HTML				
+PagedResults_HtmlSubwriter		Plain Text				
+PagedResults_HtmlSubwriter		UNRECOGNIZED SEARCH				
+						
+Bookshelf_View_ResultsViewer		TITLE / NOTES			Table header for the title/notes column	
+Bookshelf_View_ResultsViewer		Remove all checked items from your bookshelf			Hover over text for the bulk remove action in the bookshelf view	
+Bookshelf_View_ResultsViewer		remove			Text for the remove action in the bookshelf view	
+Bookshelf_View_ResultsViewer		Move all checked items to a new bookshelf			Hover over text for the bulk move action in the bookshelf view	
+Bookshelf_View_ResultsViewer		move			Text for the move action in the bookshelf view	
+Bookshelf_View_ResultsViewer		Select or unselect all items in this bookshelf			Hover over for button to select or unselect all items in the bookshelf	
+Bookshelf_View_ResultsViewer		Remove this item from your bookshelf			Hover over text for the remove action in the bookshelf view	
+Bookshelf_View_ResultsViewer		Move this item to a new bookshelf			Hover over text for the move action in the bookshelf view	
+Bookshelf_View_ResultsViewer		Send this item to a friend			Hover over text for the send action in the bookshelf view	
+Bookshelf_View_ResultsViewer		send			Text for the send action in the bookshelf view	
+Bookshelf_View_ResultsViewer		Edit this item			Hover over text for the edit action in the bookshelf view	
+Bookshelf_View_ResultsViewer		edit			Text for the edit action in the bookshelf view	
+Bookshelf_View_ResultsViewer		Select or unselect this item			Hover over text for the checkbox which selects or deselects an item for bulk actions	
+Bookshelf_View_ResultsViewer		edit note			Text for the link to edit an existing note on an item in your bookshelf	
+Bookshelf_View_ResultsViewer		add note			Text for the link to add a new note to an item in your bookshelf	
+Bookshelf_View_ResultsViewer		ACTIONS				
+						
+Brief_ResultsViewer		Access Restricted			Text used when displaying an access-restricted item in the results list	
+Brief_ResultsViewer		MISSING THUMBNAIL				
+		 				
+Export_View_ResultsViewer		This option allows you to export the list of results which match your search or browse to an excel document or CSV file for download.			Text explaining options when exporting search results	
+Export_View_ResultsViewer		Select the file type below to create the report:			Prompt for user to select type of export file	
+Export_View_ResultsViewer		Excel Spreadsheet file (XLS)			Excel file as export format	
+Export_View_ResultsViewer		Comma-seperated value text file (CSV)			CSV file as export format	
+						
+Map_ResultsWriter		( varies )			"Text used when displaying a result field which is not the same for all the items within the same title.  (i.e., two different publishers over time )"	
+Map_ResultsWriter		The following {0} matches in {1} sets share the same coordinate information			Results text for a single map when displaying results as a map	
+Map_ResultsWriter		The following {0} matches share the same coordinate information			Results text for a single map when displaying results as a map	
+Map_ResultsWriter		The following{0} matches in {1} sets have no coordinate information			"Results displayed as a map, but without coordinate information"	
+Map_ResultsWriter		The following {0} matches have no coordinate information			"Results displayed as a map, but without coordinate information"	
+Map_ResultsWriter		The following {0} titles have the same coordinate point			Single point shared by multiple titles	
+						
+No_Results_ResultsViewer		Your search returned no results.			Text displayed when no results found for a search	
+No_Results_ResultsViewer		{0} result found in {1}			"for example, '10 results found in dLOC'"	
+No_Results_ResultsViewer		The following matches were found:				
+No_Results_ResultsViewer		%1 found in the University of Florida Library Catalog				
+No_Results_ResultsViewer		One found in the University of Florida Library Catalog				
+No_Results_ResultsViewer		Consider searching one of the following:				
+No_Results_ResultsViewer		Online Resource				
+No_Results_ResultsViewer		Physical Holdings				
+						
+Table_ResultsViewer		No. 			"Short for number, which is the first column of the results when shown as a table.  Number is just the result number, starting with 1."	
+Table_ResultsViewer		Title				
+Table_ResultsViewer		Date				
+						
+Thumbnail_ResultsViewer		issue			Displayed under a newspaper thumbnail like '1 issue'	
+Thumbnail_ResultsViewer		issues			Displayed under a newspaper thumbnail like '2 issues'	
+Thumbnail_ResultsViewer		volume			Displayed under a non-newspaper thumbnail like '1 volume'	
+Thumbnail_ResultsViewer		volumes			Displayed under a non-newspaper thumbnail like '2 volumes'	
+Thumbnail_ResultsViewer		Access Restricted				
+						
+MySobek_HtmlSubwriter	Write_General_View_Type_Selectors	"Welcome back, {0}"			Message to welcome back a user by name	
+MySobek_HtmlSubwriter		%1 Home				
+						
+Saved_Searches_MySobekViewer		My Saved Searches			Title for the saved searches viewer	
+Saved_Searches_MySobekViewer		"You do not have any saved searches or browses.<br /><br />To add a search or browse, use the ADD button while viewing the results of your search or browse."			Prompt provided if the user does not have any saved searches	
+Saved_Searches_MySobekViewer		SAVED SEARCH			Header for the table which lists all the saved searches	
+Saved_Searches_MySobekViewer		Click to delete this saved search			Hover over text for the delete action to remove an existing saved search	
+Saved_Searches_MySobekViewer		Click to view this search			Hover over text for the view action to see the saved search	
+Saved_Searches_MySobekViewer		ACTIONS				
+Saved_Searches_MySobekViewer		delete				
+						
+						
+Preferences_MySobekViewer		Register for {0}			Title when a user is registering with the system initially	
+Preferences_MySobekViewer		Edit Your Account Preferences			Title when a registered/logged on user edits their account	
+Preferences_MySobekViewer		Account Information			Used for registration/account editing	
+Preferences_MySobekViewer		UserName			Used for registration/account editing	
+Preferences_MySobekViewer		Personal Information			Used for registration/account editing	
+Preferences_MySobekViewer		Family Name(s)			Used for registration/account editing	
+Preferences_MySobekViewer		Given Name(s)			Used for registration/account editing	
+Preferences_MySobekViewer		Last/Family Name(s)				
+Preferences_MySobekViewer		First/Given Name(s)				
+Preferences_MySobekViewer		Default Metadata				
+Preferences_MySobekViewer		Nickname			Used for registration/account editing	
+Preferences_MySobekViewer		Email			Used for registration/account editing	
+Preferences_MySobekViewer		Send me monthly usage statistics for my items			Used for registration/account editing	
+Preferences_MySobekViewer		Current Affiliation Information			Used for registration/account editing	
+Preferences_MySobekViewer		Organization/University			Used for registration/account editing	
+Preferences_MySobekViewer		College			Used for registration/account editing	
+Preferences_MySobekViewer		Department			Used for registration/account editing	
+Preferences_MySobekViewer		Unit			Used for registration/account editing	
+Preferences_MySobekViewer		Self-Submittal Preferences			Used for registration/account editing	
+Preferences_MySobekViewer		Send me an email when I submit new items			Used for registration/account editing	
+Preferences_MySobekViewer		Template			Used for registration/account editing	
+Preferences_MySobekViewer		Project			Used for registration/account editing	
+Preferences_MySobekViewer		Default Rights			Used for registration/account editing	
+Preferences_MySobekViewer		"(These are the default rights you give for sharing, repurposing, or remixing your item to other users. You can set this with each new item you submit, but this will be the default that appears.)"			Used for registration/account editing	
+Preferences_MySobekViewer		"You may also select a <a title=""Explanation of different creative commons licenses."" href=""http://creativecommons.org/about/licenses/"">Creative Commons License</a> option below."			Used for registration/account editing	
+Preferences_MySobekViewer		Other Preferences			Used for registration/account editing	
+Preferences_MySobekViewer		Language			Used for registration/account editing	
+Preferences_MySobekViewer		Password			Used for registration/account editing	
+Preferences_MySobekViewer		Confirm Password			Used for registration/account editing	
+Preferences_MySobekViewer		Username must be at least eight digits			Error if the username is too short	
+Preferences_MySobekViewer		Select and confirm a password			Error message if a user does not enter any password information	
+Preferences_MySobekViewer		Passwords do not match			Error message if passwords don't match	
+Preferences_MySobekViewer		Password must be at least eight digits			Error if the password is too short	
+Preferences_MySobekViewer		UFIDs are always eight digits				
+Preferences_MySobekViewer		UFIDs are always numeric				
+Preferences_MySobekViewer		A valid email is required			Error if the user does not provide a valid email	
+Preferences_MySobekViewer		Rights statement truncated to 1000 characters.			Warning if a very long rights statement is entered	
+Preferences_MySobekViewer		An account for that email address already exists.			Error if an account already exists with the same email address	
+Preferences_MySobekViewer		That username is taken.  Please choose another.			Error if the user chooses a username which already exists	
+Preferences_MySobekViewer		Registration for {0} is free and open to the public.  Enter your information below to be instantly registered.			Prompt for registration with the system	
+Preferences_MySobekViewer		"Account information, name, and email are required for each new account."			Instructions on fields required during registration	
+Preferences_MySobekViewer		Already registered?  {0}Log on{1}.			Link to logon if the user accidently ends up in registration	
+Preferences_MySobekViewer		The following errors were detected:				
+Preferences_MySobekViewer		%1 (optionally provides access through Gatorlink)				
+Preferences_MySobekViewer		"I would like to be able to submit materials online. (Once your application to submit has been approved, you will receive email notification)"				
+Preferences_MySobekViewer		CANCEL				
+						
+NewPassword_MySobekViewer		Change your password			Title displayed when changing password	
+NewPassword_MySobekViewer		Select and confirm a new password			Prompt for changing password	
+NewPassword_MySobekViewer		New passwords do not match			Error message if passwords don't match while changing	
+NewPassword_MySobekViewer		Password must be at least eight digits			Error message if password is too short	
+NewPassword_MySobekViewer		The new password cannot match the old password			Error message if the user tries to change their password to their existing password	
+NewPassword_MySobekViewer		Unable to change password.  Verify current password.			Error message if the current password is incorrect	
+NewPassword_MySobekViewer		You are required to change your password to continue.			Prompt when a user has a temporary password	
+NewPassword_MySobekViewer		Please enter your existing password and your new password.			Prompt when a user opts to change their password	
+NewPassword_MySobekViewer		Existing Password:			Used when a user changes their password	
+NewPassword_MySobekViewer		New Password:			Used when a user changes their password	
+NewPassword_MySobekViewer		Confirm New Password:			Used when a user changes their password	
+NewPassword_MySobekViewer		The following errors were detected:				
+						
+Logon_MySobekViewer		Logon to {0}			Title when the user opts to log onto the system	
+Logon_MySobekViewer		The feature you are trying to access requires a valid logon.			Prompt for the user to logon to access the system features	
+Logon_MySobekViewer		Please choose the appropriate logon directly below.				
+Logon_MySobekViewer		"<b>If you have a valid {0} logon</b>, {1}Sign on with {0} authentication here{2}."			Line for user to logon with current system authentication ( {1} and {2} are replaced with link-enabling HTML)	
+Logon_MySobekViewer		<b>Not registered yet?</b> {0}Register now{1} or {2}Contact Us{1}.			"Line for users to either register or send an email (in case of problems).  {0}, {1}, {2} are all replaced with link-enabling HTML"	
+Logon_MySobekViewer		LOG IN			Title for pop-up login form	
+Logon_MySobekViewer		Username or email:			Used in the pop-up login form	
+Logon_MySobekViewer		Password:			Used in the pop-up login form	
+Logon_MySobekViewer		Remember me			Checkbox text used in the pop-up login form to use cookies to retain user informatio	
+Logon_MySobekViewer		Not registered yet?  {0}Register now{1}			Shorter version of not-registered help used in the pop-up login form	
+Logon_MySobekViewer		Forgot your username or password?  Please {0}contact us{1}.			Shorter version of not-registered help used in the pop-up login form	
+						
+Home_MySobekViewer		"Welcome to {0}, {1}"			"Message to welcome a newly registered user ( Welcome to dLOC, Mark )"	
+Home_MySobekViewer		"Welcome back, {0}"			"Message to welcome back a user by name ( Welcome back, Mark )"	
+Home_MySobekViewer		"Welcome to {0}.  This feature allows you to add items to your bookshelves, organize your bookshelves, and email your bookshelves to friends."			Longer welcome message and explanation for the mySobek home page	
+Home_MySobekViewer		What would you like to do today?			Prompt for user to select an action from the mySobek menu	
+Home_MySobekViewer		Start a new item			Menu item within the mySobek home page	
+Home_MySobekViewer		Online submittals are temporarily disabled			Menu item within the mySobek home page if online submittals are disabled	
+Home_MySobekViewer		View all my submitted items			Menu item within the mySobek home page	
+Home_MySobekViewer		View usage for my items			Menu item within the mySobek home page	
+Home_MySobekViewer		View my descriptive tags			Menu item within the mySobek home page	
+Home_MySobekViewer		View and organize my bookshelves			Menu item within the mySobek home page	
+Home_MySobekViewer		View my saved searches			Menu item within the mySobek home page	
+Home_MySobekViewer		Edit my account preferences			Menu item within the mySobek home page	
+Home_MySobekViewer		Track Item Scanning/Processing				
+Home_MySobekViewer		Return to {0}			"If they were forwarded from a spot in the system to logon, this returns them to that spot"	
+Home_MySobekViewer		Return to previous %1 page				
+Home_MySobekViewer		Log Out			Menu item within the mySobek home page	
+Home_MySobekViewer		Comments or recommendations?  Please {0}contact us{1}.			Prompt at the bottom of the home page to provide assistance.  ( {0} and {1} are replaced with link-enabling HTML)	
+Home_MySobekViewer		"If you would like to contribute materials through the online system, please {0}contact us{1} as well."			Optional prompt if the user does not have rights to submit items online.  ( {0} and {1} are replaced with link-enabling HTML)	
+						
+Folder_Mgmt_MySobekViewer		My Library			Title for the folder management page	
+Folder_Mgmt_MySobekViewer		Move Item Between Bookshelves			Title for the pop-up form which allows you to move an item to another bookshelf	
+Folder_Mgmt_MySobekViewer		Select new bookshelf for this item			Prompt on the pop-up form which allows you to move an item to another bookshelf	
+Folder_Mgmt_MySobekViewer		Bookshelf:			Prompt for the new bookshelf when moving between bookshelves from pop-up form.	
+Folder_Mgmt_MySobekViewer		Add/Edit Notes for Bookshelf Item			Title for the pop-up form to add/edit user notes assigned to an item	
+Folder_Mgmt_MySobekViewer		Enter notes for this item in your bookshelf			Prompt for the pop-up form to add/edit user notes assigned to an item	
+Folder_Mgmt_MySobekViewer		Notes:			Prompt for the new notes on the pop-up form for adding/editing user notes assigned to an item	
+Folder_Mgmt_MySobekViewer		New Bookshelf			Title for the pop-up form for creating a new bookshelf	
+Folder_Mgmt_MySobekViewer		Enter the information for your new bookshelf			Prompt for the pop-up form for creating a new bookshelf	
+Folder_Mgmt_MySobekViewer		Name:			Used on the pop-up form for creating a new bookshelf	
+Folder_Mgmt_MySobekViewer		Parent:			Used on the pop-up form for creating a new bookshelf	
+Folder_Mgmt_MySobekViewer		Manage my library			Top-level text for managing your library	
+Folder_Mgmt_MySobekViewer		View my collections home page			Hover-over text for viewing your personalized home page	
+Folder_Mgmt_MySobekViewer		My Collections Home			Link for viewing your personalized home page 	
+Folder_Mgmt_MySobekViewer		My Saved Searches			Link for viewing saved searches	
+Folder_Mgmt_MySobekViewer		View my saved searches			Hover-over text for viewing saved searches	
+Folder_Mgmt_MySobekViewer		This bookshelf is currently empty			Message if the bookshelf a user is managing is empty	
+Folder_Mgmt_MySobekViewer		Manage My Bookshelves			Link to manage your bookshelves	
+Folder_Mgmt_MySobekViewer		Click to add a new bookshelf			Hover-over text for adding a new bookshelf	
+Folder_Mgmt_MySobekViewer		Add New Bookshelf			Link to add a new bookshelf	
+Folder_Mgmt_MySobekViewer		Refresh Bookshelves List			"Prompt in case there is some problem, or user has the bookshelves open in an alternate window"	
+Folder_Mgmt_MySobekViewer		BOOKSHELF NAME			Header text for the table of all bookshelves a user has	
+Folder_Mgmt_MySobekViewer		Click to delete this bookshelf			Hover-over text for the delete action	
+Folder_Mgmt_MySobekViewer		Make this bookshelf private			Hover-over text for the 'make private' action	
+Folder_Mgmt_MySobekViewer		Make this bookshelf public			Hover-over text for the 'make public' action	
+Folder_Mgmt_MySobekViewer		Click to manage this bookshelf			Hover-over text for the 'manage' action	
+Folder_Mgmt_MySobekViewer		You cannot delete bookshelves which contain other bookshelves			Warning message if you try to delete a bookshelf which contains other bookshelves	
+Folder_Mgmt_MySobekViewer		You cannot delete your last bookshelf			Warning message if you try to delete your last bookshelf	
+Folder_Mgmt_MySobekViewer		make private			Link text for making a folder private	
+Folder_Mgmt_MySobekViewer		make public			Link text for making a folder public	
+Folder_Mgmt_MySobekViewer		manage			Link text for managing the items within a bookshelf	
+Folder_Mgmt_MySobekViewer		Public folder			Hover-over text for a folder which is public (to help explain the icon)	
+Folder_Mgmt_MySobekViewer		Enter the email information below				
+Folder_Mgmt_MySobekViewer		To:				
+Folder_Mgmt_MySobekViewer		Comments				
+Folder_Mgmt_MySobekViewer		Format:				
+Folder_Mgmt_MySobekViewer		CLOSE				
+Folder_Mgmt_MySobekViewer		ACTIONS				
+						
+Aggregation_Single_AdminViewer		Error saving aggregation information!			Error message displayed on the screen on encountering a save error	
+Aggregation_Single_AdminViewer		( NO DEFAULT)				
+Aggregation_Single_AdminViewer		(none - top level)				
+Aggregation_Single_AdminViewer		ACTION				
+Aggregation_Single_AdminViewer		ACTIONS			Table headers	
+Aggregation_Single_AdminViewer		Active?			Checkbox label for : Is aggregation admin?	
+Aggregation_Single_AdminViewer		Add				
+Aggregation_Single_AdminViewer		Add new banner				
+Aggregation_Single_AdminViewer		Add new home page				
+Aggregation_Single_AdminViewer		Additional dublin core metadata to include in OAI-PMH set list:				
+Aggregation_Single_AdminViewer		Advanced Search				
+Aggregation_Single_AdminViewer		Advanced Search (with Year Range)				
+Aggregation_Single_AdminViewer		Africa			One of the geographic search location options for map searching	
+Aggregation_Single_AdminViewer		Aggregation-level Custom Stylesheet (CSS)				
+Aggregation_Single_AdminViewer		Appearance			Tab header	
+Aggregation_Single_AdminViewer		Appearance Options				
+Aggregation_Single_AdminViewer		Asia			One of the geographic search location options for map searching	
+Aggregation_Single_AdminViewer		BACK			Button text	
+Aggregation_Single_AdminViewer		Banner Type:				
+Aggregation_Single_AdminViewer		Banners				
+Aggregation_Single_AdminViewer		Basic Information			Section Heading for collecting basic information about the user	
+Aggregation_Single_AdminViewer		Basic Search (with Year Range)				
+Aggregation_Single_AdminViewer		Behavior:				
+Aggregation_Single_AdminViewer		Brief View				
+Aggregation_Single_AdminViewer		Browse By				
+Aggregation_Single_AdminViewer		CANCEL			Button text	
+Aggregation_Single_AdminViewer		Caribbean			One of the geographic search location options for map searching	
+Aggregation_Single_AdminViewer		Child Pages			Tab header	
+Aggregation_Single_AdminViewer		"Child pages are pages related to the aggregation and allow additional information to be presented within the same aggregational branding.  These can appear in the aggregation main menu, with any metadata browses pulled from the database, or you can set them to for no automatic visibility, in which case they are only accessible by links in the home page or other child pages."				
+Aggregation_Single_AdminViewer		click here to view the help page				
+Aggregation_Single_AdminViewer		Click to delete this subcollection				
+Aggregation_Single_AdminViewer		Close this child page details and return to main admin pages				
+Aggregation_Single_AdminViewer		CODE				
+Aggregation_Single_AdminViewer		Collection				
+Aggregation_Single_AdminViewer		Collection Button:				
+Aggregation_Single_AdminViewer		Collection Visibility				
+Aggregation_Single_AdminViewer		Contact Email:				
+Aggregation_Single_AdminViewer		Copy from existing				
+Aggregation_Single_AdminViewer		Copy from existing home:				
+Aggregation_Single_AdminViewer		Custom Home Page:				
+Aggregation_Single_AdminViewer		Custom Stylesheet:				
+Aggregation_Single_AdminViewer		default				
+Aggregation_Single_AdminViewer		Default Browse:				
+Aggregation_Single_AdminViewer		Default Result View:				
+Aggregation_Single_AdminViewer		delete			Button text	
+Aggregation_Single_AdminViewer		Delete this %1 version				
+Aggregation_Single_AdminViewer		Delete this banner				
+Aggregation_Single_AdminViewer		DELETE THIS HIGHLIGHT				
+Aggregation_Single_AdminViewer		Deleted %1 subcollection				
+Aggregation_Single_AdminViewer		Description:				
+Aggregation_Single_AdminViewer		Disable this aggregation-level stylesheet			Button hover-over text	
+Aggregation_Single_AdminViewer		dLOC Full Text Search				
+Aggregation_Single_AdminViewer		Do not apply changes			Message explaining cancel button on hover	
+Aggregation_Single_AdminViewer		Edit			Button text	
+Aggregation_Single_AdminViewer		Edit Child Page Detail				
+Aggregation_Single_AdminViewer		Edit this aggregation-level stylesheet			Button hover-over text	
+Aggregation_Single_AdminViewer		Edit this child page				
+Aggregation_Single_AdminViewer		Edit this child page in %1				
+Aggregation_Single_AdminViewer		Edit this home page				
+Aggregation_Single_AdminViewer		Edit this home page in %1				
+Aggregation_Single_AdminViewer		Edit this subcollection				
+Aggregation_Single_AdminViewer		ENABLE			Button text to enable the new style-sheet	
+Aggregation_Single_AdminViewer		Enable an aggregation-level stylesheet				
+Aggregation_Single_AdminViewer		Enabled Flag:			Label for checkbox indicating if the flag is set	
+Aggregation_Single_AdminViewer		Error adding new version to this child page				
+Aggregation_Single_AdminViewer		ERROR saving the new item aggregation to the database				
+Aggregation_Single_AdminViewer		ERROR: Invalid entry for new item aggregation				
+Aggregation_Single_AdminViewer		ERROR: Invalid entry for new item child page				
+Aggregation_Single_AdminViewer		Europe			One of the geographic search location options for map searching	
+Aggregation_Single_AdminViewer		Exhibit				
+Aggregation_Single_AdminViewer		Existing Banners:				
+Aggregation_Single_AdminViewer		Existing Child Pages:				
+Aggregation_Single_AdminViewer		Existing Home Pages:				
+Aggregation_Single_AdminViewer		Existing Subcollections:				
+Aggregation_Single_AdminViewer		Existing Versions:				
+Aggregation_Single_AdminViewer		External Link:				
+Aggregation_Single_AdminViewer		Florida			One of the geographic search location options for map searching	
+Aggregation_Single_AdminViewer		"For more information about the settings on this tab,"				
+Aggregation_Single_AdminViewer		Full Text Search				
+Aggregation_Single_AdminViewer		Full View				
+Aggregation_Single_AdminViewer		General			Tab header	
+Aggregation_Single_AdminViewer		Highlights			Tab header	
+Aggregation_Single_AdminViewer		Highlights Type:				
+Aggregation_Single_AdminViewer		Home Page				
+Aggregation_Single_AdminViewer		Home Page - Left				
+Aggregation_Single_AdminViewer		Home Page - Right				
+Aggregation_Single_AdminViewer		Home Page Text				
+Aggregation_Single_AdminViewer		Image				
+Aggregation_Single_AdminViewer		Include All / New Item Browses				
+Aggregation_Single_AdminViewer		Include in OAI-PMH as a set?				
+Aggregation_Single_AdminViewer		Include Map Browse				
+Aggregation_Single_AdminViewer		Institutional Division				
+Aggregation_Single_AdminViewer		LANGUAGE				
+Aggregation_Single_AdminViewer		LANGUAGE(S)				
+Aggregation_Single_AdminViewer		Language:				
+Aggregation_Single_AdminViewer		Link				
+Aggregation_Single_AdminViewer		Main Menu				
+Aggregation_Single_AdminViewer		Map Search (Beta)				
+Aggregation_Single_AdminViewer		Map Search (Legacy)				
+Aggregation_Single_AdminViewer		Map Search Default Area:				
+Aggregation_Single_AdminViewer		Metadata			Tab header	
+Aggregation_Single_AdminViewer		Metadata Browses				
+Aggregation_Single_AdminViewer		Middle East			One of the geographic search location options for map searching	
+Aggregation_Single_AdminViewer		Name (full)				
+Aggregation_Single_AdminViewer		Name (short):				
+Aggregation_Single_AdminViewer		New aggregation code must be twenty characters long or less				
+Aggregation_Single_AdminViewer		New Banner:				
+Aggregation_Single_AdminViewer		New child page code must be twenty characters long or less			Error message	
+Aggregation_Single_AdminViewer		New Child Page:				
+Aggregation_Single_AdminViewer		New code must be unique... %1 already exists				
+Aggregation_Single_AdminViewer		New collection home page text goes here.				
+Aggregation_Single_AdminViewer		New home page text in %1 goes here				
+Aggregation_Single_AdminViewer		New Home Page:				
+Aggregation_Single_AdminViewer		New item aggregation %1 saved successfully				
+Aggregation_Single_AdminViewer		New Subcollection:				
+Aggregation_Single_AdminViewer		No custom aggregation-level stylesheet				
+Aggregation_Single_AdminViewer		No html source files				
+Aggregation_Single_AdminViewer		NONE			Alt text for No image available	
+Aggregation_Single_AdminViewer		North America			One of the geographic search location options for map searching	
+Aggregation_Single_AdminViewer		NOTE: You may need to refresh your browser for your changes to take affect.				
+Aggregation_Single_AdminViewer		OAI-PMH Settings				
+Aggregation_Single_AdminViewer		Other Display Types:				
+Aggregation_Single_AdminViewer		PARENT				
+Aggregation_Single_AdminViewer		Parent Code(s)				
+Aggregation_Single_AdminViewer		Parent:				
+Aggregation_Single_AdminViewer		Result Views:				
+Aggregation_Single_AdminViewer		Results			Tab header	
+Aggregation_Single_AdminViewer		Results Options			Facets header	
+Aggregation_Single_AdminViewer		Rotating				
+Aggregation_Single_AdminViewer		SAVE			Button text	
+Aggregation_Single_AdminViewer		Save changes to this item Aggregation				
+Aggregation_Single_AdminViewer		Save new child page				
+Aggregation_Single_AdminViewer		Save new version of this child page				
+Aggregation_Single_AdminViewer		Search			Tab header	
+Aggregation_Single_AdminViewer		Search Options				
+Aggregation_Single_AdminViewer		Search Types:			Heading label text	
+Aggregation_Single_AdminViewer		Selected image file			Text displayed when hovering over a selected image	
+Aggregation_Single_AdminViewer		Show in parent collection home page?				
+Aggregation_Single_AdminViewer		Some of the files may be in use				
+Aggregation_Single_AdminViewer		SOURCE FILE			Table headers	
+Aggregation_Single_AdminViewer		South America			One of the geographic search location options for map searching	
+Aggregation_Single_AdminViewer		Standard			Title for Standard aggregations table	
+Aggregation_Single_AdminViewer		Static				
+Aggregation_Single_AdminViewer		SubCollections			Tab header	
+Aggregation_Single_AdminViewer		Table View				
+Aggregation_Single_AdminViewer		Text:				
+Aggregation_Single_AdminViewer		That code is a system-reserved keyword.  Try a different code.				
+Aggregation_Single_AdminViewer		The code for this browse is: %1				
+Aggregation_Single_AdminViewer		"The information in this section controls how search results or item browses appears.  The facet options control which metadata values appear to the left of the results, to allow users to narrow their results.  The search results values determine which options are available for viewing the results and what are the aggregation defaults.  Finally, the result fields determines which values are displayed with each individual result in the result set."				
+Aggregation_Single_AdminViewer		"The information in this section is the basic information about the aggregation, such as the full name, the shortened name used for breadcrumbs, the description, and the email contact. "				
+Aggregation_Single_AdminViewer		The metadata browses can be used to expose all the metadata of the resources within this aggregation for public browsing.  Select the metadata fields you would like have available below.				
+Aggregation_Single_AdminViewer		"The values in this section determine if the collection is currently visible at all, whether it is eligible to appear on the collection list at the bottom of the parent page, and the collection button used in that case.  Thematic headings are used to place this collection on the main home page."				
+Aggregation_Single_AdminViewer		Thematic Heading:			Heading label text	
+Aggregation_Single_AdminViewer		"These options control how searching works within this aggregation, such as which search options are made publicly available."				
+Aggregation_Single_AdminViewer		"These three settings have the most profound affects on the appearance of this aggregation, by forcing it to appear under a particular web skin, allowing a custom aggregation-level stylesheet, or completely overriding the system-generated home page for a custom home page HTML source file."				
+Aggregation_Single_AdminViewer		This aggregation currently has no child pages				
+Aggregation_Single_AdminViewer		This aggregation currently has no subcollections				
+Aggregation_Single_AdminViewer		THIS BANNER IMAGE IS MISSING			Alt text for a missing image	
+Aggregation_Single_AdminViewer		This page allows you to edit the basic information about a single child page and add the ability to display this child page in alternate languages.				
+Aggregation_Single_AdminViewer		This section controls all the language-specific (and default) text which appears on the home page.				
+Aggregation_Single_AdminViewer		This section shows all the existing language-specific banners for this aggregation and allows you upload new banners for this aggregation.				
+Aggregation_Single_AdminViewer		Thumbnail View				
+Aggregation_Single_AdminViewer		TITLE				
+Aggregation_Single_AdminViewer		Title (default):				
+Aggregation_Single_AdminViewer		"To change, browse to a 50x50 pixel GIF file, and then select UPLOAD"			Upload instructions	
+Aggregation_Single_AdminViewer		"To edit this, log on as the aggregation admin and hover over this text to edit it."				
+Aggregation_Single_AdminViewer		"To upload, browse to a GIF, PNG, JPEG, or BMP file, and then select UPLOAD"				
+Aggregation_Single_AdminViewer		Tooltip:				
+Aggregation_Single_AdminViewer		TYPE				
+Aggregation_Single_AdminViewer		Unable to remove subcollection directory				
+Aggregation_Single_AdminViewer		United States			One of the geographic search location options for map searching	
+Aggregation_Single_AdminViewer		Upload New Banner Image:				
+Aggregation_Single_AdminViewer		View			Button text	
+Aggregation_Single_AdminViewer		View banner image file				
+Aggregation_Single_AdminViewer		View CSS file			Button hover-over text	
+Aggregation_Single_AdminViewer		View source file				
+Aggregation_Single_AdminViewer		View this child page				
+Aggregation_Single_AdminViewer		View this child page in %1				
+Aggregation_Single_AdminViewer		View this home page				
+Aggregation_Single_AdminViewer		View this home page in %1				
+Aggregation_Single_AdminViewer		View this subcollection				
+Aggregation_Single_AdminViewer		VISIBILITY				
+Aggregation_Single_AdminViewer		Visibility:				
+Aggregation_Single_AdminViewer		Web Skin:				
+Aggregation_Single_AdminViewer		World			One of the geographic search location options for map searching	
+Aggregation_Single_AdminViewer		You can edit the contents of the aggregation-level custom stylesheet (css) file here.  Click SAVE when complete to return to the main aggregation administration screen.				
+Aggregation_Single_AdminViewer		"You can use OAI-PMH to expose all the metadata of the resources within this aggregation for automatic harvesting by other repositories.  Additionally, you can choose to attach metadata to the collection-level OAI-PMH record.  This should be coded as dublin core tags."				
+Aggregation_Single_AdminViewer		"You can view existing subcollections or add new subcollections to this aggregation from this tab.  You will have full curatorial rights over any new subcollections you add.  Currently, only system administrators can DELETE subcollections."				
+Aggregation_Single_AdminViewer		You must enter a CODE for this child page				
+Aggregation_Single_AdminViewer		You must enter a CODE for this item aggregation				
+Aggregation_Single_AdminViewer		You must enter a DESCRIPTION for this new aggregation				
+Aggregation_Single_AdminViewer		You must enter a LABEL for this child page				
+Aggregation_Single_AdminViewer		You must enter a NAME for this new aggregation				
+Aggregation_Single_AdminViewer		You must SAVE your changes before you can view or edit newly added child page versions				
+Aggregation_Single_AdminViewer		You must SAVE your changes before you can view or edit newly added home pages.				
+Aggregation_Single_AdminViewer		You must select a TYPE for this new aggregation				
+Aggregation_Single_AdminViewer		You must select a VISIBILITY for this child page				
+						
+Google_Map_ResultsViewer		The following %1 matches in  %2 sets share the same coordinate information				
+Google_Map_ResultsViewer		The following %1  matches share the same coordinate information				
+Google_Map_ResultsViewer		The following  %1 matches  in %2  sets have no coordinate information				
+Google_Map_ResultsViewer		The following %1  matches have no coordinate information				
+Google_Map_ResultsViewer		The following %1 titles have the same coordinate point				
+						
+User_Usage_Stats_MySobekViewer		Below is a list of items associated with your account including usage statistics.  Total views and visits represents the total amount of usage since the item was added to the library and the monthly views and visits is the usage in the selected month.				
+User_Usage_Stats_MySobekViewer		"For more information about these terms, see the"				
+User_Usage_Stats_MySobekViewer		definitions on the main statistics page				
+User_Usage_Stats_MySobekViewer		Select any column to re-sort this data				
+User_Usage_Stats_MySobekViewer		TITLE				
+User_Usage_Stats_MySobekViewer		TOTAL VIEWS				
+User_Usage_Stats_MySobekViewer		TOTAL VISITS				
+User_Usage_Stats_MySobekViewer		MONTHLY VIEWS				
+						
+User_Tags_MySobekViewer		"As a digital collection manager or administrator, you can use this screen to view descriptive tags added to collections of interest, as well as view the descriptive tags you have added to items."				
+User_Tags_MySobekViewer		Tags By Aggregation				
+User_Tags_MySobekViewer		Choose an aggregation below to view all tags for that aggregation:				
+User_Tags_MySobekViewer		All Aggregations				
+User_Tags_MySobekViewer		Your Descriptive Tags				
+User_Tags_MySobekViewer		You have not added any descriptive tags to any items				
+User_Tags_MySobekViewer		You have added the following %1 descriptive tags				
+User_Tags_MySobekViewer		Added by you on %1				
+User_Tags_MySobekViewer		view all by this user				
+User_Tags_MySobekViewer		Added by %1 on %2				
+User_Tags_MySobekViewer		Tags By User				
+User_Tags_MySobekViewer		This user has not added any descriptive tags to any items or it is not a valid userid.				
+						
+Page_Image_Upload_MySobekViewer		Upload Page Images				
+Page_Image_Upload_MySobekViewer		Upload the page images for your item.  You will then be directed to manage the pages and divisions to ensure the new page images appear in the correct order and are reflected in the table of contents.				
+Page_Image_Upload_MySobekViewer		Click here to add download files instead.				
+Page_Image_Upload_MySobekViewer		The following new page images will be added to the item once you click SUBMIT				
+Page_Image_Upload_MySobekViewer		FILENAME				
+Page_Image_Upload_MySobekViewer		SIZE				
+Page_Image_Upload_MySobekViewer		DATE UPLOADED				
+Page_Image_Upload_MySobekViewer		ACTION				
+Page_Image_Upload_MySobekViewer		Cancel this and remove the recentely uploaded images				
+Page_Image_Upload_MySobekViewer		Submit the recently uploaded page images and complete the process				
+Page_Image_Upload_MySobekViewer		"Once all images are uploaded, press SUBMIT to finish this item"				
+Page_Image_Upload_MySobekViewer		The following extensions are accepted				
+Page_Image_Upload_MySobekViewer		SUBMIT				
+Page_Image_Upload_MySobekViewer		CANCEL				
+						
+						
+New_Group_And_Item_MySobekViewer		Permissions Agreement				
+New_Group_And_Item_MySobekViewer		User				
+New_Group_And_Item_MySobekViewer		Date				
+New_Group_And_Item_MySobekViewer		Upload Files				
+New_Group_And_Item_MySobekViewer		"Upload the related files for your new item.  You can also provide labels for each file, once they are uploaded."				
+New_Group_And_Item_MySobekViewer		Upload Files or Enter URL				
+New_Group_And_Item_MySobekViewer		"Upload the related files or enter a URL for your new item.  You can also provide labels for each file, once they are uploaded"				
+New_Group_And_Item_MySobekViewer		Enter a URL for this new item.				
+New_Group_And_Item_MySobekViewer		Enter URL				
+New_Group_And_Item_MySobekViewer		Template				
+New_Group_And_Item_MySobekViewer		Default Metadata				
+New_Group_And_Item_MySobekViewer		Step 1 of %1: Grant of Permission				
+New_Group_And_Item_MySobekViewer		You must read and accept the below permissions to continue.				
+New_Group_And_Item_MySobekViewer		You must read and accept the above permissions agreement to continue.				
+New_Group_And_Item_MySobekViewer		CANCEL				
+New_Group_And_Item_MySobekViewer		ACCEPT				
+New_Group_And_Item_MySobekViewer		Step 1 of %1: Confirm Template and Project 				
+New_Group_And_Item_MySobekViewer		You may also change your current %1 for this submission.				
+New_Group_And_Item_MySobekViewer		"To change your default %1, select"				
+New_Group_And_Item_MySobekViewer		My Account				
+New_Group_And_Item_MySobekViewer		above				
+New_Group_And_Item_MySobekViewer		Item Description				
+New_Group_And_Item_MySobekViewer		Enter the basic information to describe your new item				
+New_Group_And_Item_MySobekViewer		The following errors were detected:				
+New_Group_And_Item_MySobekViewer		BACK				
+New_Group_And_Item_MySobekViewer		CLEAR				
+New_Group_And_Item_MySobekViewer		FILENAME				
+New_Group_And_Item_MySobekViewer		SIZE				
+New_Group_And_Item_MySobekViewer		DATE UPLOADED				
+New_Group_And_Item_MySobekViewer		ACTION				
+New_Group_And_Item_MySobekViewer		The following files are already uploaded for this package and will be included as downloads				
+New_Group_And_Item_MySobekViewer		"Once the URL is entered, press SUBMIT to finish this item."				
+New_Group_And_Item_MySobekViewer		"Once you enter any files and/or URL, press SUBMIT to finish this item"				
+New_Group_And_Item_MySobekViewer		"Once all files are uploaded, press SUBMIT to finish this item"				
+New_Group_And_Item_MySobekViewer		"Once complete, press SUBMIT to finish this item"				
+New_Group_And_Item_MySobekViewer		SUBMIT				
+New_Group_And_Item_MySobekViewer		Add a new item for this package				
+New_Group_And_Item_MySobekViewer		CONGRATULATIONS				
+New_Group_And_Item_MySobekViewer		Your item has been successfully added to the digital library and will appear immediately.				
+New_Group_And_Item_MySobekViewer		"Search indexes may take a couple minutes to build, at which time this item will be discoverable through the search interface"				
+New_Group_And_Item_MySobekViewer		An email has been sent to you with the new item information.				
+New_Group_And_Item_MySobekViewer		Ooops!! We encountered a problem!				
+New_Group_And_Item_MySobekViewer		An email has been sent to the programmer who will attempt to correct your issue.  You should be contacted within the next 24-48 hours regarding this issue				
+New_Group_And_Item_MySobekViewer		Return to my home				
+New_Group_And_Item_MySobekViewer		View this item				
+New_Group_And_Item_MySobekViewer		Edit this item				
+New_Group_And_Item_MySobekViewer		Add another item				
+New_Group_And_Item_MySobekViewer		View all my submitted items				
+						
+Mass_Update_Items_MySobekViewer		Change the behavior of all items belonging to this group				
+Mass_Update_Items_MySobekViewer		Enter any behaviors you would like to have propogate through all the items within this item group.and press the SAVE button when complete.				
+Mass_Update_Items_MySobekViewer		Clicking on the green plus button ( 				
+Mass_Update_Items_MySobekViewer		" ) will add another instance of the element, if the element is repeatable."				
+Mass_Update_Items_MySobekViewer		Click				
+Mass_Update_Items_MySobekViewer		here for detailed instructions				
+Mass_Update_Items_MySobekViewer		on mass updating behaviors online.				
+Mass_Update_Items_MySobekViewer		MASS UPDATE				
+						
+Group_AutoFill_Volume_MySobekViewer		AUTO-FILL NEW VOLUMES				
+Group_AutoFill_Volume_MySobekViewer		Implementation for this feature is currently pending.				
+						
+Group_Add_Volume_MySobekViewer		No base volume selected!				
+Group_Add_Volume_MySobekViewer		EXCEPTION CAUGHT!				
+Group_Add_Volume_MySobekViewer		NEW VOLUME				
+Group_Add_Volume_MySobekViewer		Add a new volume to this existing title/item group				
+Group_Add_Volume_MySobekViewer		Only enter data that you wish to override the data in the existing base volume.				
+Group_Add_Volume_MySobekViewer		Click				
+Group_Add_Volume_MySobekViewer		here for detailed instructions				
+Group_Add_Volume_MySobekViewer		"In addition, the following actions are available:"				
+Group_Add_Volume_MySobekViewer		SAVE & EDIT ITEM				
+Group_Add_Volume_MySobekViewer		SAVE & ADD FILES				
+Group_Add_Volume_MySobekViewer		SAVE & ADD ANOTHER				
+						
+File_Management_MySobekViewer		ERROR CAUGHT WHILE SAVING DIGITAL RESOURCE				
+File_Management_MySobekViewer		ERROR ENCOUNTERED DURING ONLINE FILE MANAGEMENT				
+File_Management_MySobekViewer		Error during file management for %1				
+File_Management_MySobekViewer		Manage Downloads				
+File_Management_MySobekViewer		"Upload the download files for your item.  You can also provide labels for each file, once they are uploaded."				
+File_Management_MySobekViewer		Click here to upload page images instead.				
+File_Management_MySobekViewer		Add a new file for this package				
+						
+Edit_Serial_Hierarchy_MySobekViewer		EDIT SERIAL HIERARCHY				
+Edit_Serial_Hierarchy_MySobekViewer		Implementation for this feature is currently pending.				
+						
+Edit_Item_Metadata_MySobekViewer		Edit Project				
+Edit_Item_Metadata_MySobekViewer		Edit Item				
+Edit_Item_Metadata_MySobekViewer		Edit this item				
+Edit_Item_Metadata_MySobekViewer		Enter the data for this item below and press the SAVE button when all your edits are complete.				
+Edit_Item_Metadata_MySobekViewer		Clicking on the green plus button ( 				
+Edit_Item_Metadata_MySobekViewer		" ) will add another instance of the element, if the element is repeatable."				
+Edit_Item_Metadata_MySobekViewer		You are using the full editing form because this item contains complex elements or was derived from MARC.				
+Edit_Item_Metadata_MySobekViewer		You are using the full editing form.  Click				
+Edit_Item_Metadata_MySobekViewer		here to return to the simplified version				
+Edit_Item_Metadata_MySobekViewer		You are using the simplified editing form.  Click				
+Edit_Item_Metadata_MySobekViewer		"To open detailed edit forms, click on the linked metadata values."				
+Edit_Item_Metadata_MySobekViewer		Click				
+Edit_Item_Metadata_MySobekViewer		here for detailed instructions				
+Edit_Item_Metadata_MySobekViewer		 on editing metadata online.				
+Edit_Item_Metadata_MySobekViewer		Edit this project				
+Edit_Item_Metadata_MySobekViewer		Enter the default data for this project below and press the SAVE button when all your edits are complete.				
+Edit_Item_Metadata_MySobekViewer		Clicking on the blue plus signs ( 				
+Edit_Item_Metadata_MySobekViewer		"Click on the element names for detailed information inluding definitions, best practices, and technical information."				
+Edit_Item_Metadata_MySobekViewer		You are using the full editing form because you are editing a project.				
+Edit_Item_Metadata_MySobekViewer		Standard View				
+Edit_Item_Metadata_MySobekViewer		MARC View				
+Edit_Item_Metadata_MySobekViewer		METS View				
+						
+Edit_Item_Behaviors_MySobekViewer		Edit Item Behaviors				
+Edit_Item_Behaviors_MySobekViewer		Edit this item's behaviors within this library				
+Edit_Item_Behaviors_MySobekViewer		Enter the data for this item below and press the SAVE button when all your edits are complete.				
+Edit_Item_Behaviors_MySobekViewer		Clicking on the green plus button ( 				
+Edit_Item_Behaviors_MySobekViewer		") will add another instance of the element, if the element is repeatable."				
+Edit_Item_Behaviors_MySobekViewer		Click				
+Edit_Item_Behaviors_MySobekViewer		here for detailed instructions				
+Edit_Item_Behaviors_MySobekViewer		on editing behaviors online				
+						
+Edit_Group_Behaviors_MySobekViewer		Edit the behaviors associated with this item group within this library				
+Edit_Group_Behaviors_MySobekViewer		Enter the data for this item group below and press the SAVE button when all your edits are complete.				
+Edit_Group_Behaviors_MySobekViewer		Clicking on the green plus button ( 				
+Edit_Group_Behaviors_MySobekViewer		" ) will add another instance of the element, if the element is repeatable."				
+Edit_Group_Behaviors_MySobekViewer		Click				
+Edit_Group_Behaviors_MySobekViewer		here for detailed instructions				
+Edit_Group_Behaviors_MySobekViewer		 on editing behaviors online.				
+						
+Delete_Item_MySobekViewer		Delete Item				
+Delete_Item_MySobekViewer		Enter DELETE in the textbox below and select GO to complete this deletion.				
+Delete_Item_MySobekViewer		Confirm delete of this item				
+Delete_Item_MySobekViewer		DELETE SUCCESSFUL				
+Delete_Item_MySobekViewer		DELETE FAILED				
+Delete_Item_MySobekViewer		Insufficient user permissions to perform delete				
+Delete_Item_MySobekViewer		Item indicated does not exists				
+Delete_Item_MySobekViewer		Error while performing delete in database				
+Delete_Item_MySobekViewer		DELETE PARTIALLY SUCCESSFUL				
+Delete_Item_MySobekViewer		Unable to move all files to the RECYCLE BIN folder				
+						
+Text_MainWriter		INVALID ITEM INDICATED				
+Text_MainWriter		TEXT WRITER - UNKNOWN MODE				
+Text_MainWriter		Invalid Group				
+Text_MainWriter		Group				
+Text_MainWriter		Items				
+Text_MainWriter		Icons				
+Text_MainWriter		Skins				
+Text_MainWriter		GROUP table				
+Text_MainWriter		GroupTitle				
+Text_MainWriter		BibID				
+Text_MainWriter		Type				
+Text_MainWriter		Default_Collection				
+Text_MainWriter		File_Root				
+Text_MainWriter		Greenstone_Code				
+Text_MainWriter		Title				
+Text_MainWriter		ItemID				
+Text_MainWriter		Level1_Text				
+Text_MainWriter		Level1_Index				
+Text_MainWriter		Level2_Text				
+Text_MainWriter		Level2_Index				
+Text_MainWriter		Level3_Text				
+Text_MainWriter		Level3_Index				
+Text_MainWriter		Level4_Text				
+Text_MainWriter		Level4_Index				
+Text_MainWriter		Level5_Text				
+Text_MainWriter		Level5_Index				
+Text_MainWriter		ICON table				
+Text_MainWriter		Icon_URL				
+Text_MainWriter		Link				
+Text_MainWriter		Icon_Name				
+Text_MainWriter		INTERFACE table				
+						
+Html_Echo_MainWriter		ERROR READING THE SOURCE FILE				
+						
+TOC_ItemViewer		Table of Contents				
+						
+Text_ItemViewer		Unknown error while retrieving text				
+Text_ItemViewer		No text file exists for this page				
+Text_ItemViewer		No text is recorded for this page				
+						
+Street_ItemViewer		UNABLE TO LOAD STREETS FROM DATABASE				
+Street_ItemViewer		Click				
+Street_ItemViewer		here				
+Street_ItemViewer		 to report this issue.				
+Street_ItemViewer		Index of Streets				
+						
+ManageMenu_ItemViewer		Manage this Item				
+ManageMenu_ItemViewer		(beta)				
+ManageMenu_ItemViewer		"Add a new, related volume to this item group."				
+ManageMenu_ItemViewer		"Add geo-spatial information for this item.  This can be as simple as a location for a photograph or can be an overlay for a map.  Points, lines, and polygons of interest can also be drawn."				
+ManageMenu_ItemViewer		Add New Volume				
+ManageMenu_ItemViewer		"Change the way this item behaves in this library, including which aggregations it appears under, the wordmarks to the left, and which viewer types are publicly accessible."				
+ManageMenu_ItemViewer		Edit Item Behaviors				
+ManageMenu_ItemViewer		Edit Item Group Behaviors				
+ManageMenu_ItemViewer		Edit Item Metadata				
+ManageMenu_ItemViewer		Edit the information about this item which appears in the citation/description.  This is basic information about the original item and this digital manifestation.				
+ManageMenu_ItemViewer		How would you like to manage this item group today?				
+ManageMenu_ItemViewer		How would you like to manage this item today?				
+ManageMenu_ItemViewer		"In addition, the following changes can be made at the item group level:"				
+ManageMenu_ItemViewer		Manage Download Files				
+ManageMenu_ItemViewer		Manage Geo-Spatial Data				
+ManageMenu_ItemViewer		Manage Pages and Divisions (Quality Control)				
+ManageMenu_ItemViewer		Manage this Item Group				
+ManageMenu_ItemViewer		Mass Update Item Behaviors				
+ManageMenu_ItemViewer		"Reorder page images, name pages, assign divisions, and delete and add new page images to this item."				
+ManageMenu_ItemViewer		Set the title under which all of these items appear in search results and set the web skins under which all these items should appear.				
+ManageMenu_ItemViewer		"This allows item-level behaviors to be set for all items within this item group, including which aggregations it appears under, the wordmarks to the left, and which viewer types are publicly accessible."				
+ManageMenu_ItemViewer		"This can be used for printing the tracking sheet for this item, which can be used as part of the built-in digitization workflow."				
+ManageMenu_ItemViewer		Upload new files for download or remove existing files that are attached to this item for download.  This generally includes everything except for the page images.				
+ManageMenu_ItemViewer		"View the history of all work performed on this item.  From this view, you can also see any digitization milestones and digital resource file information."				
+ManageMenu_ItemViewer		View Tracking Sheet				
+ManageMenu_ItemViewer		View Work History				
+						
+JPEG2000_ItemViewer		THUMBNAIL				
+						
+JPEG_ItemViewer		Click on image below to switch to zoomable version				
+JPEG_ItemViewer		Click on image to switch to zoomable version				
+JPEG_ItemViewer		MISSING IMAGE				
+						
+Google_Coordinate_Entry_ItemViewer		Loading...				
+						
+Feature_ItemViewer		Index of Features				
+Feature_ItemViewer		UNABLE TO LOAD FEATURES FROM DATABASE				
+						
+abstractItemViewer		Unnumbered 			Used to name pages in the Go to: dropdown	
+abstractItemViewer		Page 			Used to name pages in the Go to: dropdown	
+						
+MainMenus_Helper_HtmlSubWriter		Home				
+MainMenus_Helper_HtmlSubWriter		View Items				
+MainMenus_Helper_HtmlSubWriter		View All Items				
+MainMenus_Helper_HtmlSubWriter		View Recently Added Items				
+MainMenus_Helper_HtmlSubWriter		MY COLLECTIONS				
+MainMenus_Helper_HtmlSubWriter		BROWSE PARTNERS				
+MainMenus_Helper_HtmlSubWriter		BROWSE BY				
+MainMenus_Helper_HtmlSubWriter		MAP BROWSE				
+MainMenus_Helper_HtmlSubWriter		List View				
+MainMenus_Helper_HtmlSubWriter		Brief View				
+MainMenus_Helper_HtmlSubWriter		Tree View				
+MainMenus_Helper_HtmlSubWriter		Browse Partners				
+MainMenus_Helper_HtmlSubWriter		 ( Added Automatically )				
+MainMenus_Helper_HtmlSubWriter		SEARCH OPTIONS				
+MainMenus_Helper_HtmlSubWriter		BOOKSHELF VIEW				
+MainMenus_Helper_HtmlSubWriter		BRIEF VIEW				
+MainMenus_Helper_HtmlSubWriter		MAP VIEW				
+MainMenus_Helper_HtmlSubWriter		TABLE VIEW				
+MainMenus_Helper_HtmlSubWriter		THUMBNAIL VIEW				
+MainMenus_Helper_HtmlSubWriter		EXPORT				
+MainMenus_Helper_HtmlSubWriter		Save				
+MainMenus_Helper_HtmlSubWriter		Send				
+MainMenus_Helper_HtmlSubWriter		Print				
+MainMenus_Helper_HtmlSubWriter		Advanced Search				
+MainMenus_Helper_HtmlSubWriter		My Library				
+MainMenus_Helper_HtmlSubWriter		My Account				
+MainMenus_Helper_HtmlSubWriter		Internal				
+MainMenus_Helper_HtmlSubWriter		System Admin				
+MainMenus_Helper_HtmlSubWriter		Portal Admin				
+MainMenus_Helper_HtmlSubWriter		Collection Hierarchy				
+MainMenus_Helper_HtmlSubWriter		New Items				
+MainMenus_Helper_HtmlSubWriter		Memory Management				
+MainMenus_Helper_HtmlSubWriter		Wordmarks				
+MainMenus_Helper_HtmlSubWriter		Build Failures				
+						
+Item_Nav_Bar_HTML_Factory		ALL ISSUES				
+Item_Nav_Bar_HTML_Factory		RELATED MAPS				
+Item_Nav_Bar_HTML_Factory		RELATED FLIGHTS				
+Item_Nav_Bar_HTML_Factory		ALL VOLUMES				
+Item_Nav_Bar_HTML_Factory		CITATION				
+Item_Nav_Bar_HTML_Factory		DATA STRUCTURE				
+Item_Nav_Bar_HTML_Factory		REPORTS				
+Item_Nav_Bar_HTML_Factory		EXPLORE DATA				
+Item_Nav_Bar_HTML_Factory		DOWNLOADS				
+Item_Nav_Bar_HTML_Factory		FEATURES				
+Item_Nav_Bar_HTML_Factory		FLASH VIEW				
+Item_Nav_Bar_HTML_Factory		MAP SEARCH				
+Item_Nav_Bar_HTML_Factory		SEARCH RESULTS				
+Item_Nav_Bar_HTML_Factory		MAP COVERAGE				
+Item_Nav_Bar_HTML_Factory		MAP IT!				
+Item_Nav_Bar_HTML_Factory		STANDARD				
+Item_Nav_Bar_HTML_Factory		PAGE IMAGE WITH TEXT				
+Item_Nav_Bar_HTML_Factory		ZOOMABLE				
+Item_Nav_Bar_HTML_Factory		PDF VIEWER				
+Item_Nav_Bar_HTML_Factory		THUMBNAILS				
+Item_Nav_Bar_HTML_Factory		SEARCH				
+Item_Nav_Bar_HTML_Factory		STREETS				
+Item_Nav_Bar_HTML_Factory		PAGE TEXT				
+Item_Nav_Bar_HTML_Factory		RESTRICTED				
+Item_Nav_Bar_HTML_Factory		CONTAINER LIST				
+Item_Nav_Bar_HTML_Factory		PAGE TURNER				
+Item_Nav_Bar_HTML_Factory		VIDEO				
+						
+abstractHtmlSubwriter		OCLC Number				
+abstractHtmlSubwriter		ALEPH Number				
+abstractHtmlSubwriter		Anywhere				
+abstractHtmlSubwriter		Title				
+abstractHtmlSubwriter		Author				
+abstractHtmlSubwriter		Subject Keywords				
+abstractHtmlSubwriter		Country				
+abstractHtmlSubwriter		State				
+abstractHtmlSubwriter		County				
+abstractHtmlSubwriter		City				
+abstractHtmlSubwriter		Place of Publication				
+abstractHtmlSubwriter		Spatial Coverage				
+abstractHtmlSubwriter		Type				
+abstractHtmlSubwriter		Language				
+abstractHtmlSubwriter		Publisher				
+abstractHtmlSubwriter		Genre				
+abstractHtmlSubwriter		Target Audience				
+abstractHtmlSubwriter		Donor				
+abstractHtmlSubwriter		Attribution				
+abstractHtmlSubwriter		Tickler				
+abstractHtmlSubwriter		Notes				
+abstractHtmlSubwriter		Identifier				
+abstractHtmlSubwriter		Frequency				
+abstractHtmlSubwriter		Tracking Box				
+						
+Static_Browse_Info_AggregationViewer		show header data (advanced)				
+Static_Browse_Info_AggregationViewer		"The data below describes the content of this static child page and is used by some search engine indexing algorithms.  By default, it will not show in text of the page, but will be included in the head tag of the page."				
+Static_Browse_Info_AggregationViewer		Title:				
+Static_Browse_Info_AggregationViewer		Author:				
+Static_Browse_Info_AggregationViewer		Date:				
+Static_Browse_Info_AggregationViewer		Description:				
+Static_Browse_Info_AggregationViewer		Keywords:				
+Static_Browse_Info_AggregationViewer		HTML Head Info:				
+Static_Browse_Info_AggregationViewer		Edit this home text				
+Static_Browse_Info_AggregationViewer		edit content				
+						
+						
+Item_Count_Aggregation_Viewer		Resource Count in Aggregation				
+Item_Count_Aggregation_Viewer		"Below is the number of titles and items for all items within this aggregation, including currently online items as well as items in process."				
+Item_Count_Aggregation_Viewer		LAST MILESTONE				
+Item_Count_Aggregation_Viewer		TITLE COUNT				
+Item_Count_Aggregation_Viewer		ITEM COUNT				
+Item_Count_Aggregation_Viewer		PAGE COUNT				
+Item_Count_Aggregation_Viewer		FILE COUNT				
+						
+Basic_Search_YearRange_AggregationViewer		Search Collection				
+Basic_Search_YearRange_AggregationViewer		Limit by Year				
+						
+Advanced_Search_YearRange_AggregationViewer		Search for:				
+Advanced_Search_YearRange_AggregationViewer		in				
+Advanced_Search_YearRange_AggregationViewer		Search				
+Advanced_Search_YearRange_AggregationViewer		Search Options				
+Advanced_Search_YearRange_AggregationViewer		Precision				
+Advanced_Search_YearRange_AggregationViewer		Contains exactly the search terms				
+Advanced_Search_YearRange_AggregationViewer		Contains any form of the search terms				
+Advanced_Search_YearRange_AggregationViewer		Contains the search term or terms of similar meaning				
+Advanced_Search_YearRange_AggregationViewer		Limit by Year				
+Advanced_Search_YearRange_AggregationViewer		and				
+Advanced_Search_YearRange_AggregationViewer		or				
+Advanced_Search_YearRange_AggregationViewer		and not				

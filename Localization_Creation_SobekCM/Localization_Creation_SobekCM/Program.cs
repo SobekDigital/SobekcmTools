@@ -51,6 +51,8 @@ namespace SobekCM.Library.Localization
 		    }
 		    reader.Close();
 
+	        if (!Directory.Exists("OUTPUT"))
+	            Directory.CreateDirectory("OUTPUT");
 
 		    StreamWriter overallwriter = new StreamWriter("OUTPUT\\SobekCM_LocalizationInfo.cs");
 			overallwriter.WriteLine("using System;");
@@ -149,6 +151,9 @@ namespace SobekCM.Library.Localization
 		    overallwriter.WriteLine("}");
 		    overallwriter.Flush();
 		    overallwriter.Close();
+
+            if (!Directory.Exists("OUTPUT\\Classes"))
+                Directory.CreateDirectory("OUTPUT\\Classes");
 
 		    // Now, write each class
 		    foreach (Single_Class_Info thisObject in classes_to_add)

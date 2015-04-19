@@ -22,8 +22,8 @@ namespace SobekCM.Library.Localization
 				string cleaned = Name.Replace("~", "").Replace("|", "").Replace("<i>", "").Replace("</i>", "").Replace("<b>", "").Replace("</b>", "").Replace("[", "").Replace("]", "").Replace("+", "").Replace("@", "").Replace("%1", "XXX").Replace("%2", "XXX").Replace("%3", "XXX").Replace("%4", "XXX").Replace(":", "").Replace(",", " ").Replace(".", "").Replace("(", "").Replace(")", "").Replace("%", "").Replace("=", " ").Replace("\\", "").Replace("/", "").Replace("\"", "").Replace("'", "").Replace("<", " ").Replace(">", " ").Replace(";", "").Replace("&", "").Replace("-", "").Replace("?", "").Replace("!", "").Replace("{0}", "XXX").Replace("{1}", "XXX").Replace("{2}", "XXX").Replace("{3}", "XXX").Replace("{4}", "XXX").Replace("  ", " ").Replace("  ", " ").Trim();
 			    if (Char.IsNumber(cleaned[0]))
 				    cleaned = cleaned.Substring(1).Trim();
-			    if (cleaned.Length > 500)
-				    cleaned = cleaned.Substring(0, 500);
+			    if (cleaned.Length > 50)
+				    cleaned = cleaned.Substring(0, 50);
 			    return textInfo.ToTitleCase(cleaned).Replace(" ", "");
 		    }
 	    }
