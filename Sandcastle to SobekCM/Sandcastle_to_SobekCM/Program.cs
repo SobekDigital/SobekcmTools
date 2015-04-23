@@ -32,7 +32,7 @@ namespace Sandcastle_to_SobekCM
         private const string settings_builder_file = @"C:\GitRepository\SobekCM-Web-Application\SobekCM_Engine_Library\Settings\InstanceWide_Settings_Builder.cs";
 
         private const string source = @"C:\Services\Codehelp\Source\";
-        private const string destination_directory = @"C:\Services\Codehelp\Output\";
+        private const string destination_directory = @"C:\Services\Codehelp\Output";
         private const string final_web = @"\\sob-web01\sobekrepository\design\webcontent\codehelp";
         static Dictionary<string, string> link_replacements = new Dictionary<string, string>();
         static string current_type = String.Empty;
@@ -80,7 +80,7 @@ namespace Sandcastle_to_SobekCM
 
             // Look for files.. must be some files at least
             files = Directory.GetFiles(source);
-            if (files.Length == 0)
+            if (files.Length < 2)
             {
                 error_writer.WriteLine("No output files from Sandcastle script");
                 error_writer.Flush();
@@ -88,17 +88,17 @@ namespace Sandcastle_to_SobekCM
                 return;
             }
 
-            Console.WriteLine("Rewrite all the output files");
+            //Console.WriteLine("Rewrite all the output files");
 
             // Copy the top-level R_Project file as well and parse for namespace descriptions
             List<Tuple<string, string>> namespaceDescs = new List<Tuple<string, string>>();
-            if (System.IO.File.Exists(source + "html/R_Project_SobekCM.htm"))
+            if (File.Exists(source + "html/R_Project_SobekCM.htm"))
             {
-                System.IO.File.Copy(source + "html/R_Project_SobekCM.htm", destination_directory + "\\R_Project_SobekCM.html", true);
+                File.Copy(source + "html/R_Project_SobekCM.htm", destination_directory + "\\R_Project_SobekCM.html", true);
 
-                string contents = System.IO.File.ReadAllText(destination_directory + "\\R_Project_SobekCM.html");
+                string contents = File.ReadAllText(destination_directory + "\\R_Project_SobekCM.html");
 
-                int start_index = contents.IndexOf("id=\"namespacesSection\"");
+                int start_index = contents.IndexOf("<div id=\"namespacesSection\"");
                 string sub = contents.Substring(start_index);
 
                 int end_index = sub.IndexOf("</table>");
@@ -116,11 +116,11 @@ namespace Sandcastle_to_SobekCM
                     if (thisRow.IndexOf("<td>", StringComparison.OrdinalIgnoreCase) >= 0)
                     {
                         int namespace_name_start = thisRow.IndexOf(".htm\">") + 6;
-                        string namespace_name = thisRow.Substring(namespace_name_start, thisRow.IndexOf("</a>", namespace_name_start) - namespace_name_start).Trim();
+                        string namespace_name = thisRow.Substring(namespace_name_start, thisRow.IndexOf("</a>", namespace_name_start, StringComparison.Ordinal) - namespace_name_start).Trim();
                         
 
-                        int namespace_summary_start = thisRow.IndexOf("<div class=\"summary\">", namespace_name_start) + 21;
-                        string namespace_summary = thisRow.Substring(namespace_summary_start, thisRow.IndexOf("</div>", namespace_summary_start) - namespace_summary_start).Trim();
+                        int namespace_summary_start = thisRow.IndexOf("<div class=\"summary\">", namespace_name_start, StringComparison.Ordinal) + 21;
+                        string namespace_summary = thisRow.Substring(namespace_summary_start, thisRow.IndexOf("</div>", namespace_summary_start, StringComparison.Ordinal) - namespace_summary_start).Trim();
 
                         namespaceDescs.Add(new Tuple<string, string>(namespace_name, namespace_summary));
                     }
@@ -132,9 +132,6 @@ namespace Sandcastle_to_SobekCM
                 }
 
                 Console.WriteLine(sub);
-
-
-
             }
             else
             {
@@ -151,14 +148,12 @@ namespace Sandcastle_to_SobekCM
             foreach (Sandcastle_TOC_Node childNode in toc.RootNode.Child_Nodes)
             {
                 Console.WriteLine("Create folders and new structure: " + childNode.Title);
-                create_and_assign_folders_recursively(childNode, destination_directory, "SobekCM.", namespaceDescs, file_to_namespace_dic);
+                create_and_assign_folders_recursively(childNode, destination_directory, "SobekCM.", file_to_namespace_dic);
             }
-
-
 
             // Save the SobekCM site map
             Console.WriteLine("Save SobekCM Sitemap file");
-            toc.Save_SobekCM_SiteMap(destination_directory + "codehelp.sitemap", "codehelp");
+            toc.Save_SobekCM_SiteMap(destination_directory + "\\codehelp.sitemap", "codehelp");
 
             // Step through each file in the directory
             Console.WriteLine("Merging main page and class/interface members pages at each level.");
@@ -171,7 +166,7 @@ namespace Sandcastle_to_SobekCM
             error_writer.Close();
 
             // Write the link replacements to a file for testing
-            System.IO.StreamWriter writer = new System.IO.StreamWriter("replacements.txt", false );
+            StreamWriter writer = new StreamWriter("replacements.txt", false );
             foreach (string thisKey in link_replacements.Keys)
             {
                 writer.WriteLine(thisKey + " --> " + link_replacements[thisKey]);
@@ -181,42 +176,81 @@ namespace Sandcastle_to_SobekCM
 
             // Now, copy over all the files
             DirectoryCopy(destination_directory, final_web, true);
+
+            // Update the front page of the codehelp
+            if (File.Exists(final_web + "\\R_Project_SobekCM.html"))
+            {
+                try
+                {
+                    // Get the namespace table (with updated links now) from the R_Project file 
+                    string contents = File.ReadAllText(final_web + "\\R_Project_SobekCM.html");
+                    int start_index = contents.IndexOf("<div id=\"namespacesSection\"");
+                    string sub = contents.Substring(start_index);
+                    int end_index = sub.IndexOf("</table>");
+                    sub = sub.Substring(0, end_index + 8);
+
+                    // Get the contents of the current from home page file
+                    string front_page_file = final_web + "\\default.html";
+                    string front_page_contents = File.ReadAllText(front_page_file);
+                    int front_page_start_replace = front_page_contents.IndexOf("<!-- %START REPLACE% -->") + 24;
+                    string first_part = front_page_contents.Substring(0, front_page_start_replace);
+
+                    int front_page_end_replace = front_page_contents.IndexOf("<!-- %END REPLACE% -->");
+                    string last_part = front_page_contents.Substring(front_page_end_replace);
+
+                    // Now, write the new home page
+                    StreamWriter front_page_writer = new StreamWriter(front_page_file, false);
+                    front_page_writer.WriteLine(first_part);
+                    front_page_writer.WriteLine(sub);
+                    front_page_writer.WriteLine("</div>");
+                    front_page_writer.WriteLine("<br /><br />");
+                    front_page_writer.WriteLine("<span id=\"versionGeneratedSpan\">Version " + version + " ( last generated <%LASTMODIFIED%> ) </span>");
+                    front_page_writer.WriteLine(last_part);
+                    front_page_writer.Flush();
+                    front_page_writer.Close();
+
+                }
+                catch (Exception ee)
+                {
+                    
+                }
+            }
         }
 
-        private static void DirectoryCopy(string sourceDirName, string destDirName, bool copySubDirs)
+        private static void DirectoryCopy(string SourceDirName, string DestDirName, bool CopySubDirs)
         {
             // Get the subdirectories for the specified directory.
-            DirectoryInfo dir = new DirectoryInfo(sourceDirName);
+            DirectoryInfo dir = new DirectoryInfo(SourceDirName);
             DirectoryInfo[] dirs = dir.GetDirectories();
 
             if (!dir.Exists)
             {
                 throw new DirectoryNotFoundException(
                     "Source directory does not exist or could not be found: "
-                    + sourceDirName);
+                    + SourceDirName);
             }
 
             // If the destination directory doesn't exist, create it. 
-            if (!Directory.Exists(destDirName))
+            if (!Directory.Exists(DestDirName))
             {
-                Directory.CreateDirectory(destDirName);
+                Directory.CreateDirectory(DestDirName);
             }
 
             // Get the files in the directory and copy them to the new location.
             FileInfo[] files = dir.GetFiles();
             foreach (FileInfo file in files)
             {
-                string temppath = Path.Combine(destDirName, file.Name);
+                string temppath = Path.Combine(DestDirName, file.Name);
                 file.CopyTo(temppath, true);
             }
 
             // If copying subdirectories, copy them and their contents to new location. 
-            if (copySubDirs)
+            if (CopySubDirs)
             {
                 foreach (DirectoryInfo subdir in dirs)
                 {
-                    string temppath = Path.Combine(destDirName, subdir.Name);
-                    DirectoryCopy(subdir.FullName, temppath, copySubDirs);
+                    string temppath = Path.Combine(DestDirName, subdir.Name);
+                    DirectoryCopy(subdir.FullName, temppath, true);
                 }
             }
         }
@@ -244,13 +278,8 @@ namespace Sandcastle_to_SobekCM
                     Version = sub_line;
                     return true;
                 }
-                else
-                {
-                    return false;
-                }
-
-
-                return true;
+                
+                return false;
             }
             catch
             {
@@ -258,11 +287,11 @@ namespace Sandcastle_to_SobekCM
             }
         }
 
-        private static void merge_default_all_members(string directory)
+        private static void merge_default_all_members(string Directory)
         {
-            if (( System.IO.File.Exists(directory + "\\all_members.html")) && ( System.IO.File.Exists(directory + "\\default.html")))
+            if (( File.Exists(Directory + "\\all_members.html")) && ( File.Exists(Directory + "\\default.html")))
             {
-                string all_members_content = System.IO.File.ReadAllText( directory + "\\all_members.html" );
+                string all_members_content = File.ReadAllText( Directory + "\\all_members.html" );
                 int start = all_members_content.IndexOf("<h2>");
                 int end = Math.Min(all_members_content.IndexOf("<h2>See Also"), all_members_content.IndexOf("</body>"));
                 if (end < 0)
@@ -271,13 +300,13 @@ namespace Sandcastle_to_SobekCM
                 {
                     string to_keep = all_members_content.Substring(start, end - start );
 
-                    string all_default_content = System.IO.File.ReadAllText( directory + "\\default.html" );
+                    string all_default_content = File.ReadAllText( Directory + "\\default.html" );
                     end = Math.Min(all_default_content.IndexOf("<h2>See Also"), all_default_content.IndexOf("</body>"));
                     if (end < 0)
                         end = all_default_content.IndexOf("</body>");
                     if ( end > 0 )
                     {
-                        System.IO.StreamWriter writer = new System.IO.StreamWriter(directory + "\\default.html", false );
+                        StreamWriter writer = new StreamWriter(Directory + "\\default.html", false );
                         writer.WriteLine(all_default_content.Substring(0, end));
                         writer.WriteLine();
                         writer.WriteLine(to_keep);
@@ -287,52 +316,47 @@ namespace Sandcastle_to_SobekCM
                         writer.Close();
 
                         // Delete old all_members here
-                        bool delete = true;
-                        System.IO.File.Delete(directory + "\\all_members.html");
+                        File.Delete(Directory + "\\all_members.html");
                     }
                 }
             }
 
 
 
-            string[] subdirs = System.IO.Directory.GetDirectories(directory);
+            string[] subdirs = System.IO.Directory.GetDirectories(Directory);
             foreach (string thisSubDir in subdirs)
             {
                 merge_default_all_members(thisSubDir);
             }
         }
 
-        private static void rewrite_all_html_files(string directory, StreamWriter error_writer, Dictionary<string, string> file_to_namespace_dic, List<Tuple<string, string>> namespaceDescs)
+        private static void rewrite_all_html_files(string Directory, StreamWriter ErrorWriter, Dictionary<string, string> FileToNamespaceDic, List<Tuple<string, string>> NamespaceDescs)
         {
-            string[] files = System.IO.Directory.GetFiles(directory, "*.html");
+            string[] files = System.IO.Directory.GetFiles(Directory, "*.html");
             foreach (string thisFile in files)
             {
-                rewrite_file(thisFile, error_writer, file_to_namespace_dic, namespaceDescs);
+                rewrite_file(thisFile, ErrorWriter, FileToNamespaceDic, NamespaceDescs);
             }
 
-            string[] subdirs = System.IO.Directory.GetDirectories(directory);
+            string[] subdirs = System.IO.Directory.GetDirectories(Directory);
             foreach (string thisSubDir in subdirs)
             {
-                rewrite_all_html_files(thisSubDir, error_writer, file_to_namespace_dic, namespaceDescs);
+                rewrite_all_html_files(thisSubDir, ErrorWriter, FileToNamespaceDic, NamespaceDescs);
             }
         }
 
-        private static void rewrite_file(string SourceFile, StreamWriter error_writer, Dictionary<string, string> file_to_namespace_dic, List<Tuple<string, string>> namespaceDescs)
+        private static void rewrite_file(string SourceFile, StreamWriter ErrorWriter, Dictionary<string, string> FileToNamespaceDic, List<Tuple<string, string>> NamespaceDescs)
         {
             try
             {
-                string filename = (new System.IO.FileInfo(SourceFile)).Name;
+                string filename = (new FileInfo(SourceFile)).Name;
                 Console.WriteLine("Rewriting " + filename);
 
-                System.IO.StreamReader reader = new System.IO.StreamReader(SourceFile);
+                StreamReader reader = new StreamReader(SourceFile);
                 string complete_file = reader.ReadToEnd();
                 reader.Close();
 
-                int content_start = complete_file.IndexOf("<div class=\"summary\">");
-                //if (content_start < 0)
-                //    content_start = complete_file.IndexOf("<b>Namespace:</b>");
-                //if ( content_start < 0 )
-                content_start = complete_file.IndexOf("<img src=\"http://sobekrepository.org/design/aggregations/ufdchelp/images/banners/coll.jpg\" /><br /><br /> </span>") + 136;
+                int content_start = complete_file.IndexOf("<img src=\"http://sobekrepository.org/design/aggregations/ufdchelp/images/banners/coll.jpg\" /><br /><br /> </span>") + 136;
                 if (content_start < 200)
                     content_start = complete_file.IndexOf("<img src=\"http://sobekrepository.org/design/aggregations/ufdchelp/images/banners/coll.jpg\" /><br />") + 112;
                 int content_end = complete_file.IndexOf("<div id=\"footer\">");
@@ -361,14 +385,14 @@ namespace Sandcastle_to_SobekCM
                 fileBuilder.AppendLine("<h1>" + title + "</h1>");
                 fileBuilder.AppendLine("<br /><br />");
 
-                if ((file_to_namespace_dic.ContainsKey(SourceFile)) && ( SourceFile.IndexOf("R_Project") < 0 ))
+                if ((FileToNamespaceDic.ContainsKey(SourceFile)) && ( SourceFile.IndexOf("R_Project") < 0 ))
                 {
                     // Get the namespace
-                    string this_namespace = file_to_namespace_dic[SourceFile];
+                    string this_namespace = FileToNamespaceDic[SourceFile];
 
                     // Ensure there are sub-namespaces before doing anything here
                     List<Tuple<string, string>> subs = new List<Tuple<string, string>>();
-                    foreach (Tuple<string, string> thisSub in namespaceDescs)
+                    foreach (Tuple<string, string> thisSub in NamespaceDescs)
                     {
                         if (thisSub.Item1.IndexOf(this_namespace + ".") == 0)
                         {
@@ -383,11 +407,11 @@ namespace Sandcastle_to_SobekCM
 
                       //  string insert_namespace = "<h1 class=heading\"><span onclick=\"ExpandCollapse(namespacesToggle)\" style=\"cursor: default;\" onkeypress=\"ExpandCollapse_CheckKey(namespacesToggle, event)\" tabindex=\"0\"><img id=\"namespacesToggle\" class=\"toggle\" name=\"toggleSwitch\" src=\"../icons/collapse_all.gif\" />Namespaces</span></h1><div id=\"namespacesSection\" class=\"section\" name=\"collapseableSection\"><table class=\"members\" id=\"memberList\" frame=\"lhs\" cellpadding=\"2\">";
 
-                        string insert_namespace = "<h2>Namespaces</h2><div id=\"namespacesSection\" class=\"section\" name=\"collapseableSection\"><table id=\"typeList\" class=\"members\" frame=\"lhs\" cellpadding=\"2\"><tr><th class=\"nameColumn\">Namespace</th><th class=\"descriptionColumn\">Description</th></tr>";
+                        string insert_namespace = "<h2>Sub-Namespaces</h2><div id=\"namespacesSection\" class=\"section\" name=\"collapseableSection\"><table id=\"typeList\" class=\"members\" frame=\"lhs\" cellpadding=\"2\"><tr><th class=\"nameColumn\">Namespace</th><th class=\"descriptionColumn\">Description</th></tr>";
 
                         foreach (Tuple<string, string> thisSub in subs)
                         {
-                            insert_namespace = insert_namespace + "<tr><td><a href=\"N_" + thisSub.Item1.Replace(".", "_") + ".htm\">" + thisSub.Item1 + "</a></td><td><div class=\"summary\">" + thisSub.Item2 + "</div></td></tr>";
+                            insert_namespace = insert_namespace + "<tr><td><a href=\"N_" + thisSub.Item1.Replace(".", "_") + ".htm\">" + thisSub.Item1.Replace( this_namespace + ".", String.Empty ) + "</a></td><td><div class=\"summary\">" + thisSub.Item2 + "</div></td></tr>";
                         }
 
                         insert_namespace = insert_namespace + "</table></div>";
@@ -421,9 +445,9 @@ namespace Sandcastle_to_SobekCM
                 while (new_file_content.IndexOf("<h1 class=\"heading\">") > 0)
                 {
                     int start_start = new_file_content.IndexOf("<h1 class=\"heading\">");
-                    int start_end = new_file_content.IndexOf("collapse_all.gif\" />", start_start);
+                    int start_end = new_file_content.IndexOf("collapse_all.gif\" />", start_start, StringComparison.Ordinal);
 
-                    int end_start = new_file_content.IndexOf("</span></h1>", start_end);
+                    int end_start = new_file_content.IndexOf("</span></h1>", start_end, StringComparison.Ordinal);
 
                     new_file_content = new_file_content.Substring(0, start_start) + "\r\n\r\n<h2>" + new_file_content.Substring(start_end + 20, end_start - start_end - 20) + "</h2>\r\n" + new_file_content.Substring(end_start + 12);
 
@@ -446,58 +470,55 @@ namespace Sandcastle_to_SobekCM
 
 
 
-                System.IO.StreamWriter writer = new System.IO.StreamWriter(SourceFile);
+                StreamWriter writer = new StreamWriter(SourceFile);
                 writer.Write(new_file_content);
                 writer.Flush();
                 writer.Close();
-
-                bool error = false;
             }
             catch (Exception ee)
             {
-                error_writer.WriteLine("Error encountered on " + SourceFile + " : " + ee.Message);
+                ErrorWriter.WriteLine("Error encountered on " + SourceFile + " : " + ee.Message);
             }
-
         }
 
-        private static void create_and_assign_folders_recursively(Sandcastle_TOC_Node node, string directory, string current_namespace, List<Tuple<string, string>> namespaceDescs, Dictionary<string, string> file_to_namespace_dic)
+        private static void create_and_assign_folders_recursively(Sandcastle_TOC_Node Node, string Directory, string CurrentNamespace, Dictionary<string, string> FileToNamespaceDic)
         {
-            if (String.IsNullOrEmpty(node.URL))
+            if (String.IsNullOrEmpty(Node.URL))
                 return;
 
             // Only namespaces get directories
-            if (node.URL.IndexOf("N_") == 0 )
+            if (Node.URL.IndexOf("N_") == 0 )
             {
-                string current_url = "html/" + node.URL;
+                string current_url = "html/" + Node.URL;
 
                 // Get the namespace
-                string original_namespace = node.Title.Replace(" Namespace", "");
-                string complete_namespace = node.Title.Replace(" Namespace", "");
-                if (complete_namespace.IndexOf(current_namespace) == 0)
+                string original_namespace = Node.Title.Replace(" Namespace", "");
+                string complete_namespace = Node.Title.Replace(" Namespace", "");
+                if (complete_namespace.IndexOf(CurrentNamespace) == 0)
                 {
-                    complete_namespace = complete_namespace.Substring(current_namespace.Length);
+                    complete_namespace = complete_namespace.Substring(CurrentNamespace.Length);
                 }
-                current_namespace = current_namespace + complete_namespace + ".";
+                CurrentNamespace = CurrentNamespace + complete_namespace + ".";
 
-                node.New_Title = complete_namespace + " Namespace";
-                if (( node.Parent_Node != null ) && ( node.Parent_Node.New_Title.IndexOf(" Namespace") > 0) && ( node.Parent_Node.Title.IndexOf("Code Namespaces") < 0 ))
+                Node.New_Title = complete_namespace + " Namespace";
+                if (( Node.Parent_Node != null ) && ( Node.Parent_Node.New_Title.IndexOf(" Namespace") > 0) && ( Node.Parent_Node.Title.IndexOf("Code Namespaces") < 0 ))
                 {
-                    node.New_Title = complete_namespace + " Sub-Namespace";
+                    Node.New_Title = complete_namespace + " Sub-Namespace";
                 }
 
                 // Create the subdirectory
-                directory = directory + "\\" + complete_namespace;
-                if (!System.IO.Directory.Exists(directory))
-                    System.IO.Directory.CreateDirectory(directory);
-                string new_url = directory.Replace(destination_directory + "\\", "").Replace("\\", "/");
+                Directory = Directory + "\\" + complete_namespace;
+                if (!System.IO.Directory.Exists(Directory))
+                    System.IO.Directory.CreateDirectory(Directory);
+                string new_url = Directory.Replace(destination_directory + "\\", "").Replace("\\", "/");
 
                 // Look for the matching file
-                if (node.URL.Length > 0)
+                if (Node.URL.Length > 0)
                 {
-                    System.IO.File.Copy(source + "\\html\\" + node.URL, directory + "\\default.html", true);
-                    node.New_URL = sitemap_url_base + new_url;
+                    File.Copy(source + "\\html\\" + Node.URL, Directory + "\\default.html", true);
+                    Node.New_URL = sitemap_url_base + new_url;
 
-                    file_to_namespace_dic[directory + "\\default.html"] = original_namespace;
+                    FileToNamespaceDic[Directory + "\\default.html"] = original_namespace;
 
                     string new_complete_url = new_url_base + new_url + new_url_end;
                     link_replacements.Add(current_url, new_complete_url);
@@ -505,19 +526,19 @@ namespace Sandcastle_to_SobekCM
                 }
                 else
                 {
-                    node.New_URL = String.Empty;
+                    Node.New_URL = String.Empty;
                 }
 
                           
-                node.Node_Type = Code_Node_Type_Enum.Namespace;
+                Node.Node_Type = Code_Node_Type_Enum.Namespace;
 
 
             }
             else
             {
-                string original_file = node.URL;
-                node.New_Title = node.Title;
-                string name_sans_namespace = original_file.Replace(current_namespace.Replace(".", "_"), "");
+                string original_file = Node.URL;
+                Node.New_Title = Node.Title;
+                string name_sans_namespace = original_file.Replace(CurrentNamespace.Replace(".", "_"), "");
 
                 Code_Node_Type_Enum nodeType = Code_Node_Type_Enum.Unrecognized;
                 string prefix = String.Empty;
@@ -529,41 +550,41 @@ namespace Sandcastle_to_SobekCM
                         nodeType = Code_Node_Type_Enum.New_Type;
                         prefix = "T_";
                         defaultFolderFile = true;
-                        node.New_Title = node.New_Title.Replace(" Class", "").Replace(" Delegate", "").Replace(" Enumeration", "");
+                        Node.New_Title = Node.New_Title.Replace(" Class", "").Replace(" Delegate", "").Replace(" Enumeration", "");
                         break;
 
                     case "Al":
                         nodeType = Code_Node_Type_Enum.All_Members;
                         prefix = "AllMembers_T_";
-                        node.New_Title = "Class Members";
+                        Node.New_Title = "Class Members";
                         break;
 
                     case "E_":
                         nodeType = Code_Node_Type_Enum.Single_Event;
                         prefix = "E_";
                         subdir = "events\\";
-                        node.New_Title = node.New_Title.Replace(" Event", "");                  
+                        Node.New_Title = Node.New_Title.Replace(" Event", "");                  
                         break;
 
                     case "F_":
                         nodeType = Code_Node_Type_Enum.Single_Field;
                         prefix = "F_";
                         subdir = "fields\\";
-                        node.New_Title = node.New_Title.Replace(" Field", "");
+                        Node.New_Title = Node.New_Title.Replace(" Field", "");
                         break;
 
                     case "P_":
                         nodeType = Code_Node_Type_Enum.Single_Property;
                         prefix = "P_";
                         subdir = "properties\\";
-                        node.New_Title = node.New_Title.Replace(" Property", "");
+                        Node.New_Title = Node.New_Title.Replace(" Property", "");
                         break;
 
                     case "M_":
                         nodeType = Code_Node_Type_Enum.Single_Method;
                         prefix = "M_";
                         subdir = "methods\\";
-                        node.New_Title = node.New_Title.Replace(" Method", "");
+                        Node.New_Title = Node.New_Title.Replace(" Method", "");
                         break;
 
                     case "Ov":
@@ -577,7 +598,7 @@ namespace Sandcastle_to_SobekCM
                         prefix = "Properties_T_";
                         subdir = "properties\\";
                         defaultFolderFile = true;
-                        node.New_Title = "Properties";
+                        Node.New_Title = "Properties";
                         break;
 
                     case "Me":
@@ -585,7 +606,7 @@ namespace Sandcastle_to_SobekCM
                         prefix = "Methods_T_";
                         subdir = "methods\\";
                         defaultFolderFile = true;
-                        node.New_Title = "Methods";
+                        Node.New_Title = "Methods";
                         break;
 
                     case "Ev":
@@ -593,7 +614,7 @@ namespace Sandcastle_to_SobekCM
                         prefix = "Events_T_";
                         subdir = "events\\";
                         defaultFolderFile = true;
-                        node.New_Title = "Events";
+                        Node.New_Title = "Events";
                         break;
 
                     case "Fi":
@@ -601,7 +622,7 @@ namespace Sandcastle_to_SobekCM
                         prefix = "Fields_T_";
                         subdir = "fields\\";
                         defaultFolderFile = true;
-                        node.New_Title = "Fields";
+                        Node.New_Title = "Fields";
                         break;
                 }
                 
@@ -625,14 +646,14 @@ namespace Sandcastle_to_SobekCM
                         if (nodeType == Code_Node_Type_Enum.Single_Method)
                         {
                             new_file_name = new_file_name.Replace("_ctor", "constructor");
-                            int constructor_index = node.Title.IndexOf("Constructor");
+                            int constructor_index = Node.Title.IndexOf("Constructor");
                             if (constructor_index > 0)
-                                node.New_Title = node.Title.Substring(constructor_index);
+                                Node.New_Title = Node.Title.Substring(constructor_index);
                         }
                         else
                         {
                             new_file_name = new_file_name.Replace("_ctor", "constructor_overload");
-                            node.New_Title = "Constructors";
+                            Node.New_Title = "Constructors";
                         }
                         subdir = String.Empty;
                         nodeType = Code_Node_Type_Enum.Constructor;
@@ -641,10 +662,10 @@ namespace Sandcastle_to_SobekCM
                 }
 
                 // Save this node type
-                node.Node_Type = nodeType;
+                Node.Node_Type = nodeType;
 
                 
-                string new_directory = directory + "\\" + current_type + "\\" + subdir;
+                string new_directory = Directory + "\\" + current_type + "\\" + subdir;
                 if (!System.IO.Directory.Exists(new_directory))
                     System.IO.Directory.CreateDirectory(new_directory);
                 string new_file = new_directory + new_file_name + "l";
@@ -655,21 +676,21 @@ namespace Sandcastle_to_SobekCM
 
                 string current_url = "html/" + original_file;
                 string new_url = new_file.Replace(destination_directory + "\\", "").Replace("\\", "/").Replace("/default.html", "").Replace(".html", "").Replace("/all_members", "#constructorTableSection");
-                node.New_URL = sitemap_url_base + new_url;
+                Node.New_URL = sitemap_url_base + new_url;
 
                 string new_complete_url = new_url_base + new_url + new_url_end;
                 link_replacements.Add(current_url, new_complete_url);
 
 
-                System.IO.File.Copy(source + "\\html\\" + original_file, new_file, true);
+                File.Copy(source + "\\html\\" + original_file, new_file, true);
 
             }
 
-            if (node.Child_Nodes_Count > 0)
+            if (Node.Child_Nodes_Count > 0)
             {
-                foreach (Sandcastle_TOC_Node childNode in node.Child_Nodes)
+                foreach (Sandcastle_TOC_Node childNode in Node.Child_Nodes)
                 {
-                    create_and_assign_folders_recursively(childNode, directory, current_namespace, namespaceDescs, file_to_namespace_dic);
+                    create_and_assign_folders_recursively(childNode, Directory, CurrentNamespace, FileToNamespaceDic);
                 }
             }
         }
