@@ -377,6 +377,8 @@ namespace Sandcastle_to_SobekCM
                 fileBuilder.AppendLine("\t\t<meta name=\"author\" content=\"Sullivan, Mark\" />");
                 fileBuilder.AppendLine("\t\t<meta name=\"keywords\" content=\"help pages, technical help, xml\" />");
                 fileBuilder.AppendLine("\t\t<meta name=\"sitemap\" content=\"sitemaps/sobekcm.sitemap\" />");
+                fileBuilder.AppendLine("\t\t<meta name=\"menu\" content=\"true\" />");
+                fileBuilder.AppendLine("\t\t<meta name=\"locked\" content=\"true\" />");
                 fileBuilder.AppendLine("\t\t<meta name=\"description\" content=\"Description of how the SobekCM works with illustrations and code help\" />");
                 fileBuilder.AppendLine("\t\t<link href=\"http://sobekrepository.org/design/webcontent/sobekcm/sobekcm_tech.css\" rel=\"stylesheet\" type=\"text/css\" />");
                 fileBuilder.AppendLine("\t</head>");
