@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
 using Microsoft.Build.Evaluation;
 using Microsoft.Build.Execution;
+using SobekCM.Core.WebContent;
 
 namespace Sandcastle_to_SobekCM
 {
@@ -29,6 +32,8 @@ namespace Sandcastle_to_SobekCM
 
     class Program
     {
+        private const string CONNECTION_STRING = @"data source=SOB-SQL01\SOBEK2;initial catalog=sobekrepository;integrated security=Yes;";
+
         private const string settings_builder_file = @"C:\GitRepository\SobekCM-Web-Application\SobekCM_Engine_Library\Settings\InstanceWide_Settings_Builder.cs";
 
         private const string source = @"C:\Services\Codehelp\Source\";
@@ -44,7 +49,7 @@ namespace Sandcastle_to_SobekCM
 
         static void Main(string[] args)
         {
-            StreamWriter error_writer = new StreamWriter("errors.txt");
+            StreamWriter error_writer = new StreamWriter(@"C:\Services\Codehelp\App\errors.txt");
 
             // Get the version number
             if (!get_version_number(out version))
@@ -174,16 +179,88 @@ namespace Sandcastle_to_SobekCM
             writer.Flush();
             writer.Close();
 
+            // Now, update the HTML files for the new structure, where every file is DEFAULT.HTML in its own folder
+            // Collect all the .html files
+            List<string> htmlFiles = new List<string>();
+            recurse_through_dirs(destination_directory, htmlFiles);
+
+            // Determine any changes as needed
+            foreach (string thisFile in htmlFiles)
+            {
+                string fileName = Path.GetFileName(thisFile);
+                if (fileName.ToLower().IndexOf("default.") != 0)
+                {
+                    string name = Path.GetFileNameWithoutExtension(thisFile);
+                    string path = Path.GetDirectoryName(thisFile);
+                    string new_path_file = Path.Combine(path, name, "default.html");
+
+                    if (!File.Exists(new_path_file))
+                    {
+                        string new_path = Path.GetDirectoryName(new_path_file);
+                        if (!Directory.Exists(new_path))
+                            Directory.CreateDirectory(new_path);
+                        File.Move(thisFile, new_path_file);
+                    }
+                }
+            }
+
+            // Now, iterate again
+            htmlFiles.Clear();
+            recurse_through_dirs(destination_directory, htmlFiles);
+
             // Now, copy over all the files
             DirectoryCopy(destination_directory, final_web, true);
 
+            // Now, load these to the database
+            foreach (string thisFile in htmlFiles)
+            {
+                string thisFileEnd = thisFile.Substring(destination_directory.Length + 1);
+                if (thisFileEnd.Length <= 12)
+                    continue;
+                if (thisFileEnd.IndexOf("\\default.html", StringComparison.OrdinalIgnoreCase) < 0)
+                    continue;
+
+                string thisFileMiddle = thisFileEnd.Substring(0, thisFileEnd.IndexOf("\\default.html", StringComparison.OrdinalIgnoreCase));
+
+                string[] splitter = thisFileMiddle.Split("\\".ToCharArray());
+
+                // Get each individual part of the web content page
+                string first = "codehelp";
+
+                string second = (splitter.Length > 0) ? splitter[0] : null;
+                string third = (splitter.Length > 1) ? splitter[1] : null;
+                string fourth = (splitter.Length > 2) ? splitter[2] : null;
+                string fifth = (splitter.Length > 3) ? splitter[3] : null;
+                string sixth = (splitter.Length > 4) ? splitter[4] : null;
+                string seventh = (splitter.Length > 5) ? splitter[5] : null;
+                string eight = (splitter.Length > 6) ? splitter[6] : null;
+
+                // If there was a first value, then continue
+                if (!String.IsNullOrEmpty(first))
+                {
+                    string title = "Error Reading";
+                    string summary = "Error Reading";
+
+                    // Also, read the file to try and get the title and summary
+                    HTML_Based_Content thisContent = HTML_Based_Content_Reader.Read_HTML_File(thisFile, false, null);
+                    if (thisContent != null)
+                    {
+                        title = thisContent.Title;
+                        summary = thisContent.Description;
+                    }
+
+                    // Add to the database
+                    WebContent_Add_Page(first, second, third, fourth, fifth, sixth, seventh, eight, "Legacy", title, summary);
+                }
+            }
+
             // Update the front page of the codehelp
-            if (File.Exists(final_web + "\\R_Project_SobekCM.html"))
+            if (File.Exists(final_web + "\\R_Project_SobekCM\\default.html"))
             {
                 try
                 {
                     // Get the namespace table (with updated links now) from the R_Project file 
-                    string contents = File.ReadAllText(final_web + "\\R_Project_SobekCM.html");
+                    string contents = File.ReadAllText(final_web + "\\R_Project_SobekCM\\default.html");
                     int start_index = contents.IndexOf("<div id=\"namespacesSection\"");
                     string sub = contents.Substring(start_index);
                     int end_index = sub.IndexOf("</table>");
@@ -214,6 +291,50 @@ namespace Sandcastle_to_SobekCM
                 {
                     
                 }
+            }
+        }
+
+        private static void recurse_through_dirs(string directory, List<string> files)
+        {
+            string[] html_files = Directory.GetFiles(directory, "*.htm*");
+            foreach (string thisFile in html_files)
+                files.Add(thisFile);
+
+            string[] subdirs = Directory.GetDirectories(directory);
+            foreach (string thisSubdDir in subdirs)
+                recurse_through_dirs(thisSubdDir, files);
+
+        }
+
+        private static int WebContent_Add_Page(string Level1, string Level2, string Level3, string Level4, string Level5, string Level6, string Level7, string Level8, string Username, string Title, string Summary)
+        {
+
+            try
+            {
+                SqlParameter[] parameters = new SqlParameter[13];
+                parameters[0] = new SqlParameter("@level1", Level1);
+                parameters[1] = new SqlParameter("@level2", Level2);
+                parameters[2] = new SqlParameter("@level3", Level3);
+                parameters[3] = new SqlParameter("@level4", Level4);
+                parameters[4] = new SqlParameter("@level5", Level5);
+                parameters[5] = new SqlParameter("@level6", Level6);
+                parameters[6] = new SqlParameter("@level7", Level7);
+                parameters[7] = new SqlParameter("@level8", Level8);
+                parameters[8] = new SqlParameter("@username", Username);
+                parameters[9] = new SqlParameter("@title", Title);
+                parameters[10] = new SqlParameter("@summary", Summary);
+                parameters[11] = new SqlParameter("@redirect", DBNull.Value);
+                parameters[12] = new SqlParameter("@WebContentID", -1) { Direction = ParameterDirection.InputOutput };
+
+                // Define a temporary dataset
+                Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteNonQuery(CONNECTION_STRING, CommandType.StoredProcedure, "SobekCM_WebContent_Add", parameters);
+
+                // Get the new primary key and return it
+                return Int32.Parse(parameters[12].Value.ToString());
+            }
+            catch (Exception ee)
+            {
+                return -1;
             }
         }
 
@@ -360,6 +481,8 @@ namespace Sandcastle_to_SobekCM
                 if (content_start < 200)
                     content_start = complete_file.IndexOf("<img src=\"http://sobekrepository.org/design/aggregations/ufdchelp/images/banners/coll.jpg\" /><br />") + 112;
                 int content_end = complete_file.IndexOf("<div id=\"footer\">");
+                if (content_end < 0)
+                    content_end = complete_file.IndexOf("</body>");
                 string content = complete_file.Substring(content_start, content_end - content_start);
 
                 int title_start = complete_file.IndexOf("<title>");
@@ -379,7 +502,7 @@ namespace Sandcastle_to_SobekCM
                 fileBuilder.AppendLine("\t\t<meta name=\"sitemap\" content=\"sitemaps/sobekcm.sitemap\" />");
                 fileBuilder.AppendLine("\t\t<meta name=\"menu\" content=\"true\" />");
                 fileBuilder.AppendLine("\t\t<meta name=\"locked\" content=\"true\" />");
-                fileBuilder.AppendLine("\t\t<meta name=\"description\" content=\"Description of how the SobekCM works with illustrations and code help\" />");
+                fileBuilder.AppendLine("\t\t<meta name=\"description\" content=\"Code help for the " + title + "\" />");
                 fileBuilder.AppendLine("\t\t<link href=\"http://sobekrepository.org/design/webcontent/sobekcm/sobekcm_tech.css\" rel=\"stylesheet\" type=\"text/css\" />");
                 fileBuilder.AppendLine("\t</head>");
                 fileBuilder.AppendLine("<body>");

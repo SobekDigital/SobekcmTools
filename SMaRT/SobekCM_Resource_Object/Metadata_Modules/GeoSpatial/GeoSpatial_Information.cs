@@ -17,9 +17,10 @@ namespace SobekCM.Resource_Object.Metadata_Modules.GeoSpatial
     public class GeoSpatial_Information : iMetadata_Module
     {
         private string kml_reference;
-        private List<Coordinate_Line> lines;
+        private readonly List<Coordinate_Line> lines;
         private List<Coordinate_Point> points;
-        private List<Coordinate_Polygon> polygons;
+        private readonly List<Coordinate_Polygon> polygons;
+        private readonly List<Coordinate_Circle> circles;
         private double sobekcm_main_spatial_distance;
         private string sobekcm_main_spatial_string;
 
@@ -29,12 +30,12 @@ namespace SobekCM.Resource_Object.Metadata_Modules.GeoSpatial
             points = new List<Coordinate_Point>();
             polygons = new List<Coordinate_Polygon>();
             lines = new List<Coordinate_Line>();
+            circles = new List<Coordinate_Circle>();
 
             sobekcm_main_spatial_distance = -1;
             sobekcm_main_spatial_string = String.Empty;
         }
-
-
+        
         #region Methods/Properties to implement the iMetadata_Module interface
 
         /// <summary> Name for this metadata module </summary>
@@ -65,17 +66,19 @@ namespace SobekCM.Resource_Object.Metadata_Modules.GeoSpatial
             // Set the default error mesasge
             Error_Message = String.Empty;
 
+            // Clear all item footprint info
+ 
+
             // Save each and every coordinate point
             foreach (Coordinate_Point thisPoint in Points)
             {
-                Save_Item_Footprint(ItemID, thisPoint.Latitude, thisPoint.Longitude, -1.0, -1.0, -1.0, -1.0, DB_ConnectionString, out Error_Message);
+                //create kml string (just a sample)
+                string pointKMLString = "<Placemark><name>" + thisPoint.Label + "</name><point><coordinates>" + thisPoint.Latitude + "," + thisPoint.Longitude + "</coordinates></point></Placemark>";
+
+                Save_Item_Footprint(ItemID, thisPoint.Latitude, thisPoint.Longitude, -1.0, -1.0, -1.0, -1.0, pointKMLString, DB_ConnectionString, out Error_Message);
             }
 
             // Add each polygon (bounding box only)
-            double rect_latitude_a;
-            double rect_longitude_a;
-            double rect_latitude_b;
-            double rect_longitude_b;
             for (int rect_index = 0; rect_index < Polygon_Count; rect_index++)
             {
                 try
@@ -84,21 +87,19 @@ namespace SobekCM.Resource_Object.Metadata_Modules.GeoSpatial
                     Coordinate_Polygon polygon = Get_Polygon(rect_index);
 
                     // Set initial values
-                    rect_latitude_a = -1.0;
-                    rect_longitude_a = -1.0;
-                    rect_latitude_b = -1.0;
-                    rect_longitude_b = -1.0;
+                    double rect_latitude_a = -1.0;
+                    double rect_longitude_a = -1.0;
+                    double rect_latitude_b = -1.0;
+                    double rect_longitude_b = -1.0;
 
                     // Step through each point
-                    double this_latitude;
-                    double this_longitude;
                     bool first_point = true;
                     foreach ( Coordinate_Point thisPoint in polygon.Edge_Points)
                     {
                         try
                         {
-                            this_latitude = thisPoint.Latitude;
-                            this_longitude = thisPoint.Longitude;
+                            double this_latitude = thisPoint.Latitude;
+                            double this_longitude = thisPoint.Longitude;
 
                             if (first_point)
                             {
@@ -137,7 +138,11 @@ namespace SobekCM.Resource_Object.Metadata_Modules.GeoSpatial
                     // Ensure the values aren't all still -1.0
                     if ((rect_latitude_a != -1.0) && (rect_longitude_a != -1.0))
                     {
-                        Save_Item_Footprint(ItemID, -1.0, -1.0, rect_latitude_a, rect_longitude_a, rect_latitude_b, rect_longitude_b, DB_ConnectionString, out Error_Message );
+                        //for just the polygon (notice long/lat sequence)
+                        string rect_KML_String = "<Placemark><name>" + polygon.Label + "</name><Polygon><outerBoundaryIs><LinearRing><coordinates>" + rect_longitude_a + "," + rect_latitude_a + " " + rect_longitude_b + "," + rect_latitude_b + "</coordinates></LinearRing></outerBoundaryIs></Polygon></Placemark>";
+                        //for an overlay kml (not finished, requires url and perhaps folder support
+                        //string rect_KML_String = "<GroundOverlay><name>" + polygon.Label + "</name><icon>url</icon><LatLonBox>" + rect_latitude_a + "," + rect_longitude_a + " " + rect_latitude_b + "," + rect_longitude_b + "</LatLonBox></GroundOverlay>";
+                        Save_Item_Footprint(ItemID, -1.0, -1.0, rect_latitude_a, rect_longitude_a, rect_latitude_b, rect_longitude_b, rect_KML_String, DB_ConnectionString, out Error_Message );
                     }
                 }
                 catch
@@ -150,12 +155,12 @@ namespace SobekCM.Resource_Object.Metadata_Modules.GeoSpatial
         }
 
         /// <summary> Tries to convert a coordinate string into a floating point number </summary>
-        /// <param name="coordinate_string"> Cooordinate string to convert </param>
+        /// <param name="CoordinateString"> Cooordinate string to convert </param>
         /// <returns> Coordinate as a floating point (double) </returns>
-        public static double get_coordinate_float(string coordinate_string)
+        public static double get_coordinate_float(string CoordinateString)
         {
-            coordinate_string = coordinate_string.Replace("°", "");
-            return Convert.ToDouble(coordinate_string);
+            CoordinateString = CoordinateString.Replace("°", "");
+            return Convert.ToDouble(CoordinateString);
         }
 
         /// <summary> Saves ta single item footprint to the database by calling the appropriate stored procedure </summary>
@@ -166,9 +171,12 @@ namespace SobekCM.Resource_Object.Metadata_Modules.GeoSpatial
         /// <param name="Rect_Longitude_A"> Longitude of the first point of a rectangular footprint </param>
         /// <param name="Rect_Latitude_B"> Latitude of the second point of a rectangular footprint </param>
         /// <param name="Rect_Longitude_B"> Longitude of the second point of a rectangular footprint </param>
+        /// <param name="Segment_KML"></param>
+        /// <param name="DB_ConnectionString"></param>
+        /// <param name="Error_Message"></param>
         /// <returns> TRUE if successful, otherwise FALSE </returns>
         public static bool Save_Item_Footprint(int ItemID, double Point_Latitude, double Point_Longitude, double Rect_Latitude_A,
-            double Rect_Longitude_A, double Rect_Latitude_B, double Rect_Longitude_B, string DB_ConnectionString, out string Error_Message )
+            double Rect_Longitude_A, double Rect_Latitude_B, double Rect_Longitude_B, string Segment_KML, string DB_ConnectionString, out string Error_Message )
         {
             Error_Message = String.Empty;
 
@@ -186,9 +194,11 @@ namespace SobekCM.Resource_Object.Metadata_Modules.GeoSpatial
                 }
 
                 // Create the sql command / stored procedure
-                SqlCommand cmd = new SqlCommand("SobekCM_Save_Item_Footprint");
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Connection = sqlConnect;
+                SqlCommand cmd = new SqlCommand("SobekCM_Save_Item_Footprint")
+                {
+                    CommandType = CommandType.StoredProcedure, 
+                    Connection = sqlConnect
+                };
 
                 // Add the parameters
                 cmd.Parameters.AddWithValue("@itemid", ItemID);
@@ -216,6 +226,10 @@ namespace SobekCM.Resource_Object.Metadata_Modules.GeoSpatial
                     cmd.Parameters.AddWithValue("@Rect_Longitude_B", DBNull.Value);
                 else
                     cmd.Parameters.AddWithValue("@Rect_Longitude_B", Rect_Longitude_B);
+                if (Segment_KML=="")
+                    cmd.Parameters.AddWithValue("@Segment_KML", DBNull.Value);
+                else
+                    cmd.Parameters.AddWithValue("@Segment_KML", Segment_KML);
 
                 // Execute the non-query SQL stored procedure
                 try
@@ -268,15 +282,8 @@ namespace SobekCM.Resource_Object.Metadata_Modules.GeoSpatial
         /// <value>TRUE if any data exists, otherwise FALSE </value>
         public bool hasData
         {
-            get
-            {
-                if (((points == null) || (points.Count == 0)) &&
-                    ((polygons == null) || (polygons.Count == 0)) &&
-                    ((lines == null) || (lines.Count == 0)) &&
-                    (String.IsNullOrEmpty(kml_reference)))
-                    return false;
-                else
-                    return true;
+            get {
+                return ((points != null) && (points.Count != 0)) || ((polygons != null) && (polygons.Count != 0)) || ((lines != null) && (lines.Count != 0)) || (!String.IsNullOrEmpty(kml_reference));
             }
         }
 
@@ -309,6 +316,18 @@ namespace SobekCM.Resource_Object.Metadata_Modules.GeoSpatial
         public int Line_Count
         {
             get { return lines.Count; }
+        }
+
+        /// <summary> Read-only collection of polygons associated with this digital resource </summary>
+        public ReadOnlyCollection<Coordinate_Circle> Circles
+        {
+            get { return new ReadOnlyCollection<Coordinate_Circle>(circles); }
+        }
+
+        /// <summary> Number of polygons associated with this digital resource </summary>
+        public int Circle_Count
+        {
+            get { return circles.Count; }
         }
 
         /// <summary> Read-only collection of polygons associated with this digital resource </summary>
@@ -376,7 +395,6 @@ namespace SobekCM.Resource_Object.Metadata_Modules.GeoSpatial
 
             // Build the spatial_kml for this
             StringBuilder spatial_kml_builder = new StringBuilder(50);
-            string spatial_kml = String.Empty;
             try
             {
                 // Check for areas first
@@ -596,10 +614,8 @@ namespace SobekCM.Resource_Object.Metadata_Modules.GeoSpatial
                 points = new List<Coordinate_Point>();
 
             foreach (Coordinate_Point existingPoint in points)
-            {
                 if ((existingPoint.Latitude == Point.Latitude) && (existingPoint.Longitude == Point.Longitude))
                     return;
-            }
 
             if (Point != null)
                 points.Add(Point);
@@ -615,10 +631,8 @@ namespace SobekCM.Resource_Object.Metadata_Modules.GeoSpatial
                 points = new List<Coordinate_Point>();
 
             foreach (Coordinate_Point existingPoint in points)
-            {
                 if ((existingPoint.Latitude == Latitude) && (existingPoint.Longitude == Longitude))
                     return;
-            }
 
             points.Add(new Coordinate_Point(Latitude, Longitude));
         }
@@ -634,10 +648,8 @@ namespace SobekCM.Resource_Object.Metadata_Modules.GeoSpatial
                 points = new List<Coordinate_Point>();
 
             foreach (Coordinate_Point existingPoint in points)
-            {
                 if ((existingPoint.Latitude == Latitude) && (existingPoint.Longitude == Longitude))
                     return;
-            }
 
             points.Add(new Coordinate_Point(Latitude, Longitude, Label));
         }
@@ -654,27 +666,36 @@ namespace SobekCM.Resource_Object.Metadata_Modules.GeoSpatial
                 points = new List<Coordinate_Point>();
 
             foreach (Coordinate_Point existingPoint in points)
-            {
                 if ((existingPoint.Latitude == Latitude) && (existingPoint.Longitude == Longitude))
                     return;
-            }
 
             points.Add(new Coordinate_Point(Latitude, Longitude, Label, Altitude));
         }
 
-        /// <summary> Pulls one coordinate line from the collection of lines associated with this digital resource </summary>
-        /// <param name="index"> Index of the line to retrieve </param>
-        /// <returns> The indicated line or NULL </returns>
-        public Coordinate_Line Get_Line(int index)
+        /// <summary> Adds a new coordinate point associated with this digital resource </summary>
+        /// <param name="Latitude"> Latitude (expressed in decimal notation) for this point </param>
+        /// <param name="Longitude"> Longitude (expressed in decimal notation) for this point </param>
+        /// <param name="Label"> Label to associate with this point </param>
+        /// <param name="FeatureType"> Altitude for this point on a 3-dimensional plane (in meters)</param>
+        public void Add_Point(double Latitude, double Longitude, string Label, string FeatureType)
         {
-            if (index < lines.Count)
-            {
-                return lines[index];
-            }
-            else
-            {
-                return null;
-            }
+            // Only add this point if it does not already exists
+            if (points == null)
+                points = new List<Coordinate_Point>();
+
+            foreach (Coordinate_Point existingPoint in points)
+                if ((existingPoint.Latitude == Latitude) && (existingPoint.Longitude == Longitude))
+                    return;
+
+            points.Add(new Coordinate_Point(Latitude, Longitude, Label, FeatureType));
+        }
+
+        /// <summary> Pulls one coordinate line from the collection of lines associated with this digital resource </summary>
+        /// <param name="Index"> Index of the line to retrieve </param>
+        /// <returns> The indicated line or NULL </returns>
+        public Coordinate_Line Get_Line(int Index)
+        {
+            return Index < lines.Count ? lines[Index] : null;
         }
 
         /// <summary> Add a single, completely built line associated with this digital resource </summary>
@@ -684,19 +705,36 @@ namespace SobekCM.Resource_Object.Metadata_Modules.GeoSpatial
             lines.Add(Line);
         }
 
-        /// <summary> Pulls one coordinate polygon from the collection of polygons associated with this digital resource </summary>
-        /// <param name="index"> Index of the polygon to retrieve </param>
-        /// <returns> The indicated polygon or NULL </returns>
-        public Coordinate_Polygon Get_Polygon(int index)
+        /// <summary> Add a single, completely built line associated with this digital resource </summary>
+        /// <param name="Line"> Coordinate line object associated with this digital resource </param>
+        /// <param name="FeatureType"> Feature type to add </param>
+        public void Add_Line(Coordinate_Line Line, string FeatureType)
         {
-            if (index < polygons.Count)
-            {
-                return polygons[index];
-            }
-            else
-            {
-                return null;
-            }
+            Line.FeatureType = FeatureType;
+            lines.Add(Line);
+        }
+
+        /// <summary> Pulls one coordinate polygon from the collection of polygons associated with this digital resource </summary>
+        /// <param name="Index"> Index of the polygon to retrieve </param>
+        /// <returns> The indicated polygon or NULL </returns>
+        public Coordinate_Polygon Get_Polygon(int Index)
+        {
+            return Index < polygons.Count ? polygons[Index] : null;
+        }
+
+        /// <summary> Add a single, completely built Cirlce associated with this digital resource </summary>
+        /// <param name="Circle"> Coordinate Circle object associated with this digital resource </param>
+        public void Add_Circle(Coordinate_Circle Circle)
+        {
+            circles.Add(Circle);
+        }
+
+        /// <summary> Pulls one coordinate circle from the collection of circles associated with this digital resource </summary>
+        /// <param name="Index"> Index of the circle to retrieve </param>
+        /// <returns> The indicated cirlce or NULL </returns>
+        public Coordinate_Circle Get_Circle(int Index)
+        {
+            return Index < circles.Count ? circles[Index] : null;
         }
 
         /// <summary> Add a single, completely built polygon associated with this digital resource </summary>
@@ -712,12 +750,121 @@ namespace SobekCM.Resource_Object.Metadata_Modules.GeoSpatial
             points.Clear();
             polygons.Clear();
             lines.Clear();
+            circles.Clear();
         }
 
         /// <summary> Clears all of the individual point information from this digital resource </summary>
         public void Clear_Points()
         {
             points.Clear();
+        }
+
+        /// <summary> Clears all of the circle information from this digital resource </summary>
+        public void Clear_Circles()
+        {
+            circles.Clear();
+        }
+
+        /// <summary> Clears all of the individual point of interets information from this digital resource </summary>
+        public void Clear_POIs()
+        {
+            //create restore holders
+            List<Coordinate_Point> tempRestorePoints = new List<Coordinate_Point>();
+            List<Coordinate_Circle> tempRestoreCircles = new List<Coordinate_Circle>();
+            List<Coordinate_Line> tempRestoreLines = new List<Coordinate_Line>();
+            List<Coordinate_Polygon> tempRestorePolygons = new List<Coordinate_Polygon>();
+            //add objs to restore holders
+            foreach (var temp in points)
+                if (temp.FeatureType != "poi")
+                    tempRestorePoints.Add(temp);
+            foreach (var temp in circles)
+                if (temp.FeatureType != "poi")
+                    tempRestoreCircles.Add(temp);
+            foreach (var temp in lines)
+                if (temp.FeatureType != "poi")
+                    tempRestoreLines.Add(temp);
+            foreach (var temp in polygons)
+                if (temp.FeatureType != "poi")
+                    tempRestorePolygons.Add(temp);
+            //clear all objs
+            points.Clear();
+            circles.Clear();
+            lines.Clear();
+            polygons.Clear();
+            //now restore the restore objects
+            foreach (var temp in tempRestorePoints)
+                points.Add(temp);
+            foreach (var temp in tempRestoreCircles)
+                circles.Add(temp);
+            foreach (var temp in tempRestoreLines)
+                lines.Add(temp);
+            foreach (var temp in tempRestorePolygons)
+                polygons.Add(temp);
+        }
+
+        ///// <summary> Clears a specific set of spatial information matching the URI from this digital resource </summary>
+        //public void Clear_Specific(string URI)
+        //{
+        //    //points.Remove()
+        //}
+
+        /// <summary> Clears a specific polygon spatial information from this digital resource </summary>
+        public void Clear_Specific_Polygon(Coordinate_Polygon PolygonToRemove)
+        {
+            polygons.Remove(PolygonToRemove);
+        }
+
+        /// <summary> Clears all of the spatial information with the 'main' featureType from this digital resource </summary>
+        public void Clear_NonPOIs()
+        {
+            //create restore holders
+            List<Coordinate_Point> tempRestorePoints = new List<Coordinate_Point>();
+            List<Coordinate_Circle> tempRestoreCircles = new List<Coordinate_Circle>();
+            List<Coordinate_Line> tempRestoreLines = new List<Coordinate_Line>();
+            List<Coordinate_Polygon> tempRestorePolygons = new List<Coordinate_Polygon>();
+            //add objs to restore holders
+            foreach (var temp in points)
+                if (temp.FeatureType == "poi")
+                    tempRestorePoints.Add(temp);
+            foreach (var temp in circles)
+                if (temp.FeatureType == "poi")
+                    tempRestoreCircles.Add(temp);
+            foreach (var temp in lines)
+                if (temp.FeatureType == "poi")
+                    tempRestoreLines.Add(temp);
+            foreach (var temp in polygons)
+                if (temp.FeatureType == "poi")
+                    tempRestorePolygons.Add(temp);
+            //clear all objs
+            points.Clear();
+            circles.Clear();
+            lines.Clear();
+            polygons.Clear();
+            //now restore the restore objects
+            foreach (var temp in tempRestorePoints)
+                points.Add(temp);
+            foreach (var temp in tempRestoreCircles)
+                circles.Add(temp);
+            foreach (var temp in tempRestoreLines)
+                lines.Add(temp);
+            foreach (var temp in tempRestorePolygons)
+                polygons.Add(temp);
+        }
+
+        /// <summary> Clears all of the spatial information of single points with the 'main' featureType from this digital resource </summary>
+        public void Clear_NonPOIPoints()
+        {
+            //create restore holders
+            List<Coordinate_Point> tempRestorePoints = new List<Coordinate_Point>();
+            //add objs to restore holders
+            foreach (var temp in points)
+                if (temp.FeatureType == "poi")
+                    tempRestorePoints.Add(temp);
+            //clear all objs
+            points.Clear();
+            //now restore the restore objects
+            foreach (var temp in tempRestorePoints)
+                points.Add(temp);
         }
 
         /// <summary> Clears all user added polygons and all coordinate lines from this digital resource </summary>

@@ -365,3 +365,6 @@ C:\GitRepository\SobekCM-Web-Application\Other Tools\Stats Reader\SobekCM Stats 
 C:\GitRepository\SobekCM-Web-Application\Other Tools\Stats Reader\SobekCM Stats Reader\bin\Debug\Jil.xml
 C:\GitRepository\SobekCM-Web-Application\Other Tools\Stats Reader\SobekCM Stats Reader\bin\Debug\Sigil.pdb
 C:\GitRepository\SobekCM-Web-Application\Other Tools\Stats Reader\SobekCM Stats Reader\bin\Debug\Sigil.xml
+C:\GitRepository\SobekcmTools\Stats Reader\SobekCM Stats Reader\bin\Debug\SobekCM Stats Reader.exe.config
+C:\GitRepository\SobekcmTools\Stats Reader\SobekCM Stats Reader\obj\Debug\SobekCM Stats Reader.exe
+C:\GitRepository\SobekcmTools\Stats Reader\SobekCM Stats Reader\obj\Debug\SobekCM Stats Reader.pdb

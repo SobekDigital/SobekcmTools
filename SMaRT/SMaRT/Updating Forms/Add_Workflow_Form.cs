@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using SobekCM.Core.Settings;
+using SobekCM.Engine_Library.ApplicationState;
 using SobekCM.Management_Tool.Settings;
 
 #endregion
@@ -34,9 +36,9 @@ namespace SobekCM.Management_Tool
             }
 
             // Add each possible disposition type
-            List<string> workflowTypes = Library.SobekCM_Library_Settings.Workflows;
-            foreach (string thisType in workflowTypes)
-                comboBox1.Items.Add(thisType);
+            List<Workflow_Type> workflowTypes = Engine_ApplicationCache_Gateway.Settings.Workflow_Types;
+            foreach (Workflow_Type thisType in workflowTypes)
+                comboBox1.Items.Add(thisType.Name);
             comboBox1.SelectedIndex = 0;
 
             BackColor = Color.FromArgb(240, 240, 240);

@@ -1,77 +1,97 @@
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\bin\Debug\SMaRT.exe.config
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\bin\Debug\SMaRT.exe
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\bin\Debug\SMaRT.pdb
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\bin\Debug\SMaRT.xml
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\bin\Debug\Custom_Grid_1_3.dll
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\bin\Debug\GemBox.Spreadsheet.dll
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\bin\Debug\Microsoft.ApplicationBlocks.Data.dll
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\bin\Debug\SobekCM_Library.dll
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\bin\Debug\SobekCM_Resource_Object.dll
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\bin\Debug\SobekCM_Tools.dll
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\bin\Debug\FileUploadLibrary.dll
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\bin\Debug\Microsoft.ApplicationServer.Caching.Client.dll
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\bin\Debug\Microsoft.ApplicationServer.Caching.Core.dll
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\bin\Debug\SolrNet.dll
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\bin\Debug\Microsoft.Practices.ServiceLocation.dll
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\bin\Debug\Zoom.Net.YazSharp.dll
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\bin\Debug\Zoom.Net.dll
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\bin\Debug\Custom_Grid_1_3.pdb
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\bin\Debug\SobekCM_Library.pdb
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\bin\Debug\SobekCM_Library.xml
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\bin\Debug\SobekCM_Resource_Object.pdb
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\bin\Debug\SobekCM_Resource_Object.xml
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\bin\Debug\SobekCM_Tools.pdb
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\bin\Debug\SobekCM_Tools.xml
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\bin\Debug\GemBox.Spreadsheet.xml
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\bin\Debug\FileUploadLibrary.pdb
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\bin\Debug\FileUploadLibrary.xml
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\bin\Debug\SolrNet.pdb
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\bin\Debug\SolrNet.xml
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\bin\Debug\Zoom.Net.YazSharp.pdb
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\bin\Debug\Zoom.Net.pdb
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\bin\Debug\Zoom.Net.xml
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\obj\Debug\SMaRT.csprojResolveAssemblyReference.cache
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Config.SobekCM_Database_Selection_Form.resources
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Config.SMaRT_Config_Edit_Form.resources
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Reports.Tracking_Boxes_Report_Form.resources
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Update_Material_Recd_Born_Digital_Form.resources
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Add_Workflow_Form.resources
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Edit_Disposition_Advice_Form.resources
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Enter_Tracking_Box_Form.resources
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Ad_Hoc_Reporting_Query_Form.resources
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Controls.SobekCM_Item_Discovery_Panel.resources
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Ad_Hoc_Report_Display_Form.resources
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Reports.Aggregation_Space_Used_Form.resources
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Importer.Forms.Importer_Form.resources
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Importer.Forms.MARC_Importer_Form.resources
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Importer.Forms.Matching_Record_Dialog_Form.resources
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Importer.Forms.Results_Form.resources
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Importer.Forms.Select_Material_Type_Form.resources
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Importer.Forms.Select_Projects_Form.resources
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Importer.Forms.DataGridForm.resources
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Importer.Forms.SpreadSheet_Importer_Form.resources
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Importer.Column_Assignment_Control.resources
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Importer.Constant_Assignment_Control.resources
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.MainForm.resources
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Round_Button.resources
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Serial_Hierarchy_Row.resources
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Edit_Serial_Hierarchy_Form.resources
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Find_Replace_Form.resources
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Reports.Groups_Needed_Serial_Hierarchy_Form.resources
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Properties.Resources.resources
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Reports.Items_Pending_Online_Complete_Form.resources
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Reports.Reports_Form.resources
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Retrieve_Archives_Form.resources
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Retrieve_SobekCM_Items_Form.resources
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\obj\Debug\DLC.Tools.Forms.ErrorMessageBox_Internal.resources
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Update_Born_Digital_Form.resources
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Update_Disposition_Form.resources
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Update_Material_Received_Form.resources
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.About.resources
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Item_Discovery_Form.resources
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.View_Item_Form.resources
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.View_Item_Group_Form.resources
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Volume_Import_Form.resources
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\obj\Debug\SMaRT.csproj.GenerateResource.Cache
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\obj\Debug\SMaRT.exe
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT\obj\Debug\SMaRT.pdb
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\bin\Debug\SMaRT.exe.config
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\bin\Debug\SMaRT.exe
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\bin\Debug\SMaRT.pdb
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\bin\Debug\SMaRT.xml
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\bin\Debug\Custom_Grid_1_3.dll
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\bin\Debug\GemBox.Spreadsheet.dll
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\bin\Debug\Microsoft.ApplicationBlocks.Data.dll
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\bin\Debug\SobekCM_Core.dll
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\bin\Debug\SobekCM_Engine_Library.dll
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\bin\Debug\SobekCM_Resource_Database.dll
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\bin\Debug\SobekCM_Resource_Object.dll
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\bin\Debug\SobekCM_Tools.dll
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\bin\Debug\EngineAgnosticLayerDbAccess.dll
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\bin\Debug\protobuf-net.dll
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\bin\Debug\Jil.dll
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\bin\Debug\saxon9he-api.dll
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\bin\Debug\SolrNet.dll
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\bin\Debug\Zoom.Net.YazSharp.dll
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\bin\Debug\Zoom.Net.dll
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\bin\Debug\Sigil.dll
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\bin\Debug\saxon9he.dll
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\bin\Debug\IKVM.OpenJDK.XML.API.dll
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\bin\Debug\IKVM.OpenJDK.Core.dll
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\bin\Debug\IKVM.Runtime.dll
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\bin\Debug\IKVM.OpenJDK.Text.dll
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\bin\Debug\IKVM.OpenJDK.Charsets.dll
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\bin\Debug\IKVM.OpenJDK.Util.dll
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\bin\Debug\Custom_Grid_1_3.pdb
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\bin\Debug\SobekCM_Core.pdb
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\bin\Debug\SobekCM_Core.xml
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\bin\Debug\SobekCM_Engine_Library.pdb
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\bin\Debug\SobekCM_Engine_Library.xml
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\bin\Debug\SobekCM_Resource_Database.pdb
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\bin\Debug\SobekCM_Resource_Object.pdb
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\bin\Debug\SobekCM_Resource_Object.xml
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\bin\Debug\SobekCM_Tools.pdb
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\bin\Debug\SobekCM_Tools.xml
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\bin\Debug\GemBox.Spreadsheet.xml
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\bin\Debug\EngineAgnosticLayerDbAccess.pdb
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\bin\Debug\protobuf-net.pdb
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\bin\Debug\protobuf-net.xml
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\bin\Debug\Jil.pdb
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\bin\Debug\Jil.xml
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\bin\Debug\saxon9he-api.xml
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\bin\Debug\SolrNet.pdb
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\bin\Debug\SolrNet.xml
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\bin\Debug\Zoom.Net.YazSharp.pdb
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\bin\Debug\Zoom.Net.pdb
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\bin\Debug\Zoom.Net.xml
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\bin\Debug\Sigil.pdb
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\bin\Debug\Sigil.xml
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\obj\Debug\SMaRT.csprojResolveAssemblyReference.cache
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Config.SobekCM_Database_Selection_Form.resources
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Config.SMaRT_Config_Edit_Form.resources
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Reports.Tracking_Boxes_Report_Form.resources
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Update_Material_Recd_Born_Digital_Form.resources
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Add_Workflow_Form.resources
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Edit_Disposition_Advice_Form.resources
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Enter_Tracking_Box_Form.resources
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Ad_Hoc_Reporting_Query_Form.resources
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Controls.SobekCM_Item_Discovery_Panel.resources
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Ad_Hoc_Report_Display_Form.resources
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Reports.Aggregation_Space_Used_Form.resources
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Importer.Forms.Importer_Form.resources
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Importer.Forms.MARC_Importer_Form.resources
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Importer.Forms.Matching_Record_Dialog_Form.resources
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Importer.Forms.Results_Form.resources
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Importer.Forms.Select_Material_Type_Form.resources
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Importer.Forms.Select_Projects_Form.resources
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Importer.Forms.DataGridForm.resources
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Importer.Forms.SpreadSheet_Importer_Form.resources
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Importer.Column_Assignment_Control.resources
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Importer.Constant_Assignment_Control.resources
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.MainForm.resources
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Round_Button.resources
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Serial_Hierarchy_Row.resources
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Edit_Serial_Hierarchy_Form.resources
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Find_Replace_Form.resources
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Reports.Groups_Needed_Serial_Hierarchy_Form.resources
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Properties.Resources.resources
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Reports.Items_Pending_Online_Complete_Form.resources
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Reports.Reports_Form.resources
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Retrieve_Archives_Form.resources
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Retrieve_SobekCM_Items_Form.resources
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\obj\Debug\DLC.Tools.Forms.ErrorMessageBox_Internal.resources
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Update_Born_Digital_Form.resources
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Update_Disposition_Form.resources
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Update_Material_Received_Form.resources
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.About.resources
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Item_Discovery_Form.resources
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.View_Item_Form.resources
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.View_Item_Group_Form.resources
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\obj\Debug\SobekCM.Management_Tool.Volume_Import_Form.resources
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\obj\Debug\SMaRT.csproj.GenerateResource.Cache
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\obj\Debug\SMaRT.exe
+C:\GitRepository\SobekcmTools\SMaRT\SMaRT\obj\Debug\SMaRT.pdb

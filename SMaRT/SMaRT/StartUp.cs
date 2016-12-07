@@ -5,10 +5,13 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using GemBox.Spreadsheet;
-using SobekCM.Library;
-using SobekCM.Library.Database;
+using SobekCM.Engine_Library;
+using SobekCM.Engine_Library.ApplicationState;
+using SobekCM.Engine_Library.Database;
+using SobekCM.Engine_Library.Settings;
 using SobekCM.Management_Tool.Config;
 using SobekCM.Management_Tool.Versioning;
+using SobekCM_Resource_Database;
 
 #endregion
 
@@ -96,18 +99,18 @@ namespace SobekCM.Management_Tool
 
 				// References the library settings to retrieve the informatoin from the configuration file and subsequently
 				// from the SobekCM database
-				SobekCM_Database.Connection_String = SobekCM_Library_Settings.Database_Connection_String;
-                Resource_Object.Database.SobekCM_Database.Connection_String = SobekCM_Library_Settings.Database_Connection_String;
+                Engine_Database.Connection_String = Engine_ApplicationCache_Gateway.Settings.Database_Connection.Connection_String;
+                SobekCM_Item_Database.Connection_String = Engine_ApplicationCache_Gateway.Settings.Database_Connection.Connection_String;
                 
                 // Set the workflow and disposition types
-                SobekCM_Library_Settings.Set_Workflow_And_Disposition_Types(SobekCM_Database.All_WorkFlow_Types, SobekCM_Database.All_Possible_Disposition_Types);
+                InstanceWide_Settings_Builder.Set_Workflow_And_Disposition_Types(Engine_ApplicationCache_Gateway.Settings, Engine_Database.All_WorkFlow_Types, Engine_Database.All_Possible_Disposition_Types);
 
                 // Set the metadata types
-                SobekCM_Library_Settings.Set_Metadata_Types(SobekCM_Database.Get_Metadata_Fields(null));
+                InstanceWide_Settings_Builder.Set_Metadata_Types(Engine_ApplicationCache_Gateway.Settings, Engine_Database.Get_Metadata_Fields(null));
+   
+                SobekCM.Resource_Object.Configuration.ResourceObjectSettings.MetadataConfig.Set_Default_Values();
+                SobekCM.Resource_Object.Configuration.ResourceObjectSettings.MetadataConfig.Finalize_Metadata_Configuration();
 
-                // Set the search stop words
-                SobekCM_Library_Settings.Search_Stop_Words = SobekCM_Database.Search_Stop_Words(null);
-    
 				// Launch the main form
 				Application.Run(new MainForm( ));
 			}

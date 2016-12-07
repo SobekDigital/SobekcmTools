@@ -10,6 +10,7 @@ using SobekCM.Resource_Object.METS_Sec_ReaderWriters;
 
 namespace SobekCM.Resource_Object.Metadata_File_ReaderWriters
 {
+    /// <summary> OAI-PMH type metadata file reader/writer </summary>
     public class OAI_File_ReaderWriter : iMetadata_File_ReaderWriter
     {
         #region iMetadata_File_ReaderWriter Members
@@ -134,11 +135,11 @@ namespace SobekCM.Resource_Object.Metadata_File_ReaderWriters
             // Add the URL as the identifier
             if (Item_To_Save.Bib_Info.Location.PURL.Length > 0)
             {
-                Output_Stream.WriteLine("<dc:identifer>" + Item_To_Save.Bib_Info.Location.PURL + "</dc:identifier>");
+                Output_Stream.WriteLine("<dc:identifier>" + Item_To_Save.Bib_Info.Location.PURL + "</dc:identifier>");
             }
             else if (Item_To_Save.Web.Service_URL.Length > 0)
             {
-                Output_Stream.WriteLine("<dc:identifer>" + Item_To_Save.Web.Service_URL + "</dc:identifier>");
+                Output_Stream.WriteLine("<dc:identifier>" + Item_To_Save.Web.Service_URL + "</dc:identifier>");
             }
 
             // Finish this OAI

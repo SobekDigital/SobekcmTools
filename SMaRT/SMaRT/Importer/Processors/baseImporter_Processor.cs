@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Text;
+using SobekCM.Engine_Library.ApplicationState;
+using SobekCM.Engine_Library.Database;
 using SobekCM.Resource_Object;
 using System.Text.RegularExpressions;
+using SobekCM.Resource_Object.Utilities;
+using SobekCM_Resource_Database;
 
 namespace SobekCM.Management_Tool.Importer
 {
@@ -51,6 +55,8 @@ namespace SobekCM.Management_Tool.Importer
         protected Matching_Record_Choice_Enum matching_record_dialog_form_always_use_value = Matching_Record_Choice_Enum.Undefined;
         protected bool allow_overlay;
 
+        protected readonly Dictionary<string, object> save_options;
+
         protected baseImporter_Processor(Constant_Fields constantCollection)
         {
             // Create the objects to keep track of errors and items processed
@@ -71,7 +77,7 @@ namespace SobekCM.Management_Tool.Importer
 
             // Load the data tables needed
             //     TrackingDB.CS_TrackingDatabase.Refresh_Bib_Table();
-            allInstitutions = SobekCM.Library.Database.SobekCM_Database.Get_Codes_Item_Aggregations(null);
+            allInstitutions = Engine_Database.Get_Codes_Item_Aggregations(null);
 
             // Declare the lists which will hold the new bib id and receiving id information
             Provided_Bib_To_New_Bib = new Dictionary<string, string>();
@@ -81,6 +87,19 @@ namespace SobekCM.Management_Tool.Importer
             // Set some defaults
             default_projects = new List<string>();
             default_material_type = String.Empty;
+
+            // Create the options dictionary used when saving information to the database, or writing MarcXML
+            save_options = new Dictionary<string, object>();
+            if (Engine_ApplicationCache_Gateway.Settings.MarcGeneration != null)
+            {
+                save_options["MarcXML_File_ReaderWriter:MARC Cataloging Source Code"] = Engine_ApplicationCache_Gateway.Settings.MarcGeneration.Cataloging_Source_Code;
+                save_options["MarcXML_File_ReaderWriter:MARC Location Code"] = Engine_ApplicationCache_Gateway.Settings.MarcGeneration.Location_Code;
+                save_options["MarcXML_File_ReaderWriter:MARC Reproduction Agency"] = Engine_ApplicationCache_Gateway.Settings.MarcGeneration.Reproduction_Agency;
+                save_options["MarcXML_File_ReaderWriter:MARC Reproduction Place"] = Engine_ApplicationCache_Gateway.Settings.MarcGeneration.Reproduction_Place;
+                save_options["MarcXML_File_ReaderWriter:MARC XSLT File"] = Engine_ApplicationCache_Gateway.Settings.MarcGeneration.XSLT_File;
+            }
+            save_options["MarcXML_File_ReaderWriter:System Name"] = Engine_ApplicationCache_Gateway.Settings.System.System_Name;
+            save_options["MarcXML_File_ReaderWriter:System Abbreviation"] = Engine_ApplicationCache_Gateway.Settings.System.System_Abbreviation;
         }
 
         /// <summary>Gets the formatted messages for errors that prevent saving</summary>
@@ -168,7 +187,7 @@ namespace SobekCM.Management_Tool.Importer
 
             // Does this Bibliographic record already exist in the tracking database?
             DataRow[] selected = null;
-            DataTable matchingRows = SobekCM.Resource_Object.Database.SobekCM_Database.Check_For_Record_Existence(bibPackage.BibID, bibPackage.VID, bibPackage.Bib_Info.OCLC_Record, bibPackage.Bib_Info.ALEPH_Record);
+            DataTable matchingRows = SobekCM_Resource_Database.SobekCM_Item_Database.Check_For_Record_Existence(bibPackage.BibID, bibPackage.VID, bibPackage.Bib_Info.OCLC_Record, bibPackage.Bib_Info.ALEPH_Record);
             if ((matchingRows != null) && (matchingRows.Rows.Count > 0))
             {
                 // check if the BibID already exists
@@ -503,7 +522,7 @@ namespace SobekCM.Management_Tool.Importer
 
                 // If the bibid is not in bibid format, then clear it and save it now
                 string original_bibid = bibPackage.BibID;
-                if (!SobekCM.Resource_Object.Database.SobekCM_Database.is_bibid_format(original_bibid))
+                if (!SobekCM_Item.is_bibid_format(original_bibid))
                 {
                     if (Provided_Bib_To_New_Bib.ContainsKey(bibPackage.BibID))
                     {
@@ -532,7 +551,7 @@ namespace SobekCM.Management_Tool.Importer
                 {
                     if (!existing)
                     {
-                        if (!SobekCM.Resource_Object.Database.SobekCM_Database.Save_New_Digital_Resource(bibPackage, false, false, username, source, -1))
+                        if (!SobekCM_Resource_Database.SobekCM_Item_Database.Save_New_Digital_Resource(bibPackage, false, false, username, source, -1))
                         {
                             //this.errors.Add("Error saving " + bibPackage.BibID + ":" + bibPackage.VID + " to the database.");
                             errorCnt++;
@@ -556,7 +575,7 @@ namespace SobekCM.Management_Tool.Importer
                     }
                     else
                     {
-                        if (SobekCM.Resource_Object.Database.SobekCM_Database.Save_Digital_Resource(bibPackage) < 0)
+                        if (SobekCM_Resource_Database.SobekCM_Item_Database.Save_Digital_Resource(bibPackage, save_options) < 0)
                         {
                             //this.errors.Add("Error saving " + bibPackage.BibID + ":" + bibPackage.VID + " to the database.");
                             errorCnt++;
@@ -692,7 +711,7 @@ namespace SobekCM.Management_Tool.Importer
                     // Set the directory where the METS file will be saved
                     if (!preview_mode)
                     {
-                        string inbound_folder = Library.SobekCM_Library_Settings.Main_Builder_Input_Folder + "\\" + bibPackage.BibID + "_" + bibPackage.VID;
+                        string inbound_folder = Engine_ApplicationCache_Gateway.Settings.Builder.Main_Builder_Input_Folder + "\\" + bibPackage.BibID + "_" + bibPackage.VID;
                         bibPackage.Source_Directory = inbound_folder;
                         if (!Directory.Exists(inbound_folder))
                         {

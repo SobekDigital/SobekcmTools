@@ -4,9 +4,11 @@ using System;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
-using SobekCM.Library.Database;
-using SobekCM.Library.Navigation;
-using SobekCM.Library.Search;
+using SobekCM.Core.Navigation;
+using SobekCM.Engine_Library.ApplicationState;
+using SobekCM.Engine_Library.Database;
+using SobekCM.Engine_Library.Navigation;
+using SobekCM.Management_Tool.Search;
 
 #endregion
 
@@ -186,7 +188,7 @@ namespace SobekCM.Management_Tool.Controls
             // Get the list of aggregations/collections 
             try
             {
-                DataTable aggregationTable = SobekCM_Database.Get_Codes_Item_Aggregations( null);
+                DataTable aggregationTable = Engine_Database.Get_Codes_Item_Aggregations( null);
                 DataColumn codeColumn = aggregationTable.Columns["Code"];
                 DataColumn typeColumn = aggregationTable.Columns["Type"];
                 foreach (DataRow thisRow in aggregationTable.Rows)
@@ -216,7 +218,7 @@ namespace SobekCM.Management_Tool.Controls
             collectionComboBox.SelectedIndexChanged += collectionComboBox_SelectedIndexChanged;
 
             // Set some personalization and customization for the SobekCM Instance Name
-            allRadioButton.Text = "No limit ( All " + Library.SobekCM_Library_Settings.System_Abbreviation + " Items )";
+            allRadioButton.Text = "No limit ( All " + Engine_ApplicationCache_Gateway.Settings.System.System_Abbreviation + " Items )";
         }
 
         void collectionComboBox_SelectedIndexChanged(object sender, EventArgs e)

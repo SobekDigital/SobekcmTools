@@ -1,28 +1,49 @@
-﻿using System;
+﻿#region Using directives
+
+using System;
 using System.Reflection;
+using System.Runtime.Serialization;
+using System.Xml.Serialization;
+using ProtoBuf;
 using SobekCM.Resource_Object.Metadata_Modules;
+
+#endregion
 
 namespace SobekCM.Resource_Object.Configuration
 {
     /// <summary> Holds all the information about metadata modules which should be added
     /// to each new SobekCM_Item class </summary>
+    [Serializable, DataContract, ProtoContract]
+    [XmlRoot("AdditionalMetadataModuleConfig")]
     public class Additional_Metadata_Module_Config
     {
         /// <summary> Key used for this metadata module when adding to a new package </summary>
+        [DataMember(Name = "key")]
+        [XmlAttribute("key")]
+        [ProtoMember(1)]
         public string Key { get; set; }
 
         /// <summary> Namespace within which this metadata extension module appears </summary>
         /// <remarks> For all standard reader/writers, this returns 'SobekCM.Resource_Object.Metadata_Modules'.<br /><br />
         /// This is used for instantiating the metadata extension module. </remarks>
-        public string Code_Namespace { get; set; }
+        [DataMember(Name = "namespace")]
+        [XmlAttribute("namespace")]
+        [ProtoMember(2)]
+        public string Code_Namespace { get;  set; }
 
         /// <summary> Class name for the metadata extension module </summary>
         /// <remarks> This is used for instantiating the metadata extension module. </remarks>
+        [DataMember(Name = "class")]
+        [XmlAttribute("class")]
+        [ProtoMember(3)]
         public string Code_Class { get; set; }
 
         /// <summary> Assembly name of the DLL which holds this metadata extension module </summary>
         /// <remarks> For all standard metadata extension modules, this is an empty string, since they are in this DLL. <br /><br />
         ///  This is used for instantiating the metadata extension module. </remarks>
+        [DataMember(Name = "assembly")]
+        [XmlAttribute("assembly")]
+        [ProtoMember(4)]
         public string Code_Assembly { get; set; }
 
         /// <summary> Constructor for a new instance of the Additional_Metadata_Module_Config class </summary>
@@ -59,11 +80,10 @@ namespace SobekCM.Resource_Object.Configuration
                 //  Assembly dllAssembly = Assembly..LoadFrom( Code_Assembly );
                 Type readerWriterType = dllAssembly.GetType(Code_Namespace + "." + Code_Class);
                 object possibleModule = Activator.CreateInstance(readerWriterType);
-                if (possibleModule is iMetadata_Module)
-                    return (iMetadata_Module) possibleModule;
-                return null;
+                iMetadata_Module module = possibleModule as iMetadata_Module;
+                return module;
             }
-            catch (Exception ee)
+            catch 
             {
                  return null;
             }

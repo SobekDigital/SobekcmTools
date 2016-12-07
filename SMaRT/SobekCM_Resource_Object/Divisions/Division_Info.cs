@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Runtime.Serialization;
 using System.Text;
 
 #endregion
@@ -13,12 +14,13 @@ namespace SobekCM.Resource_Object.Divisions
     /// <summary> Stores information about the divisions and files associated with this resource </summary>
     /// <remarks> Object created by Mark V Sullivan (2006) for University of Florida's Digital Library Center.</remarks>
     [Serializable]
+    [DataContract]
     public class Division_Info : XML_Writing_Base_Type
     {
         private string source_directory;
         
-        private Division_Tree downloadDivisionTree;
-        private Division_Tree physicalDivisionTree;
+        private readonly Division_Tree downloadDivisionTree;
+        private readonly Division_Tree physicalDivisionTree;
 
         private List<Outer_Division_Info> outerDivisions;  
 
@@ -48,13 +50,12 @@ namespace SobekCM.Resource_Object.Divisions
         }
 
         /// <summary> Returns the readonly collection of outer divisions  </summary>
+        [DataMember(EmitDefaultValue = false)]
         public ReadOnlyCollection<Outer_Division_Info> Outer_Divisions
         {
             get
             {
-                if (outerDivisions == null)
-                    return new ReadOnlyCollection<Outer_Division_Info>(new List<Outer_Division_Info>());
-                return new ReadOnlyCollection<Outer_Division_Info>(outerDivisions);
+                return outerDivisions == null ? null : new ReadOnlyCollection<Outer_Division_Info>(outerDivisions);
             }
         }
 
@@ -93,6 +94,79 @@ namespace SobekCM.Resource_Object.Divisions
                     return true;
             }
             return false;
+        }
+
+        #endregion
+
+        #region Method to provide some metadata to be saved with the item
+
+        /// <summary> Gets the metadata search terms and values to be saved to the database
+        /// to allow searching to occur over the data in this metadata module </summary>
+        public List<KeyValuePair<string, string>> Metadata_Search_Terms
+        {
+            get
+            {
+                List<KeyValuePair<string, string>> metadataTerms = new List<KeyValuePair<string, string>>();
+
+                // Add any other division or page names 
+                foreach (abstract_TreeNode thisNode in downloadDivisionTree.Divisions_PreOrder)
+                {
+                    if ((thisNode.Label.Length > 0) &&
+                        (((thisNode.Label.IndexOf("Page ", StringComparison.InvariantCultureIgnoreCase) != 0) &&
+                          (thisNode.Label.IndexOf("Chapter ", StringComparison.InvariantCultureIgnoreCase) != 0)) ||
+                         (thisNode.Label.Length > 10)))
+                    {
+                        metadataTerms.Add(new KeyValuePair<string, string>("Other Citation", thisNode.Label));
+                    }
+                }
+                foreach (abstract_TreeNode thisNode in physicalDivisionTree.Divisions_PreOrder)
+                {
+                    if ((thisNode.Label.Length > 0) &&
+                        (((thisNode.Label.IndexOf("Page ", StringComparison.InvariantCultureIgnoreCase) != 0) &&
+                          (thisNode.Label.IndexOf("Chapter ", StringComparison.InvariantCultureIgnoreCase) != 0)) ||
+                         (thisNode.Label.Length > 10)))
+                    {
+                        metadataTerms.Add(new KeyValuePair<string, string>("TOC", thisNode.Label));
+                    }
+                }
+
+                // Add all the MIME types
+                if ((downloadDivisionTree.Has_Files) || (physicalDivisionTree.Has_Files))
+                {
+                    List<string> mimeTypes = new List<string>();
+                    List<SobekCM_File_Info> allDownloads = downloadDivisionTree.All_Files;
+                    foreach (SobekCM_File_Info thisDownload in allDownloads)
+                    {
+                        string thisMimeType = thisDownload.MIME_Type(thisDownload.File_Extension);
+                        if ((thisMimeType.Length > 0) && (!mimeTypes.Contains(thisMimeType)))
+                        {
+                            mimeTypes.Add(thisMimeType);
+                        }
+                    }
+                    List<SobekCM_File_Info> allImages = physicalDivisionTree.All_Files;
+                    foreach (SobekCM_File_Info thisImage in allImages)
+                    {
+                        string thisMimeType = thisImage.MIME_Type(thisImage.File_Extension);
+                        if ((thisMimeType.Length > 0) && (!mimeTypes.Contains(thisMimeType)))
+                        {
+                            mimeTypes.Add(thisMimeType);
+                        }
+                    }
+                    if (mimeTypes.Count > 0)
+                    {
+                        foreach (string thisMimeType in mimeTypes)
+                        {
+                            metadataTerms.Add(new KeyValuePair<string, string>("MIME Type", thisMimeType));
+                        }
+                    }
+                    else
+                        metadataTerms.Add(new KeyValuePair<string, string>("MIME Type", "NONE"));
+                }
+                else
+                    metadataTerms.Add(new KeyValuePair<string, string>("MIME Type", "NONE"));
+
+                return metadataTerms;
+            }
         }
 
         #endregion
@@ -166,12 +240,14 @@ namespace SobekCM.Resource_Object.Divisions
 
         /// <summary> Gets the physical division hierarchy tree (analogous to the table of contents 
         /// for an original phyiscl object) </summary>
+        [DataMember(EmitDefaultValue = false)]
         public Division_Tree Physical_Tree
         {
             get { return physicalDivisionTree; }
         }
 
         /// <summary> Gets the division hierarchy tree which contains all other download files </summary>
+        [DataMember(EmitDefaultValue = false)]
         public Division_Tree Download_Tree
         {
             get { return downloadDivisionTree; }

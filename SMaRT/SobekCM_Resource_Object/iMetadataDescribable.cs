@@ -9,20 +9,16 @@ using SobekCM.Resource_Object.Metadata_Modules;
 
 namespace SobekCM.Resource_Object
 {
+    /// <summary> Base interface for all elements of the METS hierarchy that can have metadata sections
+    /// associated with it </summary>
     public interface iMetadataDescribable
     {
         #region Code to cover metadata module extensions
 
-        /// <summary> Gets the number of metadata module extensions included in this
-        /// digital resource  </summary>
-        /// <remarks> These methods allows extensibility since any metadata plug-in can implement
-        /// the iMetadata_Module interface and be added here. </remarks>
-        int Metadata_Modules_Count { get; }
-
         /// <summary> Gets the collection of all included metadata module extensions </summary>
         /// <remarks> These methods allows extensibility since any metadata plug-in can implement
         /// the iMetadata_Module interface and be added here. </remarks>
-        ReadOnlyCollection<iMetadata_Module> All_Metadata_Modules { get; }
+        ReadOnlyCollection<iMetadata_Module> Metadata_Modules { get; }
 
         /// <summary> Gets a metadata module extension by name from this digital resource </summary>
         /// <param name="Module_Name"> Name of the module to retrieve </param>
@@ -42,14 +38,8 @@ namespace SobekCM.Resource_Object
 
         #region Code to cover any unanalyzed DMDSEC or AMDSEC portions of the original METS file
 
-        /// <summary> Returns the number of unanalyzed DMDSECs (descriptive metadata sections) in the original METS file </summary>
-        int Unanalyzed_DMDSEC_Count { get; }
-
         /// <summary> Gets the collection of unanalyzed DMDSECs (descriptive metadata sections) in the original METS file </summary>
         List<Unanalyzed_METS_Section> Unanalyzed_DMDSECs { get; }
-
-        /// <summary> Returns the number of unanalyzed AMDSECs (administrative metadata sections) in the original METS file </summary>
-        int Unanalyzed_AMDSEC_Count { get; }
 
         /// <summary> Gets the collection of unanalyzed AMDSECs (administrative metadata sections) in the original METS file </summary>
         List<Unanalyzed_METS_Section> Unanalyzed_AMDSECs { get; }

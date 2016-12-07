@@ -10,7 +10,8 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using DLC.Tools.Forms;
-using SobekCM.Library.Database;
+using SobekCM.Engine_Library.ApplicationState;
+using SobekCM.Engine_Library.Database;
 using SobekCM.Management_Tool.Importer;
 using SobekCM.Management_Tool.Importer.Forms;
 using SobekCM.Management_Tool.Settings;
@@ -465,10 +466,10 @@ namespace SobekCM.Management_Tool
             string mets_file = String.Empty;
             if (!multiple_bibs_in_table)
             {
-                string online_folder = Library.SobekCM_Library_Settings.Image_Server_Network + "\\" + bibid.Substring(0, 2) + "\\" + bibid.Substring(2, 2) + "\\" + bibid.Substring(4, 2) + "\\" + bibid.Substring(6, 2) + "\\" + bibid.Substring(8) + "\\" + vid;
+                string online_folder = Engine_ApplicationCache_Gateway.Settings.Servers.Image_Server_Network + "\\" + bibid.Substring(0, 2) + "\\" + bibid.Substring(2, 2) + "\\" + bibid.Substring(4, 2) + "\\" + bibid.Substring(6, 2) + "\\" + bibid.Substring(8) + "\\" + vid;
                 if (!Directory.Exists(online_folder))
                 {
-                    MessageBox.Show("Select a different VID, since this VID is not yet fully loaded into " + Library.SobekCM_Library_Settings.System_Abbreviation + ".    \n\nDirectory not present online.", "VID not loaded", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Select a different VID, since this VID is not yet fully loaded into " + Engine_ApplicationCache_Gateway.Settings.System.System_Abbreviation + ".    \n\nDirectory not present online.", "VID not loaded", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
@@ -476,7 +477,7 @@ namespace SobekCM.Management_Tool
                 mets_file = online_folder + "\\" + bibid + "_" + vid + ".mets.xml";
                 if (!File.Exists(mets_file))
                 {
-                    MessageBox.Show("Select a different VID, since this VID is not yet fully loaded into " + Library.SobekCM_Library_Settings.System_Abbreviation + ".       \n\nMETS file missing online.", "VID not loaded", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Select a different VID, since this VID is not yet fully loaded into " + Engine_ApplicationCache_Gateway.Settings.System.System_Abbreviation + ".       \n\nMETS file missing online.", "VID not loaded", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
@@ -586,7 +587,7 @@ namespace SobekCM.Management_Tool
 
         private void check_for_bib()
         {
-            DataSet bibInfo = SobekCM_Database.Get_Item_Details(bibIdTextBox.Text.Trim(), String.Empty, null);
+            DataSet bibInfo = Engine_Database.Get_Item_Details(bibIdTextBox.Text.Trim(), String.Empty, null);
             if ((bibInfo != null) && ( bibInfo.Tables[0].Rows.Count > 0 ))
             {
                 titleLabel.Text = bibInfo.Tables[0].Rows[0]["GroupTitle"].ToString();

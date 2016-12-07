@@ -28,7 +28,7 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>3.5</OldToolsVersion>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
@@ -67,6 +67,7 @@
     <WarningLevel>4</WarningLevel>
     <DebugType>full</DebugType>
     <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -89,32 +90,34 @@
     <WarningLevel>4</WarningLevel>
     <DebugType>none</DebugType>
     <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x64\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <BaseAddress>285212672</BaseAddress>
-    <DocumentationFile>bin\Debug\DLC_Tools.XML</DocumentationFile>
+    <DocumentationFile>bin\Debug\SobekCM_Tools.XML</DocumentationFile>
     <FileAlignment>4096</FileAlignment>
     <DebugType>full</DebugType>
     <PlatformTarget>x64</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
     <OutputPath>bin\x64\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <BaseAddress>285212672</BaseAddress>
-    <DocumentationFile>DLC_Tools.xml</DocumentationFile>
+    <DocumentationFile>bin\x64\Release\SobekCM_Tools.xml</DocumentationFile>
     <Optimize>true</Optimize>
     <FileAlignment>4096</FileAlignment>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.ApplicationBlocks.Data, Version=2.0.0.0, Culture=neutral">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\DLLs\Microsoft.ApplicationBlocks.Data.dll</HintPath>
+    <Reference Include="protobuf-net">
+      <HintPath>..\DLLs\Protobuf-net\protobuf-net.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <Name>System</Name>
@@ -126,16 +129,22 @@
       <Name>System.Data</Name>
     </Reference>
     <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml">
       <Name>System.XML</Name>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Custom_Tracer.cs" />
+    <Compile Include="DateTime_Helper.cs" />
+    <Compile Include="IpRangeUtilities\ComparableIpAddress.cs" />
+    <Compile Include="IpRangeUtilities\IpRangeSetV4.cs" />
+    <Compile Include="IpRangeUtilities\SingleIpRangeV4.cs" />
     <Compile Include="Logs\LogFileXHTML.cs" />
     <Compile Include="Logs\LogFileXHTML_Style.cs" />
     <Compile Include="Logs\LogFile_Exception.cs" />
     <Compile Include="SecurityInfo.cs" />
-    <Compile Include="Settings\IS_UserSettings.cs" />
+    <Compile Include="Settings\IsolatedStorage_Settings.cs" />
     <Compile Include="FDA\FDA_File.cs" />
     <Compile Include="FDA\FDA_File_Warning.cs" />
     <Compile Include="FDA\FDA_Report_Data.cs" />
@@ -150,6 +159,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="SobekCM_File_Utilities.cs" />
+    <Compile Include="SobekCM_Traced_Exception.cs" />
+    <Compile Include="StringKeyValuePair.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <SubType>Designer</SubType>
       <Generator>ResXFileCodeGenerator</Generator>

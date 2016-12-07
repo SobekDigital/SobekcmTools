@@ -10,41 +10,108 @@ using System.IO;
 namespace SobekCM.Resource_Object.Bib_Info
 {
     /// <summary> Enumeration of the different resource types generally allowed by MODS </summary>
+    /// <remarks> Source of the remarks on each enumeration value are from the Library of 
+	/// Congress MODS site ( http://www.loc.gov/standards/mods/userguide/typeofresource.html ) [2013] </remarks>
     public enum TypeOfResource_MODS_Enum : byte
     {
+		/// <summary> Unknown, default MODS type </summary>
         UNKNOWN,
+
+		/// <summary> Resources that are basically textual in nature </summary>
         Text,
+
+		/// <summary> Includes maps, atlases, globes, digital maps, and other cartographic items </summary>
         Cartographic,
+
+		/// <summary>  Graphic, non-realized representations of musical works, both in printed and digitized manifestations that represent the four components of musical sound: pitch, duration, timbre, and loudness </summary>
         Notated_Music,
+
+		/// <summary> Used when a mixture of musical and nonmusical sound recordings occurs in a resource or when a user does not want to or cannot make a distinction between musical and nonmusical </summary>
         Sound_Recording,
+
+		/// <summary> Used when a resource is predominately a musical sound recording </summary>
         Sound_Recording_Musical,
+
+		/// <summary> Used when the sound recording is nonmusical in nature </summary>
         Sound_Recording_Nonmusical,
+
+		/// <summary> Includes two-dimensional images and slides and transparencies </summary>
         Still_Image,
+
+		/// <summary> Includes motion pictures and videorecordings, as well as television programs, digital video, and animated computer graphics—but not slides and transparencies. It does not include moving images that are primarily computer programs, such as computer games or computer-oriented multimedia; these are included in "software, multimedia" </summary>
         Moving_Image,
+
+		/// <summary>  Includes man-made objects such as models, sculptures, clothing, and toys, as well as naturally occurring objects such as specimens mounted for viewing </summary>
         Three_Dimensional_Object,
+
+		/// <summary> Appropriate for any electronic resource without a significant aspect that indicates one of the other typeOfResource categories. It includes: software, numeric data, computer-oriented multimedia, and online systems and services </summary>
         Sofware_Multimedia,
+
+		/// <summary> Indicates that there are significant materials in two or more forms that are usually related by virtue of their having been accumulated by or about a person or body. Mixed material includes archival fonds and manuscript collections of mixed forms of materials, such as text, photographs, and sound recordings </summary>
         Mixed_Material
     }
 
     /// <summary> Enumeration of the different resource types recognized by SobekCM web application </summary>
     public enum TypeOfResource_SobekCM_Enum : byte
     {
+        /// <summary> Unknown resource type (default) </summary>
         UNKNOWN,
+
+        /// <summary> Aerial photography </summary>
         Aerial,
+
+        /// <summary> Archival material </summary>
         Archival,
+
+        /// <summary> Artifact type material </summary>
         Artifact,
+
+        /// <summary> Audio material (musical or nonmusical)  </summary>
         Audio,
+
+        /// <summary> Book type material   </summary>
         Book,
+
+        /// <summary> DataSet or tabular data  </summary>
+		Dataset,
+
+        /// <summary> Encoded Archival Descriptor  </summary>
+        EAD,
+
+        /// <summary> Learning object </summary>
         Learning_Object,
+
+        /// <summary> Cartographic material </summary>
         Map,
+
+        /// <summary> Beta map material type? </summary>
+        Map_Beta,
+
+        /// <summary> Mixed material (often also classified as Archival) </summary>
         Mixed_Material,
+
+        /// <summary> Multi-volume type </summary>
         Multivolume,
+
+        /// <summary> Newspaper issue  </summary>
         Newspaper,
+
+        /// <summary> Notated musical score </summary>
         Notated_Music,
+
+        /// <summary> Photographic material  </summary>
         Photograph,
+
+        /// <summary> Special SobekCM reserved type for PROJECT, or default metadata set </summary>
         Project,
+
+        /// <summary> Serial type material </summary>
         Serial,
+
+        /// <summary> Software or multimedia type material </summary>
         Software_Multimedia,
+
+        /// <summary> Video </summary>
         Video
     }
 
@@ -87,6 +154,7 @@ namespace SobekCM.Resource_Object.Bib_Info
             set { modsType = value; }
         }
 
+        /// <summary> Returns the type of resource, in the MODS ready string </summary>
         public string MODS_Type_String
         {
             get
@@ -130,29 +198,21 @@ namespace SobekCM.Resource_Object.Bib_Info
             }
         }
 
+        /// <summary> Gets the number of additional, uncontrolled types associated
+        /// with this resource </summary>
         public int Uncontrolled_Types_Count
         {
-            get
-            {
-                if (uncontrolledTypes == null)
-                    return 0;
-                else
-                    return uncontrolledTypes.Count;
+            get {
+	            return uncontrolledTypes == null ? 0 : uncontrolledTypes.Count;
             }
         }
 
+        /// <summary> Gets the collection of uncontrolled types associated 
+        /// with this resource </summary>
         public ReadOnlyCollection<string> Uncontrolled_Types
         {
-            get
-            {
-                if (uncontrolledTypes != null)
-                {
-                    return new ReadOnlyCollection<string>(uncontrolledTypes);
-                }
-                else
-                {
-                    return new ReadOnlyCollection<string>(new List<string>());
-                }
+            get {
+	            return uncontrolledTypes != null ? new ReadOnlyCollection<string>(uncontrolledTypes) : new ReadOnlyCollection<string>(new List<string>());
             }
         }
 
@@ -164,13 +224,17 @@ namespace SobekCM.Resource_Object.Bib_Info
             manuscript = false;
         }
 
+        /// <summary> Clears the list of all uncontrolled types associated with this  </summary>
         public void Clear_Uncontrolled_Types()
         {
             if (uncontrolledTypes != null)
                 uncontrolledTypes.Clear();
         }
 
-        public void Add_Uncontrolled_Type(string Uncontrolled_Type)
+		/// <summary> Adds an uncontrolled type to this resource </summary>
+		/// <param name="Uncontrolled_Type"> New uncontrolled type </param>
+		/// <remarks> This type is still analyzed to see if it is actually controlled </remarks>
+        public TypeOfResource_MODS_Enum Add_Uncontrolled_Type(string Uncontrolled_Type)
         {
             switch (Uncontrolled_Type.ToUpper().Replace(" ", "").Replace(",", "").Replace("-", ""))
             {
@@ -199,6 +263,7 @@ namespace SobekCM.Resource_Object.Bib_Info
                     break;
 
                 case "STILLIMAGE":
+				case "IMAGE":
                     modsType = TypeOfResource_MODS_Enum.Still_Image;
                     break;
 
@@ -211,6 +276,7 @@ namespace SobekCM.Resource_Object.Bib_Info
                     break;
 
                 case "SOFTWAREMULTIMEDIA":
+				case "DATASET":
                     modsType = TypeOfResource_MODS_Enum.Sofware_Multimedia;
                     break;
 
@@ -223,93 +289,14 @@ namespace SobekCM.Resource_Object.Bib_Info
                     if (uncontrolledTypes == null)
                         uncontrolledTypes = new List<string>();
                     uncontrolledTypes.Add(Uncontrolled_Type);
-                    break;
+                    return TypeOfResource_MODS_Enum.UNKNOWN;
             }
+
+            return modsType;
         }
 
 
-        ///// <summary> Gets and sets the type for this material </summary>
-        //public string Type
-        //{
-        //    get { return type; }
-        //    set
-        //    {
-        //        switch (value.ToUpper())
-        //        {
-        //            case "AERIAL":
-        //            case "IMAGEAERIAL":
-        //                type = "Aerial";
-        //                break;
-
-        //            case "ARTIFACT":
-        //            case "THREE DIMENSIONAL OBJECT":
-        //                type = "Artifact";
-        //                break;
-
-        //            case "BOOK":
-        //            case "MONOGRAPH":
-        //            case "TEXT":
-        //                type = "Book";
-        //                break;
-
-        //            case "IMAGEMAP":
-        //            case "CARTOGRAPHIC":
-        //                type = "Map";
-        //                break;
-
-        //            case "PHOTOGRAPH":
-        //            case "IMAGE":
-        //            case "POSTCARD":
-        //            case "STILL IMAGE":
-        //                type = "Photograph";
-        //                break;
-
-        //            case "SERIAL":
-        //                type = "Serial";
-        //                break;
-
-        //            case "AUDIO":
-        //            case "SOUND RECORDING":
-        //            case "SOUND RECORDING-MUSICAL":
-        //            case "SOUND RECORDING-NONMUSICAL":
-        //                type = "Audio";
-        //                break;
-
-        //            case "VIDEO":
-        //            case "MOVING IMAGE":
-        //                type = "Video";
-        //                break;
-
-        //            case "NEWSPAPER":
-        //                type = "Newspaper";
-        //                break;
-
-        //            case "ARCHIVES":
-        //            case "ARCHIVE":
-        //            case "MIXED MATERIAL":
-        //                type = "Archival";
-        //                break;
-
-        //            case "PROJECT":
-        //                type = "Project";
-        //                break;
-
-        //            case "MULTIVOLUME":
-        //                type = "MultiVolume";
-        //                break;
-
-        //            case "EXTERNAL LINK":
-        //                type = "External Link";
-        //                break;
-
-        //            default:
-        //                type = value;
-        //                break;
-        //        }
-        //    }
-        //}
-
-        internal void Add_MODS_MODS(TextWriter results)
+        internal void Add_MODS_MODS(TextWriter Results)
         {
             if (modsType == TypeOfResource_MODS_Enum.UNKNOWN)
                 return;
@@ -365,12 +352,12 @@ namespace SobekCM.Resource_Object.Bib_Info
 
             if (modsTypeString.Length > 0)
             {
-                results.Write("<mods:typeOfResource");
+                Results.Write("<mods:typeOfResource");
                 if (collection)
-                    results.Write(" collection=\"yes\"");
+                    Results.Write(" collection=\"yes\"");
                 if (manuscript)
-                    results.Write(" manuscript=\"yes\"");
-                results.Write(">" + modsTypeString + "</mods:typeOfResource>\r\n");
+                    Results.Write(" manuscript=\"yes\"");
+                Results.Write(">" + modsTypeString + "</mods:typeOfResource>\r\n");
             }
         }
     }

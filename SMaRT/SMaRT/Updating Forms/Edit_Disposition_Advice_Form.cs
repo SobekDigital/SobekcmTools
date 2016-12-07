@@ -4,7 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using SobekCM.Library;
+using SobekCM.Engine_Library;
+using SobekCM.Engine_Library.ApplicationState;
 using SobekCM.Management_Tool.Settings;
 
 #endregion
@@ -34,7 +35,7 @@ namespace SobekCM.Management_Tool
             }
 
             // Add each possible disposition type
-            List<string> dispositionTypes = SobekCM_Library_Settings.Disposition_Types_Future;
+            List<string> dispositionTypes = Engine_ApplicationCache_Gateway.Settings.Disposition_Types_Future;
             foreach (string thisType in dispositionTypes)
                 comboBox1.Items.Add(thisType);
             comboBox1.SelectedIndex = 0;
@@ -67,10 +68,10 @@ namespace SobekCM.Management_Tool
             }
 
             // Add each possible disposition type
-            List<string> dispositionTypes = SobekCM_Library_Settings.Disposition_Types_Future;
+            List<string> dispositionTypes = Engine_ApplicationCache_Gateway.Settings.Disposition_Types_Future;
             foreach (string thisType in dispositionTypes)
                 comboBox1.Items.Add(thisType);
-            comboBox1.Text = SobekCM_Library_Settings.Disposition_Term_Future(Initial_Disposition_Type);
+            comboBox1.Text = Engine_ApplicationCache_Gateway.Settings.Disposition_Term_Future(Initial_Disposition_Type);
             textBox1.Text = Initial_Notes;
 
             BackColor = Color.FromArgb(240, 240, 240);
@@ -123,7 +124,7 @@ namespace SobekCM.Management_Tool
         private void okButton_Button_Pressed(object sender, EventArgs e)
         {
             notes = textBox1.Text;
-            typeId = SobekCM_Library_Settings.Disposition_ID_Future(comboBox1.Text);
+            typeId = Engine_ApplicationCache_Gateway.Settings.Disposition_ID_Future(comboBox1.Text);
             DialogResult = DialogResult.OK;
             Close();
         }

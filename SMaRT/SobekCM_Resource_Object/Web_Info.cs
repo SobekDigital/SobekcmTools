@@ -4,11 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
 using SobekCM.Resource_Object.Behaviors;
-using SobekCM.Resource_Object.Bib_Info;
 using SobekCM.Resource_Object.Divisions;
 
 #endregion
@@ -24,7 +20,7 @@ namespace SobekCM.Resource_Object
     [Serializable]
     public class Web_Info
     {
-        private Behaviors_Info behaviors;
+        private readonly Behaviors_Info behaviors;
 
         private List<Related_Titles> related_titles_collection;
 
@@ -48,6 +44,7 @@ namespace SobekCM.Resource_Object
         private string vid;
         private Dictionary<string, SobekCM_File_Info> viewer_to_file;
 
+        /// <summary> Flag indicates additional work is needed </summary>
         public bool Additional_Work_Needed { get; set; }
         
         /// <summary> Constructor for a new instance of the Behaviors_Info class </summary>
@@ -76,39 +73,40 @@ namespace SobekCM.Resource_Object
         {
             get
             {
-                if ((assocFilePath == null) || (assocFilePath.Length == 0))
+                if (String.IsNullOrEmpty(assocFilePath))
                 {
                     assocFilePath = bibid.Substring(0, 2) + "/" + bibid.Substring(2, 2) + "/" + bibid.Substring(4, 2) + "/" + bibid.Substring(6, 2) + "/" + bibid.Substring(8, 2) + "/" + vid;
                 }
-                string assocFilePath_URLstyle = assocFilePath.Replace("\\", "/");
-                if ((assocFilePath_URLstyle.Length > 0) && (assocFilePath_URLstyle[assocFilePath_URLstyle.Length - 1] == '/'))
+                string assocFilePathUrLstyle = assocFilePath.Replace("\\", "/");
+                if ((assocFilePathUrLstyle.Length > 0) && (assocFilePathUrLstyle[assocFilePathUrLstyle.Length - 1] == '/'))
                 {
-                    assocFilePath_URLstyle = assocFilePath_URLstyle.Substring(0, assocFilePath_URLstyle.Length - 1);
+                    assocFilePathUrLstyle = assocFilePathUrLstyle.Substring(0, assocFilePathUrLstyle.Length - 1);
                 }
                 if (imageRoot != null)
                 {
-                    if (imageRoot.IndexOf(assocFilePath_URLstyle) >= 0)
+                    if (imageRoot.IndexOf(assocFilePathUrLstyle) >= 0)
                         return imageRoot;
-                    else
-                        return imageRoot + assocFilePath_URLstyle;
+                    
+                    return imageRoot + assocFilePathUrLstyle;
                 }
-                else
-                {
-                    return assocFilePath_URLstyle;
-                }
+                
+                return assocFilePathUrLstyle;
             }
         }
 
         /// <summary> Gets the collection of pages by sequence </summary>
         public ReadOnlyCollection<Page_TreeNode> Pages_By_Sequence
         {
-            get
-            {
-                if (pages_by_seq == null)
-                    return new ReadOnlyCollection<Page_TreeNode>(new List<Page_TreeNode>());
-                else
-                    return new ReadOnlyCollection<Page_TreeNode>(pages_by_seq);
+            get {
+                return pages_by_seq == null ? new ReadOnlyCollection<Page_TreeNode>(new List<Page_TreeNode>()) : new ReadOnlyCollection<Page_TreeNode>(pages_by_seq);
             }
+        }
+
+        /// <summary> Clears the complete list of pages by sequence </summary>
+        public void Clear_Pages_By_Sequence()
+        {
+            if ( pages_by_seq != null )
+                pages_by_seq.Clear();
         }
 
         /// <summary> Sets the bibliographic identifier </summary>
@@ -123,272 +121,20 @@ namespace SobekCM.Resource_Object
             set { vid = value; }
         }
 
-        #region Methods used by the SobekCM web application to get a valid viewer by code 
-
-        /// <summary> Gets the collection of pages by sequence </summary>
-        public Dictionary<string, SobekCM_File_Info> Viewer_To_File
-        {
-            get
-            {
-                if (viewer_to_file == null)
-                    viewer_to_file = new Dictionary<string, SobekCM_File_Info>();
-
-
-                return viewer_to_file;
-            }
-        }
-
-
-        /// <summary> Gets a valid viewer code for this item, based on the requested viewer code and page </summary>
-        /// <param name="viewer_code"> Requested viewer code </param>
-        /// <param name="page"> Requested page </param>
-        /// <returns> Valid viewer code and page </returns>
-        /// <remarks> The requested viewer code and page are validated, and if valid, returned.  Otherwise, the closest valid viewer code to the one requested is returned. </remarks>
-        public string Get_Valid_Viewer_Code(string viewer_code, int page)
-        {
-            string lower_code = viewer_code.ToLower();
-
-            // If this is 'RES' for restricted, taht is always valid
-            if (viewer_code == "res")
-                return "res";
-
-            // Is this in the item level viewer list?
-            if (lower_code.Length > 0)
-            {
-                if (behaviors.Views_Count > 0 )
-                {
-                    foreach (View_Object thisView in behaviors.Views)
-                    {
-                        foreach (string thisCode in thisView.Viewer_Codes)
-                        {
-                            if (thisCode.ToLower() == lower_code)
-                            {
-                                return lower_code;
-                            }
-                        }
-                    }
-                }
-
-                // Check if this is a Related Items page, which also allows paging
-                if (lower_code.IndexOf(View_Object.Viewer_Code_By_Type(View_Enum.RELATED_IMAGES)[0]) >= 0)
-                {
-                    int viewer_page = 0;
-                    try
-                    {
-                        string try_page_get = lower_code.Replace(View_Object.Viewer_Code_By_Type(View_Enum.RELATED_IMAGES)[0], "").Trim();
-                        if (try_page_get.Length > 0)
-                        {
-                            viewer_page = Convert.ToInt32(try_page_get);
-                        }
-                        return View_Object.Viewer_Code_By_Type(View_Enum.RELATED_IMAGES)[0];
-                    }
-                    catch
-                    {
-                    }
-                }
-
-                // Check if this is the quality conrtols page, which also allows paging
-                if (lower_code.IndexOf(View_Object.Viewer_Code_By_Type(View_Enum.QUALITY_CONTROL)[0]) >= 0)
-                {
-                    int viewer_page = 0;
-                    try
-                    {
-                        string try_page_get = lower_code.Replace(View_Object.Viewer_Code_By_Type(View_Enum.QUALITY_CONTROL)[0], "").Trim();
-                        if (try_page_get.Length > 0)
-                        {
-                            viewer_page = Convert.ToInt32(try_page_get);
-                        }
-                        return View_Object.Viewer_Code_By_Type(View_Enum.QUALITY_CONTROL)[0];
-                    }
-                    catch
-                    {
-                    }
-                }
-
-                // Check each page
-                if (viewer_to_file != null)
-                {
-                    if (viewer_to_file.ContainsKey(lower_code))
-                    {
-                        return lower_code;
-                    }
-                }
-            }
-
-            // No match, so just return the default, if there is one
-            if ((viewer_code.Length == 0) && ( behaviors.Default_View != null) && (behaviors.Default_View.Viewer_Codes.Length > 0))
-            {
-                return behaviors.Default_View.Viewer_Codes[0];
-            }
-
-            // If embedded video is present, show that.
-            if ( behaviors.Views_Count > 0 )
-            {
-                foreach (View_Object thisView in behaviors.Views)
-                {
-                    if (thisView.View_Type == View_Enum.YOUTUBE_VIDEO)
-                        return thisView.Viewer_Codes[0];
-                    if (thisView.View_Type == View_Enum.EMBEDDED_VIDEO)
-                        return thisView.Viewer_Codes[0];
-                }
-            }
-
-            // If there are no pages, return the DEFAULT viewer, or FULL CITATION code
-            if ((viewer_to_file == null) || (viewer_to_file.Count == 0))
-            {
-                if ((behaviors.Default_View != null) && (behaviors.Default_View.Viewer_Codes.Length > 0))
-                    return behaviors.Default_View.Viewer_Codes[0];
-                else
-                    return View_Object.Viewer_Code_By_Type(View_Enum.CITATION)[0];
-            }
-
-
-            if (behaviors.Item_Level_Page_Views_Count == 0)
-            {
-                behaviors.Add_Item_Level_Page_View(new View_Object(View_Enum.JPEG2000));
-                behaviors.Add_Item_Level_Page_View(new View_Object(View_Enum.JPEG));
-            }
-
-            // Return the first viewer code for this page
-            if ((pages_by_seq != null) && ( behaviors.Item_Level_Page_Views_Count > 0 ) && (pages_by_seq.Count >= page) && (pages_by_seq[page - 1].Files.Count > 0))
-            {
-                foreach (View_Object itemTaggedView in behaviors.Item_Level_Page_Views)
-                {
-                    foreach (SobekCM_File_Info thisFile in pages_by_seq[page - 1].Files)
-                    {
-                        if (thisFile.Get_Viewer() != null)
-                        {
-                            if (thisFile.Get_Viewer().View_Type == itemTaggedView.View_Type)
-                            {
-                                return page.ToString() + thisFile.Get_Viewer().Viewer_Codes[0];
-                            }
-                        }
-                    }
-                }
-            }
-
-            // Look for FLASH or PDF views if no page was requested
-            if ( behaviors.Views_Count > 0 )
-            {
-                foreach (View_Object thisView in behaviors.Views)
-                {
-                    if ((thisView.View_Type == View_Enum.PDF) || (thisView.View_Type == View_Enum.FLASH))
-                    {
-                        return thisView.Viewer_Codes[0];
-                    }
-                }
-            }
-
-            // Return first page viewer code
-            if ((pages_by_seq != null) && (behaviors.Item_Level_Page_Views_Count > 0 ) && (pages_by_seq.Count > 0) && (pages_by_seq[0].Files.Count > 0))
-            {
-                foreach (View_Object itemTaggedView in behaviors.Item_Level_Page_Views)
-                {
-                    foreach (SobekCM_File_Info thisFile in pages_by_seq[0].Files)
-                    {
-                        if (thisFile.Get_Viewer() != null)
-                        {
-                            if (thisFile.Get_Viewer().View_Type == itemTaggedView.View_Type)
-                            {
-                                return "1" + thisFile.Get_Viewer().Viewer_Codes[0];
-                            }
-                        }
-                    }
-                }
-            }
-
-            return View_Object.Viewer_Code_By_Type(View_Enum.CITATION)[0];
-        }
-
-        /// <summary> Gets the view object from this item based on the requested viewer code  </summary>
-        /// <param name="viewer_code"> Viewer code for the viewer requested </param>
-        /// <returns> Valid view object from this item, based on requested viewer code, or NULL </returns>
-        public View_Object Get_Viewer(string viewer_code)
-        {
-            string lower_code = viewer_code.ToLower();
-
-            // If this is for the restricted viewer, that is always valid
-            if (lower_code == "res")
-            {
-                return new View_Object(View_Enum.RESTRICTED);
-            }
-
-            // If this was for the full citation, jsut return that
-            if (lower_code.IndexOf("citation") == 0)
-            {
-                return new View_Object(View_Enum.CITATION);
-            }
-
-            // Is this in the item level viewer list?
-            if ( behaviors.Views_Count > 0 )
-            {
-                foreach (View_Object thisView in behaviors.Views)
-                {
-                    foreach (string thisCode in thisView.Viewer_Codes)
-                    {
-                        if (thisCode.ToLower() == lower_code)
-                        {
-                            return thisView;
-                        }
-                    }
-                }
-            }
-
-            // Check each page
-            if ((viewer_to_file != null) && (viewer_to_file.ContainsKey(lower_code)))
-            {
-                return viewer_to_file[lower_code].Get_Viewer();
-            }
-
-            // No match, so just return the default..
-            if ( behaviors.Default_View != null)
-            {
-                return behaviors.Default_View;
-            }
-
-            // Return first page viewer
-            if ((pages_by_seq != null) && (pages_by_seq.Count > 0) && (pages_by_seq[0].Files.Count > 0))
-            {
-                SobekCM_File_Info first_page = pages_by_seq[0].Files[0];
-                View_Object firstPageViewer = first_page.Get_Viewer();
-            }
-
-            // If there is a single view, return the first code for it
-            if ( behaviors.Views_Count > 0 )
-            {
-                return behaviors.Views[0];
-            }
-
-            // Return null
-            return null;
-        }
-
-        #endregion
-
-
         #region Related title properties and methods
 
         /// <summary> Gets the number of related titles from the SobekCM database </summary>
         public int Related_Titles_Count
         {
-            get
-            {
-                if (related_titles_collection == null)
-                    return 0;
-                else
-                    return related_titles_collection.Count;
+            get {
+                return related_titles_collection == null ? 0 : related_titles_collection.Count;
             }
         }
 
         /// <summary> Gets the related titles collection </summary>
         public List<Related_Titles> All_Related_Titles
         {
-            get
-            {
-                if (related_titles_collection == null)
-                    related_titles_collection = new List<Related_Titles>();
-                return related_titles_collection;
-            }
+            get { return related_titles_collection ?? (related_titles_collection = new List<Related_Titles>()); }
         }
 
         #endregion

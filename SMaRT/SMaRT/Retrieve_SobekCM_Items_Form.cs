@@ -10,8 +10,9 @@ using System.Net;
 using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
-using SobekCM.Library;
-using SobekCM.Library.Settings;
+using SobekCM.Engine_Library;
+using SobekCM.Engine_Library.ApplicationState;
+using SobekCM.Engine_Library.Settings;
 
 #endregion
 
@@ -43,9 +44,9 @@ namespace SobekCM.Management_Tool
 
 
             // Personalize several labels and controls now for the SobekCM Instance Name
-            Text = "Retrieve " + SobekCM_Library_Settings.System_Abbreviation + " Items Form";
-            mainLabel.Text = "Retrieve " + SobekCM_Library_Settings.System_Abbreviation + " Items";
-            queryLabel.Text = SobekCM_Library_Settings.System_Abbreviation + " Query:";
+            Text = "Retrieve " + Engine_ApplicationCache_Gateway.Settings.System.System_Abbreviation + " Items Form";
+            mainLabel.Text = "Retrieve " + Engine_ApplicationCache_Gateway.Settings.System.System_Abbreviation + " Items";
+            queryLabel.Text = Engine_ApplicationCache_Gateway.Settings.System.System_Abbreviation + " Query:";
         }
 
         public override sealed string Text
@@ -115,13 +116,13 @@ namespace SobekCM.Management_Tool
         {
             if (sobekcmQueryTextBox.Text.Trim().Length == 0)
             {
-                MessageBox.Show("Please include a  " + SobekCM_Library_Settings.System_Abbreviation + " URL for a browse or search.       \n\nFor example: 'http://ufdc.ufl.edu/l/foto/results/?t=flint hall'    ", "Missing URL", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please include a  " + Engine_ApplicationCache_Gateway.Settings.System.System_Abbreviation + " URL for a browse or search.       \n\nFor example: 'http://ufdc.ufl.edu/l/foto/results/?t=flint hall'    ", "Missing URL", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             if (( destinationTextBox.Text.Trim().Length == 0 ) || ( !Directory.Exists( destinationTextBox.Text )))
             {
-                MessageBox.Show("Please select a valid destination for the " + SobekCM_Library_Settings.System_Abbreviation + " packages.    ", "Missing or Invalid Destination", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please select a valid destination for the " + Engine_ApplicationCache_Gateway.Settings.System.System_Abbreviation + " packages.    ", "Missing or Invalid Destination", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -142,10 +143,10 @@ namespace SobekCM.Management_Tool
                 sobekcm_url = sobekcm_url + "http://";
             if ( sobekcm_url.IndexOf("/xml/") < 0 )
             {
-                if (sobekcm_url.IndexOf(SobekCM_Library_Settings.System_Base_URL.ToLower()) == 0)
+                if (sobekcm_url.IndexOf(Engine_ApplicationCache_Gateway.Settings.Servers.System_Base_URL.ToLower()) == 0)
                 {
-                    sobekcm_url = sobekcm_url.Replace(SobekCM_Library_Settings.System_Base_URL.ToLower(),
-                                                      SobekCM_Library_Settings.System_Base_URL.ToLower() + "xml/");
+                    sobekcm_url = sobekcm_url.Replace(Engine_ApplicationCache_Gateway.Settings.Servers.System_Base_URL.ToLower(),
+                                                      Engine_ApplicationCache_Gateway.Settings.Servers.System_Base_URL.ToLower() + "xml/");
                 }
                 else
                 {
@@ -159,7 +160,7 @@ namespace SobekCM.Management_Tool
 
             if (web_stream.Length == 0)
             {
-                MessageBox.Show("Invalid " + SobekCM_Library_Settings.System_Abbreviation + " Query URL was supplied.\n\nPerform requested search or browse directly in " + SobekCM_Library_Settings.System_Abbreviation + " and     \nthen copy the URL into the " + SobekCM_Library_Settings.System_Abbreviation + " query box.", "Invalid " + SobekCM_Library_Settings.System_Abbreviation + " Query Supplied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Invalid " + Engine_ApplicationCache_Gateway.Settings.System.System_Abbreviation + " Query URL was supplied.\n\nPerform requested search or browse directly in " + Engine_ApplicationCache_Gateway.Settings.System.System_Abbreviation + " and     \nthen copy the URL into the " + Engine_ApplicationCache_Gateway.Settings.System.System_Abbreviation + " query box.", "Invalid " + Engine_ApplicationCache_Gateway.Settings.System.System_Abbreviation + " Query Supplied", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 sobekcmQueryTextBox.ReadOnly = false;
                 destinationTextBox.ReadOnly = false;
                 completeRadioButton.Enabled = true;
@@ -196,14 +197,14 @@ namespace SobekCM.Management_Tool
             // Save the data to the temp folder
             try
             {
-                StreamWriter writer = new StreamWriter(temp_folder + "\\" + SobekCM_Library_Settings.System_Abbreviation.ToLower() + "_download.xml", false );
+                StreamWriter writer = new StreamWriter(temp_folder + "\\" + Engine_ApplicationCache_Gateway.Settings.System.System_Abbreviation.ToLower() + "_download.xml", false );
                 writer.Write( web_stream );
                 writer.Flush();
                 writer.Close();
             }
             catch
             {
-                MessageBox.Show("Unable to save the downloaded data to the temporary folder:\n\n\t" + temp_folder + "\\" + SobekCM_Library_Settings.System_Abbreviation.ToLower() + "_download.xml", "Unable to create temporary file", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Unable to save the downloaded data to the temporary folder:\n\n\t" + temp_folder + "\\" + Engine_ApplicationCache_Gateway.Settings.System.System_Abbreviation.ToLower() + "_download.xml", "Unable to create temporary file", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 sobekcmQueryTextBox.ReadOnly = false;
                 destinationTextBox.ReadOnly = false;
                 completeRadioButton.Enabled = true;
@@ -219,7 +220,7 @@ namespace SobekCM.Management_Tool
             DataTable itemList = null;
             try
             {
-                itemList = Read_Item_Xml( temp_folder + "\\" + SobekCM_Library_Settings.System_Abbreviation.ToLower() + "_download.xml");
+                itemList = Read_Item_Xml( temp_folder + "\\" + Engine_ApplicationCache_Gateway.Settings.System.System_Abbreviation.ToLower() + "_download.xml");
             }
             catch
             {
@@ -251,7 +252,7 @@ namespace SobekCM.Management_Tool
             }
 
             // Ensure the user knows what they are doing here
-            DialogResult continue_test = MessageBox.Show("You are about to download " + itemList.Rows.Count + " packages from " + SobekCM_Library_Settings.System_Abbreviation.ToLower() + ".    \n\nAre you sure you would like to continue?", "Confirmation", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+            DialogResult continue_test = MessageBox.Show("You are about to download " + itemList.Rows.Count + " packages from " + Engine_ApplicationCache_Gateway.Settings.System.System_Abbreviation.ToLower() + ".    \n\nAre you sure you would like to continue?", "Confirmation", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
             if (continue_test != DialogResult.Yes)
             {
                 sobekcmQueryTextBox.ReadOnly = false;

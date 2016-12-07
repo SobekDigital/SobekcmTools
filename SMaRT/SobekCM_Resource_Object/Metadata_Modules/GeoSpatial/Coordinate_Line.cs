@@ -3,7 +3,6 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
 
 #endregion
 
@@ -14,7 +13,9 @@ namespace SobekCM.Resource_Object.Metadata_Modules.GeoSpatial
     public class Coordinate_Line
     {
         private string label;
-        private List<Coordinate_Point> points;
+        private readonly List<Coordinate_Point> points;
+        private string featureType;
+
 
         /// <summary> Constructor for a new instance of this Coordinate_Line class </summary>
         public Coordinate_Line()
@@ -39,6 +40,13 @@ namespace SobekCM.Resource_Object.Metadata_Modules.GeoSpatial
         {
             get { return label ?? String.Empty; }
             set { label = value; }
+        }
+
+        /// <summary> FeatureType associated with this point  </summary>
+        public string FeatureType
+        {
+            get { return featureType ?? String.Empty; }
+            set { featureType = value; }
         }
 
         /// <summary>Add a pre-existing point object to this line </summary>
@@ -71,27 +79,6 @@ namespace SobekCM.Resource_Object.Metadata_Modules.GeoSpatial
             Coordinate_Point newPoint = new Coordinate_Point(Latitude, Longitude, Label, Altitude);
             points.Add(newPoint);
             return newPoint;
-        }
-
-        /// <summary> Writes this line of coordinates as SobekCM-formatted XML </summary>
-        /// <param name="sobekcm_namespace"> Namespace to use for the SobekCM custom schema ( usually 'sobekcm' )</param>
-        /// <param name="results"> Stream to write this line of coordiantes as SobekCM-formatted XML</param>
-        internal void Add_SobekCM_Metadata(string sobekcm_namespace, TextWriter results)
-        {
-            // If no points, return nothing
-            if (points.Count == 0)
-                return;
-
-            // Step through all the points in this line
-            results.Write("<" + sobekcm_namespace + ":Line");
-            if (!String.IsNullOrEmpty(label))
-                results.Write(" label=\"" + label + "\"");
-            results.Write(">\r\n");
-            foreach (Coordinate_Point thisPoint in points)
-            {
-                thisPoint.Add_SobekCM_Metadata(-1, sobekcm_namespace, results);
-            }
-            results.Write("</" + sobekcm_namespace + ":Line>\r\n");
         }
     }
 }

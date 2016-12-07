@@ -1,4 +1,11 @@
-﻿using System;
+﻿#region Using directives
+
+using System;
+using System.Runtime.Serialization;
+using System.Xml.Serialization;
+using ProtoBuf;
+
+#endregion
 
 namespace SobekCM.Resource_Object.Metadata_Modules.EAD
 {

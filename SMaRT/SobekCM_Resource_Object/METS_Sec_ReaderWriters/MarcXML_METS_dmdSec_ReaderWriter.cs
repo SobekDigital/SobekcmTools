@@ -14,6 +14,7 @@ using SobekCM.Resource_Object.Metadata_Modules.GeoSpatial;
 
 namespace SobekCM.Resource_Object.METS_Sec_ReaderWriters
 {
+    /// <summary> MARCxml reader that operates against a single METS section  </summary>
     public class MarcXML_METS_dmdSec_ReaderWriter : XML_Writing_Base_Type, iPackage_dmdSec_ReaderWriter
     {
         #region iPackage_dmdSec_ReaderWriter Members
@@ -135,12 +136,23 @@ namespace SobekCM.Resource_Object.METS_Sec_ReaderWriters
 
         #region Static methods to read the MarcXML information
 
-        /// <summary> Reads the MARC Core-compliant section of XML and stores the data in the provided digital resource </summary>
+	    /// <summary> Reads the MARC Core-compliant section of XML and stores the data in the provided digital resource </summary>
+	    /// <param name="r"> XmlTextReader from which to read the marc data </param>
+	    /// <param name="thisBibInfo">Bibliographic object into which most the values are read</param>
+	    /// <param name="package"> Digital resource object to save the data to if this is reading the top-level bibDesc (OPTIONAL)</param>
+	    /// <param name="Importing_Record"> Importing record flag is used to determine if special treatment should be applied to the 001 identifier.  If this is reading MarcXML from a dmdSec, this is set to false </param>
+	    public static void Read_MarcXML_Info(XmlReader r, Bibliographic_Info thisBibInfo, SobekCM_Item package, bool Importing_Record )
+	    {
+			Read_MarcXML_Info(r, thisBibInfo, package, Importing_Record, null );
+	    }
+
+	    /// <summary> Reads the MARC Core-compliant section of XML and stores the data in the provided digital resource </summary>
         /// <param name="r"> XmlTextReader from which to read the marc data </param>
         /// <param name="thisBibInfo">Bibliographic object into which most the values are read</param>
         /// <param name="package"> Digital resource object to save the data to if this is reading the top-level bibDesc (OPTIONAL)</param>
         /// <param name="Importing_Record"> Importing record flag is used to determine if special treatment should be applied to the 001 identifier.  If this is reading MarcXML from a dmdSec, this is set to false </param>
-        public static void Read_MarcXML_Info(XmlReader r, Bibliographic_Info thisBibInfo, SobekCM_Item package, bool Importing_Record)
+		/// <param name="Options"> Dictionary of any options which this metadata reader/writer may utilize </param>
+		public static void Read_MarcXML_Info(XmlReader r, Bibliographic_Info thisBibInfo, SobekCM_Item package, bool Importing_Record, Dictionary<string, object> Options )
         {
             // Create the MARC_XML_Reader to load everything into first
             MARC_Record record = new MARC_Record();
@@ -148,7 +160,23 @@ namespace SobekCM.Resource_Object.METS_Sec_ReaderWriters
             // Read from the file
             record.Read_MARC_Info(r);
 
-            // Now, load values into the bib package 
+			// Handle optional mapping first for retaining the 856 as a related link
+		    if ((Options != null) && (Options.ContainsKey("MarcXML_File_ReaderWriter.Retain_856_As_Related_Link")))
+		    {
+			    if (Options["MarcXML_File_ReaderWriter.Retain_856_As_Related_Link"].ToString().ToUpper() == "TRUE")
+			    {
+				    if ((record.Get_Data_Subfield(856, 'u').Length > 0) && (record.Get_Data_Subfield(856, 'y').Length > 0))
+				    {
+					    string url856 = record.Get_Data_Subfield(856, 'u');
+					    string label856 = record.Get_Data_Subfield(856, 'y');
+
+					    thisBibInfo.Location.Other_URL = url856;
+					    thisBibInfo.Location.Other_URL_Note = label856;
+				    }
+			    }
+		    }
+
+		    // Now, load values into the bib package 
             // Load the date ( 260 |c )
             thisBibInfo.Origin_Info.MARC_DateIssued = Remove_Trailing_Punctuation(record.Get_Data_Subfield(260, 'c'));
 
@@ -160,7 +188,7 @@ namespace SobekCM.Resource_Object.METS_Sec_ReaderWriters
             foreach (MARC_Field thisRecord in record[786])
             {
                 if ((thisRecord.Indicators == "0 ") && (thisRecord.Subfield_Count == 1) && (thisRecord.has_Subfield('n')))
-                    thisBibInfo.Add_Note(thisRecord.Subfields[0].Data, Note_Type_Enum.source);
+                    thisBibInfo.Add_Note(thisRecord.Subfields[0].Data, Note_Type_Enum.Source);
             }
 
             // Add the contents (505)
@@ -192,115 +220,120 @@ namespace SobekCM.Resource_Object.METS_Sec_ReaderWriters
                     package.Add_Metadata_Module(GlobalVar.GEOSPATIAL_METADATA_MODULE_KEY, geoInfo);
                 }
 
-                if (geoInfo.Polygon_Count == 0)
-                {
-                    string d_field = record.Get_Data_Subfield(034, 'd');
-                    string e_field = record.Get_Data_Subfield(034, 'e');
-                    string f_field = record.Get_Data_Subfield(034, 'f');
-                    string g_field = record.Get_Data_Subfield(034, 'g');
+	            if (geoInfo.Polygon_Count == 0)
+	            {
+		            try
+		            {
 
-                    double d_value = 1;
-                    double e_value = 1;
-                    double f_value = 1;
-                    double g_value = 1;
+			            string d_field = record.Get_Data_Subfield(034, 'd').Replace("O", "0");
+			            string e_field = record.Get_Data_Subfield(034, 'e').Replace("O", "0");
+			            string f_field = record.Get_Data_Subfield(034, 'f').Replace("O", "0");
+			            string g_field = record.Get_Data_Subfield(034, 'g').Replace("O", "0");
 
-                    if (d_field.Contains("."))
-                    {
-                        if (d_field.Contains("W"))
-                        {
-                            d_value = -1*Convert.ToDouble(d_field.Replace("W", ""));
-                        }
-                        else
-                        {
-                            d_value = Convert.ToDouble(d_field.Replace("E", ""));
-                        }
-                    }
-                    else
-                    {
-                        d_value = Convert.ToDouble(d_field.Substring(1, 3)) + (Convert.ToDouble(d_field.Substring(4, 2))/60);
+			            double d_value = 1;
+			            double e_value = 1;
+			            double f_value = 1;
+			            double g_value = 1;
 
-                        if ((d_field[0] == '-') || (d_field[0] == 'W'))
-                        {
-                            d_value = -1*d_value;
-                        }
-                    }
+			            if (d_field.Contains("."))
+			            {
+				            if (d_field.Contains("W"))
+				            {
+					            d_value = -1*Convert.ToDouble(d_field.Replace("W", ""));
+				            }
+				            else
+				            {
+					            d_value = Convert.ToDouble(d_field.Replace("E", ""));
+				            }
+			            }
+			            else
+			            {
+				            d_value = Convert.ToDouble(d_field.Substring(1, 3)) + (Convert.ToDouble(d_field.Substring(4, 2))/60);
 
-                    if (d_value < -180)
-                        d_value = d_value + 360;
+				            if ((d_field[0] == '-') || (d_field[0] == 'W'))
+				            {
+					            d_value = -1*d_value;
+				            }
+			            }
 
-                    if (e_field.Contains("."))
-                    {
-                        if (e_field.Contains("W"))
-                        {
-                            e_value = -1*Convert.ToDouble(e_field.Replace("W", ""));
-                        }
-                        else
-                        {
-                            e_value = Convert.ToDouble(e_field.Replace("E", ""));
-                        }
-                    }
-                    else
-                    {
-                        e_value = Convert.ToDouble(e_field.Substring(1, 3)) + (Convert.ToDouble(e_field.Substring(4, 2))/60);
+			            if (d_value < -180)
+				            d_value = d_value + 360;
 
-                        if ((e_field[0] == '-') || (e_field[0] == 'W'))
-                        {
-                            e_value = -1*e_value;
-                        }
-                    }
+			            if (e_field.Contains("."))
+			            {
+				            if (e_field.Contains("W"))
+				            {
+					            e_value = -1*Convert.ToDouble(e_field.Replace("W", ""));
+				            }
+				            else
+				            {
+					            e_value = Convert.ToDouble(e_field.Replace("E", ""));
+				            }
+			            }
+			            else
+			            {
+				            e_value = Convert.ToDouble(e_field.Substring(1, 3)) + (Convert.ToDouble(e_field.Substring(4, 2))/60);
 
-                    if (e_value < -180)
-                        e_value = e_value + 360;
+				            if ((e_field[0] == '-') || (e_field[0] == 'W'))
+				            {
+					            e_value = -1*e_value;
+				            }
+			            }
 
-                    if (f_field.Contains("."))
-                    {
-                        if (f_field.Contains("S"))
-                        {
-                            f_value = -1*Convert.ToDouble(f_field.Replace("S", ""));
-                        }
-                        else
-                        {
-                            f_value = Convert.ToDouble(f_field.Replace("N", ""));
-                        }
-                    }
-                    else
-                    {
-                        f_value = Convert.ToDouble(f_field.Substring(1, 3)) + (Convert.ToDouble(f_field.Substring(4, 2))/60);
+			            if (e_value < -180)
+				            e_value = e_value + 360;
 
-                        if ((f_field[0] == '-') || (f_field[0] == 'S'))
-                        {
-                            f_value = -1*f_value;
-                        }
-                    }
+			            if (f_field.Contains("."))
+			            {
+				            if (f_field.Contains("S"))
+				            {
+					            f_value = -1*Convert.ToDouble(f_field.Replace("S", ""));
+				            }
+				            else
+				            {
+					            f_value = Convert.ToDouble(f_field.Replace("N", ""));
+				            }
+			            }
+			            else
+			            {
+				            f_value = Convert.ToDouble(f_field.Substring(1, 3)) + (Convert.ToDouble(f_field.Substring(4, 2))/60);
 
-                    if (g_field.Contains("."))
-                    {
-                        if (g_field.Contains("S"))
-                        {
-                            g_value = -1*Convert.ToDouble(g_field.Replace("S", ""));
-                        }
-                        else
-                        {
-                            g_value = Convert.ToDouble(g_field.Replace("N", ""));
-                        }
-                    }
-                    else
-                    {
-                        g_value = Convert.ToDouble(g_field.Substring(1, 3)) + (Convert.ToDouble(g_field.Substring(4, 2))/60);
+				            if ((f_field[0] == '-') || (f_field[0] == 'S'))
+				            {
+					            f_value = -1*f_value;
+				            }
+			            }
 
-                        if ((g_field[0] == '-') || (g_field[0] == 'S'))
-                        {
-                            g_value = -1*g_value;
-                        }
-                    }
-                    Coordinate_Polygon polygon = new Coordinate_Polygon();
-                    polygon.Add_Edge_Point(f_value, d_value);
-                    polygon.Add_Edge_Point(g_value, d_value);
-                    polygon.Add_Edge_Point(g_value, e_value);
-                    polygon.Add_Edge_Point(f_value, e_value);
-                    polygon.Label = "Map Coverage";
-                    geoInfo.Add_Polygon(polygon);
-                }
+			            if (g_field.Contains("."))
+			            {
+				            if (g_field.Contains("S"))
+				            {
+					            g_value = -1*Convert.ToDouble(g_field.Replace("S", ""));
+				            }
+				            else
+				            {
+					            g_value = Convert.ToDouble(g_field.Replace("N", ""));
+				            }
+			            }
+			            else
+			            {
+				            g_value = Convert.ToDouble(g_field.Substring(1, 3)) + (Convert.ToDouble(g_field.Substring(4, 2))/60);
+
+				            if ((g_field[0] == '-') || (g_field[0] == 'S'))
+				            {
+					            g_value = -1*g_value;
+				            }
+			            }
+			            Coordinate_Polygon polygon = new Coordinate_Polygon();
+			            polygon.Add_Edge_Point(f_value, d_value);
+			            polygon.Add_Edge_Point(g_value, d_value);
+			            polygon.Add_Edge_Point(g_value, e_value);
+			            polygon.Add_Edge_Point(f_value, e_value);
+			            polygon.Label = "Map Coverage";
+			            geoInfo.Add_Polygon(polygon);
+		            }
+		            catch {   }
+	            }
             }
 
             // Add the abstract ( 520 |a )
@@ -907,7 +940,7 @@ namespace SobekCM.Resource_Object.METS_Sec_ReaderWriters
             {
                 if (thisRecord.has_Subfield('a'))
                 {
-                    Title_Info abbrTitle = new Title_Info(thisRecord['a'], Title_Type_Enum.abbreviated);
+                    Title_Info abbrTitle = new Title_Info(thisRecord['a'], Title_Type_Enum.Abbreviated);
                     if (thisRecord.has_Subfield('b'))
                         abbrTitle.Subtitle = thisRecord['b'];
                     thisBibInfo.Add_Other_Title(abbrTitle);
@@ -918,16 +951,16 @@ namespace SobekCM.Resource_Object.METS_Sec_ReaderWriters
             Add_Main_Title(thisBibInfo, record, 245, Title_Type_Enum.UNSPECIFIED, 2, 1);
 
             // Add the translated titles ( 242 )
-            Add_Main_Title(thisBibInfo, record, 242, Title_Type_Enum.translated, 2, 2);
+            Add_Main_Title(thisBibInfo, record, 242, Title_Type_Enum.Translated, 2, 2);
 
             // Add the alternative titles ( 246, 740 )
-            Add_Main_Title(thisBibInfo, record, 246, Title_Type_Enum.alternative, 0, 2);
-            Add_Main_Title(thisBibInfo, record, 740, Title_Type_Enum.alternative, 1, 2);
+            Add_Main_Title(thisBibInfo, record, 246, Title_Type_Enum.Alternative, 0, 2);
+            Add_Main_Title(thisBibInfo, record, 740, Title_Type_Enum.Alternative, 1, 2);
 
             // Add the uniform titles (130, 240, 730 )
-            Add_Main_Title(thisBibInfo, record, 130, Title_Type_Enum.uniform, 1, 2);
-            Add_Main_Title(thisBibInfo, record, 240, Title_Type_Enum.uniform, 2, 2);
-            Add_Main_Title(thisBibInfo, record, 730, Title_Type_Enum.uniform, 1, 2);
+            Add_Main_Title(thisBibInfo, record, 130, Title_Type_Enum.Uniform, 1, 2);
+            Add_Main_Title(thisBibInfo, record, 240, Title_Type_Enum.Uniform, 2, 2);
+            Add_Main_Title(thisBibInfo, record, 730, Title_Type_Enum.Uniform, 1, 2);
 
             // Add the series titles ( 440, 490 )
             Add_Main_Title(thisBibInfo, record, 440, Title_Type_Enum.UNSPECIFIED, 2, 3);
@@ -947,7 +980,7 @@ namespace SobekCM.Resource_Object.METS_Sec_ReaderWriters
             foreach (MARC_Field thisRecord in record[775])
             {
                 Related_Item_Info otherEditionItem = new Related_Item_Info();
-                otherEditionItem.Relationship = Related_Item_Type_Enum.otherVersion;
+                otherEditionItem.Relationship = Related_Item_Type_Enum.OtherVersion;
                 if (thisRecord.has_Subfield('t'))
                     otherEditionItem.Main_Title.Title = thisRecord['t'];
                 if (thisRecord.has_Subfield('x'))
@@ -976,7 +1009,7 @@ namespace SobekCM.Resource_Object.METS_Sec_ReaderWriters
             foreach (MARC_Field thisRecord in record[780])
             {
                 Related_Item_Info precedingItem = new Related_Item_Info();
-                precedingItem.Relationship = Related_Item_Type_Enum.preceding;
+                precedingItem.Relationship = Related_Item_Type_Enum.Preceding;
                 if (thisRecord.has_Subfield('t'))
                     precedingItem.Main_Title.Title = thisRecord['t'];
                 if (thisRecord.has_Subfield('x'))
@@ -1017,7 +1050,7 @@ namespace SobekCM.Resource_Object.METS_Sec_ReaderWriters
             foreach (MARC_Field thisRecord in record[785])
             {
                 Related_Item_Info succeedingItem = new Related_Item_Info();
-                succeedingItem.Relationship = Related_Item_Type_Enum.succeeding;
+                succeedingItem.Relationship = Related_Item_Type_Enum.Succeeding;
                 if (thisRecord.has_Subfield('t'))
                     succeedingItem.Main_Title.Title = thisRecord['t'];
                 if (thisRecord.has_Subfield('x'))
@@ -1949,7 +1982,7 @@ namespace SobekCM.Resource_Object.METS_Sec_ReaderWriters
             {
                 // Create the name object
                 Name_Info newName = new Name_Info();
-                newName.Name_Type = Name_Info_Type_Enum.personal;
+                newName.Name_Type = Name_Info_Type_Enum.Personal;
 
                 // Only continue if there is an id in this record
                 if ((thisRecord.has_Subfield('a')) && (thisRecord['a'].ToUpper().IndexOf("PALMM") < 0))
@@ -2030,7 +2063,7 @@ namespace SobekCM.Resource_Object.METS_Sec_ReaderWriters
                         string[] relatorCodesSplitter = completeRelatorcode.Split("|".ToCharArray());
                         foreach (string relatorcode in relatorCodesSplitter)
                         {
-                            newName.Add_Role(relatorcode, "marcrelator", Name_Info_Role_Type_Enum.code);
+                            newName.Add_Role(relatorcode, "marcrelator", Name_Info_Role_Type_Enum.Code);
                         }
                     }
 
@@ -2102,7 +2135,7 @@ namespace SobekCM.Resource_Object.METS_Sec_ReaderWriters
                 {
                     // Create the name object
                     Name_Info newName = new Name_Info();
-                    newName.Name_Type = Name_Info_Type_Enum.corporate;
+                    newName.Name_Type = Name_Info_Type_Enum.Corporate;
 
                     // Only continue if there is an id in this record
                     if ((thisRecord.has_Subfield('a')) && (thisRecord['a'].ToUpper().IndexOf("PALMM") < 0))
@@ -2126,7 +2159,7 @@ namespace SobekCM.Resource_Object.METS_Sec_ReaderWriters
                         {
                             // Get the relator code
                             string relatorcode = thisRecord['4'];
-                            newName.Add_Role(relatorcode, "marcrelator", Name_Info_Role_Type_Enum.code);
+                            newName.Add_Role(relatorcode, "marcrelator", Name_Info_Role_Type_Enum.Code);
                         }
 
                         switch (name_type)
@@ -2196,7 +2229,7 @@ namespace SobekCM.Resource_Object.METS_Sec_ReaderWriters
             {
                 // Create the name object
                 Name_Info newName = new Name_Info();
-                newName.Name_Type = Name_Info_Type_Enum.conference;
+                newName.Name_Type = Name_Info_Type_Enum.Conference;
 
                 // Only continue if there is an id in this record
                 if ((thisRecord.has_Subfield('a')) && (thisRecord['a'].ToUpper().IndexOf("PALMM") < 0))
@@ -2222,7 +2255,7 @@ namespace SobekCM.Resource_Object.METS_Sec_ReaderWriters
                     {
                         // Get the relator code
                         string relatorcode = thisRecord['4'];
-                        newName.Add_Role(relatorcode, "marcrelator", Name_Info_Role_Type_Enum.code);
+                        newName.Add_Role(relatorcode, "marcrelator", Name_Info_Role_Type_Enum.Code);
                     }
 
                     switch (name_type)
@@ -2287,7 +2320,7 @@ namespace SobekCM.Resource_Object.METS_Sec_ReaderWriters
             {
                 if (thisRecord.has_Subfield('a'))
                 {
-                    thisBibInfo.Add_Note(thisRecord['a'], Note_Type_Enum.thesis);
+                    thisBibInfo.Add_Note(thisRecord['a'], Note_Type_Enum.Thesis);
                 }
             }
 
@@ -2296,7 +2329,7 @@ namespace SobekCM.Resource_Object.METS_Sec_ReaderWriters
             {
                 if (thisRecord.has_Subfield('a'))
                 {
-                    thisBibInfo.Add_Note(thisRecord['a'], Note_Type_Enum.bibliography);
+                    thisBibInfo.Add_Note(thisRecord['a'], Note_Type_Enum.Bibliography);
                 }
             }
 
@@ -2315,7 +2348,7 @@ namespace SobekCM.Resource_Object.METS_Sec_ReaderWriters
             {
                 if (thisRecord.has_Subfield('a'))
                 {
-                    thisBibInfo.Add_Note(thisRecord['a'], Note_Type_Enum.creation_credits);
+                    thisBibInfo.Add_Note(thisRecord['a'], Note_Type_Enum.CreationCredits);
                 }
             }
 
@@ -2324,7 +2357,7 @@ namespace SobekCM.Resource_Object.METS_Sec_ReaderWriters
             {
                 if (thisRecord.has_Subfield('a'))
                 {
-                    thisBibInfo.Add_Note(thisRecord['a'], Note_Type_Enum.citation_reference);
+                    thisBibInfo.Add_Note(thisRecord['a'], Note_Type_Enum.CitationReference);
                 }
             }
 
@@ -2335,11 +2368,11 @@ namespace SobekCM.Resource_Object.METS_Sec_ReaderWriters
                 {
                     if (thisRecord.Indicator1 == '1')
                     {
-                        thisBibInfo.Add_Note(thisRecord['a'], Note_Type_Enum.performers, "cast");
+                        thisBibInfo.Add_Note(thisRecord['a'], Note_Type_Enum.Performers, "cast");
                     }
                     else
                     {
-                        thisBibInfo.Add_Note(thisRecord['a'], Note_Type_Enum.performers);
+                        thisBibInfo.Add_Note(thisRecord['a'], Note_Type_Enum.Performers);
                     }
                 }
             }
@@ -2351,11 +2384,11 @@ namespace SobekCM.Resource_Object.METS_Sec_ReaderWriters
                 {
                     if (thisRecord.has_Subfield('3'))
                     {
-                        thisBibInfo.Add_Note(thisRecord['a'], Note_Type_Enum.date_venue, thisRecord['3']);
+                        thisBibInfo.Add_Note(thisRecord['a'], Note_Type_Enum.DateVenue, thisRecord['3']);
                     }
                     else
                     {
-                        thisBibInfo.Add_Note(thisRecord['a'], Note_Type_Enum.date_venue);
+                        thisBibInfo.Add_Note(thisRecord['a'], Note_Type_Enum.DateVenue);
                     }
                 }
             }
@@ -2367,11 +2400,11 @@ namespace SobekCM.Resource_Object.METS_Sec_ReaderWriters
                 {
                     if (thisRecord.has_Subfield('3'))
                     {
-                        thisBibInfo.Add_Note(thisRecord['a'], Note_Type_Enum.preferred_citation, thisRecord['3']);
+                        thisBibInfo.Add_Note(thisRecord['a'], Note_Type_Enum.PreferredCitation, thisRecord['3']);
                     }
                     else
                     {
-                        thisBibInfo.Add_Note(thisRecord['a'], Note_Type_Enum.preferred_citation);
+                        thisBibInfo.Add_Note(thisRecord['a'], Note_Type_Enum.PreferredCitation);
                     }
                 }
             }
@@ -2399,7 +2432,7 @@ namespace SobekCM.Resource_Object.METS_Sec_ReaderWriters
                 string complete_530 = builder_530.ToString().Trim();
                 if (complete_530.Length > 0)
                 {
-                    thisBibInfo.Add_Note(complete_530, Note_Type_Enum.additional_physical_form);
+                    thisBibInfo.Add_Note(complete_530, Note_Type_Enum.AdditionalPhysicalForm);
                 }
             }
 
@@ -2446,7 +2479,7 @@ namespace SobekCM.Resource_Object.METS_Sec_ReaderWriters
                 string complete_534 = builder_534.ToString().Trim();
                 if (complete_534.Length > 0)
                 {
-                    thisBibInfo.Add_Note(complete_534, Note_Type_Enum.original_version);
+                    thisBibInfo.Add_Note(complete_534, Note_Type_Enum.OriginalVersion);
                 }
             }
 
@@ -2483,7 +2516,7 @@ namespace SobekCM.Resource_Object.METS_Sec_ReaderWriters
                     }
                     else
                     {
-                        thisBibInfo.Add_Note(complete_535, Note_Type_Enum.original_location);
+                        thisBibInfo.Add_Note(complete_535, Note_Type_Enum.OriginalLocation);
                     }
                 }
             }
@@ -2493,7 +2526,7 @@ namespace SobekCM.Resource_Object.METS_Sec_ReaderWriters
             {
                 if (thisRecord.has_Subfield('a'))
                 {
-                    thisBibInfo.Add_Note(thisRecord['a'], Note_Type_Enum.funding);
+                    thisBibInfo.Add_Note(thisRecord['a'], Note_Type_Enum.Funding);
                 }
             }
 
@@ -2502,7 +2535,7 @@ namespace SobekCM.Resource_Object.METS_Sec_ReaderWriters
             {
                 if (thisRecord.has_Subfield('a'))
                 {
-                    thisBibInfo.Add_Note(thisRecord['a'], Note_Type_Enum.system_details);
+                    thisBibInfo.Add_Note(thisRecord['a'], Note_Type_Enum.SystemDetails);
                 }
             }
 
@@ -2513,7 +2546,7 @@ namespace SobekCM.Resource_Object.METS_Sec_ReaderWriters
                 {
                     if (thisRecord.Indicator1 != '0')
                     {
-                        thisBibInfo.Add_Note(thisRecord['a'], Note_Type_Enum.acquisition);
+                        thisBibInfo.Add_Note(thisRecord['a'], Note_Type_Enum.Acquisition);
                     }
                 }
             }
@@ -2523,7 +2556,15 @@ namespace SobekCM.Resource_Object.METS_Sec_ReaderWriters
             {
                 if (thisRecord.has_Subfield('a'))
                 {
-                    thisBibInfo.Add_Note(thisRecord['a'], Note_Type_Enum.biographical);
+					if (thisRecord.has_Subfield('b'))
+					{
+						thisBibInfo.Add_Note(thisRecord['a'] + " " + thisRecord['b'], Note_Type_Enum.Biographical);
+					}
+					else
+					{
+						thisBibInfo.Add_Note(thisRecord['a'], Note_Type_Enum.Biographical);
+					}
+                    
                 }
             }
 
@@ -2534,11 +2575,11 @@ namespace SobekCM.Resource_Object.METS_Sec_ReaderWriters
                 {
                     if (thisRecord.has_Subfield('3'))
                     {
-                        thisBibInfo.Add_Note(thisRecord['a'], Note_Type_Enum.language, thisRecord['3']);
+                        thisBibInfo.Add_Note(thisRecord['a'], Note_Type_Enum.Language, thisRecord['3']);
                     }
                     else
                     {
-                        thisBibInfo.Add_Note(thisRecord['a'], Note_Type_Enum.language);
+                        thisBibInfo.Add_Note(thisRecord['a'], Note_Type_Enum.Language);
                     }
                 }
             }
@@ -2550,11 +2591,11 @@ namespace SobekCM.Resource_Object.METS_Sec_ReaderWriters
                 {
                     if (thisRecord.has_Subfield('3'))
                     {
-                        thisBibInfo.Add_Note(thisRecord['a'], Note_Type_Enum.ownership, thisRecord['3']);
+                        thisBibInfo.Add_Note(thisRecord['a'], Note_Type_Enum.Ownership, thisRecord['3']);
                     }
                     else
                     {
-                        thisBibInfo.Add_Note(thisRecord['a'], Note_Type_Enum.ownership);
+                        thisBibInfo.Add_Note(thisRecord['a'], Note_Type_Enum.Ownership);
                     }
                 }
             }
@@ -2586,7 +2627,7 @@ namespace SobekCM.Resource_Object.METS_Sec_ReaderWriters
                 string complete_562 = builder_562.ToString().Trim();
                 if (complete_562.Length > 0)
                 {
-                    thisBibInfo.Add_Note(complete_562, Note_Type_Enum.version_identification);
+                    thisBibInfo.Add_Note(complete_562, Note_Type_Enum.VersionIdentification);
                 }
             }
 
@@ -2597,11 +2638,11 @@ namespace SobekCM.Resource_Object.METS_Sec_ReaderWriters
                 {
                     if (thisRecord.has_Subfield('3'))
                     {
-                        thisBibInfo.Add_Note(thisRecord['a'], Note_Type_Enum.publications, thisRecord['3']);
+                        thisBibInfo.Add_Note(thisRecord['a'], Note_Type_Enum.Publications, thisRecord['3']);
                     }
                     else
                     {
-                        thisBibInfo.Add_Note(thisRecord['a'], Note_Type_Enum.publications);
+                        thisBibInfo.Add_Note(thisRecord['a'], Note_Type_Enum.Publications);
                     }
                 }
             }
@@ -2613,11 +2654,11 @@ namespace SobekCM.Resource_Object.METS_Sec_ReaderWriters
                 {
                     if (thisRecord.has_Subfield('3'))
                     {
-                        thisBibInfo.Add_Note(thisRecord['a'], Note_Type_Enum.exhibitions, thisRecord['3']);
+                        thisBibInfo.Add_Note(thisRecord['a'], Note_Type_Enum.Exhibitions, thisRecord['3']);
                     }
                     else
                     {
-                        thisBibInfo.Add_Note(thisRecord['a'], Note_Type_Enum.exhibitions);
+                        thisBibInfo.Add_Note(thisRecord['a'], Note_Type_Enum.Exhibitions);
                     }
                 }
             }
@@ -2627,7 +2668,7 @@ namespace SobekCM.Resource_Object.METS_Sec_ReaderWriters
             {
                 if (thisRecord.has_Subfield('c'))
                 {
-                    thisBibInfo.Add_Note(thisRecord['c'], Note_Type_Enum.statement_of_responsibility);
+                    thisBibInfo.Add_Note(thisRecord['c'], Note_Type_Enum.StatementOfResponsibility);
                 }
             }
 
@@ -2638,11 +2679,11 @@ namespace SobekCM.Resource_Object.METS_Sec_ReaderWriters
                 {
                     if (thisRecord.has_Subfield('z'))
                     {
-                        thisBibInfo.Add_Note(thisRecord['a'], Note_Type_Enum.dates_sequential_designation, thisRecord['z']);
+                        thisBibInfo.Add_Note(thisRecord['a'], Note_Type_Enum.DatesSequentialDesignation, thisRecord['z']);
                     }
                     else
                     {
-                        thisBibInfo.Add_Note(thisRecord['a'], Note_Type_Enum.dates_sequential_designation);
+                        thisBibInfo.Add_Note(thisRecord['a'], Note_Type_Enum.DatesSequentialDesignation);
                     }
                 }
             }
@@ -2652,7 +2693,7 @@ namespace SobekCM.Resource_Object.METS_Sec_ReaderWriters
             {
                 if (thisRecord.has_Subfield('a'))
                 {
-                    thisBibInfo.Add_Note(thisRecord['a'], Note_Type_Enum.numbering_peculiarities);
+                    thisBibInfo.Add_Note(thisRecord['a'], Note_Type_Enum.NumberingPeculiarities);
                 }
             }
 
@@ -2661,7 +2702,7 @@ namespace SobekCM.Resource_Object.METS_Sec_ReaderWriters
             {
                 if (thisRecord.has_Subfield('a'))
                 {
-                    thisBibInfo.Add_Note(thisRecord['a'], Note_Type_Enum.issuing_body);
+                    thisBibInfo.Add_Note(thisRecord['a'], Note_Type_Enum.IssuingBody);
                 }
             }
 

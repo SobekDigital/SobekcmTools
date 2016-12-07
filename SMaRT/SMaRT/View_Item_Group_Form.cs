@@ -1,6 +1,7 @@
 ﻿#region Using directives
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
@@ -10,12 +11,15 @@ using System.Drawing.Printing;
 using System.Text;
 using System.Windows.Forms;
 using DLC.Custom_Grid;
-using SobekCM.Library;
-using SobekCM.Library.Database;
-using SobekCM.Library.Items;
-using SobekCM.Library.Search;
+using SobekCM.Core.Items;
+using SobekCM.Engine_Library;
+using SobekCM.Engine_Library.ApplicationState;
+using SobekCM.Engine_Library.Database;
+using SobekCM.Engine_Library.Items;
+using SobekCM.Management_Tool.Search;
 using SobekCM.Management_Tool.Settings;
 using SobekCM.Management_Tool.Versioning;
+using SobekCM_Resource_Database;
 
 #endregion
 
@@ -54,7 +58,7 @@ namespace SobekCM.Management_Tool
             BackColor = Color.FromArgb(240, 240, 240);
 
             // Set some personalization and customization for the SobekCM Instance Name
-            openWebContextMenuItem.Text = "Open Item in " + SobekCM_Library_Settings.System_Abbreviation;
+            openWebContextMenuItem.Text = "Open Item in " + Engine_ApplicationCache_Gateway.Settings.System.System_Abbreviation;
 
             titleRow = Title_Row;
 
@@ -185,7 +189,7 @@ namespace SobekCM.Management_Tool
 
         private void show_all_volumes()
         {
-            SobekCM_Items_In_Title testSet1 = SobekCM_Database.Tracking_Multiple_Volumes(bibid, null);
+            SobekCM_Items_In_Title testSet1 = Engine_Database.Tracking_Multiple_Volumes(bibid, null);
             if (testSet1 == null) return;
 
             childTable = testSet1.Item_Table;
@@ -720,7 +724,7 @@ namespace SobekCM.Management_Tool
 
         private void mainLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            string url = SobekCM_Library_Settings.System_Base_URL + bibid;
+            string url = Engine_ApplicationCache_Gateway.Settings.Servers.System_Base_URL + bibid;
 
             try
             {
@@ -811,7 +815,7 @@ namespace SobekCM.Management_Tool
 
         private void behaviorsPictureBox_Click(object sender, EventArgs e)
         {
-            string url = SobekCM_Library_Settings.System_Base_URL + "my/groupbehaviors/" + bibid + "/1";
+            string url = Engine_ApplicationCache_Gateway.Settings.Servers.System_Base_URL + "my/groupbehaviors/" + bibid + "/1";
 
             try
             {
@@ -826,7 +830,7 @@ namespace SobekCM.Management_Tool
 
         private void addVolumePictureBox_Click(object sender, EventArgs e)
         {
-            string url = SobekCM_Library_Settings.System_Base_URL + "my/addvolume/" + bibid + "/1";
+            string url = Engine_ApplicationCache_Gateway.Settings.Servers.System_Base_URL + "my/addvolume/" + bibid + "/1";
 
             try
             {
@@ -850,8 +854,8 @@ namespace SobekCM.Management_Tool
 
         private void serialHierarchyPictureBox_Click(object sender, EventArgs e)
         {
-            SobekCM_Items_In_Title multiple = SobekCM_Database.Get_Multiple_Volumes(bibid, null);
-            if (multiple == null)
+            List<Item_Hierarchy_Details> multiple = Engine_Database.Get_Multiple_Volumes(bibid, null);
+            if ((multiple == null) || (multiple.Count == 0))
             {
                 MessageBox.Show("Database error occurred");
             }
@@ -866,7 +870,7 @@ namespace SobekCM.Management_Tool
 
         private void massUpdatePictureBox_Click(object sender, EventArgs e)
         {
-            string url = SobekCM_Library_Settings.System_Base_URL + "my/massupdate/" + bibid + "/1";
+            string url = Engine_ApplicationCache_Gateway.Settings.Servers.System_Base_URL + "my/massupdate/" + bibid + "/1";
 
             try
             {
@@ -943,7 +947,7 @@ namespace SobekCM.Management_Tool
                     if (itemid > 0)
                     {
                         updated++;
-                        if (Resource_Object.Database.SobekCM_Database.Save_New_Tracking_Box(itemid, new_tracking_box))
+                        if (SobekCM_Item_Database.Save_New_Tracking_Box(itemid, new_tracking_box))
                             thisRow["Tracking_Box"] = new_tracking_box;
                     }
                 }
@@ -970,14 +974,14 @@ namespace SobekCM.Management_Tool
                 string notes = trackingBox.Disposition_Notes;
                 if (notes.Trim().Length == 0)
                 {
-                    notes = SobekCM_Library_Settings.Disposition_Term_Past(typeid);
+                    notes = Engine_ApplicationCache_Gateway.Settings.Disposition_Term_Past(typeid);
                 }
                 foreach (DataRow thisRow in gridPanel.Selected_Row)
                 {
                     int itemid = Convert.ToInt32(thisRow["ItemID"]);
                     if (itemid > 0)
                     {
-                        Resource_Object.Database.SobekCM_Database.Update_Disposition(itemid, typeid, notes, date, username);
+                        SobekCM_Item_Database.Update_Disposition(itemid, typeid, notes, date, username);
                         updated++;
                     }
                     else
@@ -1011,7 +1015,8 @@ namespace SobekCM.Management_Tool
                         // Verify this wasn't already disposed off, in which case no point in allowing this edit
                         if (thisRow["Disposition_Date"] == DBNull.Value)
                         {
-                            Resource_Object.Database.SobekCM_Database.Edit_Disposition_Advice(itemid, typeid, notes);
+                            SobekCM_Item_Database.Edit_Disposition_Advice(itemid, typeid, notes);
+                            SobekCM_Item_Database.Edit_Disposition_Advice(itemid, typeid, notes);
                             updated++;
                         }
                     }
@@ -1041,7 +1046,7 @@ namespace SobekCM.Management_Tool
                     int itemid = Convert.ToInt32(thisRow["ItemID"]);
                     if (itemid > 0)
                     {
-                        Resource_Object.Database.SobekCM_Database.Add_Past_Workflow(itemid, workflowType, notes, date, username, String.Empty);
+                        SobekCM_Item_Database.Add_Past_Workflow(itemid, workflowType, notes, date, username, String.Empty);
                         updated++;
                     }
                     else
@@ -1074,7 +1079,7 @@ namespace SobekCM.Management_Tool
                     int itemid = Convert.ToInt32(thisRow["ItemID"]);
                     if (itemid > 0)
                     {
-                        Resource_Object.Database.SobekCM_Database.Update_Material_Received(itemid, date, estimated, username, notes);
+                        SobekCM_Item_Database.Update_Material_Received(itemid, date, estimated, username, notes);
                         updated++;
                     }
                     else
@@ -1105,7 +1110,7 @@ namespace SobekCM.Management_Tool
                     int itemid = Convert.ToInt32(thisRow["ItemID"]);
                     if (itemid > 0)
                     {
-                        Resource_Object.Database.SobekCM_Database.Update_Born_Digital_Flag(itemid, newflag);
+                        SobekCM_Item_Database.Update_Born_Digital_Flag(itemid, newflag);
                         updated++;
                     }
                     else
@@ -1130,7 +1135,7 @@ namespace SobekCM.Management_Tool
             DialogResult result = saveFileDialog1.ShowDialog();
             if (result == DialogResult.OK)
             {
-                if (gridPanel.Export_as_Excel(saveFileDialog1.FileName, SobekCM_Library_Settings.System_Abbreviation + " Volumes within Title '" + bibid + "'", bibid))
+                if (gridPanel.Export_as_Excel(saveFileDialog1.FileName, Engine_ApplicationCache_Gateway.Settings.System.System_Abbreviation + " Volumes within Title '" + bibid + "'", bibid))
                 {
                     MessageBox.Show("Data exported as excel.\n\n" + saveFileDialog1.FileName + "       \n\n", "Export Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -1222,7 +1227,7 @@ namespace SobekCM.Management_Tool
             // Get the information from this row
             string vid = thisRow["VID"].ToString();
 
-            string url = SobekCM_Library_Settings.System_Base_URL + bibid + "/" + vid;
+            string url = Engine_ApplicationCache_Gateway.Settings.Servers.System_Base_URL + bibid + "/" + vid;
 
             try
             {
@@ -1297,7 +1302,7 @@ namespace SobekCM.Management_Tool
                     if (itemid > 0)
                     {
                         updated++;
-                        if (Resource_Object.Database.SobekCM_Database.Save_New_Tracking_Box(itemid, new_tracking_box))
+                        if (SobekCM_Item_Database.Save_New_Tracking_Box(itemid, new_tracking_box))
                             thisRow["Tracking_Box"] = new_tracking_box;
                     }
                 }
@@ -1326,7 +1331,7 @@ namespace SobekCM.Management_Tool
                     {
                         if (thisRow["Disposition_Date"] == DBNull.Value)
                         {
-                            Resource_Object.Database.SobekCM_Database.Edit_Disposition_Advice(itemid, typeid, notes);
+                            SobekCM_Item_Database.Edit_Disposition_Advice(itemid, typeid, notes);
                             updated++;
                         }
                     }
@@ -1356,7 +1361,7 @@ namespace SobekCM.Management_Tool
                     int itemid = Convert.ToInt32(thisRow["ItemID"]);
                     if (itemid > 0)
                     {
-                        Resource_Object.Database.SobekCM_Database.Add_Past_Workflow(itemid, workflowType, notes, date, username, String.Empty);
+                        SobekCM_Item_Database.Add_Past_Workflow(itemid, workflowType, notes, date, username, String.Empty);
                         updated++;
                     }
                     else
@@ -1386,14 +1391,14 @@ namespace SobekCM.Management_Tool
                 string notes = trackingBox.Disposition_Notes;
                 if (notes.Trim().Length == 0)
                 {
-                    notes = SobekCM_Library_Settings.Disposition_Term_Past(typeid);
+                    notes = Engine_ApplicationCache_Gateway.Settings.Disposition_Term_Past(typeid);
                 }
                 foreach (DataRow thisRow in gridPanel.Selected_Row)
                 {
                     int itemid = Convert.ToInt32(thisRow["ItemID"]);
                     if (itemid > 0)
                     {
-                        Resource_Object.Database.SobekCM_Database.Update_Disposition(itemid, typeid, notes, date, username);
+                        SobekCM_Item_Database.Update_Disposition(itemid, typeid, notes, date, username);
                         updated++;
                     }
                     else
@@ -1424,7 +1429,7 @@ namespace SobekCM.Management_Tool
                     int itemid = Convert.ToInt32(thisRow["ItemID"]);
                     if (itemid > 0)
                     {
-                        Resource_Object.Database.SobekCM_Database.Update_Born_Digital_Flag(itemid, newflag);
+                        SobekCM_Item_Database.Update_Born_Digital_Flag(itemid, newflag);
                         updated++;
                     }
                     else
@@ -1457,7 +1462,7 @@ namespace SobekCM.Management_Tool
                     int itemid = Convert.ToInt32(thisRow["ItemID"]);
                     if (itemid > 0)
                     {
-                        Resource_Object.Database.SobekCM_Database.Update_Material_Received(itemid, date, estimated, username, notes);
+                        SobekCM_Item_Database.Update_Material_Received(itemid, date, estimated, username, notes);
                         updated++;
                     }
                     else
@@ -1485,7 +1490,7 @@ namespace SobekCM.Management_Tool
                 // What is the currently selected action?
                 if (openItemFromWebMenuItem.Checked)
                 {
-                    string url = SobekCM_Library_Settings.System_Base_URL + bibid + "/" + vid;
+                    string url = Engine_ApplicationCache_Gateway.Settings.Servers.System_Base_URL + bibid + "/" + vid;
 
                     try
                     {

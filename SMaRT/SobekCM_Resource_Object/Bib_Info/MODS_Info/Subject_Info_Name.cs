@@ -115,19 +115,19 @@ namespace SobekCM.Resource_Object.Bib_Info
 
         /// <summary> Add a new role to this name entity </summary>
         /// <param name="Role">Text of the role</param>
-        /// <param name="Authority">Authority for this role term</param>
+        /// <param name="NewAuthority">Authority for this role term</param>
         /// <param name="Role_Type">Type of role</param>
-        public void Add_Role(string Role, string Authority, Name_Info_Role_Type_Enum Role_Type)
+        public void Add_Role(string Role, string NewAuthority, Name_Info_Role_Type_Enum Role_Type)
         {
-            nameInfo.Roles.Add(new Name_Info_Role(Role, Authority, Role_Type));
+            nameInfo.Roles.Add(new Name_Info_Role(Role, NewAuthority, Role_Type));
         }
 
         /// <summary> Add a new role to this name entity </summary>
         /// <param name="Role">Text of the role</param>
-        /// <param name="Authority">Authority for this role term</param>
-        public void Add_Role(string Role, string Authority)
+        /// <param name="NewAuthority">Authority for this role term</param>
+        public void Add_Role(string Role, string NewAuthority)
         {
-            nameInfo.Roles.Add(new Name_Info_Role(Role, Authority));
+            nameInfo.Roles.Add(new Name_Info_Role(Role, NewAuthority));
         }
 
         /// <summary> Add a new role to this name entity </summary>
@@ -164,10 +164,11 @@ namespace SobekCM.Resource_Object.Bib_Info
         public override string ToString(bool Include_Scheme)
         {
             StringBuilder builder = new StringBuilder();
-            if (nameInfo.Full_Name.Length > 0)
-                builder.Append(nameInfo.ToString());
+            string nameInfoString = nameInfo.ToString(false);
+            if (nameInfoString.Length > 0)
+                builder.Append(nameInfoString);
 
-            builder.Append(base.To_Base_String());
+            builder.Append(To_Base_String());
 
             if (Include_Scheme)
             {
@@ -178,21 +179,21 @@ namespace SobekCM.Resource_Object.Bib_Info
             return builder.ToString();
         }
 
-        internal override void Add_MODS(TextWriter results)
+        internal override void Add_MODS(TextWriter Results)
         {
-            results.Write("<mods:subject");
-            base.Add_ID(results);
+            Results.Write("<mods:subject");
+            Add_ID(Results);
             if (!String.IsNullOrEmpty(language))
-                results.Write(" lang=\"" + language + "\"");
+                Results.Write(" lang=\"" + language + "\"");
             if (!String.IsNullOrEmpty(authority))
-                results.Write(" authority=\"" + authority + "\"");
-            results.Write(">\r\n");
+                Results.Write(" authority=\"" + authority + "\"");
+            Results.Write(">\r\n");
 
-            nameInfo.Add_MODS(false, results);
+            nameInfo.Add_MODS(false, Results);
 
-            Add_Base_MODS(results);
+            Add_Base_MODS(Results);
 
-            results.Write("</mods:subject>\r\n");
+            Results.Write("</mods:subject>\r\n");
         }
 
         internal override MARC_Field to_MARC_HTML()
@@ -200,17 +201,18 @@ namespace SobekCM.Resource_Object.Bib_Info
             MARC_Field returnValue = nameInfo.to_MARC_HTML(true);
 
             // Set the tag
+            returnValue.Tag = 600;
             switch (nameInfo.Name_Type)
             {
-                case Name_Info_Type_Enum.personal:
+                case Name_Info_Type_Enum.Personal:
                     returnValue.Tag = 600;
                     break;
 
-                case Name_Info_Type_Enum.corporate:
+                case Name_Info_Type_Enum.Corporate:
                     returnValue.Tag = 610;
                     break;
 
-                case Name_Info_Type_Enum.conference:
+                case Name_Info_Type_Enum.Conference:
                     returnValue.Tag = 611;
                     break;
             }
@@ -250,12 +252,12 @@ namespace SobekCM.Resource_Object.Bib_Info
                 }
             }
 
-            base.Add_Source_Indicator(returnValue, fieldBuilder);
+            Add_Source_Indicator(returnValue, fieldBuilder);
 
             // Add the relator codes last
             foreach (Name_Info_Role thisRole in nameInfo.Roles)
             {
-                if ((thisRole.Role_Type == Name_Info_Role_Type_Enum.code) && (thisRole.Authority == "marcrelator"))
+                if ((thisRole.Role_Type == Name_Info_Role_Type_Enum.Code) && (thisRole.Authority == "marcrelator"))
                 {
                     fieldBuilder.Append("|4 " + thisRole.Role + " ");
                 }

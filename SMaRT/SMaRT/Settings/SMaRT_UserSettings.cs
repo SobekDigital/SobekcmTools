@@ -2,8 +2,9 @@
 
 using System;
 using System.Drawing;
-using SobekCM.Library.Navigation;
-using SobekCM.Library.Search;
+using SobekCM.Core.Navigation;
+using SobekCM.Engine_Library.Navigation;
+using SobekCM.Management_Tool.Search;
 using SobekCM.Tools.Settings;
 
 #endregion
@@ -34,7 +35,7 @@ namespace SobekCM.Management_Tool.Settings
 
     /// <summary> SMaRT_UserSettings is a static class which holds all of the settings for this 
     /// particular user and assemply in the Isolated Storage. </summary>
-    public class SMaRT_UserSettings : IS_UserSettings
+    public class SMaRT_UserSettings : IsolatedStorage_Settings
     {
         /// <summary> Name of the XML file used to store the QC settings </summary>
         private const string fileName = "SMaRT_UserSettings_Version_A";

@@ -69,7 +69,7 @@ namespace SobekCM.Resource_Object.Metadata_File_ReaderWriters
                 // create the node reader
                 nodeReader = new XmlTextReader(reader);
 
-                MarcXML_METS_dmdSec_ReaderWriter.Read_MarcXML_Info(nodeReader, Return_Package.Bib_Info, Return_Package, true);
+                MarcXML_METS_dmdSec_ReaderWriter.Read_MarcXML_Info(nodeReader, Return_Package.Bib_Info, Return_Package, true, Options );
             }
             catch (Exception ee)
             {
@@ -161,8 +161,37 @@ namespace SobekCM.Resource_Object.Metadata_File_ReaderWriters
             // Set default error outpt message
             Error_Message = String.Empty;
 
+            // Try to pull some values from the options
+            string cataloging_source_code = String.Empty;
+            if ((Options.ContainsKey("MarcXML_File_ReaderWriter:MARC Cataloging Source Code")) && (Options["MarcXML_File_ReaderWriter:MARC Cataloging Source Code"] != null))
+                cataloging_source_code = Options["MarcXML_File_ReaderWriter:MARC Cataloging Source Code"].ToString();
+
+            string location_code = String.Empty;
+            if ((Options.ContainsKey("MarcXML_File_ReaderWriter:MARC Location Code")) && (Options["MarcXML_File_ReaderWriter:MARC Location Code"] != null))
+                location_code = Options["MarcXML_File_ReaderWriter:MARC Location Code"].ToString();
+
+            string reproduction_agency = String.Empty;
+            if ((Options.ContainsKey("MarcXML_File_ReaderWriter:MARC Reproduction Agency")) && (Options["MarcXML_File_ReaderWriter:MARC Reproduction Agency"] != null))
+                reproduction_agency = Options["MarcXML_File_ReaderWriter:MARC Reproduction Agency"].ToString();
+
+            string reproduction_place = String.Empty;
+            if ((Options.ContainsKey("MarcXML_File_ReaderWriter:MARC Reproduction Place")) && (Options["MarcXML_File_ReaderWriter:MARC Reproduction Place"] != null))
+                reproduction_place = Options["MarcXML_File_ReaderWriter:MARC Reproduction Place"].ToString();
+
+            string system_name = String.Empty;
+            if ((Options.ContainsKey("MarcXML_File_ReaderWriter:System Name")) && (Options["MarcXML_File_ReaderWriter:System Name"] != null))
+                system_name = Options["MarcXML_File_ReaderWriter:System Name"].ToString();
+
+            string system_abbreviation = String.Empty;
+            if ((Options.ContainsKey("MarcXML_File_ReaderWriter:System Abbreviation")) && (Options["MarcXML_File_ReaderWriter:System Abbreviation"] != null))
+                system_abbreviation = Options["MarcXML_File_ReaderWriter:System Abbreviation"].ToString();
+
+            string thumbnail_base = String.Empty;
+            if ((Options.ContainsKey("MarcXML_File_ReaderWriter:Image_Base")) && (Options["MarcXML_File_ReaderWriter:Image_Base"] != null))
+                thumbnail_base = Options["MarcXML_File_ReaderWriter:Image_Base"].ToString();
+            
             // Get all the standard tags
-            MARC_Record tags = Item_To_Save.To_MARC_Record();
+            MARC_Record tags = Item_To_Save.To_MARC_Record(cataloging_source_code, location_code, reproduction_agency, reproduction_place, system_name, system_abbreviation, thumbnail_base);
 
             // Look for extra tags to add in the OPTIONS
             if (Options.ContainsKey("MarcXML_File_ReaderWriter:Additional_Tags"))
@@ -198,7 +227,7 @@ namespace SobekCM.Resource_Object.Metadata_File_ReaderWriters
             {
                 if ((thisTag.Tag >= 1) && (thisTag.Tag <= 8))
                 {
-                    Output_Stream.WriteLine("    <controlfield tag=\"" + thisTag.Tag.ToString().PadLeft(3, '0') + "\">" + base.Convert_String_To_XML_Safe(thisTag.Control_Field_Value).Replace("&amp;bar;", "|") + "</controlfield>");
+                    Output_Stream.WriteLine("    <controlfield tag=\"" + thisTag.Tag.ToString().PadLeft(3, '0') + "\">" + Convert_String_To_XML_Safe(thisTag.Control_Field_Value).Replace("&amp;bar;", "|") + "</controlfield>");
                 }
                 else
                 {
@@ -209,7 +238,7 @@ namespace SobekCM.Resource_Object.Metadata_File_ReaderWriters
                     {
                         if (subfield.Length > 2)
                         {
-                            Output_Stream.WriteLine("      <subfield code=\"" + subfield[0] + "\">" + base.Convert_String_To_XML_Safe(subfield.Substring(2).Trim()).Replace("&amp;bar;", "|") + "</subfield>");
+                            Output_Stream.WriteLine("      <subfield code=\"" + subfield[0] + "\">" + Convert_String_To_XML_Safe(subfield.Substring(2).Trim()).Replace("&amp;bar;", "|") + "</subfield>");
                         }
                     }
 

@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using GemBox.Spreadsheet;
-using SobekCM.Library.Database;
+using SobekCM.Engine_Library.Database;
 
 #endregion
 
@@ -104,7 +104,7 @@ namespace SobekCM.Management_Tool.Reports
             Hide();
 
             // Get the requested report
-            DataSet space_utilized = SobekCM_Database.Online_Archived_Space(code1, code2, onlineSpaceType, archiveSpaceType);
+            DataSet space_utilized = Engine_Database.Online_Archived_Space(code1, code2, onlineSpaceType, archiveSpaceType);
 
             if (space_utilized == null)
             {

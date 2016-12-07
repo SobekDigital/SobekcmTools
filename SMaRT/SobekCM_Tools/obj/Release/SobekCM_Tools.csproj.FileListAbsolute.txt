@@ -1,6 +1,8 @@
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SobekCM_Tools\bin\Release\SobekCM_Tools.XML
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SobekCM_Tools\bin\Release\SobekCM_Tools.dll
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SobekCM_Tools\bin\Release\Microsoft.ApplicationBlocks.Data.dll
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SobekCM_Tools\obj\Release\SobekCM.Tools.Properties.Resources.resources
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SobekCM_Tools\obj\Release\SobekCM_Tools.csproj.GenerateResource.Cache
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SobekCM_Tools\obj\Release\SobekCM_Tools.dll
+C:\GitRepository\SobekcmTools\SMaRT\SobekCM_Tools\bin\Release\SobekCM_Tools.XML
+C:\GitRepository\SobekcmTools\SMaRT\SobekCM_Tools\bin\Release\SobekCM_Tools.dll
+C:\GitRepository\SobekcmTools\SMaRT\SobekCM_Tools\bin\Release\protobuf-net.dll
+C:\GitRepository\SobekcmTools\SMaRT\SobekCM_Tools\bin\Release\protobuf-net.pdb
+C:\GitRepository\SobekcmTools\SMaRT\SobekCM_Tools\bin\Release\protobuf-net.xml
+C:\GitRepository\SobekcmTools\SMaRT\SobekCM_Tools\obj\Release\SobekCM.Tools.Properties.Resources.resources
+C:\GitRepository\SobekcmTools\SMaRT\SobekCM_Tools\obj\Release\SobekCM_Tools.csproj.GenerateResource.Cache
+C:\GitRepository\SobekcmTools\SMaRT\SobekCM_Tools\obj\Release\SobekCM_Tools.dll

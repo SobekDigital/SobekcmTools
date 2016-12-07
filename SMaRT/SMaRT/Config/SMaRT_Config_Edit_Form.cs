@@ -6,7 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using System.Xml;
-using SobekCM.Library.Database;
+using SobekCM.Engine_Library.Database;
 using SobekCM.Management_Tool.Versioning;
 
 #endregion
@@ -230,7 +230,7 @@ namespace SobekCM.Management_Tool.Config
         private void testConnectionButton_Button_Pressed(object sender, EventArgs e)
         {
             Cursor = Cursors.WaitCursor;
-            bool connection_succsss = SobekCM_Database.Test_Connection(connectionTextBox.Text.Trim());
+            bool connection_succsss = Engine_Database.Test_Connection(connectionTextBox.Text.Trim());
             Cursor = Cursors.Default;
 
             MessageBox.Show(connection_succsss ? "CONNECTION SUCCESSFUL!" : "CONNECTION FAILED!");

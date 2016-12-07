@@ -3,7 +3,7 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using SobekCM.Library.Database;
+using SobekCM.Engine_Library.Database;
 
 #endregion
 
@@ -61,7 +61,7 @@ namespace SobekCM.Management_Tool.Config
         {
             Connection_String = "data source=" + serverNameTextBox.Text.Trim() + ";initial catalog=" + databaseNameTextBox.Text.Trim() + ";integrated security=Yes;";
 
-            MessageBox.Show(SobekCM_Database.Test_Connection(Connection_String)
+            MessageBox.Show(Engine_Database.Test_Connection(Connection_String)
                                 ? "CONNECTION SUCCESSFUL!"
                                 : "CONNECTION FAILED!");
         }
@@ -76,7 +76,7 @@ namespace SobekCM.Management_Tool.Config
         {
             Connection_String = "data source=" + serverNameTextBox.Text.Trim() + ";initial catalog=" + databaseNameTextBox.Text.Trim() + ";integrated security=Yes;";
 
-            if (SobekCM_Database.Test_Connection(Connection_String))
+            if (Engine_Database.Test_Connection(Connection_String))
             {
                 DialogResult = DialogResult.OK;
                 Close();

@@ -1,7 +1,6 @@
 ﻿#region Using directives
 
 using System;
-using System.IO;
 
 #endregion
 
@@ -16,6 +15,7 @@ namespace SobekCM.Resource_Object.Metadata_Modules.GeoSpatial
         private double latitude;
         private double longitude;
         private int order_temp;
+        private string featureType;
 
         #region Constructors
 
@@ -62,6 +62,20 @@ namespace SobekCM.Resource_Object.Metadata_Modules.GeoSpatial
             order_temp = -1;
         }
 
+        /// <summary> Constructor for a new instance of the Coordinate_Point class </summary>
+        /// <param name="Latitude"> Latitude (expressed in decimal notation) for this point </param>
+        /// <param name="Longitude"> Longitude (expressed in decimal notation) for this point </param>
+        /// <param name="Label"> Label to associate with this point </param>
+        /// <param name="FeatureType"> Altitude for this point on a 3-dimensional plane (in meters)</param>
+        public Coordinate_Point(double Latitude, double Longitude, string Label, string FeatureType)
+        {
+            latitude = Latitude;
+            longitude = Longitude;
+            featureType = FeatureType;
+            label = Label;
+            order_temp = -1;
+        }
+
         #endregion
 
         /// <summary> Order from the XML read </summary>
@@ -101,29 +115,11 @@ namespace SobekCM.Resource_Object.Metadata_Modules.GeoSpatial
             set { label = value; }
         }
 
-
-        /// <summary> Writes this single coordinate point as SobekCM-formatted XML </summary>
-        /// <param name="order"> Order in which this point appears within a larger object (such as a line or polygon) </param>
-        /// <param name="sobekcm_namespace"> Namespace to use for the SobekCM custom schema ( usually 'sobekcm' )</param>
-        /// <param name="results"> Stream to write this single coordinate point as SobekCM-formatted XML</param>
-        internal void Add_SobekCM_Metadata(int order, string sobekcm_namespace, TextWriter results)
+        /// <summary> FeatureType associated with this point  </summary>
+        public string FeatureType
         {
-            results.Write("<" + sobekcm_namespace + ":Point ");
-            results.Write("latitude=\"" + latitude + "\" ");
-            results.Write("longitude=\"" + longitude + "\" ");
-            if (altitude != 0)
-            {
-                results.Write("altitude=\"" + altitude.ToString() + "\" ");
-            }
-            if (order > 0)
-            {
-                results.Write("order=\"" + order + "\" ");
-            }
-            if (!String.IsNullOrEmpty(label))
-            {
-                results.Write("label=\"" + label + "\"");
-            }
-            results.Write(" />\r\n");
+            get { return featureType ?? String.Empty; }
+            set { featureType = value; }
         }
     }
 }

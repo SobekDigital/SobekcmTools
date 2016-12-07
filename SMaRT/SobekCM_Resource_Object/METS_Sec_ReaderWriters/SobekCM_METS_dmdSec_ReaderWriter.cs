@@ -12,9 +12,10 @@ using SobekCM.Resource_Object.Metadata_Modules.GeoSpatial;
 
 namespace SobekCM.Resource_Object.METS_Sec_ReaderWriters
 {
+    /// <summary> Reader that operates against a single custom SobekCM descriptive METS section  </summary>
     public class SobekCM_METS_dmdSec_ReaderWriter : XML_Writing_Base_Type, iPackage_dmdSec_ReaderWriter
     {
-        private string sobekcm_namespace;
+        private readonly string sobekcm_namespace;
 
 
         /// <summary> Constructor for a new instance of the SobekCM_METS_dmdSec_ReaderWriter class </summary>
@@ -66,11 +67,11 @@ namespace SobekCM.Resource_Object.METS_Sec_ReaderWriters
 
                 // Add all the custom SobekCM specific data
                 if (oralInfo.Interviewee.Length > 0)
-                    Output_Stream.WriteLine("<oral:Interviewee>" + base.Convert_String_To_XML_Safe(oralInfo.Interviewee) + "</oral:Interviewee>");
+                    Output_Stream.WriteLine("<oral:Interviewee>" + Convert_String_To_XML_Safe(oralInfo.Interviewee) + "</oral:Interviewee>");
                 if (oralInfo.Interviewer.Length > 0)
-                    Output_Stream.WriteLine("<oral:Interviewer>" + base.Convert_String_To_XML_Safe(oralInfo.Interviewer) + "</oral:Interviewer>");
+                    Output_Stream.WriteLine("<oral:Interviewer>" + Convert_String_To_XML_Safe(oralInfo.Interviewer) + "</oral:Interviewer>");
                 if (oralInfo.Interview_Date.Length > 0)
-                    Output_Stream.WriteLine("<oral:InterviewDate>" + base.Convert_String_To_XML_Safe(oralInfo.Interview_Date) + "</oral:InterviewDate>");
+                    Output_Stream.WriteLine("<oral:InterviewDate>" + Convert_String_To_XML_Safe(oralInfo.Interview_Date) + "</oral:InterviewDate>");
 
                 // End the Administrative section
                 Output_Stream.WriteLine("</oral:interview>");
@@ -90,26 +91,26 @@ namespace SobekCM.Resource_Object.METS_Sec_ReaderWriters
                     {
                         Output_Stream.Write("<part:Performer");
                         if (thisPerformer.LifeSpan.Length > 0)
-                            Output_Stream.Write(" lifespan=\"" + base.Convert_String_To_XML_Safe(thisPerformer.LifeSpan) + "\"");
+                            Output_Stream.Write(" lifespan=\"" + Convert_String_To_XML_Safe(thisPerformer.LifeSpan) + "\"");
                         if (thisPerformer.Title.Length > 0)
-                            Output_Stream.Write(" title=\"" + base.Convert_String_To_XML_Safe(thisPerformer.Title) + "\"");
+                            Output_Stream.Write(" title=\"" + Convert_String_To_XML_Safe(thisPerformer.Title) + "\"");
                         if (thisPerformer.Occupation.Length > 0)
-                            Output_Stream.Write(" occupation=\"" + base.Convert_String_To_XML_Safe(thisPerformer.Occupation) + "\"");
+                            Output_Stream.Write(" occupation=\"" + Convert_String_To_XML_Safe(thisPerformer.Occupation) + "\"");
                         if (thisPerformer.Sex.Length > 0)
                             Output_Stream.Write(" sex=\"" + thisPerformer.Sex + "\"");
-                        Output_Stream.WriteLine(">" + base.Convert_String_To_XML_Safe(thisPerformer.Name) + "</part:Performer>");
+                        Output_Stream.WriteLine(">" + Convert_String_To_XML_Safe(thisPerformer.Name) + "</part:Performer>");
                     }
                 }
 
                 // Add the performance information
                 if ((!String.IsNullOrEmpty(partInfo.Performance)) || (!String.IsNullOrEmpty(partInfo.Performance_Date)))
                 {
-                    string performanceName = base.Convert_String_To_XML_Safe(partInfo.Performance);
+                    string performanceName = Convert_String_To_XML_Safe(partInfo.Performance);
                     if (performanceName.Length == 0)
                         performanceName = "Unknown";
                     Output_Stream.Write("<part:Performance");
                     if (!String.IsNullOrEmpty(partInfo.Performance_Date))
-                        Output_Stream.Write(" date=\"" + base.Convert_String_To_XML_Safe(partInfo.Performance_Date) + "\"");
+                        Output_Stream.Write(" date=\"" + Convert_String_To_XML_Safe(partInfo.Performance_Date) + "\"");
                     Output_Stream.WriteLine(">" + performanceName + "</part:Performance>");
                 }
 
@@ -334,6 +335,19 @@ namespace SobekCM.Resource_Object.METS_Sec_ReaderWriters
                             }
                             break;
 
+						case "VisibilityRestrictions":
+		                    Input_XmlReader.Read();
+							if (Input_XmlReader.NodeType == XmlNodeType.Text)
+							{
+								string restriction_text = Input_XmlReader.Value;
+								short restriction;
+								if (Int16.TryParse(restriction_text, out restriction))
+								{
+									Return_Package.Behaviors.IP_Restriction_Membership = restriction;
+								}
+							}
+		                    break;
+
                         case "Tickler":
                             Input_XmlReader.Read();
                             if (Input_XmlReader.NodeType == XmlNodeType.Text)
@@ -484,42 +498,36 @@ namespace SobekCM.Resource_Object.METS_Sec_ReaderWriters
                         case "Temporal":
                             while (Input_XmlReader.Read())
                             {
-                                if ((Input_XmlReader.NodeType == XmlNodeType.EndElement) && (Input_XmlReader.Name == sobekcm_namespace + ":Temporal"))
+								if ((Input_XmlReader.NodeType == XmlNodeType.EndElement) && (Input_XmlReader.Name == sobekcm_namespace + ":Temporal"))
                                 {
-                                    break;
+									break;
                                 }
 
                                 if ((Input_XmlReader.NodeType == XmlNodeType.Element) && (Input_XmlReader.Name == sobekcm_namespace + ":period"))
                                 {
-                                    Temporal_Info newTemporal = new Temporal_Info();
-                                    if (Input_XmlReader.MoveToAttribute("start"))
+									Temporal_Info newTemporal = new Temporal_Info();
+									if (Input_XmlReader.MoveToAttribute("start"))
                                     {
-                                        try
-                                        {
-                                            newTemporal.Start_Year = Convert.ToInt32(Input_XmlReader.Value);
-                                        }
-                                        catch
-                                        {
-                                        }
+	                                    int temp_start_year;
+	                                    if (Int32.TryParse(Input_XmlReader.Value, out temp_start_year))
+		                                    newTemporal.Start_Year = temp_start_year;
                                     }
 
                                     if (Input_XmlReader.MoveToAttribute("end"))
                                     {
-                                        try
-                                        {
-                                            newTemporal.End_Year = Convert.ToInt32(Input_XmlReader.Value);
-                                        }
-                                        catch
-                                        {
-                                        }
+										int temp_end_year;
+										if (Int32.TryParse(Input_XmlReader.Value, out temp_end_year))
+											newTemporal.End_Year = temp_end_year;
                                     }
 
                                     Input_XmlReader.Read();
                                     if (Input_XmlReader.NodeType == XmlNodeType.Text)
                                     {
                                         newTemporal.TimePeriod = Input_XmlReader.Value;
-                                        Return_Package.Bib_Info.Add_Temporal_Subject(newTemporal);
                                     }
+
+									if (( newTemporal.Start_Year > 0 ) || ( newTemporal.End_Year > 0 ) || ( newTemporal.TimePeriod.Length > 0 ))
+										Return_Package.Bib_Info.Add_Temporal_Subject(newTemporal);
                                 }
                             }
                             break;
@@ -1038,9 +1046,9 @@ namespace SobekCM.Resource_Object.METS_Sec_ReaderWriters
         /// <returns> Formatted schema namespace info for the METS header</returns>
         public string[] Schema_Namespace(SobekCM_Item METS_Item)
         {
-            string sobekcm_ref = "sobekcm=\"http://digital.uflib.ufl.edu/metadata/sobekcm/\"";
-            string oral_ref = "oral=\"http://digital.uflib.ufl.edu/metadata/oral/\"";
-            string part_ref = "part=\"http://digital.uflib.ufl.edu/metadata/part/\"";
+            string sobekcm_ref = "sobekcm=\"http://sobekrepository.org/schemas/sobekcm/\"";
+			string oral_ref = "oral=\"http://sobekrepository.org/schemas/sobekcm_oral/\"";
+			string part_ref = "part=\"http://sobekrepository.org/schemas/sobekcm_part/\"";
 
             Performing_Arts_Info partInfo = METS_Item.Get_Metadata_Module("PerformingArts") as Performing_Arts_Info;
             Oral_Interview_Info oralInfo = METS_Item.Get_Metadata_Module("OralInterview") as Oral_Interview_Info;
@@ -1069,9 +1077,9 @@ namespace SobekCM.Resource_Object.METS_Sec_ReaderWriters
         /// <returns> Formatted schema location for the METS header</returns>
         public string[] Schema_Location(SobekCM_Item METS_Item)
         {
-            string sobekcm_ref = "    http://digital.uflib.ufl.edu/metadata/sobekcm/\r\n    http://digital.uflib.ufl.edu/metadata/sobekcm/sobekcm.xsd";
-            string oral_ref = "    http://digital.uflib.ufl.edu/metadata/oral/\r\n    http://digital.uflib.ufl.edu/metadata/oral/oral.xsd";
-            string part_ref = "    http://digital.uflib.ufl.edu/metadata/part/\r\n    http://digital.uflib.ufl.edu/metadata/part/part.xsd";
+			string sobekcm_ref = "    http://sobekrepository.org/schemas/sobekcm/\r\n    http://sobekrepository.org/schemas/sobekcm.xsd";
+			string oral_ref = "    http://sobekrepository.org/schemas/sobekcm_oral/\r\n    http://sobekrepository.org/schemas/sobekcm_oral.xsd";
+			string part_ref = "    http://sobekrepository.org/schemas/sobekcm_part/\r\n    http://sobekrepository.org/schemas/sobekcm_part.xsd";
 
             Performing_Arts_Info partInfo = METS_Item.Get_Metadata_Module("PerformingArts") as Performing_Arts_Info;
             Oral_Interview_Info oralInfo = METS_Item.Get_Metadata_Module("OralInterview") as Oral_Interview_Info;

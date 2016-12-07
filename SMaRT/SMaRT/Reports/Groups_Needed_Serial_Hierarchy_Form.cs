@@ -1,13 +1,15 @@
 ﻿#region Using directives
 
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using DLC.Custom_Grid;
-using SobekCM.Library.Database;
-using SobekCM.Library.Items;
+using SobekCM.Core.Items;
+using SobekCM.Engine_Library.Database;
+using SobekCM.Engine_Library.Items;
 
 #endregion
 
@@ -24,7 +26,7 @@ namespace SobekCM.Management_Tool.Reports
             InitializeComponent();
             BackColor = Color.FromArgb(240, 240, 240);
 
-            DataTable sourceTable = SobekCM_Database.Newspapers_Without_Serial_Info;
+            DataTable sourceTable = Engine_Database.Newspapers_Without_Serial_Info;
 
             iconPanel = new CustomGrid_Panel();
             iconPanel.Anchor = (((((AnchorStyles.Top | AnchorStyles.Bottom)
@@ -65,7 +67,7 @@ namespace SobekCM.Management_Tool.Reports
         private void refresh(  )
         {
             int width = iconPanel.Style.Column_Styles[1].Width;
-            DataTable sourceTable = SobekCM_Database.Newspapers_Without_Serial_Info;
+            DataTable sourceTable = Engine_Database.Newspapers_Without_Serial_Info;
             iconPanel.DataTable = sourceTable;
             //// Configure some individual columns
             iconPanel.Style.Column_Styles[1].Header_Text = "Group Title";
@@ -78,8 +80,8 @@ namespace SobekCM.Management_Tool.Reports
             if (thisRow != null)
             {
                 string bibid = thisRow["BibID"].ToString();
-                SobekCM_Items_In_Title multiple = SobekCM_Database.Get_Multiple_Volumes( bibid, null);
-                if (multiple == null)
+                List<Item_Hierarchy_Details> multiple = Engine_Database.Get_Multiple_Volumes( bibid, null);
+                if ((multiple == null) || ( multiple.Count == 0 ))
                 {
                     MessageBox.Show("Either the BibID you entered is invalid, or there was a database error.");
                 }

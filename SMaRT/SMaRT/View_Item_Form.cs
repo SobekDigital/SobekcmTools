@@ -9,10 +9,12 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Printing;
 using System.Windows.Forms;
 using DLC.Custom_Grid;
+using SobekCM.Engine_Library.ApplicationState;
 using SobekCM.Resource_Object.Tracking;
-using SobekCM.Library;
-using SobekCM.Library.Database;
+using SobekCM.Engine_Library;
+using SobekCM.Engine_Library.Database;
 using SobekCM.Management_Tool.Settings;
+using SobekCM_Resource_Database;
 
 #endregion
 
@@ -203,7 +205,7 @@ namespace SobekCM.Management_Tool
             bool dark = Convert.ToBoolean(volumeInfo["Dark"]);
 
             // Add the directory
-            directoryLinkLabel.Text = SobekCM_Library_Settings.Image_Server_Network + bibid.Substring(0, 2) + "\\" + bibid.Substring(2, 2) + "\\" + bibid.Substring(4, 2) + "\\" + bibid.Substring(6, 2) + "\\" + bibid.Substring(8, 2) + "\\" + vid;
+            directoryLinkLabel.Text = Engine_ApplicationCache_Gateway.Settings.Servers.Image_Server_Network + bibid.Substring(0, 2) + "\\" + bibid.Substring(2, 2) + "\\" + bibid.Substring(4, 2) + "\\" + bibid.Substring(6, 2) + "\\" + bibid.Substring(8, 2) + "\\" + vid;
 
             if (dark)
             {
@@ -250,7 +252,7 @@ namespace SobekCM.Management_Tool
         private void show_milestones_worklog()
         {
             // Pull the tracking information
-            trackingInfo = SobekCM_Database.Tracking_Get_History_Archives(itemid, null);
+            trackingInfo = Engine_Database.Tracking_Get_History_Archives(itemid, null);
 
             // Pull out the standard tracking milestones
             trackingInfoObj = new Tracking_Info();
@@ -302,7 +304,7 @@ namespace SobekCM.Management_Tool
                 adviceLabel.Show();
                 dispositionLabel.Show();
                 dispositionLinkLabel.Hide();
-                string disposition = SobekCM_Library_Settings.Disposition_Term_Past(trackingInfoObj.Disposition_Type).ToUpper();
+                string disposition = Engine_ApplicationCache_Gateway.Settings.Disposition_Term_Past(trackingInfoObj.Disposition_Type).ToUpper();
                 if (trackingInfoObj.Disposition_Notes.Trim().Length > 0)
                 {
                     dispositionLabel.Text = disposition + " " + trackingInfoObj.Disposition_Date.Value.ToShortDateString() + " - " + trackingInfoObj.Disposition_Notes;
@@ -323,7 +325,7 @@ namespace SobekCM.Management_Tool
 
             if (trackingInfoObj.Disposition_Advice > 0)
             {
-                string disposition = SobekCM_Library_Settings.Disposition_Term_Future(trackingInfoObj.Disposition_Advice).ToUpper();
+                string disposition = Engine_ApplicationCache_Gateway.Settings.Disposition_Term_Future(trackingInfoObj.Disposition_Advice).ToUpper();
                 if (trackingInfoObj.Disposition_Advice_Notes.Trim().Length > 0)
                 {
                     adviceLinkLabel.Text = disposition + " - " + trackingInfoObj.Disposition_Advice_Notes;
@@ -486,7 +488,7 @@ namespace SobekCM.Management_Tool
 
         private void mainLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            string url = SobekCM_Library_Settings.System_Base_URL + bibid + "/" + vid;
+            string url = Engine_ApplicationCache_Gateway.Settings.Servers.System_Base_URL + bibid + "/" + vid;
 
             try
             {
@@ -552,7 +554,7 @@ namespace SobekCM.Management_Tool
 
         private void metadataPictureBox_Click(object sender, EventArgs e)
         {
-            string url = SobekCM_Library_Settings.System_Base_URL + "my/edit/" + bibid + "/" + vid + "/1";
+            string url = Engine_ApplicationCache_Gateway.Settings.Servers.System_Base_URL + "my/edit/" + bibid + "/" + vid + "/1";
 
             try
             {
@@ -569,7 +571,7 @@ namespace SobekCM.Management_Tool
 
         private void behaviorsPictureBox_Click(object sender, EventArgs e)
         {
-            string url = SobekCM_Library_Settings.System_Base_URL + "my/behaviors/" + bibid + "/" + vid + "/1"; 
+            string url = Engine_ApplicationCache_Gateway.Settings.Servers.System_Base_URL + "my/behaviors/" + bibid + "/" + vid + "/1"; 
 
             try
             {
@@ -584,7 +586,7 @@ namespace SobekCM.Management_Tool
 
         private void metsPictureBox_Click(object sender, EventArgs e)
         {
-            string url = SobekCM_Library_Settings.Image_URL + bibid.Substring(0, 2) + "/" + bibid.Substring(2, 2) + "/" + bibid.Substring(4, 2) + "/" + bibid.Substring(6, 2) + "/" + bibid.Substring(8, 2) + "/" + vid + "/" + bibid + "_" + vid + ".mets.xml";
+            string url = Engine_ApplicationCache_Gateway.Settings.Servers.Image_URL + bibid.Substring(0, 2) + "/" + bibid.Substring(2, 2) + "/" + bibid.Substring(4, 2) + "/" + bibid.Substring(6, 2) + "/" + bibid.Substring(8, 2) + "/" + vid + "/" + bibid + "_" + vid + ".mets.xml";
            
             try
             {
@@ -627,12 +629,12 @@ namespace SobekCM.Management_Tool
 
                 if ((type != trackingInfoObj.Disposition_Advice) || (notes.Trim() != trackingInfoObj.Disposition_Advice_Notes.Trim()))
                 {
-                    if (Resource_Object.Database.SobekCM_Database.Edit_Disposition_Advice(itemid, type, notes))
+                    if (SobekCM_Item_Database.Edit_Disposition_Advice(itemid, type, notes))
                     {
                         trackingInfoObj.Disposition_Advice = (short)type;
                         trackingInfoObj.Disposition_Advice_Notes = notes;
 
-                        string disposition = SobekCM_Library_Settings.Disposition_Term_Future(trackingInfoObj.Disposition_Advice).ToUpper();
+                        string disposition = Engine_ApplicationCache_Gateway.Settings.Disposition_Term_Future(trackingInfoObj.Disposition_Advice).ToUpper();
                         if (trackingInfoObj.Disposition_Advice_Notes.Trim().Length > 0)
                         {
                             adviceLinkLabel.Text = disposition + " - " + trackingInfoObj.Disposition_Advice_Notes;
@@ -662,7 +664,7 @@ namespace SobekCM.Management_Tool
                 int type = trackingForm.Disposition_Type_ID;
                 string notes = trackingForm.Disposition_Notes;
 
-                if (Resource_Object.Database.SobekCM_Database.Update_Disposition(itemid, type, notes, date, Environment.UserName))
+                if (SobekCM_Item_Database.Update_Disposition(itemid, type, notes, date, Environment.UserName))
                 {
                     show_milestones_worklog();
                 }
@@ -681,7 +683,7 @@ namespace SobekCM.Management_Tool
                 string newBox = trackingForm.New_Tracking_Box;
                 if (newBox.Trim() != trackingInfoObj.Tracking_Box.Trim())
                 {
-                    if (Resource_Object.Database.SobekCM_Database.Save_New_Tracking_Box(itemid, newBox))
+                    if (SobekCM_Item_Database.Save_New_Tracking_Box(itemid, newBox))
                     {
                         trackingInfoObj.Tracking_Box = newBox;
                         trackingBoxLabel.Text = newBox;

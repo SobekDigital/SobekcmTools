@@ -1,133 +1,174 @@
-﻿using System;
+﻿#region Using directives
+
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using SobekCM.Resource_Object.Configuration;
+using System.Runtime.Serialization;
+using System.Xml.Serialization;
+using ProtoBuf;
 using SobekCM.Resource_Object.METS_Sec_ReaderWriters;
+
+#endregion
 
 namespace SobekCM.Resource_Object.Configuration
 {
     /// <summary> Profile defines which METS sections reader/writers are used when writing 
     /// a METS file. </summary>
+    [Serializable, DataContract, ProtoContract]
+    [XmlRoot("MetsWritingProfile")]
     public class METS_Writing_Profile
     {
-        private List<METS_Section_ReaderWriter_Config> packageLevelAmdSecWriterConfigs;
-        private List<METS_Section_ReaderWriter_Config> packageLevelDmdSecWriterConfigs;
-        private List<METS_Section_ReaderWriter_Config> divisionLevelAmdSecWriterConfigs;
-        private List<METS_Section_ReaderWriter_Config> divisionLevelDmdSecWriterConfigs;
-        private List<METS_Section_ReaderWriter_Config> fileLevelAmdSecWriterConfigs;
-        private List<METS_Section_ReaderWriter_Config> fileLevelDmdSecWriterConfigs;
-
         /// <summary> Name associated with this profile </summary>
-        public string Profile_Name { get; internal set; }
+        [DataMember(Name = "name", EmitDefaultValue = false)]
+        [XmlAttribute("name")]
+        [ProtoMember(1)]
+        public string Profile_Name { get; set; }
 
         /// <summary> Description associated with this profile </summary>
-        public string Profile_Description { get; internal set; }
+        [DataMember(Name = "description", EmitDefaultValue = false)]
+        [XmlAttribute("description")]
+        [ProtoMember(2)]
+        public string Profile_Description { get; set; }
 
         /// <summary> Flag indicates if this is the default profile </summary>
-        public bool Default_Profile { get; internal set;  }
+        [DataMember(Name = "default", EmitDefaultValue = false)]
+        [XmlAttribute("default")]
+        [ProtoMember(3)]
+        public bool Default_Profile { get; set;  }
+
+        /// <summary> Collection of all the package-level amdSec reader/writer configurations </summary>
+        [DataMember(Name = "packageAmdSecWriterConfigs")]
+        [XmlArray("packageAmdSecWriterConfigs")]
+        [XmlArrayItem("writerConfig", typeof(METS_Section_ReaderWriter_Config))]
+        [ProtoMember(4)]
+        public List<METS_Section_ReaderWriter_Config> Package_Level_AmdSec_Writer_Configs { get; set; }
+
+        /// <summary> Collection of all the package-level dmdSec reader/writer configurations </summary>
+        [DataMember(Name = "packageDmdSecWriterConfigs")]
+        [XmlArray("packageDmdSecWriterConfigs")]
+        [XmlArrayItem("writerConfig", typeof(METS_Section_ReaderWriter_Config))]
+        [ProtoMember(5)]
+        public List<METS_Section_ReaderWriter_Config> Package_Level_DmdSec_Writer_Configs { get; set; }
+
+        /// <summary> Collection of all the division-level amdSec reader/writer configurations </summary>
+        [DataMember(Name = "divisionAmdSecWriterConfigs")]
+        [XmlArray("divisionAmdSecWriterConfigs")]
+        [XmlArrayItem("writerConfig", typeof(METS_Section_ReaderWriter_Config))]
+        [ProtoMember(6)]
+        public List<METS_Section_ReaderWriter_Config> Division_Level_AmdSec_Writer_Configs { get; set; }
+
+        /// <summary> Collection of all the division-level dmdSec reader/writer configurations </summary>
+        [DataMember(Name = "divisionDmdSecWriterConfigs")]
+        [XmlArray("divisionDmdSecWriterConfigs")]
+        [XmlArrayItem("writerConfig", typeof(METS_Section_ReaderWriter_Config))]
+        [ProtoMember(7)]
+        public List<METS_Section_ReaderWriter_Config> Division_Level_DmdSec_Writer_Configs { get; set; }
+
+        /// <summary> Collection of all the file-level amdSec reader/writer configurations </summary>
+        [DataMember(Name = "fileAmdSecWriterConfigs")]
+        [XmlArray("fileAmdSecWriterConfigs")]
+        [XmlArrayItem("writerConfig", typeof(METS_Section_ReaderWriter_Config))]
+        [ProtoMember(8)]
+        public List<METS_Section_ReaderWriter_Config> File_Level_AmdSec_Writer_Configs { get; set; }
+
+        /// <summary> Collection of all the file-level dmdSec reader/writer configurations </summary>
+        [DataMember(Name = "fileDmdSecWriterConfigs")]
+        [XmlArray("fileDmdSecWriterConfigs")]
+        [XmlArrayItem("writerConfig", typeof(METS_Section_ReaderWriter_Config))]
+        [ProtoMember(9)]
+        public List<METS_Section_ReaderWriter_Config> File_Level_DmdSec_Writer_Configs { get; set; }
 
         /// <summary> Constructor for a new instance of a METS_Writing_Profile </summary>
         public METS_Writing_Profile()
         {
-            packageLevelAmdSecWriterConfigs = new List<METS_Section_ReaderWriter_Config>();
-            packageLevelDmdSecWriterConfigs = new List<METS_Section_ReaderWriter_Config>();
-            divisionLevelAmdSecWriterConfigs = new List<METS_Section_ReaderWriter_Config>();
-            divisionLevelDmdSecWriterConfigs = new List<METS_Section_ReaderWriter_Config>();
-            fileLevelAmdSecWriterConfigs = new List<METS_Section_ReaderWriter_Config>();
-            fileLevelDmdSecWriterConfigs = new List<METS_Section_ReaderWriter_Config>();
+            Package_Level_AmdSec_Writer_Configs = new List<METS_Section_ReaderWriter_Config>();
+            Package_Level_DmdSec_Writer_Configs = new List<METS_Section_ReaderWriter_Config>();
+            Division_Level_AmdSec_Writer_Configs = new List<METS_Section_ReaderWriter_Config>();
+            Division_Level_DmdSec_Writer_Configs = new List<METS_Section_ReaderWriter_Config>();
+            File_Level_AmdSec_Writer_Configs = new List<METS_Section_ReaderWriter_Config>();
+            File_Level_DmdSec_Writer_Configs = new List<METS_Section_ReaderWriter_Config>();
 
             Default_Profile = false;
             Profile_Name = String.Empty;
             Profile_Description = String.Empty;
         }
 
+        /// <summary> Clears all the information about which reader/writers to use 
+        /// for this METS writing profile </summary>
+        public void Clear()
+        {
+            Package_Level_AmdSec_Writer_Configs.Clear();
+            Package_Level_DmdSec_Writer_Configs.Clear();
+            Division_Level_AmdSec_Writer_Configs.Clear();
+            Division_Level_DmdSec_Writer_Configs.Clear();
+            File_Level_AmdSec_Writer_Configs.Clear();
+            File_Level_DmdSec_Writer_Configs.Clear();
+        }
 
         /// <summary> Add a new package-level amdSec reader/writer configuration </summary>
         /// <param name="NewConfig"> New METS section reader writer configuration </param>
         public void Add_Package_Level_AmdSec_Writer_Config( METS_Section_ReaderWriter_Config NewConfig )
         {
-            if ( NewConfig.ReaderWriterObject is iPackage_amdSec_ReaderWriter )
-                packageLevelAmdSecWriterConfigs.Add(NewConfig);
+            if (NewConfig == null)
+                return;
+
+           // if ( NewConfig.ReaderWriterObject is iPackage_amdSec_ReaderWriter )
+                Package_Level_AmdSec_Writer_Configs.Add(NewConfig);
         }
 
         /// <summary> Add a new package-level dmdSec reader/writer configuration </summary>
         /// <param name="NewConfig"> New METS section reader writer configuration </param>
         public void Add_Package_Level_DmdSec_Writer_Config(METS_Section_ReaderWriter_Config NewConfig)
         {
-            if (NewConfig.ReaderWriterObject is iPackage_dmdSec_ReaderWriter)
-                packageLevelDmdSecWriterConfigs.Add(NewConfig);
+            if (NewConfig == null)
+                return;
+
+           // if (NewConfig.ReaderWriterObject is iPackage_dmdSec_ReaderWriter)
+                Package_Level_DmdSec_Writer_Configs.Add(NewConfig);
         }
 
         /// <summary> Add a new division-level amdSec reader/writer configuration </summary>
         /// <param name="NewConfig"> New METS section reader writer configuration </param>
         public void Add_Division_Level_AmdSec_Writer_Config(METS_Section_ReaderWriter_Config NewConfig)
         {
-            if (NewConfig.ReaderWriterObject is iDivision_amdSec_ReaderWriter)
-                divisionLevelAmdSecWriterConfigs.Add(NewConfig);
+            if (NewConfig == null)
+                return;
+
+          //  if (NewConfig.ReaderWriterObject is iDivision_amdSec_ReaderWriter)
+                Division_Level_AmdSec_Writer_Configs.Add(NewConfig);
         }
 
         /// <summary> Add a new division-level dmdSec reader/writer configuration </summary>
         /// <param name="NewConfig"> New METS section reader writer configuration </param>
         public void Add_Division_Level_DmdSec_Writer_Config(METS_Section_ReaderWriter_Config NewConfig)
         {
-            if (NewConfig.ReaderWriterObject is iDivision_dmdSec_ReaderWriter)
-                divisionLevelDmdSecWriterConfigs.Add(NewConfig);
+            if (NewConfig == null)
+                return;
+
+           // if (NewConfig.ReaderWriterObject is iDivision_dmdSec_ReaderWriter)
+                Division_Level_DmdSec_Writer_Configs.Add(NewConfig);
         }
 
         /// <summary> Add a new file-level amdSec reader/writer configuration </summary>
         /// <param name="NewConfig"> New METS section reader writer configuration </param>
         public void Add_File_Level_AmdSec_Writer_Config(METS_Section_ReaderWriter_Config NewConfig)
         {
-            if (NewConfig.ReaderWriterObject is iFile_amdSec_ReaderWriter)
-                fileLevelAmdSecWriterConfigs.Add(NewConfig);
+            if (NewConfig == null)
+                return;
+
+           // if (NewConfig.ReaderWriterObject is iFile_amdSec_ReaderWriter)
+                File_Level_AmdSec_Writer_Configs.Add(NewConfig);
         }
 
         /// <summary> Add a new file-level dmdSec reader/writer configuration </summary>
         /// <param name="NewConfig"> New METS section reader writer configuration </param>
         public void Add_File_Level_DmdSec_Writer_Config(METS_Section_ReaderWriter_Config NewConfig)
         {
-            if (NewConfig.ReaderWriterObject is iFile_dmdSec_ReaderWriter)
-                fileLevelDmdSecWriterConfigs.Add(NewConfig);
+            if (NewConfig == null)
+                return;
+
+          //  if (NewConfig.ReaderWriterObject is iFile_dmdSec_ReaderWriter)
+                File_Level_DmdSec_Writer_Configs.Add(NewConfig);
         }
-
-        /// <summary> Collection of all the package-level amdSec reader/writer configurations </summary>
-        public ReadOnlyCollection<METS_Section_ReaderWriter_Config> Package_Level_AmdSec_Writer_Configs
-        {
-            get { return new ReadOnlyCollection<METS_Section_ReaderWriter_Config>(packageLevelAmdSecWriterConfigs); }
-        }
-
-        /// <summary> Collection of all the package-level dmdSec reader/writer configurations </summary>
-        public ReadOnlyCollection<METS_Section_ReaderWriter_Config> Package_Level_DmdSec_Writer_Configs
-        {
-            get { return new ReadOnlyCollection<METS_Section_ReaderWriter_Config>(packageLevelDmdSecWriterConfigs); }
-        }
-
-        /// <summary> Collection of all the division-level amdSec reader/writer configurations </summary>
-        public ReadOnlyCollection<METS_Section_ReaderWriter_Config> Division_Level_AmdSec_Writer_Configs
-        {
-            get { return new ReadOnlyCollection<METS_Section_ReaderWriter_Config>(divisionLevelAmdSecWriterConfigs); }
-        }
-
-        /// <summary> Collection of all the division-level dmdSec reader/writer configurations </summary>
-        public ReadOnlyCollection<METS_Section_ReaderWriter_Config> Division_Level_DmdSec_Writer_Configs
-        {
-            get { return new ReadOnlyCollection<METS_Section_ReaderWriter_Config>(divisionLevelDmdSecWriterConfigs); }
-        }
-
-        /// <summary> Collection of all the file-level amdSec reader/writer configurations </summary>
-        public ReadOnlyCollection<METS_Section_ReaderWriter_Config> File_Level_AmdSec_Writer_Configs
-        {
-            get { return new ReadOnlyCollection<METS_Section_ReaderWriter_Config>(fileLevelAmdSecWriterConfigs); }
-        }
-
-        /// <summary> Collection of all the file-level dmdSec reader/writer configurations </summary>
-        public ReadOnlyCollection<METS_Section_ReaderWriter_Config> File_Level_DmdSec_Writer_Configs
-        {
-            get { return new ReadOnlyCollection<METS_Section_ReaderWriter_Config>(fileLevelDmdSecWriterConfigs); }
-        }
-
-
     }
 }

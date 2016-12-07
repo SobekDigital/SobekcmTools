@@ -1,4 +1,6 @@
-﻿namespace SobekCM.Management_Tool
+﻿using SobekCM.Core.Navigation;
+
+namespace SobekCM.Management_Tool
 {
     partial class Ad_Hoc_Reporting_Query_Form
     {
@@ -54,7 +56,7 @@
             this.sobekCM_Item_Discovery_Panel1.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sobekCM_Item_Discovery_Panel1.Location = new System.Drawing.Point(15, 3);
             this.sobekCM_Item_Discovery_Panel1.Name = "sobekCM_Item_Discovery_Panel1";
-            this.sobekCM_Item_Discovery_Panel1.Search_Precision = SobekCM.Library.Navigation.Search_Precision_Type_Enum.Inflectional_Form;
+            this.sobekCM_Item_Discovery_Panel1.Search_Precision = Search_Precision_Type_Enum.Inflectional_Form;
             this.sobekCM_Item_Discovery_Panel1.Size = new System.Drawing.Size(760, 145);
             this.sobekCM_Item_Discovery_Panel1.TabIndex = 0;
             this.sobekCM_Item_Discovery_Panel1.Search_Requested += new SobekCM.Management_Tool.Controls.SobekCM_Item_Discovery_Panel.Search_Requested_Delegate(this.sobekCM_Item_Discovery_Panel1_Search_Requested);

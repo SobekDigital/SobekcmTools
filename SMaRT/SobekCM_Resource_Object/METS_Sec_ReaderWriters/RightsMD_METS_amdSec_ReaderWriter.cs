@@ -10,6 +10,7 @@ using SobekCM.Resource_Object.Metadata_Modules;
 
 namespace SobekCM.Resource_Object.METS_Sec_ReaderWriters
 {
+    /// <summary> RightsMD reader that operates against a single METS section  </summary>
     public class RightsMD_METS_amdSec_ReaderWriter : iPackage_amdSec_ReaderWriter
     {
         #region iPackage_amdSec_ReaderWriter Members
@@ -85,7 +86,7 @@ namespace SobekCM.Resource_Object.METS_Sec_ReaderWriters
             if (rightsInfo == null)
             {
                 rightsInfo = new RightsMD_Info();
-                Return_Package.Add_Metadata_Module("PalmmRightsMD", rightsInfo);
+                Return_Package.Add_Metadata_Module(GlobalVar.PALMM_RIGHTSMD_METADATA_MODULE_KEY, rightsInfo);
             }
 
             // Loop through reading each XML node

@@ -7,7 +7,8 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using DLC.Custom_Grid;
-using SobekCM.Library.Database;
+using SobekCM.Engine_Library.ApplicationState;
+using SobekCM.Engine_Library.Database;
 using SobekCM.Management_Tool.Settings;
 
 #endregion
@@ -26,7 +27,7 @@ namespace SobekCM.Management_Tool.Reports
             InitializeComponent();
             BackColor = Color.FromArgb(240, 240, 240);
 
-            DataTable sourceTable = SobekCM_Database.Items_Pending_Online_Complete;
+            DataTable sourceTable = Engine_Database.Items_Pending_Online_Complete;
 
             // Add two columns
             DataColumn accessColumn = sourceTable.Columns.Add("Access");
@@ -101,7 +102,7 @@ namespace SobekCM.Management_Tool.Reports
                 {
                     string bibid = thisRow["BibID"].ToString();
                     string vid = thisRow["VID"].ToString();
-                    string url = Library.SobekCM_Library_Settings.System_Base_URL + bibid + "/" + vid;
+                    string url = Engine_ApplicationCache_Gateway.Settings.Servers.System_Base_URL + bibid + "/" + vid;
                     Process showURL = new Process {StartInfo = {FileName = url}};
                     showURL.Start();
                 }
@@ -119,7 +120,7 @@ namespace SobekCM.Management_Tool.Reports
 
         private void refreshButton_Button_Pressed(object sender, EventArgs e)
         {
-            DataTable sourceTable = SobekCM_Database.Items_Pending_Online_Complete;
+            DataTable sourceTable = Engine_Database.Items_Pending_Online_Complete;
             iconPanel.DataTable = sourceTable;
 
             ////// Configure some individual columns

@@ -5,15 +5,17 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
+using SobekCM.Resource_Object.Behaviors;
 using SobekCM.Resource_Object.Bib_Info;
 using SobekCM.Resource_Object.Configuration;
 using SobekCM.Resource_Object.Divisions;
 using SobekCM.Resource_Object.MARC;
 using SobekCM.Resource_Object.Metadata_File_ReaderWriters;
 using SobekCM.Resource_Object.Metadata_Modules;
-using SobekCM.Resource_Object.OAI;
-using SobekCM.Resource_Object.Behaviors;
+using SobekCM.Resource_Object.OAI.Reader;
 using SobekCM.Resource_Object.Tracking;
+using SobekCM.Resource_Object.Utilities;
 
 #endregion
 
@@ -25,14 +27,14 @@ namespace SobekCM.Resource_Object
     public class SobekCM_Item : MetadataDescribableBase
     {
         // Variables hold all the main information about a digital resource
-        private METS_Header_Info metsInfo;
+        private readonly METS_Header_Info metsInfo;
         private Division_Info divInfo;        
-        private Behaviors_Info behaviorInfo;
+        private readonly Behaviors_Info behaviorInfo;
         private Tracking_Info trackingInfo;
-        private Web_Info web;
+        private readonly Web_Info web;
 
         private int total_order;
-        private double sizeKb;
+        //       private string main_thumbnail;
 
         // Flags used while editing a resource in the online SobekCM digital repository 
         private bool using_complex_template;
@@ -49,18 +51,19 @@ namespace SobekCM.Resource_Object
             metsInfo = new METS_Header_Info();
             behaviorInfo = new Behaviors_Info();
             divInfo = new Division_Info();
-            bibInfo = new Bibliographic_Info();
+            BIBInfo = new Bibliographic_Info();
             web = new Web_Info(behaviorInfo);
             analyzed_for_complex_content = false;
             contains_complex_content = false;
             using_complex_template = false;
-            sizeKb = 0;
-
+            DiskSize_KB = 0;
+  //          main_thumbnail = String.Empty;
+            
             // If there is a metadata configuration which calls for a metadata
             // extension module to always be used, add it now
-            if (Metadata_Configuration.Metadata_Modules_To_Include.Count > 0)
+            if (ResourceObjectSettings.MetadataConfig.Metadata_Modules_To_Include.Count > 0)
             {
-                foreach (Additional_Metadata_Module_Config thisConfig in Metadata_Configuration.Metadata_Modules_To_Include)
+                foreach (Additional_Metadata_Module_Config thisConfig in ResourceObjectSettings.MetadataConfig.Metadata_Modules_To_Include)
                 {
                     iMetadata_Module toInclude = thisConfig.Get_Module();
                     if (toInclude != null)
@@ -77,12 +80,12 @@ namespace SobekCM.Resource_Object
             metsInfo = new METS_Header_Info();
             behaviorInfo = new Behaviors_Info();
             divInfo = new Division_Info();
-            bibInfo = new Bibliographic_Info();
+            BIBInfo = new Bibliographic_Info();
             web = new Web_Info(behaviorInfo);
             analyzed_for_complex_content = false;
             contains_complex_content = false;
             using_complex_template = false;
-            sizeKb = 0;
+            DiskSize_KB = 0;
 
             // Copy over all the data
             if (OAI_Record.hasCreators)
@@ -204,7 +207,7 @@ namespace SobekCM.Resource_Object
                 {
                     if (Bib_Info.Main_Title.ToString().Length > 0)
                     {
-                        Bib_Info.Add_Other_Title(thistitle, Title_Type_Enum.alternative);
+                        Bib_Info.Add_Other_Title(thistitle, Title_Type_Enum.Alternative);
                     }
                     else
                     {
@@ -223,9 +226,9 @@ namespace SobekCM.Resource_Object
 
             // If there is a metadata configuration which calls for a metadata
             // extension module to always be used, add it now
-            if (Metadata_Configuration.Metadata_Modules_To_Include.Count > 0)
+            if (ResourceObjectSettings.MetadataConfig.Metadata_Modules_To_Include.Count > 0)
             {
-                foreach (Additional_Metadata_Module_Config thisConfig in Metadata_Configuration.Metadata_Modules_To_Include)
+                foreach (Additional_Metadata_Module_Config thisConfig in ResourceObjectSettings.MetadataConfig.Metadata_Modules_To_Include)
                 {
                     iMetadata_Module toInclude = thisConfig.Get_Module();
                     if (toInclude != null)
@@ -236,14 +239,20 @@ namespace SobekCM.Resource_Object
             }
         }
 
-        /// <summary> Size of the entire package on disk </summary>
-        public double DiskSize_KB
+        /// <summary> Get the pairtree folder structure from a provided BibID / VID pair </summary>
+        /// <param name="BaseDirectory"> Base directory </param>
+        /// <param name="BibID"> Provided BibID to use for creating the folder structure </param>
+        /// <param name="VID"> Provided VID to use for creating the folder structure </param>
+        /// <returns> Directory for this item, determined by the BibID and VID, under the given base directory </returns>
+        public static string Directory_From_Bib_VID(string BaseDirectory, string BibID, string VID)
         {
-            get { return sizeKb; }
-            set { sizeKb = value; }
+            string folder = BibID.Substring(0, 2) + Path.DirectorySeparatorChar + BibID.Substring(2, 2) + Path.DirectorySeparatorChar + BibID.Substring(4, 2) + Path.DirectorySeparatorChar + BibID.Substring(6, 2) + Path.DirectorySeparatorChar + BibID.Substring(8, 2) + Path.DirectorySeparatorChar + VID;
+            return Path.Combine(BaseDirectory, folder);
         }
 
- 
+        /// <summary> Size of the entire package on disk (in kilobytes ) </summary>
+        public double DiskSize_KB { get; set; }
+
 
         /// <summary> Gets a flag that indicates if the data in this item contains complex content
         /// which appears to be derived from a MARC record or otherwise have faceted elements
@@ -254,16 +263,16 @@ namespace SobekCM.Resource_Object
             {
                 if (!analyzed_for_complex_content)
                 {
-                    if (bibInfo.EncodingLevel.Length > 0)
+                    if (BIBInfo.EncodingLevel.Length > 0)
                     {
                         contains_complex_content = true;
                         analyzed_for_complex_content = true;
                         return true;
                     }
 
-                    if (bibInfo.Subjects_Count > 0)
+                    if (BIBInfo.Subjects_Count > 0)
                     {
-                        foreach (Subject_Info thisSubject in bibInfo.Subjects)
+                        foreach (Subject_Info thisSubject in BIBInfo.Subjects)
                         {
                             if (thisSubject.Class_Type == Subject_Info_Type.TitleInfo)
                             {
@@ -310,9 +319,9 @@ namespace SobekCM.Resource_Object
                         return true;
                     }
 
-                    if (bibInfo.Names_Count > 0)
+                    if (BIBInfo.Names_Count > 0)
                     {
-                        if (bibInfo.Names.Any(thisName => (thisName.Roles.Count > 1) || (thisName.Terms_Of_Address.Length > 0) || (thisName.Dates.Length > 0) || (thisName.Description.Length > 0) || (thisName.Display_Form.Length > 0) || (thisName.Family_Name.Length > 0) || (thisName.Given_Name.Length > 0)))
+                        if (BIBInfo.Names.Any(thisName => (thisName.Roles.Count > 1) || (thisName.Terms_Of_Address.Length > 0) || (thisName.Dates.Length > 0) || (thisName.Description.Length > 0) || (thisName.Display_Form.Length > 0) || (thisName.Family_Name.Length > 0) || (thisName.Given_Name.Length > 0)))
                         {
                             contains_complex_content = true;
                             analyzed_for_complex_content = true;
@@ -320,16 +329,16 @@ namespace SobekCM.Resource_Object
                         }
                     }
 
-                    if ((bibInfo.Main_Title.Authority.Length > 0) || (bibInfo.Main_Title.Display_Label.Length > 0) || (bibInfo.Main_Title.NonSort.Length > 0) || (bibInfo.Main_Title.Part_Names_Count > 0) || (bibInfo.Main_Title.Part_Numbers_Count > 0) || (bibInfo.Main_Title.Subtitle.Length > 0))
+                    if ((BIBInfo.Main_Title.Authority.Length > 0) || (BIBInfo.Main_Title.Display_Label.Length > 0) || (BIBInfo.Main_Title.NonSort.Length > 0) || (BIBInfo.Main_Title.Part_Names_Count > 0) || (BIBInfo.Main_Title.Part_Numbers_Count > 0) || (BIBInfo.Main_Title.Subtitle.Length > 0))
                     {
                         contains_complex_content = true;
                         analyzed_for_complex_content = true;
                         return true;
                     }
 
-                    if (bibInfo.Other_Titles_Count > 0)
+                    if (BIBInfo.Other_Titles_Count > 0)
                     {
-                        if (bibInfo.Other_Titles.Any(thisTitle => (thisTitle.Authority.Length > 0) || (thisTitle.Display_Label.Length > 0) || (thisTitle.NonSort.Length > 0) || (thisTitle.Part_Names_Count > 0) || (thisTitle.Part_Numbers_Count > 0) || (thisTitle.Subtitle.Length > 0)))
+                        if (BIBInfo.Other_Titles.Any(thisTitle => (thisTitle.Authority.Length > 0) || (thisTitle.Display_Label.Length > 0) || (thisTitle.NonSort.Length > 0) || (thisTitle.Part_Names_Count > 0) || (thisTitle.Part_Numbers_Count > 0) || (thisTitle.Subtitle.Length > 0)))
                         {
                             contains_complex_content = true;
                             analyzed_for_complex_content = true;
@@ -361,37 +370,37 @@ namespace SobekCM.Resource_Object
                 if (behaviorInfo.GroupTitle.Length > 0)
                     return behaviorInfo.GroupTitle;
 
-                if (bibInfo.SobekCM_Type == TypeOfResource_SobekCM_Enum.Newspaper)
+                if (BIBInfo.SobekCM_Type == TypeOfResource_SobekCM_Enum.Newspaper)
                 {
-                    if (bibInfo.Other_Titles_Count > 0)
+                    if (BIBInfo.Other_Titles_Count > 0)
                     {
-                        foreach (Title_Info otherTitle in bibInfo.Other_Titles)
+                        foreach (Title_Info otherTitle in BIBInfo.Other_Titles)
                         {
-                            if (otherTitle.Title_Type == Title_Type_Enum.uniform)
+                            if (otherTitle.Title_Type == Title_Type_Enum.Uniform)
                             {
                                 return otherTitle.ToString();
                             }
                         }
                     }
-                    if ((bibInfo.hasSeriesTitle) && (bibInfo.SeriesTitle.ToString().Length > 0))
-                        return bibInfo.SeriesTitle.ToString();
+                    if ((BIBInfo.hasSeriesTitle) && (BIBInfo.SeriesTitle.ToString().Length > 0))
+                        return BIBInfo.SeriesTitle.ToString();
                 }
                 else
                 {
-                    if ((bibInfo.hasSeriesTitle) && (bibInfo.SeriesTitle.ToString().Length > 0))
-                        return bibInfo.SeriesTitle.ToString();
-                    if (bibInfo.Other_Titles_Count > 0)
+                    if ((BIBInfo.hasSeriesTitle) && (BIBInfo.SeriesTitle.ToString().Length > 0))
+                        return BIBInfo.SeriesTitle.ToString();
+                    if (BIBInfo.Other_Titles_Count > 0)
                     {
-                        foreach (Title_Info otherTitle in bibInfo.Other_Titles)
+                        foreach (Title_Info otherTitle in BIBInfo.Other_Titles)
                         {
-                            if (otherTitle.Title_Type == Title_Type_Enum.uniform)
+                            if (otherTitle.Title_Type == Title_Type_Enum.Uniform)
                             {
                                 return otherTitle.ToString();
                             }
                         }
                     }
                 }
-                return bibInfo.Main_Title.ToString();
+                return BIBInfo.Main_Title.ToString();
             }
         }
 
@@ -400,7 +409,7 @@ namespace SobekCM.Resource_Object
         /// <param name="SobekCM_URL"> SobekCM URL for this material </param>
         public void Set_PURL(string SobekCM_URL)
         {
-            Bib_Info.Location.PURL = SobekCM_URL + "?b=" + bibInfo.BibID + "&amp;v=" + bibInfo.VID.Replace("VID", "");
+            Bib_Info.Location.PURL = SobekCM_URL + "?b=" + BIBInfo.BibID + "&amp;v=" + BIBInfo.VID.Replace("VID", "");
         }
 
         /// <summary> Saves the data stored in this instance of the 
@@ -412,6 +421,7 @@ namespace SobekCM.Resource_Object
             behaviorInfo.Set_Serial_Info(SerialInfo);
             Bib_Info.Series_Part_Info = serialHierarchyObject;
         }
+
 
         #region Public Properties
 
@@ -464,21 +474,21 @@ namespace SobekCM.Resource_Object
         /// <summary> Gets and sets the Bibliographic Identifier (BibID) associated with this resource </summary>
         public string BibID
         {
-            get { return bibInfo.BibID; }
+            get { return BIBInfo.BibID; }
             set
             {
                 web.BibID = value.ToUpper();
-                bibInfo.BibID = value.ToUpper();
+                BIBInfo.BibID = value.ToUpper();
 
                 if (value.Length > 0)
                 {
-                    if (bibInfo.VID.Length > 0)
+                    if (BIBInfo.VID.Length > 0)
                     {
-                        METS_Header.ObjectID = bibInfo.BibID + "_" + bibInfo.VID;
+                        METS_Header.ObjectID = BIBInfo.BibID + "_" + BIBInfo.VID;
                     }
                     else
                     {
-                        METS_Header.ObjectID = bibInfo.BibID;
+                        METS_Header.ObjectID = BIBInfo.BibID;
                     }
                 }
             }
@@ -487,15 +497,15 @@ namespace SobekCM.Resource_Object
         /// <summary> Gets and sets the Volume Identifier (VID) associated with this resource </summary>
         public string VID
         {
-            get { return bibInfo.VID; }
+            get { return BIBInfo.VID; }
             set
             {
                 web.VID = value;
-                bibInfo.VID = value;
+                BIBInfo.VID = value;
 
                 if (value.Length > 0)
                 {
-                    METS_Header.ObjectID = bibInfo.BibID + "_" + bibInfo.VID;
+                    METS_Header.ObjectID = BIBInfo.BibID + "_" + BIBInfo.VID;
                 }
             }
         }
@@ -894,17 +904,6 @@ namespace SobekCM.Resource_Object
                     }
                 }
 
-                // Set the related image, if they all had thumbnails
-                if (allHaveThumbs)
-                {
-                    bool relatedAlreadyThere = Behaviors.Views.Any(thisView => thisView.View_Type == View_Enum.RELATED_IMAGES);
-
-                    if (!relatedAlreadyThere)
-                    {
-                        Behaviors.Add_View(View_Enum.RELATED_IMAGES);
-                    }
-                }
-
                 // Now, step through each jpeg2000 file in the METS package directory
                 allHaveThumbs = true;
                 textFilesInDir = Directory.GetFiles(Source_Directory, "*.jp2");
@@ -932,17 +931,6 @@ namespace SobekCM.Resource_Object
                 }
 
 
-                // Set the related image, if they all had thumbnails
-                if (allHaveThumbs)
-                {
-                    bool relatedAlreadyThere2 = Behaviors.Views.Any(thisView => thisView.View_Type == View_Enum.RELATED_IMAGES);
-
-                    if (!relatedAlreadyThere2)
-                    {
-                        Behaviors.Add_View(View_Enum.RELATED_IMAGES);
-                    }
-                }
-
                 //// If there is one thumbnail, assign it
                 //int fileid = 999999;
                 //string[] thumbs = Directory.GetFiles( Source_Directory, "*thm.jpg" );
@@ -962,15 +950,6 @@ namespace SobekCM.Resource_Object
                 //        fileid--;
                 //    }
                 //}
-
-                // If this is destined for PALMM, and there is no PALMM Project, just copy 
-                // over the SobekCM Primary code
-                PALMM_Info palmmInfo = Get_Metadata_Module("PALMM") as PALMM_Info;
-                if (palmmInfo != null)
-                {
-                    if ((palmmInfo.toPALMM) && (palmmInfo.PALMM_Project.Length == 0) && (behaviorInfo.Aggregation_Count > 0))
-                        palmmInfo.PALMM_Project = behaviorInfo.Aggregations[0].Code;
-                }
 
                 // Save the old METS
                 string[] metsFiles = Directory.GetFiles(Source_Directory, "*.mets*");
@@ -1182,9 +1161,9 @@ namespace SobekCM.Resource_Object
             // If there is an interview date, use that to calculate the sort safe date
             // Ensure this metadata module extension exists and has data
             Oral_Interview_Info oralInfo = Get_Metadata_Module("OralInterview") as Oral_Interview_Info;
-            if ((oralInfo != null) && (oralInfo.Interview_Date.Length > 0) && (bibInfo.SortDate > 0))
+            if ((oralInfo != null) && (oralInfo.Interview_Date.Length > 0) && (BIBInfo.SortDate > 0))
             {
-                bibInfo.SortDate = bibInfo.sortSafeDate(oralInfo.Interview_Date);
+                BIBInfo.SortDate = BIBInfo.SortSafeDate(oralInfo.Interview_Date);
             }
 
             // Save this to the METS file format
@@ -1211,9 +1190,9 @@ namespace SobekCM.Resource_Object
             // If there is an interview date, use that to calculate the sort safe date
             // Ensure this metadata module extension exists and has data
             Oral_Interview_Info oralInfo = Get_Metadata_Module("OralInterview") as Oral_Interview_Info;
-            if ((oralInfo != null) && (oralInfo.Interview_Date.Length > 0) && (bibInfo.SortDate > 0))
+            if ((oralInfo != null) && (oralInfo.Interview_Date.Length > 0) && (BIBInfo.SortDate > 0))
             {
-                bibInfo.SortDate = bibInfo.sortSafeDate(oralInfo.Interview_Date);
+                BIBInfo.SortDate = BIBInfo.SortSafeDate(oralInfo.Interview_Date);
             }
 
             // Save this to the METS file format
@@ -1232,9 +1211,9 @@ namespace SobekCM.Resource_Object
             // If there is an interview date, use that to calculate the sort safe date
             // Ensure this metadata module extension exists and has data
             Oral_Interview_Info oralInfo = Get_Metadata_Module("OralInterview") as Oral_Interview_Info;
-            if ((oralInfo != null) && (oralInfo.Interview_Date.Length > 0) && (bibInfo.SortDate > 0))
+            if ((oralInfo != null) && (oralInfo.Interview_Date.Length > 0) && (BIBInfo.SortDate > 0))
             {
-                bibInfo.SortDate = bibInfo.sortSafeDate(oralInfo.Interview_Date);
+                BIBInfo.SortDate = BIBInfo.SortSafeDate(oralInfo.Interview_Date);
             }
 
             // Save this to the METS file format
@@ -1380,28 +1359,22 @@ namespace SobekCM.Resource_Object
         }
 
         /// <summary> Writes all the data about this item in MARC-ish HTML for display online</summary>
-        /// <param name="Collections"> List of the names of the collections linked to this item </param>
-        /// <param name="Include_Endeca_Tags"> Flag indicates whether to include tags specific to Florida's implementation of Endeca </param>
-        /// <param name="System_Name"> Name of the host system, which is added into the MARC record </param>
-        /// <param name="System_Abbreviation"> Abbreviation for the host system, which is added into the MARC record </param>
+        /// <param name="Options"> Dictionary of any options which this metadata reader/writer may utilize </param>
         /// <returns> Complete HTML as a string, ready for display </returns>
-        public string Get_MARC_HTML(List<string> Collections, bool Include_Endeca_Tags, string System_Name, string System_Abbreviation)
+        public string Get_MARC_HTML(Dictionary<string, object> Options)
         {
             MARC_HTML_Writer marcHtmlWriter = new MARC_HTML_Writer();
-            return marcHtmlWriter.MARC_HTML(this, MARC_Sobek_Standard_Tags(Collections, Include_Endeca_Tags, System_Name, System_Abbreviation));
+            return marcHtmlWriter.MARC_HTML(this, Options);
         }
 
         /// <summary> Writes all the data about this item in MARC-ish HTML for display online</summary>
-        /// <param name="Collections"> List of the names of the collections linked to this item </param>
-        /// <param name="Include_Endeca_Tags"> Flag indicates whether to include tags specific to Florida's implementation of Endeca </param>
+        /// <param name="Options"> Dictionary of any options which this metadata reader/writer may utilize </param>
         /// <param name="Width"> Width value for use within the rendered tables </param>
-        /// <param name="System_Name"> Name of the host system, which is added into the MARC record </param>
-        /// <param name="System_Abbreviation"> Abbreviation for the host system, which is added into the MARC record </param>
         /// <returns> Complete HTML as a string, ready for display </returns>
-        public string Get_MARC_HTML(List<string> Collections, bool Include_Endeca_Tags, string Width, string System_Name, string System_Abbreviation)
+        public string Get_MARC_HTML(Dictionary<string, object> Options, string Width )
         {
             MARC_HTML_Writer marcHtmlWriter = new MARC_HTML_Writer();
-            return marcHtmlWriter.MARC_HTML(this, Width, MARC_Sobek_Standard_Tags(Collections, Include_Endeca_Tags, System_Name, System_Abbreviation));
+            return marcHtmlWriter.MARC_HTML(this, Width, Options);
         }
 
         #endregion
@@ -1409,14 +1382,42 @@ namespace SobekCM.Resource_Object
         #region Method to retrieve this item as a MARC record 
 
         /// <summary> Gets the collection of MARC tags to be written for this digital resource </summary>
-        /// <value> Collection of MARC tags to be written for this digital resource </value>
+        /// <returns> Collection of MARC tags to be written for this digital resource </returns>
         public MARC_Record To_MARC_Record()
         {
+            return To_MARC_Record(null, null, null, null, null, null, null);
+        }
+
+        /// <summary> Gets the collection of MARC tags to be written for this digital resource </summary>
+        /// <param name="CatalogingSourceCode"> Cataloging source code for the 040 field, ( for example FUG for University of Florida ) </param>
+        /// <param name="LocationCode"> Location code for the 852 |a - if none is given the system abbreviation will be used. Otherwise, the system abbreviation will be put in the 852 |b field. </param>
+        /// <param name="ReproductionAgency"> Agency responsible for reproduction, or primary agency associated with the SobekCM instance ( for the added 533 |c field ) </param>
+        /// <param name="ReproductionPlace"> Place of reproduction, or primary location associated with the SobekCM instance ( for the added 533 |b field ) </param>
+        /// <param name="SystemName"> Name used for this SobekCM (or otherwise) digital repository system </param>
+        /// <param name="SystemAbbreviation"> Abbrevation used for this SobekCM (or otherwise) digital repository system </param>
+        /// <param name="ThumbnailBase"> Base URL for the thumbnail to be included</param>
+        /// <returns> Collection of MARC tags to be written for this digital resource </returns>
+        public MARC_Record To_MARC_Record(string CatalogingSourceCode, string LocationCode, string ReproductionAgency, string ReproductionPlace, string SystemName, string SystemAbbreviation, string ThumbnailBase )
+        {
+            // Find the first aggregation name
+            string first_aggr_name = String.Empty;
+            if (Behaviors.Aggregation_Count > 0)
+            {
+                foreach (Aggregation_Info thisAggr in Behaviors.Aggregations)
+                {
+                    if (( String.Compare(thisAggr.Code, "ALL", true) != 0 ) && (( String.IsNullOrEmpty(thisAggr.Type)) || (thisAggr.Type.IndexOf("INSTITUT", StringComparison.InvariantCultureIgnoreCase) < 0)))
+                    {
+                        first_aggr_name = thisAggr.Name;
+                        break;
+                    }
+                }
+            }
+
             // Create the sorted list
             MARC_Record tags = new MARC_Record();
 
             // Compute the sobekcm type, which will be used for some of these mappings
-            TypeOfResource_SobekCM_Enum sobekcm_type = bibInfo.SobekCM_Type;
+            TypeOfResource_SobekCM_Enum sobekcm_type = BIBInfo.SobekCM_Type;
 
             // Build a hashtable of all the pertinent genres
             Dictionary<string, string> genreHash = new Dictionary<string, string>();
@@ -1497,21 +1498,21 @@ namespace SobekCM.Resource_Object
             tags.Add_Field(new MARC_Field(7, "  ", bldr007.ToString()));
 
             // ADD THE MAIN ENTITY NAME
-            if ((Bib_Info.hasMainEntityName) && (Bib_Info.Main_Entity_Name.Full_Name.Length > 0))
+            if (Bib_Info.hasMainEntityName) 
             {
                 MARC_Field main_entity_marc = Bib_Info.Main_Entity_Name.to_MARC_HTML(false);
 
                 switch (Bib_Info.Main_Entity_Name.Name_Type)
                 {
-                    case Name_Info_Type_Enum.personal:
+                    case Name_Info_Type_Enum.Personal:
                         main_entity_marc.Tag = 100;
                         break;
 
-                    case Name_Info_Type_Enum.corporate:
+                    case Name_Info_Type_Enum.Corporate:
                         main_entity_marc.Tag = 110;
                         break;
 
-                    case Name_Info_Type_Enum.conference:
+                    case Name_Info_Type_Enum.Conference:
                         main_entity_marc.Tag = 111;
                         break;
 
@@ -1527,21 +1528,21 @@ namespace SobekCM.Resource_Object
             {
                 foreach (Name_Info name in Bib_Info.Names)
                 {
-                    if (name.Full_Name.Length > 0)
+                    if ((!String.IsNullOrEmpty(name.Full_Name)) || (!String.IsNullOrEmpty(name.Given_Name)) || (!String.IsNullOrEmpty(name.Family_Name)))
                     {
                         MARC_Field name_marc = name.to_MARC_HTML(false);
 
                         switch (name.Name_Type)
                         {
-                            case Name_Info_Type_Enum.personal:
+                            case Name_Info_Type_Enum.Personal:
                                 name_marc.Tag = 700;
                                 break;
 
-                            case Name_Info_Type_Enum.corporate:
+                            case Name_Info_Type_Enum.Corporate:
                                 name_marc.Tag = 710;
                                 break;
 
-                            case Name_Info_Type_Enum.conference:
+                            case Name_Info_Type_Enum.Conference:
                                 name_marc.Tag = 711;
                                 break;
 
@@ -1562,15 +1563,15 @@ namespace SobekCM.Resource_Object
 
                 switch (Bib_Info.Donor.Name_Type)
                 {
-                    case Name_Info_Type_Enum.personal:
+                    case Name_Info_Type_Enum.Personal:
                     case Name_Info_Type_Enum.UNKNOWN:
                         donor_marc.Indicators = donor_marc.Indicators[0] + "3";
                         donor_marc.Tag = 796;
                         tags.Add_Field(donor_marc);
                         break;
 
-                    case Name_Info_Type_Enum.corporate:
-                    case Name_Info_Type_Enum.conference:
+                    case Name_Info_Type_Enum.Corporate:
+                    case Name_Info_Type_Enum.Conference:
                         donor_marc.Indicators = donor_marc.Indicators[0] + "3";
                         donor_marc.Tag = 797;
                         tags.Add_Field(donor_marc);
@@ -1732,7 +1733,7 @@ namespace SobekCM.Resource_Object
             bool another_version_exists = false;
             if (Bib_Info.RelatedItems_Count > 0)
             {
-                if (Bib_Info.RelatedItems.Where(relatedItem => relatedItem.URL.Length > 0).Any(relatedItem => relatedItem.Relationship == Related_Item_Type_Enum.otherVersion))
+                if (Bib_Info.RelatedItems.Where(relatedItem => relatedItem.URL.Length > 0).Any(relatedItem => relatedItem.Relationship == Related_Item_Type_Enum.OtherVersion))
                 {
                     another_version_exists = true;
                 }
@@ -1748,16 +1749,16 @@ namespace SobekCM.Resource_Object
                 {
                     switch (thisNote.Note_Type)
                     {
-                        case Note_Type_Enum.statement_of_responsibility:
+                        case Note_Type_Enum.StatementOfResponsibility:
                             statement_of_responsibility = thisNote.Note;
                             break;
 
-                        case Note_Type_Enum.electronic_access:
+                        case Note_Type_Enum.ElectronicAccess:
                             electronic_access_note = thisNote.Note;
                             break;
 
-                        case Note_Type_Enum.publication_status:
-                        case Note_Type_Enum.internal_comments:
+                        case Note_Type_Enum.PublicationStatus:
+                        case Note_Type_Enum.InternalComments:
                             // DO nothing 
                             break;
 
@@ -1768,7 +1769,7 @@ namespace SobekCM.Resource_Object
                 }
             }
 
-            // Add an 856 pointing to eitther ufdc or dloc first
+            // Add an 856 pointing to this item first
             MARC_Field tag856 = new MARC_Field {Tag = 856, Indicators = "40"};
             string url = Bib_Info.Location.PURL;
             if (url.Length == 0)
@@ -1778,12 +1779,12 @@ namespace SobekCM.Resource_Object
             string linkText = "Electronic Resource";
             if ((Bib_Info.Type.MODS_Type == TypeOfResource_MODS_Enum.Text))
                 linkText = "Click here for full text";
-            if (another_version_exists)
+            if ((another_version_exists) && ( SystemAbbreviation.Length > 0 ))
             {
                 if (electronic_access_note.Length > 0)
-                    tag856.Control_Field_Value = "|3 UFDC Version |u " + url + " |y " + linkText + " |z " + electronic_access_note;
+                    tag856.Control_Field_Value = "|3 " + SystemAbbreviation + " Version |u " + url + " |y " + linkText + " |z " + electronic_access_note;
                 else
-                    tag856.Control_Field_Value = "|3 UFDC Version |u " + url + " |y " + linkText;
+                    tag856.Control_Field_Value = "|3 " + SystemAbbreviation + " Version |u " + url + " |y " + linkText;
             }
             else
             {
@@ -1806,7 +1807,7 @@ namespace SobekCM.Resource_Object
                     if (relatedItem.URL.Length > 0)
                     {
                         MARC_Field linking_tag = new MARC_Field {Tag = 856, Indicators = "42"};
-                        if (relatedItem.Relationship == Related_Item_Type_Enum.otherVersion)
+                        if (relatedItem.Relationship == Related_Item_Type_Enum.OtherVersion)
                             linking_tag.Indicators = "41";
 
                         StringBuilder linking856_builder = new StringBuilder();
@@ -1818,23 +1819,23 @@ namespace SobekCM.Resource_Object
                         {
                             switch (relatedItem.Relationship)
                             {
-                                case Related_Item_Type_Enum.host:
+                                case Related_Item_Type_Enum.Host:
                                     linking856_builder.Append("|3 Host material ");
                                     break;
 
-                                case Related_Item_Type_Enum.otherFormat:
+                                case Related_Item_Type_Enum.OtherFormat:
                                     linking856_builder.Append("|3 Other format ");
                                     break;
 
-                                case Related_Item_Type_Enum.otherVersion:
+                                case Related_Item_Type_Enum.OtherVersion:
                                     linking856_builder.Append("|3 Other version ");
                                     break;
 
-                                case Related_Item_Type_Enum.preceding:
+                                case Related_Item_Type_Enum.Preceding:
                                     linking856_builder.Append("|3 Preceded by ");
                                     break;
 
-                                case Related_Item_Type_Enum.succeeding:
+                                case Related_Item_Type_Enum.Succeeding:
                                     linking856_builder.Append("|3 Succeeded by ");
                                     break;
 
@@ -1923,10 +1924,38 @@ namespace SobekCM.Resource_Object
             //}
 
             // Add the NEW cataloging source information
-            MARC_Field catSource = new MARC_Field {Tag = 40, Indicators = "  ", Control_Field_Value = "|a FUG |c FUG"};
-            if (bibInfo.Record.Description_Standard.Length > 0)
-                catSource.Control_Field_Value = catSource.Control_Field_Value + " |e " + bibInfo.Record.Description_Standard.ToLower();
-            tags.Add_Field(catSource);
+            if ((!String.IsNullOrEmpty(CatalogingSourceCode)) || ( Bib_Info.Record.MARC_Record_Content_Sources_Count > 0 ))
+            {
+
+                MARC_Field catSource = new MARC_Field { Tag = 40, Indicators = "  " };
+
+                StringBuilder catSourceBuilder = new StringBuilder();
+                if (Bib_Info.Record.MARC_Record_Content_Sources_Count > 0)
+                {
+                    bool a_added = false;
+                    foreach (string thisSource in Bib_Info.Record.MARC_Record_Content_Sources)
+                    {
+                        if (!a_added)
+                        {
+                            catSourceBuilder.Append("|a " + thisSource);
+                            a_added = true;
+                        }
+                        else
+                        {
+                            catSourceBuilder.Append(" |d " + thisSource);
+                        }
+                    }
+                }
+                else
+                {
+                    catSourceBuilder.Append("|a " + CatalogingSourceCode.Trim() + " |c " + CatalogingSourceCode.Trim());
+                }
+
+                if (BIBInfo.Record.Description_Standard.Length > 0)
+                    catSourceBuilder.Append(" |e " + BIBInfo.Record.Description_Standard.ToLower());
+                catSource.Control_Field_Value = catSourceBuilder.ToString();
+                tags.Add_Field(catSource);
+            }
 
 
             // ADD THE ABSTRACTS
@@ -2200,7 +2229,20 @@ namespace SobekCM.Resource_Object
             // ADD THE RIGHTS 
             if (Bib_Info.Access_Condition.Text.Length > 0)
             {
-                tags.Add_Field(String.Compare(Bib_Info.Access_Condition.Type, "use and reproduction", StringComparison.OrdinalIgnoreCase) == 0 ? 540 : 506, "  ", "|a " + Bib_Info.Access_Condition.Text);
+                if (String.Compare(Bib_Info.Access_Condition.Type, "use and reproduction", StringComparison.OrdinalIgnoreCase) == 0)
+                {
+                    if ( Bib_Info.Access_Condition.Text.IndexOf("http") == 0 )
+                        tags.Add_Field(540, "  ", "|u " + Bib_Info.Access_Condition.Text);
+                    else
+                        tags.Add_Field(540, "  ", "|a " + Bib_Info.Access_Condition.Text);
+                }
+                else
+                {
+                    if (Bib_Info.Access_Condition.Text.IndexOf("http") == 0)
+                        tags.Add_Field(506, "  ", "|u " + Bib_Info.Access_Condition.Text);
+                    else
+                        tags.Add_Field(506, "  ", "|a " + Bib_Info.Access_Condition.Text);
+                }
             }
 
             // ADD THE HOLDING LOCATION
@@ -2846,6 +2888,85 @@ namespace SobekCM.Resource_Object
 
             #endregion
 
+			#region Visual Material Specific 008 Values
+
+			if (sobekcm_type == TypeOfResource_SobekCM_Enum.Dataset) 
+			{
+				// Undefined (008/18-21)
+				builder008.Append("    ");
+
+				// Target Audience (008/22)
+				int visual_target_audiences = 0;
+				if (Bib_Info.Target_Audiences_Count > 0)
+				{
+					foreach (TargetAudience_Info thisTarget in Bib_Info.Target_Audiences)
+					{
+						if (thisTarget.Authority == "marctarget")
+						{
+							add_value(thisTarget.Audience == "adolescent", 'd', ref visual_target_audiences, 1, builder008);
+							add_value(thisTarget.Audience == "adult", 'e', ref visual_target_audiences, 1, builder008);
+							add_value(thisTarget.Audience == "general", 'g', ref visual_target_audiences, 1, builder008);
+							add_value(thisTarget.Audience == "primary", 'b', ref visual_target_audiences, 1, builder008);
+							add_value(thisTarget.Audience == "pre-adolescent", 'c', ref visual_target_audiences, 1, builder008);
+							add_value(thisTarget.Audience == "juvenile", 'j', ref visual_target_audiences, 1, builder008);
+							add_value(thisTarget.Audience == "preschool", 'a', ref visual_target_audiences, 1, builder008);
+							add_value(thisTarget.Audience == "specialized", 'f', ref visual_target_audiences, 1, builder008);
+						}
+					}
+				}
+				if (visual_target_audiences == 0)
+					builder008.Append(" ");
+
+				// Form of item (008/23) (unknown or not specified)
+				builder008.Append(" ");
+
+				// Undefined (008/24-25)
+				builder008.Append("  ");
+
+				// Type of computer file (008/26)
+				builder008.Append(" ");
+				int computer_file_type = 0;
+				add_value(genreHash.ContainsKey("numeric data"), 'c', ref computer_file_type, 1, builder008);
+				add_value(genreHash.ContainsKey("computer program"), 'f', ref computer_file_type, 1, builder008);
+				add_value(genreHash.ContainsKey("representational"), 'i', ref computer_file_type, 1, builder008);
+				add_value(genreHash.ContainsKey("document"), 'l', ref computer_file_type, 1, builder008);
+				add_value(genreHash.ContainsKey("bibliographic data"), 'm', ref computer_file_type, 1, builder008);
+				add_value(genreHash.ContainsKey("font"), 'o', ref computer_file_type, 1, builder008);
+				add_value(genreHash.ContainsKey("game"), 's', ref computer_file_type, 1, builder008);
+				add_value(genreHash.ContainsKey("sound"), 'a', ref computer_file_type, 1, builder008);
+				add_value(genreHash.ContainsKey("interactive multimedia"), 'm', ref computer_file_type, 1, builder008);
+				add_value(genreHash.ContainsKey("online system or service"), 'o', ref computer_file_type, 1, builder008);
+				add_value(genreHash.ContainsKey("combination"), 's', ref computer_file_type, 1, builder008);
+				add_value(genreHash.ContainsKey("other computer file"), 'a', ref computer_file_type, 1, builder008);
+				if (computer_file_type == 0)
+				{
+					builder008.Append(" ");
+				}
+
+				// Undefined (008/27)
+				builder008.Append(" ");
+
+				// Is this a government publication? (008/28)
+				int visual_govt_publication = 0;
+				add_value(genreHash.ContainsKey("multilocal government publication"), 'c', ref visual_govt_publication, 1, builder008);
+				add_value(genreHash.ContainsKey("federal government publication"), 'f', ref visual_govt_publication, 1, builder008);
+				add_value(genreHash.ContainsKey("international intergovernmental publication"), 'i', ref visual_govt_publication, 1, builder008);
+				add_value(genreHash.ContainsKey("local government publication"), 'l', ref visual_govt_publication, 1, builder008);
+				add_value(genreHash.ContainsKey("multistate government publication"), 'm', ref visual_govt_publication, 1, builder008);
+				add_value(genreHash.ContainsKey("government publication"), 'o', ref visual_govt_publication, 1, builder008);
+				add_value(genreHash.ContainsKey("government publication (state, provincial, terriorial, dependent)"), 's', ref visual_govt_publication, 1, builder008);
+				add_value(genreHash.ContainsKey("government publication (autonomous or semiautonomous component)"), 'a', ref visual_govt_publication, 1, builder008);
+				if (visual_govt_publication == 0)
+				{
+					builder008.Append(" ");
+				}
+
+				// Undefined (008/29-34)
+				builder008.Append("      ");
+			}
+
+			#endregion
+
             if (sobekcm_type == TypeOfResource_SobekCM_Enum.Archival)
             {
                 // Treat as MIXED material
@@ -2853,7 +2974,7 @@ namespace SobekCM.Resource_Object
             }
 
             // For any other type, just use spaces
-            if ((sobekcm_type != TypeOfResource_SobekCM_Enum.Book) && (sobekcm_type != TypeOfResource_SobekCM_Enum.Map) && (sobekcm_type != TypeOfResource_SobekCM_Enum.Newspaper) && (sobekcm_type != TypeOfResource_SobekCM_Enum.Serial) && (sobekcm_type != TypeOfResource_SobekCM_Enum.Aerial) && (sobekcm_type != TypeOfResource_SobekCM_Enum.Photograph) && (sobekcm_type != TypeOfResource_SobekCM_Enum.Audio) && (sobekcm_type != TypeOfResource_SobekCM_Enum.Video) && (sobekcm_type != TypeOfResource_SobekCM_Enum.Artifact) && (sobekcm_type != TypeOfResource_SobekCM_Enum.Archival))
+            if ((sobekcm_type != TypeOfResource_SobekCM_Enum.Book) && (sobekcm_type != TypeOfResource_SobekCM_Enum.Map) && (sobekcm_type != TypeOfResource_SobekCM_Enum.Newspaper) && (sobekcm_type != TypeOfResource_SobekCM_Enum.Serial) && (sobekcm_type != TypeOfResource_SobekCM_Enum.Aerial) && (sobekcm_type != TypeOfResource_SobekCM_Enum.Photograph) && (sobekcm_type != TypeOfResource_SobekCM_Enum.Audio) && (sobekcm_type != TypeOfResource_SobekCM_Enum.Video) && (sobekcm_type != TypeOfResource_SobekCM_Enum.Artifact) && (sobekcm_type != TypeOfResource_SobekCM_Enum.Archival) && ( sobekcm_type != TypeOfResource_SobekCM_Enum.Dataset ))
             {
                 builder008.Append("     s           ");
             }
@@ -2886,6 +3007,164 @@ namespace SobekCM.Resource_Object
 
             fixedField008.Control_Field_Value = builder008.ToString();
             tags.Add_Field(fixedField008);
+
+            // Add the system name also as a 830 (before the collections)
+            if (!String.IsNullOrEmpty(SystemName))
+            {
+                tags.Add_Field(new MARC_Field(830, " 0", "|a " + SystemName + "."));
+            }
+
+            // Add the collection name as well ( Was getting duplicates here sometimes )
+            if (Behaviors.Aggregations != null)
+            {
+                List<string> added_already = new List<string>();
+                foreach (Aggregation_Info thisAggr in Behaviors.Aggregations)
+                {
+                    if (( String.Compare(thisAggr.Code,"ALL", true ) != 0 ) && (( String.IsNullOrEmpty(thisAggr.Type)) || (thisAggr.Type.IndexOf("INSTITUT", StringComparison.InvariantCultureIgnoreCase) < 0)))
+                    {
+                        string collection = thisAggr.Name;
+                        if (String.IsNullOrEmpty(collection)) collection = thisAggr.Code;
+
+                        if (!added_already.Contains(collection.ToUpper().Trim()))
+                        {
+                            if (collection.Trim().Length > 0)
+                            {
+                                added_already.Add(collection.ToUpper().Trim());
+                                tags.Add_Field(new MARC_Field(830, " 0", "|a " + collection + "."));
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Add the thumbnail link (992)
+            if ((Behaviors.Main_Thumbnail.Length > 0) && (!Behaviors.Dark_Flag))
+            {
+
+                string thumbnail_link = Path.Combine(web.Source_URL, Behaviors.Main_Thumbnail);
+
+                if (!String.IsNullOrEmpty(ThumbnailBase))
+                {
+                    thumbnail_link = Path.Combine(ThumbnailBase, thumbnail_link);
+                }
+
+
+                tags.Add_Field(new MARC_Field(992, "04", "|a " + thumbnail_link.Replace("\\", "/").Replace("//", "/").Replace("http:/", "http://")));
+            }
+
+            // Was this born digital?  in which case this is NOT an electronic reproduction, so
+            // leave out the 533 field
+            bool borndigital = Bib_Info.Genres.Any(ThisGenre => (ThisGenre.Authority == "sobekcm") && (ThisGenre.Genre_Term == "born-digital"));
+            if (!borndigital)
+            {
+                MARC_Field tag533 = new MARC_Field { Tag = 533, Indicators = "  " };
+                StringBuilder builder533 = new StringBuilder(100);
+                builder533.Append("|a Electronic reproduction. ");
+
+                if ( !String.IsNullOrEmpty(ReproductionPlace))
+                    builder533.Append("|b " + ReproductionPlace + " : ");
+
+                List<string> agencies = new List<string>();
+                if (!String.IsNullOrEmpty(ReproductionAgency))
+                {
+                    builder533.Append("|c " + ReproductionAgency + ", ");
+                    agencies.Add(ReproductionAgency);
+                }
+
+                // Add the source statement as another agency possibly
+                if (!String.IsNullOrEmpty(Bib_Info.Source.Statement))
+                {
+                    string source_statement = Bib_Info.Source.Statement;
+
+                    // determine if this is a subset of any existing agency, or vice versa
+                    bool found = false;
+                    foreach (string thisAgency in agencies)
+                    {
+                        if ((source_statement.IndexOf(thisAgency, StringComparison.InvariantCultureIgnoreCase) >= 0) || (thisAgency.IndexOf(source_statement, StringComparison.InvariantCultureIgnoreCase) >= 0))
+                        {
+                            found = true;
+                            break;
+                        }
+                    }
+
+                    if (!found)
+                    {
+                        builder533.Append("|c " + source_statement + ", ");
+                        agencies.Add(source_statement);
+                    }
+                }
+
+                // Add the source statement as another agency possibly
+                if ((Bib_Info.hasLocationInformation) && (Bib_Info.Location.Holding_Code != Bib_Info.Source.Code) && (!String.IsNullOrEmpty(Bib_Info.Location.Holding_Name)))
+                {
+                    string holding_statement = Bib_Info.Location.Holding_Name;
+
+                    // determine if this is a subset of any existing agency, or vice versa
+                    bool found = false;
+                    foreach (string thisAgency in agencies)
+                    {
+                        if ((holding_statement.IndexOf(thisAgency, StringComparison.InvariantCultureIgnoreCase) >= 0) || (thisAgency.IndexOf(holding_statement, StringComparison.InvariantCultureIgnoreCase) >= 0))
+                        {
+                            found = true;
+                            break;
+                        }
+                    }
+
+                    if (!found)
+                    {
+                        builder533.Append("|c " + holding_statement + ", ");
+                        agencies.Add(holding_statement);
+                    }
+                }
+
+                builder533.Append("|d " + METS_Header.Create_Date.Year + ". ");
+                if (!String.IsNullOrEmpty(SystemName))
+                {
+                    builder533.Append("|f (" + SystemName + ") ");
+                }
+                //foreach (string collection in Collection_Names)
+                //{
+                //    if (collection.Trim().Length > 0)
+                //    {
+                //        builder533.Append(" |f (" + collection + ")");
+                //    }
+                //}
+                builder533.Append("|n Mode of access: World Wide Web.  |n System requirements: Internet connectivity; Web browser software.");
+                tag533.Control_Field_Value = builder533.ToString();
+                tags.Add_Field(tag533);
+            }
+
+
+
+            // Add the endeca only tags
+            if (( !String.IsNullOrEmpty(SystemAbbreviation)) || ( !String.IsNullOrEmpty(LocationCode)))
+            {
+                // Add the 852
+                MARC_Field tag852 = new MARC_Field { Tag = 852, Indicators = "  " };
+                StringBuilder builder852 = new StringBuilder(100);
+
+                if (!String.IsNullOrEmpty(LocationCode))
+                {
+                    builder852.Append("|a " + LocationCode + " ");
+                    if (!String.IsNullOrEmpty(SystemAbbreviation))
+                        builder852.Append("|b " + SystemAbbreviation);
+                }
+                else
+                {
+                    builder852.Append("|a " + SystemAbbreviation);
+                }
+
+                if ( !String.IsNullOrEmpty(first_aggr_name))
+                    builder852.Append(" |c " + first_aggr_name);
+                tag852.Control_Field_Value = builder852.ToString();
+                tags.Add_Field(tag852);
+            }
+
+            // Add the collection name in the Endeca spot (997)
+            if (!String.IsNullOrEmpty(first_aggr_name))
+            {
+                tags.Add_Field(new MARC_Field(997, "  ", "|a " + first_aggr_name));
+            }
 
             // Now, set the leader
             tags.Leader = MARC_Leader();
@@ -2944,6 +3223,10 @@ namespace SobekCM.Resource_Object
                 case TypeOfResource_SobekCM_Enum.Artifact:
                     type_string = "rm";
                     break;
+
+				case TypeOfResource_SobekCM_Enum.Dataset:
+		            type_string = "mm";
+		            break;
             }
 
             // Per betsy, do not include the original encoding level.. always '3'
@@ -2958,125 +3241,6 @@ namespace SobekCM.Resource_Object
             }
 
             //return total_length_string + "n" + type_string + "  22" + total_directory_string + "3a 4500";
-        }
-
-        /// <summary> Gets the SobekCM-specific tags to be written for this digital resource </summary>
-        /// <param name="Collection_Name"> Item aggregation name this digital resource is associated with </param>
-        /// <param name="include_endeca_tags"> Flag indicates whether Endeca-specific tags should also be written </param>
-        /// <param name="system_name"> Name of the host system, which is added into the MARC record </param>
-        /// <param name="system_abbrev"> Abbreviation for the host system, which is added into the MARC record </param>
-        /// <returns> Collection of MARC tags to be written for this digital resource </returns>
-        public List<MARC_Field> MARC_Sobek_Standard_Tags(string Collection_Name, bool include_endeca_tags, string system_name, string system_abbrev)
-        {
-            List<string> collections = new List<string>();
-            if (Collection_Name.Trim().Length > 0)
-            {
-                collections.Add(Collection_Name);
-            }
-            return MARC_Sobek_Standard_Tags(collections, include_endeca_tags, system_name, system_abbrev);
-        }
-
-        /// <summary> Gets the SobekCM-specific tags to be written for this digital resource </summary>
-        /// <param name="Collection_Names"> Collection of all the item aggregation names this digital resource is associated with </param>
-        /// <param name="include_endeca_tags"> Flag indicates whether Endeca-specific tags should also be written </param>
-        /// <param name="system_name"> Name of the host system, which is added into the MARC record </param>
-        /// <param name="system_abbrev"> Abbreviation for the host system, which is added into the MARC record </param>
-        /// <returns> Collection of MARC tags to be written for this digital resource </returns>
-        public List<MARC_Field> MARC_Sobek_Standard_Tags(List<string> Collection_Names, bool include_endeca_tags, string system_name, string system_abbrev)
-        {
-            // Start to build the list of additional tags
-            List<MARC_Field> tag_list = new List<MARC_Field>();
-
-            if (system_name.Length > 0)
-            {
-                tag_list.Add(new MARC_Field(830, " 0", "|a " + system_name + "."));
-            }
-
-            // Was this born digital?  in which case this is NOT an electronic reproduction, so
-            // leave out the 533 field
-            bool borndigital = Bib_Info.Genres.Any(thisGenre => (thisGenre.Authority == "sobekcm") && (thisGenre.Genre_Term == "born-digital"));
-            if (!borndigital)
-            {
-                MARC_Field tag533 = new MARC_Field {Tag = 533, Indicators = "  "};
-                StringBuilder builder533 = new StringBuilder(100);
-                builder533.Append("|a Electronic reproduction. ");
-                if (Bib_Info.BibID.IndexOf("UF") == 0)
-                    builder533.Append("|b Gainesville, Fla. : |c University of Florida, George A. Smathers Libraries, ");
-
-                if (Bib_Info.Source.Code.IndexOf("UF") < 0)
-                {
-                    builder533.Append("|c " + Bib_Info.Source.Statement + ", ");
-                }
-
-                if ((Bib_Info.hasLocationInformation) && (Bib_Info.Location.Holding_Code.IndexOf("UF") < 0) && (Bib_Info.Location.Holding_Code != Bib_Info.Source.Code))
-                {
-                    builder533.Append("|c " + Bib_Info.Location.Holding_Name + ", ");
-                }
-
-                builder533.Append("|d " + METS_Header.Create_Date.Year + ". ");
-                if (system_name.Length > 0)
-                {
-                    builder533.Append("|f (" + system_name + ")");
-                }
-                foreach (string collection in Collection_Names)
-                {
-                    if (collection.Trim().Length > 0)
-                    {
-                        builder533.Append(" |f (" + collection + ")");
-                    }
-                }
-                builder533.Append("|n Mode of access: World Wide Web.  |n System requirements: Internet connectivity; Web browser software.");
-                tag533.Control_Field_Value = builder533.ToString();
-                tag_list.Add(tag533);
-            }
-
-            // Add the collection name as well ( Was getting duplicates here sometimes )
-            List<string> added_already = new List<string>();
-            foreach (string collection in Collection_Names)
-            {
-                if (!added_already.Contains(collection.ToUpper().Trim()))
-                {
-                    if (collection.Trim().Length > 0)
-                    {
-                        added_already.Add(collection.ToUpper().Trim());
-                        tag_list.Add(new MARC_Field(830, " 0", "|a " + collection + "."));
-                    }
-                }
-            }
-
-            // REMOVED PER JIMMIE ( January 2010 )
-            //tag_list.Add_Tag("530", "  ", "|a Also available in print.");
-
-
-            // Add the endeca only tags
-            if (include_endeca_tags)
-            {
-                // Add the thumbnail link (992)
-                if ((Behaviors.Main_Thumbnail.Length > 0) && (!Behaviors.Dark_Flag))
-                {
-                    string thumbnail_link = web.Source_URL + "/" + Behaviors.Main_Thumbnail;
-                    tag_list.Add(new MARC_Field(992, "04", "|a " + thumbnail_link.Replace("\\", "/").Replace("//", "/").Replace("http:/", "http://")));
-                }
-
-                // Add the 852
-                MARC_Field tag852 = new MARC_Field {Tag = 852, Indicators = "  "};
-                StringBuilder builder852 = new StringBuilder(100);
-                builder852.Append("|a SUS01:;:;: ");
-                if (system_abbrev.Length > 0)
-                    builder852.Append("|b " + system_abbrev);
-                if (Behaviors.Aggregation_Count > 0)
-                    builder852.Append(" |c " + Behaviors.Aggregations[0].Name);
-                tag852.Control_Field_Value = builder852.ToString();
-                tag_list.Add(tag852);
-
-                // Add the collection name in the Endeca spot (997)
-                if (Collection_Names.Count > 0)
-                {
-                    tag_list.Add(new MARC_Field(997, "  ", "|a " + Collection_Names[0]));
-                }
-            }
-
-            return tag_list;
         }
 
         #endregion
@@ -3247,6 +3411,41 @@ namespace SobekCM.Resource_Object
             }
 
             return level > 1;
+        }
+
+        #endregion
+
+        #region Method checks to see if a string is in valid BIbID or VId format
+
+        /// <summary> Gets the length of the bib id </summary>
+        private const int Bib_Length = 10;
+
+        /// <summary> Gest the lenght of the vids </summary>
+        private const int Vids_Length = 5;
+
+
+        /// <summary> Gets a flag indicating if the provided string appears to be in bib id format </summary>
+        /// <param name="TestString"> string to check for bib id format </param>
+        /// <returns> TRUE if this string appears to be in bib id format, otherwise FALSE </returns>
+        public static bool is_bibid_format(string TestString)
+        {
+            // Must be 10 characters long to start with
+            if (TestString.Length != Bib_Length)
+                return false;
+
+            // Use regular expressions to check format
+            Regex myReg = new Regex("[A-Z]{2}[A-Z|0-9]{4}[0-9]{4}");
+            return myReg.IsMatch(TestString.ToUpper());
+        }
+
+        /// <summary> Static method to set if a string is a vid VIDS format</summary>
+        /// <param name="TestString"> string to check for vid VIDS format</param>
+        /// <returns>TRUE if this string appears to be in VID format, otherwise FALSE</returns>
+        public static bool is_vids_format(string TestString)
+        {
+            if (TestString.Length != Vids_Length)
+                return false;
+            return Regex.Match(TestString.ToUpper(), @"^[0-9]{5}$").Success;
         }
 
         #endregion

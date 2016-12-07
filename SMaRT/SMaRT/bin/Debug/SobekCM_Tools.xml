@@ -4,12 +4,172 @@
         <name>SobekCM_Tools</name>
     </assembly>
     <members>
-        <member name="T:SobekCM.Tools.Logs.LogFileXHTML">
+        <member name="T:SobekCM.Tools.Custom_Trace_Type_Enum">
+            <summary> Enumeration tells the type of trace message </summary>
+        </member>
+        <member name="F:SobekCM.Tools.Custom_Trace_Type_Enum.Normal">
+            <summary> This is a NORMAL trace message </summary>
+        </member>
+        <member name="F:SobekCM.Tools.Custom_Trace_Type_Enum.Error">
+            <summary> This is an ERROR trace message </summary>
+        </member>
+        <member name="T:SobekCM.Tools.Custom_Tracer">
+            <summary> Traces execution of a SobekCM query through construction of the various classes and rendering of HTML and controls </summary>
+            <remarks> This class allows a trace route to be written at the bottom of the server HTML page </remarks>
+        </member>
+        <member name="M:SobekCM.Tools.Custom_Tracer.#ctor">
+            <summary> Constructor for a new instance of the Custom_Tracer class </summary>
+        </member>
+        <member name="M:SobekCM.Tools.Custom_Tracer.Add_Trace(System.String)">
+            <summary> Adds a trace message to the building list of traces </summary>
+            <param name="Method">Method from which this trace call was executed</param>
+        </member>
+        <member name="M:SobekCM.Tools.Custom_Tracer.Add_Trace(System.String,System.String)">
+            <summary> Adds a trace message to the building list of traces </summary>
+            <param name="Method">Method from which this trace call was executed</param>
+            <param name="Message">Message to add to trace</param>
+        </member>
+        <member name="M:SobekCM.Tools.Custom_Tracer.Add_Trace(System.String,System.String,SobekCM.Tools.Custom_Trace_Type_Enum)">
+            <summary> Adds a trace message to the building list of traces </summary>
+            <param name="Method">Method from which this trace call was executed</param>
+            <param name="Message">Message to add to trace</param>
+            <param name="Message_Type">Type of message</param>
+        </member>
+        <member name="M:SobekCM.Tools.Custom_Tracer.Clear">
+            <summary> Clears this trace route and resets the elapsed timer </summary>
+            <remarks> This is generally called when creating static HTML pages through the Builder application, to prevent
+            the trace object from getting astronomically large </remarks>
+        </member>
+        <member name="P:SobekCM.Tools.Custom_Tracer.Milliseconds">
+            <summary> Number of milliseconds since execution began </summary>
+        </member>
+        <member name="P:SobekCM.Tools.Custom_Tracer.Enabled">
+            <summary> Flag which indicates whether this class is enabled </summary>
+        </member>
+        <member name="P:SobekCM.Tools.Custom_Tracer.Complete_Trace">
+            <summary> Gets the complete trace route, as an HTML table </summary>
+        </member>
+        <member name="P:SobekCM.Tools.Custom_Tracer.Text_Trace">
+            <summary> Returns the complete trace route as simple text </summary>
+            <remarks> Since the trace is actually built as HTML, this must remove the html tags from the trace route</remarks>
+        </member>
+        <member name="T:SobekCM.Tools.DateTime_Helper">
+            <summary> Static class contains helper methods for working with date/times  </summary>
+        </member>
+        <member name="M:SobekCM.Tools.DateTime_Helper.ToRfc822(System.DateTime)">
+            <summary> Returns the RFC-822 date format for a particulat date time </summary>
+            <param name="Date"> Date to display in RFC-822</param>
+            <returns> Date as the RFC-822 format </returns>
+        </member>
+        <member name="T:SobekCM.Tools.IpRangeUtilities.ComparableIpAddress">
+            <summary> Single IP address that is wrapped in such as way to quickly compare to a set of restricted IP addresses </summary>
+        </member>
+        <member name="M:SobekCM.Tools.IpRangeUtilities.ComparableIpAddress.#ctor(System.UInt64)">
+            <summary> Constructor for a new instance of the ComparableIpAddress class </summary>
+            <param name="Value"> IP Address as an unsigned long </param>
+        </member>
+        <member name="M:SobekCM.Tools.IpRangeUtilities.ComparableIpAddress.#ctor(System.String)">
+            <summary> Constructor for a new instance of the ComparableIpAddress class </summary>
+            <param name="Value"> IP Address as a string </param>
+        </member>
+        <member name="M:SobekCM.Tools.IpRangeUtilities.ComparableIpAddress.ToUlong(System.String)">
+            <summary> Static method is used to convert from a string IP address to an unsigned long IP adress </summary>
+            <param name="IpAddress"> IP address as a string </param>
+            <returns> IP address as an unsigned long </returns>
+        </member>
+        <member name="P:SobekCM.Tools.IpRangeUtilities.ComparableIpAddress.Value">
+            <summary> Value of the IP address (as an unsigned long) </summary>
+        </member>
+        <member name="P:SobekCM.Tools.IpRangeUtilities.ComparableIpAddress.Prefix">
+            <summary> First byte of the IP address, for quick comparison lookup </summary>
+        </member>
+        <member name="T:SobekCM.Tools.IpRangeUtilities.IpRangeSetV4">
+            <summary> Set of IP address ranges used in the solution for quick IP range checks to
+            support lookups within IP restrictions on the SobekCM engine </summary>
+            <remarks>This supports very fast lookup to see if a provided IP address is within the
+            set of IP ranges included within this set. </remarks>
+        </member>
+        <member name="M:SobekCM.Tools.IpRangeUtilities.IpRangeSetV4.#ctor">
+            <summary> Constructor for a new instance of the IpRangeSetV4 class </summary>
+        </member>
+        <member name="M:SobekCM.Tools.IpRangeUtilities.IpRangeSetV4.AddIpRange(SobekCM.Tools.IpRangeUtilities.SingleIpRangeV4)">
+            <summary> Add a single IP restriction range to this set </summary>
+            <param name="IpRange"> Single IP range </param>
+        </member>
+        <member name="M:SobekCM.Tools.IpRangeUtilities.IpRangeSetV4.AddIpRange(System.UInt64)">
+            <summary> Add a single IP restriction range to this set </summary>
+            <param name="SingleIpAddress"> Single IP address/range (as an unsigned long)</param>
+        </member>
+        <member name="M:SobekCM.Tools.IpRangeUtilities.IpRangeSetV4.AddIpRange(System.UInt64,System.UInt64)">
+            <summary> Add a single IP restriction range to this set </summary>
+            <param name="StartIpAddress"> First IP address in the range (as an unsigned long)</param>
+            <param name="EndIpAddress">  Last IP address in the range (as an unsigned long)</param>
+        </member>
+        <member name="M:SobekCM.Tools.IpRangeUtilities.IpRangeSetV4.AddIpRange(System.String)">
+            <summary> Add a single IP restriction range to this set </summary>
+            <param name="SingleIpAddress"> Single IP address/range (as a string)</param>
+        </member>
+        <member name="M:SobekCM.Tools.IpRangeUtilities.IpRangeSetV4.AddIpRange(System.String,System.String)">
+            <summary> Add a single IP restriction range to this set </summary>
+            <param name="StartIpAddress"> First IP address in the range (as a string)</param>
+            <param name="EndIpAddress">  Last IP address in the range (as a string)</param>
+        </member>
+        <member name="M:SobekCM.Tools.IpRangeUtilities.IpRangeSetV4.Ready">
+            <summary> Readies this set for comparisons, by building some internal data structures </summary>
+        </member>
+        <member name="M:SobekCM.Tools.IpRangeUtilities.IpRangeSetV4.Contains(System.String)">
+            <summary> Check to see if a given IP address is within the IP ranges in this set </summary>
+            <param name="Address"> IP address to check for inclusion ( as a string )</param>
+            <returns> TRUE if the IP address is within the ranges, otherwise FALSE </returns>
+        </member>
+        <member name="M:SobekCM.Tools.IpRangeUtilities.IpRangeSetV4.Contains(SobekCM.Tools.IpRangeUtilities.ComparableIpAddress)">
+            <summary> Check to see if a given IP address is within the IP ranges in this set </summary>
+            <param name="Address"> IP address to check for inclusion ( as a <see cref="T:SobekCM.Tools.IpRangeUtilities.ComparableIpAddress"/> object )</param>
+            <returns> TRUE if the IP address is within the ranges, otherwise FALSE </returns>
+        </member>
+        <member name="T:SobekCM.Tools.IpRangeUtilities.SingleIpRangeV4">
+            <summary> Single IP address range used in the solution for quick IP range checks to
+            support IP restrictions on the SobekCM engine </summary>
+        </member>
+        <member name="M:SobekCM.Tools.IpRangeUtilities.SingleIpRangeV4.#ctor(System.UInt64)">
+            <summary> Constructor for a new instance of the SingleIpRangeV4 class </summary>
+            <param name="SingleIpAddress"> IP address, as an unsigned long </param>
+        </member>
+        <member name="M:SobekCM.Tools.IpRangeUtilities.SingleIpRangeV4.#ctor(System.UInt64,System.UInt64)">
+            <summary> Constructor for a new instance of the SingleIpRangeV4 class </summary>
+            <param name="StartIpAddress"> First IP address in the range (as an unsigned long)</param>
+            <param name="EndIpAddress">  Last IP address in the range (as an unsigned long)</param>
+        </member>
+        <member name="M:SobekCM.Tools.IpRangeUtilities.SingleIpRangeV4.#ctor(System.String)">
+            <summary> Constructor for a new instance of the SingleIpRangeV4 class </summary>
+            <param name="SingleIpAddress"> IP address, as a string </param>
+        </member>
+        <member name="M:SobekCM.Tools.IpRangeUtilities.SingleIpRangeV4.#ctor(System.String,System.String)">
+            <summary> Constructor for a new instance of the SingleIpRangeV4 class </summary>
+            <param name="StartIpAddress"> First IP address in the range (as a string)</param>
+            <param name="EndIpAddress">  Last IP address in the range (as a string)</param>
+        </member>
+        <member name="M:SobekCM.Tools.IpRangeUtilities.SingleIpRangeV4.CompareTo(SobekCM.Tools.IpRangeUtilities.ComparableIpAddress)">
+            <summary> Compares a provided IP address against this range of IPs </summary>
+            <param name="IpAddress"> IP address to compare to this range </param>
+            <returns> 0 if this is in the range, 1 if this range is greater than 
+            the IP, or -1 if the range is less than the comparison IP address </returns>
+        </member>
+        <member name="P:SobekCM.Tools.IpRangeUtilities.SingleIpRangeV4.StartIpAddress">
+            <summary> First IP address in the range (as an unsigned long) </summary>
+        </member>
+        <member name="P:SobekCM.Tools.IpRangeUtilities.SingleIpRangeV4.EndIpAddress">
+            <summary> Last IP address in the range (as an unsigned long) </summary>
+        </member>
+        <member name="P:SobekCM.Tools.IpRangeUtilities.SingleIpRangeV4.Prefix">
+            <summary> First byte of the IP address, for quick comparisons </summary>
+        </member>
+        <member name="T:SobekCM.Tools.Logs.LogFileXhtml">
              <summary>
              This class establishes a rich XHTML log file.  Then, lines can be added in three
              flavors ( error, nonerror, and complete). <br/> <br/> </summary>
              <remarks> There are two modes that can be used for this log file.  You can 
-             specify <see cref="M:SobekCM.Tools.Logs.LogFileXHTML.Open"/> and <see cref="M:SobekCM.Tools.Logs.LogFileXHTML.Close"/>, which will leave the file stream (and associated 
+             specify <see cref="M:SobekCM.Tools.Logs.LogFileXhtml.Open"/> and <see cref="M:SobekCM.Tools.Logs.LogFileXhtml.Close"/>, which will leave the file stream (and associated 
              resources) open during the period between the two calls. Alternatively, 
              you can just call the Write routines directly.  It will open the stream
              before the write and close right after writing and modifying the header information. <br/> <br/>
@@ -134,179 +294,179 @@
             	&lt;/html&gt;
              </code></example>
         </member>
-        <member name="F:SobekCM.Tools.Logs.LogFileXHTML.COMPLETE_NEW_HEADER">
+        <member name="F:SobekCM.Tools.Logs.LogFileXhtml.COMPLETE_NEW_HEADER">
             <summary> Constant string of tags and text used to create a new header
             for a new log file. </summary>
         </member>
-        <member name="F:SobekCM.Tools.Logs.LogFileXHTML.NEW_START_BODY1">
+        <member name="F:SobekCM.Tools.Logs.LogFileXhtml.NEW_START_BODY1">
             <summary> Constant string values used to indicate necessary tags surrounding
             the body of the log file and the end of the log file. </summary>
         </member>
-        <member name="F:SobekCM.Tools.Logs.LogFileXHTML.NEW_START_BODY2">
+        <member name="F:SobekCM.Tools.Logs.LogFileXhtml.NEW_START_BODY2">
             <summary> Constant string values used to indicate necessary tags surrounding
             the body of the log file and the end of the log file. </summary>
         </member>
-        <member name="F:SobekCM.Tools.Logs.LogFileXHTML.NEW_END_TAGS">
+        <member name="F:SobekCM.Tools.Logs.LogFileXhtml.NEW_END_TAGS">
             <summary> Constant string values used to indicate necessary tags surrounding
             the body of the log file and the end of the log file. </summary>
         </member>
-        <member name="F:SobekCM.Tools.Logs.LogFileXHTML.titlePosition">
+        <member name="F:SobekCM.Tools.Logs.LogFileXhtml.TITLE_POSITION">
             <summary> Constant position values used to place, or fetch, data into the 
             XHTML header of the log file. </summary>
         </member>
-        <member name="F:SobekCM.Tools.Logs.LogFileXHTML.positionPosition">
+        <member name="F:SobekCM.Tools.Logs.LogFileXhtml.POSITION_POSITION">
             <summary> Constant position values used to place, or fetch, data into the 
             XHTML header of the log file. </summary>
         </member>
-        <member name="F:SobekCM.Tools.Logs.LogFileXHTML.createDatePosition">
+        <member name="F:SobekCM.Tools.Logs.LogFileXhtml.CREATE_DATE_POSITION">
             <summary> Constant position values used to place, or fetch, data into the 
             XHTML header of the log file. </summary>
         </member>
-        <member name="F:SobekCM.Tools.Logs.LogFileXHTML.rowHeaderPosition">
+        <member name="F:SobekCM.Tools.Logs.LogFileXhtml.ROW_HEADER_POSITION">
             <summary> Constant position values used to place, or fetch, data into the 
             XHTML header of the log file. </summary>
         </member>
-        <member name="F:SobekCM.Tools.Logs.LogFileXHTML.dateStampPosition">
+        <member name="F:SobekCM.Tools.Logs.LogFileXhtml.DATE_STAMP_POSITION">
             <summary> Constant position values used to place, or fetch, data into the 
             XHTML header of the log file. </summary>
         </member>
-        <member name="F:SobekCM.Tools.Logs.LogFileXHTML.errorPosition">
+        <member name="F:SobekCM.Tools.Logs.LogFileXhtml.ERROR_POSITION">
             <summary> Constant position values used to place, or fetch, data into the 
             XHTML header of the log file. </summary>
         </member>
-        <member name="F:SobekCM.Tools.Logs.LogFileXHTML.applicationPosition">
+        <member name="F:SobekCM.Tools.Logs.LogFileXhtml.APPLICATION_POSITION">
             <summary> Constant position values used to place, or fetch, data into the 
             XHTML header of the log file. </summary>
         </member>
-        <member name="F:SobekCM.Tools.Logs.LogFileXHTML.appName">
+        <member name="F:SobekCM.Tools.Logs.LogFileXhtml.appName">
             <summary> stores the name of the creating application  </summary>
         </member>
-        <member name="F:SobekCM.Tools.Logs.LogFileXHTML.currentPosition">
+        <member name="F:SobekCM.Tools.Logs.LogFileXhtml.currentPosition">
             <summary> Stores the current position in the log file  </summary>
         </member>
-        <member name="F:SobekCM.Tools.Logs.LogFileXHTML.eachRowHeader">
+        <member name="F:SobekCM.Tools.Logs.LogFileXhtml.eachRowHeader">
             <summary> store a string to be written after the date on each line </summary>
         </member>
-        <member name="F:SobekCM.Tools.Logs.LogFileXHTML.logFileStream">
+        <member name="F:SobekCM.Tools.Logs.LogFileXhtml.logFileStream">
             <summary> FileStream object used to read and write to the 
             log file.  </summary>
         </member>
-        <member name="F:SobekCM.Tools.Logs.LogFileXHTML.title">
+        <member name="F:SobekCM.Tools.Logs.LogFileXhtml.title">
             <summary> stores the title of the log file. </summary>
         </member>
-        <member name="M:SobekCM.Tools.Logs.LogFileXHTML.#ctor(System.String)">
+        <member name="M:SobekCM.Tools.Logs.LogFileXhtml.#ctor(System.String)">
             <summary> Constructor which builds a new LogFileXHTML object </summary>
-            <param name="newFileName"> File Name and Path for this LogFileXHTML object </param>
-            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXHTML"/> class. </example>
+            <param name="NewFileName"> File Name and Path for this LogFileXHTML object </param>
+            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXhtml"/> class. </example>
             <remarks> This uses the following default values: <ul>
             <li type="circle"/> Title - this is set to no title by default
             <li type="circle"/> Application Name - this is left blank by default
-            <li type="circle"/> Row Header - Disabled ( can be enabled by calling the <see cref="M:SobekCM.Tools.Logs.LogFileXHTML.enableRowHeaders(System.String)"/> method )
-            <li type="circle"/> Date Stamping - Enabled ( can be changed by calling the <see cref="P:SobekCM.Tools.Logs.LogFileXHTML.DateStampingEnabled"/> property )
-            <li type="circle"/> Exceptions - Enabled ( can be changed by calling the <see cref="P:SobekCM.Tools.Logs.LogFileXHTML.SuppressExceptions"/> property )
+            <li type="circle"/> Row Header - Disabled ( can be enabled by calling the <see cref="M:SobekCM.Tools.Logs.LogFileXhtml.EnableRowHeaders(System.String)"/> method )
+            <li type="circle"/> Date Stamping - Enabled ( can be changed by calling the <see cref="P:SobekCM.Tools.Logs.LogFileXhtml.DateStampingEnabled"/> property )
+            <li type="circle"/> Exceptions - Enabled ( can be changed by calling the <see cref="P:SobekCM.Tools.Logs.LogFileXhtml.SuppressExceptions"/> property )
             </ul></remarks>
             <exception cref="T:SobekCM.Tools.Logs.LogFile_Exception"> A <see cref="T:SobekCM.Tools.Logs.LogFile_Exception"/> will be thrown here if the directory for
             the log file does not exist, and can not be created. </exception>
         </member>
-        <member name="M:SobekCM.Tools.Logs.LogFileXHTML.#ctor(System.String,System.String)">
+        <member name="M:SobekCM.Tools.Logs.LogFileXhtml.#ctor(System.String,System.String)">
             <summary> Constructor which builds a new LogFileXHTML object </summary>
-            <param name="newFileName"> File Name and Path for this LogFileXHTML object </param>
-            <param name="title"> Title for this log </param>
-            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXHTML"/> class. </example>
+            <param name="NewFileName"> File Name and Path for this LogFileXHTML object </param>
+            <param name="Title"> Title for this log </param>
+            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXhtml"/> class. </example>
             <remarks> This uses the following default values: <ul>
             <li type="circle"/> Application Name - this is left blank by default
-            <li type="circle"/> Row Header - Disabled ( can be enabled by calling the <see cref="M:SobekCM.Tools.Logs.LogFileXHTML.enableRowHeaders(System.String)"/> method )
-            <li type="circle"/> Date Stamping - Enabled ( can be changed by calling the <see cref="P:SobekCM.Tools.Logs.LogFileXHTML.DateStampingEnabled"/> property )
-            <li type="circle"/> Exceptions - Enabled ( can be changed by calling the <see cref="P:SobekCM.Tools.Logs.LogFileXHTML.SuppressExceptions"/> property )
+            <li type="circle"/> Row Header - Disabled ( can be enabled by calling the <see cref="M:SobekCM.Tools.Logs.LogFileXhtml.EnableRowHeaders(System.String)"/> method )
+            <li type="circle"/> Date Stamping - Enabled ( can be changed by calling the <see cref="P:SobekCM.Tools.Logs.LogFileXhtml.DateStampingEnabled"/> property )
+            <li type="circle"/> Exceptions - Enabled ( can be changed by calling the <see cref="P:SobekCM.Tools.Logs.LogFileXhtml.SuppressExceptions"/> property )
             </ul></remarks>
             <exception cref="T:SobekCM.Tools.Logs.LogFile_Exception"> A <see cref="T:SobekCM.Tools.Logs.LogFile_Exception"/> will be thrown here if the directory for
             the log file does not exist, and can not be created. </exception>
         </member>
-        <member name="M:SobekCM.Tools.Logs.LogFileXHTML.#ctor(System.String,System.String,System.String)">
+        <member name="M:SobekCM.Tools.Logs.LogFileXhtml.#ctor(System.String,System.String,System.String)">
             <summary> Constructor which builds a new LogFileXHTML object </summary>
-            <param name="newFileName"> File Name and Path for this LogFileXHTML object </param>
-            <param name="title"> Title for this log </param>
-            <param name="appName"> Name of the application </param>
-            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXHTML"/> class. </example>
+            <param name="NewFileName"> File Name and Path for this LogFileXHTML object </param>
+            <param name="Title"> Title for this log </param>
+            <param name="AppName"> Name of the application </param>
+            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXhtml"/> class. </example>
             <remarks> This uses the following default values: <ul>
-            <li type="circle"/> Row Header - Disabled ( can be enabled by calling the <see cref="M:SobekCM.Tools.Logs.LogFileXHTML.enableRowHeaders(System.String)"/> method )
-            <li type="circle"/> Date Stamping - Enabled ( can be changed by calling the <see cref="P:SobekCM.Tools.Logs.LogFileXHTML.DateStampingEnabled"/> property )
-            <li type="circle"/> Exceptions - Enabled ( can be changed by calling the <see cref="P:SobekCM.Tools.Logs.LogFileXHTML.SuppressExceptions"/> property )
+            <li type="circle"/> Row Header - Disabled ( can be enabled by calling the <see cref="M:SobekCM.Tools.Logs.LogFileXhtml.EnableRowHeaders(System.String)"/> method )
+            <li type="circle"/> Date Stamping - Enabled ( can be changed by calling the <see cref="P:SobekCM.Tools.Logs.LogFileXhtml.DateStampingEnabled"/> property )
+            <li type="circle"/> Exceptions - Enabled ( can be changed by calling the <see cref="P:SobekCM.Tools.Logs.LogFileXhtml.SuppressExceptions"/> property )
             </ul></remarks>
             <exception cref="T:SobekCM.Tools.Logs.LogFile_Exception"> A <see cref="T:SobekCM.Tools.Logs.LogFile_Exception"/> will be thrown here if the directory for
             the log file does not exist, and can not be created. </exception>
         </member>
-        <member name="M:SobekCM.Tools.Logs.LogFileXHTML.#ctor(System.String,System.String,System.String,System.String)">
+        <member name="M:SobekCM.Tools.Logs.LogFileXhtml.#ctor(System.String,System.String,System.String,System.String)">
             <summary> Constructor which builds a new LogFileXHTML object </summary>
-            <param name="newFileName"> File Name and Path for this LogFileXHTML object </param>
-            <param name="title"> Title for this log </param>
-            <param name="appName"> Name of the application </param>
-            <param name="rowHeader"> Header for each row </param>
-            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXHTML"/> class. </example>
+            <param name="NewFileName"> File Name and Path for this LogFileXHTML object </param>
+            <param name="Title"> Title for this log </param>
+            <param name="AppName"> Name of the application </param>
+            <param name="RowHeader"> Header for each row </param>
+            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXhtml"/> class. </example>
             <remarks> This uses the following default values: <ul>
-            <li type="circle"/> Date Stamping - Enabled ( can be changed by calling the <see cref="P:SobekCM.Tools.Logs.LogFileXHTML.DateStampingEnabled"/> property )
-            <li type="circle"/> Exceptions - Enabled ( can be changed by calling the <see cref="P:SobekCM.Tools.Logs.LogFileXHTML.SuppressExceptions"/> property )
+            <li type="circle"/> Date Stamping - Enabled ( can be changed by calling the <see cref="P:SobekCM.Tools.Logs.LogFileXhtml.DateStampingEnabled"/> property )
+            <li type="circle"/> Exceptions - Enabled ( can be changed by calling the <see cref="P:SobekCM.Tools.Logs.LogFileXhtml.SuppressExceptions"/> property )
             </ul></remarks>
             <exception cref="T:SobekCM.Tools.Logs.LogFile_Exception"> A <see cref="T:SobekCM.Tools.Logs.LogFile_Exception"/> will be thrown here if the directory for
             the log file does not exist, and can not be created. </exception>
         </member>
-        <member name="M:SobekCM.Tools.Logs.LogFileXHTML.#ctor(System.String,System.Boolean)">
+        <member name="M:SobekCM.Tools.Logs.LogFileXhtml.#ctor(System.String,System.Boolean)">
             <summary> Constructor which builds a new LogFileXHTML object </summary>
-            <param name="newFileName"> File Name and Path for this LogFileXHTML object </param>
-            <param name="suppressExceptions"> Flag indicates whether to suppress exceptions </param>
-            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXHTML"/> class. </example>
+            <param name="NewFileName"> File Name and Path for this LogFileXHTML object </param>
+            <param name="SuppressExceptions"> Flag indicates whether to suppress exceptions </param>
+            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXhtml"/> class. </example>
             <remarks> This uses the following default values: <ul>
             <li type="circle"/> Title - this is set to no title by default
             <li type="circle"/> Application Name - this is left blank by default
-            <li type="circle"/> Row Header - Disabled ( can be enabled by calling the <see cref="M:SobekCM.Tools.Logs.LogFileXHTML.enableRowHeaders(System.String)"/> method )
-            <li type="circle"/> Date Stamping - Enabled ( can be changed by calling the <see cref="P:SobekCM.Tools.Logs.LogFileXHTML.DateStampingEnabled"/> property )
+            <li type="circle"/> Row Header - Disabled ( can be enabled by calling the <see cref="M:SobekCM.Tools.Logs.LogFileXhtml.EnableRowHeaders(System.String)"/> method )
+            <li type="circle"/> Date Stamping - Enabled ( can be changed by calling the <see cref="P:SobekCM.Tools.Logs.LogFileXhtml.DateStampingEnabled"/> property )
             </ul></remarks>
             <exception cref="T:SobekCM.Tools.Logs.LogFile_Exception"> A <see cref="T:SobekCM.Tools.Logs.LogFile_Exception"/> will be thrown here if the directory for
-            the log file does not exist, and can not be created, unless the <see cref="P:SobekCM.Tools.Logs.LogFileXHTML.SuppressExceptions"/> flag is set to true. </exception>
+            the log file does not exist, and can not be created, unless the <see cref="P:SobekCM.Tools.Logs.LogFileXhtml.SuppressExceptions"/> flag is set to true. </exception>
         </member>
-        <member name="M:SobekCM.Tools.Logs.LogFileXHTML.#ctor(System.String,System.String,System.Boolean)">
+        <member name="M:SobekCM.Tools.Logs.LogFileXhtml.#ctor(System.String,System.String,System.Boolean)">
             <summary> Constructor which builds a new LogFileXHTML object </summary>
-            <param name="newFileName"> File Name and Path for this LogFileXHTML object </param>
-            <param name="title"> Title for this log </param>
-            <param name="suppressExceptions"> Flag indicates whether to suppress exceptions </param>
-            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXHTML"/> class. </example>
+            <param name="NewFileName"> File Name and Path for this LogFileXHTML object </param>
+            <param name="Title"> Title for this log </param>
+            <param name="SuppressExceptions"> Flag indicates whether to suppress exceptions </param>
+            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXhtml"/> class. </example>
             <remarks> This uses the following default values: <ul>
             <li type="circle"/> Application Name - this is left blank by default
-            <li type="circle"/> Row Header - Disabled ( can be enabled by calling the <see cref="M:SobekCM.Tools.Logs.LogFileXHTML.enableRowHeaders(System.String)"/> method )
-            <li type="circle"/> Date Stamping - Enabled ( can be changed by calling the <see cref="P:SobekCM.Tools.Logs.LogFileXHTML.DateStampingEnabled"/> property )
+            <li type="circle"/> Row Header - Disabled ( can be enabled by calling the <see cref="M:SobekCM.Tools.Logs.LogFileXhtml.EnableRowHeaders(System.String)"/> method )
+            <li type="circle"/> Date Stamping - Enabled ( can be changed by calling the <see cref="P:SobekCM.Tools.Logs.LogFileXhtml.DateStampingEnabled"/> property )
             </ul></remarks>
             <exception cref="T:SobekCM.Tools.Logs.LogFile_Exception"> A <see cref="T:SobekCM.Tools.Logs.LogFile_Exception"/> will be thrown here if the directory for
-            the log file does not exist, and can not be created, unless the <see cref="P:SobekCM.Tools.Logs.LogFileXHTML.SuppressExceptions"/> flag is set to true. </exception>
+            the log file does not exist, and can not be created, unless the <see cref="P:SobekCM.Tools.Logs.LogFileXhtml.SuppressExceptions"/> flag is set to true. </exception>
         </member>
-        <member name="M:SobekCM.Tools.Logs.LogFileXHTML.#ctor(System.String,System.String,System.String,System.Boolean)">
+        <member name="M:SobekCM.Tools.Logs.LogFileXhtml.#ctor(System.String,System.String,System.String,System.Boolean)">
             <summary> Constructor which builds a new LogFileXHTML object </summary>
-            <param name="newFileName"> File Name and Path for this LogFileXHTML object </param>
-            <param name="title"> Title for this log </param>
-            <param name="appName"> Name of the application </param>
-            <param name="suppressExceptions"> Flag indicates whether to suppress exceptions </param>
-            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXHTML"/> class. </example>
+            <param name="NewFileName"> File Name and Path for this LogFileXHTML object </param>
+            <param name="Title"> Title for this log </param>
+            <param name="AppName"> Name of the application </param>
+            <param name="SuppressExceptions"> Flag indicates whether to suppress exceptions </param>
+            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXhtml"/> class. </example>
             <remarks> This uses the following default values: <ul>
-            <li type="circle"/> Row Header - Disabled ( can be enabled by calling the <see cref="M:SobekCM.Tools.Logs.LogFileXHTML.enableRowHeaders(System.String)"/> method )
-            <li type="circle"/> Date Stamping - Enabled ( can be changed by calling the <see cref="P:SobekCM.Tools.Logs.LogFileXHTML.DateStampingEnabled"/> property )
+            <li type="circle"/> Row Header - Disabled ( can be enabled by calling the <see cref="M:SobekCM.Tools.Logs.LogFileXhtml.EnableRowHeaders(System.String)"/> method )
+            <li type="circle"/> Date Stamping - Enabled ( can be changed by calling the <see cref="P:SobekCM.Tools.Logs.LogFileXhtml.DateStampingEnabled"/> property )
             </ul></remarks>
             <exception cref="T:SobekCM.Tools.Logs.LogFile_Exception"> A <see cref="T:SobekCM.Tools.Logs.LogFile_Exception"/> will be thrown here if the directory for
-            the log file does not exist, and can not be created, unless the <see cref="P:SobekCM.Tools.Logs.LogFileXHTML.SuppressExceptions"/> flag is set to true. </exception>
+            the log file does not exist, and can not be created, unless the <see cref="P:SobekCM.Tools.Logs.LogFileXhtml.SuppressExceptions"/> flag is set to true. </exception>
         </member>
-        <member name="M:SobekCM.Tools.Logs.LogFileXHTML.#ctor(System.String,System.String,System.String,System.String,System.Boolean)">
+        <member name="M:SobekCM.Tools.Logs.LogFileXhtml.#ctor(System.String,System.String,System.String,System.String,System.Boolean)">
             <summary> Constructor which builds a new LogFileXHTML object </summary>
-            <param name="newFileName"> File Name and Path for this LogFileXHTML object </param>
-            <param name="title"> Title for this log </param>
-            <param name="appName"> Name of the application </param>
-            <param name="rowHeader"> Header for each row </param>
-            <param name="suppressExceptions"> Flag indicates whether to suppress exceptions </param>
-            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXHTML"/> class. </example>
+            <param name="NewFileName"> File Name and Path for this LogFileXHTML object </param>
+            <param name="Title"> Title for this log </param>
+            <param name="AppName"> Name of the application </param>
+            <param name="RowHeader"> Header for each row </param>
+            <param name="SuppressExceptions"> Flag indicates whether to suppress exceptions </param>
+            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXhtml"/> class. </example>
             <remarks> This uses the following default values: <ul>
-            <li type="circle"/> Date Stamping - Enabled ( can be changed by calling the <see cref="P:SobekCM.Tools.Logs.LogFileXHTML.DateStampingEnabled"/> property )
+            <li type="circle"/> Date Stamping - Enabled ( can be changed by calling the <see cref="P:SobekCM.Tools.Logs.LogFileXhtml.DateStampingEnabled"/> property )
             </ul></remarks>
             <exception cref="T:SobekCM.Tools.Logs.LogFile_Exception"> A <see cref="T:SobekCM.Tools.Logs.LogFile_Exception"/> will be thrown here if the directory for
-            the log file does not exist, and can not be created, unless the <see cref="P:SobekCM.Tools.Logs.LogFileXHTML.SuppressExceptions"/> flag is set to true. </exception>
+            the log file does not exist, and can not be created, unless the <see cref="P:SobekCM.Tools.Logs.LogFileXhtml.SuppressExceptions"/> flag is set to true. </exception>
         </member>
-        <member name="M:SobekCM.Tools.Logs.LogFileXHTML.setupLogFile(System.String,System.String,System.String,System.String,System.Boolean)">
+        <member name="M:SobekCM.Tools.Logs.LogFileXhtml.SetupLogFile(System.String,System.String,System.String,System.String,System.Boolean)">
             <summary> Method called by the constructors to help initialize this object. </summary>
             <param name="Log_FileName"> File Name and Path for this LogFileXHTML object </param>
             <param name="Title"> Title for this log </param>
@@ -314,50 +474,50 @@
             <param name="RowHeader"> Header for each row </param>
             <param name="SuppressExceptionsFlag"> Flag indicates whether to suppress exceptions </param>
             <exception cref="T:SobekCM.Tools.Logs.LogFile_Exception"> A <see cref="T:SobekCM.Tools.Logs.LogFile_Exception"/> will be thrown here if the directory for
-            the log file does not exist, and can not be created, unless the <see cref="P:SobekCM.Tools.Logs.LogFileXHTML.SuppressExceptions"/> flag is set to true. </exception>
+            the log file does not exist, and can not be created, unless the <see cref="P:SobekCM.Tools.Logs.LogFileXhtml.SuppressExceptions"/> flag is set to true. </exception>
         </member>
-        <member name="M:SobekCM.Tools.Logs.LogFileXHTML.New">
+        <member name="M:SobekCM.Tools.Logs.LogFileXhtml.New">
             <summary>  Deletes the current log file, closing first if necessary. </summary>
             <returns> TRUE if successful, otherwise FALSE </returns>
-            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXHTML"/> class. </example>
+            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXhtml"/> class. </example>
             <exception cref="T:SobekCM.Tools.Logs.LogFile_Exception"> A <see cref="T:SobekCM.Tools.Logs.LogFile_Exception"/> will be thrown if there is an error
-            during processing, unless the <see cref="P:SobekCM.Tools.Logs.LogFileXHTML.SuppressExceptions"/> flag is set to true. </exception>
+            during processing, unless the <see cref="P:SobekCM.Tools.Logs.LogFileXhtml.SuppressExceptions"/> flag is set to true. </exception>
         </member>
-        <member name="M:SobekCM.Tools.Logs.LogFileXHTML.Exists">
+        <member name="M:SobekCM.Tools.Logs.LogFileXhtml.Exists">
             <summary> Returns true if the log file currently exists. </summary>
             <returns> TRUE if successful, otherwise FALSE </returns>
-            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXHTML"/> class. </example>
+            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXhtml"/> class. </example>
         </member>
-        <member name="M:SobekCM.Tools.Logs.LogFileXHTML.Open">
+        <member name="M:SobekCM.Tools.Logs.LogFileXhtml.Open">
             <summary> Opens or creates a log file. </summary>
             <returns> TRUE if successful, otherwise FALSE </returns>
             <remarks>  This also specifies that the connection to the file will 
-            remain open until <see cref="M:SobekCM.Tools.Logs.LogFileXHTML.Close"/> is called. </remarks>
-            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXHTML"/> class. </example>
+            remain open until <see cref="M:SobekCM.Tools.Logs.LogFileXhtml.Close"/> is called. </remarks>
+            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXhtml"/> class. </example>
             <exception cref="T:SobekCM.Tools.Logs.LogFile_Exception"> A <see cref="T:SobekCM.Tools.Logs.LogFile_Exception"/> will be thrown if there is an error
-            opening the connection, unless the <see cref="P:SobekCM.Tools.Logs.LogFileXHTML.SuppressExceptions"/> flag is set to true. </exception>
+            opening the connection, unless the <see cref="P:SobekCM.Tools.Logs.LogFileXhtml.SuppressExceptions"/> flag is set to true. </exception>
         </member>
-        <member name="M:SobekCM.Tools.Logs.LogFileXHTML.Close">
+        <member name="M:SobekCM.Tools.Logs.LogFileXhtml.Close">
             <summary> Saves and closes the log file. </summary>
             <returns> TRUE if successful, otherwise FALSE </returns>
-            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXHTML"/> class. </example>
+            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXhtml"/> class. </example>
             <exception cref="T:SobekCM.Tools.Logs.LogFile_Exception"> A <see cref="T:SobekCM.Tools.Logs.LogFile_Exception"/> will be thrown if there is an error
-            closing the connection, unless the <see cref="P:SobekCM.Tools.Logs.LogFileXHTML.SuppressExceptions"/> flag is set to true. </exception>
+            closing the connection, unless the <see cref="P:SobekCM.Tools.Logs.LogFileXhtml.SuppressExceptions"/> flag is set to true. </exception>
         </member>
-        <member name="M:SobekCM.Tools.Logs.LogFileXHTML.disableRowHeaders">
+        <member name="M:SobekCM.Tools.Logs.LogFileXhtml.DisableRowHeaders">
             <summary> Disable the additional information between the time/date and the log entry. </summary>
-            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXHTML"/> class. </example>
+            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXhtml"/> class. </example>
         </member>
-        <member name="M:SobekCM.Tools.Logs.LogFileXHTML.enableRowHeaders(System.String)">
+        <member name="M:SobekCM.Tools.Logs.LogFileXhtml.EnableRowHeaders(System.String)">
             <summary> Enables the additional information between the time/date and
             the log entry and sets this information to the string which is passed in. </summary>
-            <param name="textForEachLine"> Text to be used as the Row Headers on each row </param>
+            <param name="TextForEachLine"> Text to be used as the Row Headers on each row </param>
             <returns> TRUE if the requested row header is accepted, otherwise FALSE </returns>
-            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXHTML"/> class. </example>
+            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXhtml"/> class. </example>
         </member>
-        <member name="M:SobekCM.Tools.Logs.LogFileXHTML.AddNonError(System.String)">
+        <member name="M:SobekCM.Tools.Logs.LogFileXhtml.AddNonError(System.String)">
             <summary> Adds a non-error line to the current log file. </summary>
-            <param name="msg"> Message to add </param>
+            <param name="Msg"> Message to add </param>
             <returns> TRUE if successful, otherwise FALSE </returns>
             <remarks> This uses the default style defined as 'logEntry' with the following attributes: <ul>
             <li type="circle"/> Color:		Black
@@ -365,11 +525,11 @@
             <li type="circle"/> Bold:		false
             <li type="circle"/> Italics:	false
             </ul></remarks>
-            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXHTML"/> class. </example>
+            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXhtml"/> class. </example>
         </member>
-        <member name="M:SobekCM.Tools.Logs.LogFileXHTML.AddError(System.String)">
+        <member name="M:SobekCM.Tools.Logs.LogFileXhtml.AddError(System.String)">
             <summary> Adds an error line to the current log file.  </summary>
-            <param name="msg"> Message to add </param>
+            <param name="Msg"> Message to add </param>
             <returns> TRUE if successful, otherwise FALSE </returns>
             <remarks> This uses the default style defined as 'errorLogEntry' with the following attributes: <ul>
             <li type="circle"/> Color:		Red
@@ -377,11 +537,11 @@
             <li type="circle"/> Bold:		true
             <li type="circle"/> Italics:	false
             </ul></remarks>
-            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXHTML"/> class. </example>
+            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXhtml"/> class. </example>
         </member>
-        <member name="M:SobekCM.Tools.Logs.LogFileXHTML.AddComplete(System.String)">
+        <member name="M:SobekCM.Tools.Logs.LogFileXhtml.AddComplete(System.String)">
             <summary> Adds a line indicating completeness to the log file. </summary>
-            <param name="msg"> Msg to add indicating completeness </param>
+            <param name="Msg"> Msg to add indicating completeness </param>
             <returns> TRUE if successful, otherwise FALSE </returns>
             <remarks> This uses the default style defined as 'completedLogEntry' with the following attributes: <ul>
             <li type="circle"/> Color:		Blue
@@ -389,21 +549,21 @@
             <li type="circle"/> Bold:		true
             <li type="circle"/> Italics:	false
             </ul></remarks>
-            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXHTML"/> class. </example>
+            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXhtml"/> class. </example>
         </member>
-        <member name="M:SobekCM.Tools.Logs.LogFileXHTML.Display">
+        <member name="M:SobekCM.Tools.Logs.LogFileXhtml.Display">
             <summary> Displays the XHTML log file in Internet Explorer. </summary>
             <returns> TRUE if successful, otherwise FALSE </returns>
-            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXHTML"/> class. </example>
+            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXhtml"/> class. </example>
             <exception cref="T:SobekCM.Tools.Logs.LogFile_Exception"> A <see cref="T:SobekCM.Tools.Logs.LogFile_Exception"/> will be thrown if there is an error
-            while trying to display the log, unless the <see cref="P:SobekCM.Tools.Logs.LogFileXHTML.SuppressExceptions"/> flag is set to true. </exception>
+            while trying to display the log, unless the <see cref="P:SobekCM.Tools.Logs.LogFileXhtml.SuppressExceptions"/> flag is set to true. </exception>
         </member>
-        <member name="M:SobekCM.Tools.Logs.LogFileXHTML.AddNewStyle(System.String,System.String,System.Boolean)">
+        <member name="M:SobekCM.Tools.Logs.LogFileXhtml.AddNewStyle(System.String,System.String,System.Boolean)">
             <summary> [NOT YET FULLY IMPLEMENTED] <br/> <br/> Create a new style for this log file. </summary>
             <remarks> This style will be used in the Style Definition
             section and will be used in the body of the text below.  Any custom styles will
             need to be specified when the line is added to the log file.  When a style is added to the XHTML Log file,
-            a new <see cref="T:SobekCM.Tools.Logs.LogFileXHTML_Style"/> object is created and added to a collection of style objects. <br/> <br/>
+            a new <see cref="T:SobekCM.Tools.Logs.LogFileXhtmlStyle"/> object is created and added to a collection of style objects. <br/> <br/>
             The following colors are accepted: <ul>
             <li type="circle"/> Aqua
             <li type="circle"/> Lime
@@ -421,18 +581,18 @@
             <li type="circle"/> Teal
             <li type="circle"/> Yellow
             </ul>  </remarks>
-            <param name="style_name"> Name for this style </param>
-            <param name="font_color"> Color for text of this style </param>
-            <param name="bold"> Flag tells whether text of this style should be emboldened </param>
+            <param name="StyleName"> Name for this style </param>
+            <param name="FontColor"> Color for text of this style </param>
+            <param name="Bold"> Flag tells whether text of this style should be emboldened </param>
             <returns> TRUE if this style was successfully added, otherwise FALSE </returns>
-            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXHTML"/> class. </example>
+            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXhtml"/> class. </example>
         </member>
-        <member name="M:SobekCM.Tools.Logs.LogFileXHTML.AddNewStyle(System.String,System.String)">
+        <member name="M:SobekCM.Tools.Logs.LogFileXhtml.AddNewStyle(System.String,System.String)">
             <summary> [NOT YET FULLY IMPLEMENTED] <br/> <br/> Create a new style for this log file. </summary>
             <remarks> This style will be used in the Style Definition
             section and will be used in the body of the text below.  Any custom styles will
             need to be specified when the line is added to the log file.  When a style is added to the XHTML Log file,
-            a new <see cref="T:SobekCM.Tools.Logs.LogFileXHTML_Style"/> object is created and added to a collection of style objects.  <br/> <br/>
+            a new <see cref="T:SobekCM.Tools.Logs.LogFileXhtmlStyle"/> object is created and added to a collection of style objects.  <br/> <br/>
             The following colors are accepted: <ul>
             <li type="circle"/> Aqua
             <li type="circle"/> Lime
@@ -450,53 +610,17 @@
             <li type="circle"/> Teal
             <li type="circle"/> Yellow
             </ul> </remarks>
-            <param name="style_name"> Name for this style </param>
-            <param name="font_color"> Color for text of this style </param>
+            <param name="StyleName"> Name for this style </param>
+            <param name="FontColor"> Color for text of this style </param>
             <returns> TRUE if this style was successfully added, otherwise FALSE </returns>
-            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXHTML"/> class. </example>
+            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXhtml"/> class. </example>
         </member>
-        <member name="M:SobekCM.Tools.Logs.LogFileXHTML.AddNewStyle(System.String,System.String,System.String)">
+        <member name="M:SobekCM.Tools.Logs.LogFileXhtml.AddNewStyle(System.String,System.String,System.String)">
             <summary> [NOT YET FULLY IMPLEMENTED] <br/> <br/> Create a new style for this log file. </summary>
             <remarks> This style will be used in the Style Definition
             section and will be used in the body of the text below.  Any custom styles will
             need to be specified when the line is added to the log file.  When a style is added to the XHTML Log file,
-            a new <see cref="T:SobekCM.Tools.Logs.LogFileXHTML_Style"/> object is created and added to a collection of style objects. <br/> <br/>
-            The following colors are accepted: <ul>
-            <li type="circle"/> Aqua
-            <li type="circle"/> Lime
-            <li type="circle"/> Black
-            <li type="circle"/> Blue
-            <li type="circle"/> Fuchsia
-            <li type="circle"/> Green
-            <li type="circle"/> Gray
-            <li type="circle"/> Maroon
-            <li type="circle"/> Navy
-            <li type="circle"/> Olive
-            <li type="circle"/> Purple
-            <li type="circle"/> Red
-            <li type="circle"/> Silver
-            <li type="circle"/> Teal
-            <li type="circle"/> Yellow
-            </ul> <br/> <br/>
-            The following sizes are accepted: <ul>
-            <li type="circle"/> x-small
-            <li type="circle"/> small
-            <li type="circle"/> medium
-            <li type="circle"/> large
-            <li type="circle"/> x-large
-            </ul> </remarks>
-            <param name="style_name"> Name for this style </param>
-            <param name="font_color"> Color for text of this style </param>
-            <param name="font_size"> Size for the text of this style </param>
-            <returns> TRUE if this style was successfully added, otherwise FALSE </returns>
-            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXHTML"/> class. </example>
-        </member>
-        <member name="M:SobekCM.Tools.Logs.LogFileXHTML.AddNewStyle(System.String,System.String,System.String,System.Boolean)">
-            <summary> [NOT YET FULLY IMPLEMENTED] <br/> <br/> Create a new style for this log file. </summary>
-            <remarks> This style will be used in the Style Definition
-            section and will be used in the body of the text below.  Any custom styles will
-            need to be specified when the line is added to the log file.  When a style is added to the XHTML Log file,
-            a new <see cref="T:SobekCM.Tools.Logs.LogFileXHTML_Style"/> object is created and added to a collection of style objects. <br/> <br/>
+            a new <see cref="T:SobekCM.Tools.Logs.LogFileXhtmlStyle"/> object is created and added to a collection of style objects. <br/> <br/>
             The following colors are accepted: <ul>
             <li type="circle"/> Aqua
             <li type="circle"/> Lime
@@ -521,19 +645,18 @@
             <li type="circle"/> large
             <li type="circle"/> x-large
             </ul> </remarks>
-            <param name="style_name"> Name for this style </param>
-            <param name="font_color"> Color for text of this style </param>
-            <param name="font_size"> Size for the text of this style </param>
-            <param name="bold"> Flag tells whether text of this style should be emboldened </param>
+            <param name="StyleName"> Name for this style </param>
+            <param name="FontColor"> Color for text of this style </param>
+            <param name="FontSize"> Size for the text of this style </param>
             <returns> TRUE if this style was successfully added, otherwise FALSE </returns>
-            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXHTML"/> class. </example>
+            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXhtml"/> class. </example>
         </member>
-        <member name="M:SobekCM.Tools.Logs.LogFileXHTML.AddNewStyle(System.String,System.String,System.String,System.Boolean,System.Boolean)">
+        <member name="M:SobekCM.Tools.Logs.LogFileXhtml.AddNewStyle(System.String,System.String,System.String,System.Boolean)">
             <summary> [NOT YET FULLY IMPLEMENTED] <br/> <br/> Create a new style for this log file. </summary>
             <remarks> This style will be used in the Style Definition
             section and will be used in the body of the text below.  Any custom styles will
             need to be specified when the line is added to the log file.  When a style is added to the XHTML Log file,
-            a new <see cref="T:SobekCM.Tools.Logs.LogFileXHTML_Style"/> object is created and added to a collection of style objects.  <br/> <br/>
+            a new <see cref="T:SobekCM.Tools.Logs.LogFileXhtmlStyle"/> object is created and added to a collection of style objects. <br/> <br/>
             The following colors are accepted: <ul>
             <li type="circle"/> Aqua
             <li type="circle"/> Lime
@@ -558,174 +681,211 @@
             <li type="circle"/> large
             <li type="circle"/> x-large
             </ul> </remarks>
-            <param name="style_name"> Name for this style </param>
-            <param name="font_color"> Color for text of this style </param>
-            <param name="font_size"> Size for the text of this style </param>
-            <param name="bold"> Flag tells whether text of this style should be emboldened </param>
-            <param name="italics"> Flag tells whether text of this style should be italicized </param>
+            <param name="StyleName"> Name for this style </param>
+            <param name="FontColor"> Color for text of this style </param>
+            <param name="FontSize"> Size for the text of this style </param>
+            <param name="Bold"> Flag tells whether text of this style should be emboldened </param>
             <returns> TRUE if this style was successfully added, otherwise FALSE </returns>
-            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXHTML"/> class. </example>
+            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXhtml"/> class. </example>
         </member>
-        <member name="M:SobekCM.Tools.Logs.LogFileXHTML.TextOfLogFile">
+        <member name="M:SobekCM.Tools.Logs.LogFileXhtml.AddNewStyle(System.String,System.String,System.String,System.Boolean,System.Boolean)">
+            <summary> [NOT YET FULLY IMPLEMENTED] <br/> <br/> Create a new style for this log file. </summary>
+            <remarks> This style will be used in the Style Definition
+            section and will be used in the body of the text below.  Any custom styles will
+            need to be specified when the line is added to the log file.  When a style is added to the XHTML Log file,
+            a new <see cref="T:SobekCM.Tools.Logs.LogFileXhtmlStyle"/> object is created and added to a collection of style objects.  <br/> <br/>
+            The following colors are accepted: <ul>
+            <li type="circle"/> Aqua
+            <li type="circle"/> Lime
+            <li type="circle"/> Black
+            <li type="circle"/> Blue
+            <li type="circle"/> Fuchsia
+            <li type="circle"/> Green
+            <li type="circle"/> Gray
+            <li type="circle"/> Maroon
+            <li type="circle"/> Navy
+            <li type="circle"/> Olive
+            <li type="circle"/> Purple
+            <li type="circle"/> Red
+            <li type="circle"/> Silver
+            <li type="circle"/> Teal
+            <li type="circle"/> Yellow
+            </ul> <br/> <br/>
+            The following sizes are accepted: <ul>
+            <li type="circle"/> x-small
+            <li type="circle"/> small
+            <li type="circle"/> medium
+            <li type="circle"/> large
+            <li type="circle"/> x-large
+            </ul> </remarks>
+            <param name="StyleName"> Name for this style </param>
+            <param name="FontColor"> Color for text of this style </param>
+            <param name="FontSize"> Size for the text of this style </param>
+            <param name="Bold"> Flag tells whether text of this style should be emboldened </param>
+            <param name="Italics"> Flag tells whether text of this style should be italicized </param>
+            <returns> TRUE if this style was successfully added, otherwise FALSE </returns>
+            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXhtml"/> class. </example>
+        </member>
+        <member name="M:SobekCM.Tools.Logs.LogFileXhtml.TextOfLogFile">
             <summary> Returns the text of this file as a string. </summary>
             <returns> Text of this file as a string </returns>
         </member>
-        <member name="M:SobekCM.Tools.Logs.LogFileXHTML.Write(System.String,System.String,System.Boolean)">
+        <member name="M:SobekCM.Tools.Logs.LogFileXhtml.Write(System.String,System.String,System.Boolean)">
             <summary> Writes a string to the log file. </summary>
             <returns> TRUE if successful, otherwise FALSE </returns>
             <exception cref="T:SobekCM.Tools.Logs.LogFile_Exception"> A <see cref="T:SobekCM.Tools.Logs.LogFile_Exception"/> will be thrown if there is an error
-            while processing, unless the <see cref="P:SobekCM.Tools.Logs.LogFileXHTML.SuppressExceptions"/> flag is set to true. </exception>
+            while processing, unless the <see cref="P:SobekCM.Tools.Logs.LogFileXhtml.SuppressExceptions"/> flag is set to true. </exception>
         </member>
-        <member name="M:SobekCM.Tools.Logs.LogFileXHTML.writeClosingTags">
+        <member name="M:SobekCM.Tools.Logs.LogFileXhtml.WriteClosingTags">
             <summary> Private method writes closing tags to the file. </summary>
         </member>
-        <member name="M:SobekCM.Tools.Logs.LogFileXHTML.openConnection">
+        <member name="M:SobekCM.Tools.Logs.LogFileXhtml.OpenConnection">
             <summary> Opens the connection and returns true
             or false.  Called by public method Open().  False is returned
             if the header in the log file is corrupted.
             </summary>
             <returns> TRUE if successful, otherwise FALSE </returns>
             <exception cref="T:SobekCM.Tools.Logs.LogFile_Exception"> A <see cref="T:SobekCM.Tools.Logs.LogFile_Exception"/> will be thrown if there is an error
-            while processing, unless the <see cref="P:SobekCM.Tools.Logs.LogFileXHTML.SuppressExceptions"/> flag is set to true. </exception>
+            while processing, unless the <see cref="P:SobekCM.Tools.Logs.LogFileXhtml.SuppressExceptions"/> flag is set to true. </exception>
         </member>
-        <member name="M:SobekCM.Tools.Logs.LogFileXHTML.createHeader">
+        <member name="M:SobekCM.Tools.Logs.LogFileXhtml.CreateHeader">
             <summary>  Creates the header for a new log file  </summary>
             <returns> TRUE if sucessful, otherwise FALSE </returns>
             <exception cref="T:SobekCM.Tools.Logs.LogFile_Exception"> A <see cref="T:SobekCM.Tools.Logs.LogFile_Exception"/> will be thrown if there is an error
-            while processing, unless the <see cref="P:SobekCM.Tools.Logs.LogFileXHTML.SuppressExceptions"/> flag is set to true. </exception>
+            while processing, unless the <see cref="P:SobekCM.Tools.Logs.LogFileXhtml.SuppressExceptions"/> flag is set to true. </exception>
         </member>
-        <member name="M:SobekCM.Tools.Logs.LogFileXHTML.saveCurrentPosition">
+        <member name="M:SobekCM.Tools.Logs.LogFileXhtml.SaveCurrentPosition">
             <summary> Saves the current position into the XHTML header </summary>
             <exception cref="T:SobekCM.Tools.Logs.LogFile_Exception"> A <see cref="T:SobekCM.Tools.Logs.LogFile_Exception"/> will be thrown if there is an error
-            while processing, unless the <see cref="P:SobekCM.Tools.Logs.LogFileXHTML.SuppressExceptions"/> flag is set to true. </exception>
+            while processing, unless the <see cref="P:SobekCM.Tools.Logs.LogFileXhtml.SuppressExceptions"/> flag is set to true. </exception>
         </member>
-        <member name="M:SobekCM.Tools.Logs.LogFileXHTML.saveErrorCount">
+        <member name="M:SobekCM.Tools.Logs.LogFileXhtml.SaveErrorCount">
             <summary> Saves the number of current errors into the XHTML header </summary>
             <exception cref="T:SobekCM.Tools.Logs.LogFile_Exception"> A <see cref="T:SobekCM.Tools.Logs.LogFile_Exception"/> will be thrown if there is an error
-            while processing, unless the <see cref="P:SobekCM.Tools.Logs.LogFileXHTML.SuppressExceptions"/> flag is set to true. </exception>
+            while processing, unless the <see cref="P:SobekCM.Tools.Logs.LogFileXhtml.SuppressExceptions"/> flag is set to true. </exception>
         </member>
-        <member name="M:SobekCM.Tools.Logs.LogFileXHTML.writeAtPos(System.Int32,System.String)">
+        <member name="M:SobekCM.Tools.Logs.LogFileXhtml.WriteAtPos(System.Int32,System.String)">
             <summary>  Writes at a certain position in the log File </summary>
-            <param name="newPosition"> Position to write at </param>
-            <param name="msg"> Message to write </param>
+            <param name="NewPosition"> Position to write at </param>
+            <param name="Msg"> Message to write </param>
             <exception cref="T:SobekCM.Tools.Logs.LogFile_Exception"> A <see cref="T:SobekCM.Tools.Logs.LogFile_Exception"/> will be thrown if there is an error
-            while processing, unless the <see cref="P:SobekCM.Tools.Logs.LogFileXHTML.SuppressExceptions"/> flag is set to true. </exception>
+            while processing, unless the <see cref="P:SobekCM.Tools.Logs.LogFileXhtml.SuppressExceptions"/> flag is set to true. </exception>
         </member>
-        <member name="M:SobekCM.Tools.Logs.LogFileXHTML.readHeader">
+        <member name="M:SobekCM.Tools.Logs.LogFileXhtml.ReadHeader">
             <summary> Reads the header information </summary>
             <returns> FALSE if it was corrupted </returns>
             <exception cref="T:SobekCM.Tools.Logs.LogFile_Exception"> A <see cref="T:SobekCM.Tools.Logs.LogFile_Exception"/> will be thrown if there is an error
-            while processing, unless the <see cref="P:SobekCM.Tools.Logs.LogFileXHTML.SuppressExceptions"/> flag is set to true. </exception>
+            while processing, unless the <see cref="P:SobekCM.Tools.Logs.LogFileXhtml.SuppressExceptions"/> flag is set to true. </exception>
         </member>
-        <member name="M:SobekCM.Tools.Logs.LogFileXHTML.configureText(System.String,System.String,System.Boolean)">
+        <member name="M:SobekCM.Tools.Logs.LogFileXhtml.ConfigureText(System.String,System.String,System.Boolean)">
             <summary>  Take a basic line to go into the log and append the date or rowHeader
             as necessary.  Also, breaks up the message if it exceeds the line length
             for the log file. </summary>
-            <param name="origMsg"> Original message </param>
-            <param name="styleType"> StyleType name to use </param>
-            <param name="strong"> Tells whether this is strong or not </param>
+            <param name="OrigMsg"> Original message </param>
+            <param name="StyleType"> StyleType name to use </param>
+            <param name="Strong"> Tells whether this is strong or not </param>
             <returns> The configured line </returns>
             <exception cref="T:SobekCM.Tools.Logs.LogFile_Exception"> A <see cref="T:SobekCM.Tools.Logs.LogFile_Exception"/> will be thrown if there is an error
-            while processing, unless the <see cref="P:SobekCM.Tools.Logs.LogFileXHTML.SuppressExceptions"/> flag is set to true. </exception>
+            while processing, unless the <see cref="P:SobekCM.Tools.Logs.LogFileXhtml.SuppressExceptions"/> flag is set to true. </exception>
         </member>
-        <member name="M:SobekCM.Tools.Logs.LogFileXHTML.writeToLog(System.String)">
+        <member name="M:SobekCM.Tools.Logs.LogFileXhtml.WriteToLog(System.String)">
             <summary> Writes a fully configured and correct length line into the file
             and inserts the carriage return and linefeed. </summary>
             <param name="msg"> Message to write </param>
             <returns> TRUE if successful, otherwise FALSE </returns>
             <exception cref="T:SobekCM.Tools.Logs.LogFile_Exception"> A <see cref="T:SobekCM.Tools.Logs.LogFile_Exception"/> will be thrown if there is an error
-            while processing, unless the <see cref="P:SobekCM.Tools.Logs.LogFileXHTML.SuppressExceptions"/> flag is set to true. </exception>
+            while processing, unless the <see cref="P:SobekCM.Tools.Logs.LogFileXhtml.SuppressExceptions"/> flag is set to true. </exception>
         </member>
-        <member name="M:SobekCM.Tools.Logs.LogFileXHTML.closeConnection">
+        <member name="M:SobekCM.Tools.Logs.LogFileXhtml.CloseConnection">
             <summary>  Saves and closes the log file </summary>
             <returns> TRUE if successful, otherwise FALSE </returns>
             <exception cref="T:SobekCM.Tools.Logs.LogFile_Exception"> A <see cref="T:SobekCM.Tools.Logs.LogFile_Exception"/> will be thrown if there is an error
-            while processing, unless the <see cref="P:SobekCM.Tools.Logs.LogFileXHTML.SuppressExceptions"/> flag is set to true. </exception>
+            while processing, unless the <see cref="P:SobekCM.Tools.Logs.LogFileXhtml.SuppressExceptions"/> flag is set to true. </exception>
         </member>
-        <member name="P:SobekCM.Tools.Logs.LogFileXHTML.SuppressExceptions">
+        <member name="P:SobekCM.Tools.Logs.LogFileXhtml.SuppressExceptions">
             <summary> Gets and Sets the flag which indicates if all <see cref="T:SobekCM.Tools.Logs.LogFile_Exception"/>s should be
             suppressed or not.  </summary>
-            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXHTML"/> class. </example>
+            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXhtml"/> class. </example>
         </member>
-        <member name="P:SobekCM.Tools.Logs.LogFileXHTML.isOpen">
+        <member name="P:SobekCM.Tools.Logs.LogFileXhtml.isOpen">
             <summary> Returns true if the log file is currently open. </summary>
-            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXHTML"/> class. </example>
+            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXhtml"/> class. </example>
         </member>
-        <member name="P:SobekCM.Tools.Logs.LogFileXHTML.DateStampingEnabled">
+        <member name="P:SobekCM.Tools.Logs.LogFileXhtml.DateStampingEnabled">
             <summary> Gets and sets the flag which indicates if each line receives a date stamp. </summary>
-            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXHTML"/> class. </example>
+            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXhtml"/> class. </example>
         </member>
-        <member name="P:SobekCM.Tools.Logs.LogFileXHTML.DateCreated">
+        <member name="P:SobekCM.Tools.Logs.LogFileXhtml.DateCreated">
             <summary> Gets the date and time the current log file was created. </summary>
-            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXHTML"/> class. </example>
+            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXhtml"/> class. </example>
         </member>
-        <member name="P:SobekCM.Tools.Logs.LogFileXHTML.ErrorCount">
-            <summary> Gets the number of explicit calls to <see cref="M:SobekCM.Tools.Logs.LogFileXHTML.AddError(System.String)"/> method were made. </summary>
-            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXHTML"/> class. </example>
+        <member name="P:SobekCM.Tools.Logs.LogFileXhtml.ErrorCount">
+            <summary> Gets the number of explicit calls to <see cref="M:SobekCM.Tools.Logs.LogFileXhtml.AddError(System.String)"/> method were made. </summary>
+            <example> To see examples, look at the examples listed under the main <see cref="T:SobekCM.Tools.Logs.LogFileXhtml"/> class. </example>
         </member>
-        <member name="P:SobekCM.Tools.Logs.LogFileXHTML.FileName">
+        <member name="P:SobekCM.Tools.Logs.LogFileXhtml.FileName">
             <summary> Returns the filename for this log file </summary>
         </member>
-        <member name="T:SobekCM.Tools.Logs.LogFileXHTML_Style">
+        <member name="T:SobekCM.Tools.Logs.LogFileXhtmlStyle">
             <summary> [ NOT YET FULLY IMPLEMENTED ] <br/> <br/>
-            LogFileXHTML_Style is a class used to hold information about a specific style used in the <see cref="T:SobekCM.Tools.Logs.LogFileXHTML"/> class. 
+            LogFileXHTML_Style is a class used to hold information about a specific style used in the <see cref="T:SobekCM.Tools.Logs.LogFileXhtml"/> class. 
             <br/> <br/> </summary>
-            <remarks> This class is created by calls to the <see cref="M:SobekCM.Tools.Logs.LogFileXHTML.AddNewStyle(System.String,System.String,System.Boolean)"/> method in the <see cref="T:SobekCM.Tools.Logs.LogFileXHTML"/> class. 
+            <remarks> This class is created by calls to the <see cref="M:SobekCM.Tools.Logs.LogFileXhtml.AddNewStyle(System.String,System.String,System.Boolean)"/> method in the <see cref="T:SobekCM.Tools.Logs.LogFileXhtml"/> class. 
             <br/> <br/>
             Object created by Mark V Sullivan (2003) for University of Florida's Digital Library Center.  </remarks> 
         </member>
-        <member name="F:SobekCM.Tools.Logs.LogFileXHTML_Style.bold">
+        <member name="F:SobekCM.Tools.Logs.LogFileXhtmlStyle.bold">
             <summary> Private bool variable stores flag which indicates if this style should have the actual log portion of the line emboldened. </summary>
         </member>
-        <member name="F:SobekCM.Tools.Logs.LogFileXHTML_Style.fontColor">
+        <member name="F:SobekCM.Tools.Logs.LogFileXhtmlStyle.fontColor">
             <summary> Private string variable stores the information for the color of the font used for this style. </summary>
         </member>
-        <member name="F:SobekCM.Tools.Logs.LogFileXHTML_Style.fontFamily">
+        <member name="F:SobekCM.Tools.Logs.LogFileXhtmlStyle.fontFamily">
             <summary> Private string variable stores the information for the font family for this style. </summary>
         </member>
-        <member name="F:SobekCM.Tools.Logs.LogFileXHTML_Style.fontSize">
+        <member name="F:SobekCM.Tools.Logs.LogFileXhtmlStyle.fontSize">
             <summary> Private string variable stores the information for the size of the font to use for this style. </summary>
         </member>
-        <member name="F:SobekCM.Tools.Logs.LogFileXHTML_Style.italics">
+        <member name="F:SobekCM.Tools.Logs.LogFileXhtmlStyle.italics">
             <summary> Private bool variable stores flag which indicates if the actual log information for these style should be italicized. </summary>
         </member>
-        <member name="F:SobekCM.Tools.Logs.LogFileXHTML_Style.name">
+        <member name="F:SobekCM.Tools.Logs.LogFileXhtmlStyle.name">
             <summary> Private string variable stores the name of this style to be referenced in the body of the XHTML document. </summary>
         </member>
-        <member name="M:SobekCM.Tools.Logs.LogFileXHTML_Style.#ctor(System.Boolean,System.String,System.String,System.Boolean,System.String)">
+        <member name="M:SobekCM.Tools.Logs.LogFileXhtmlStyle.#ctor(System.Boolean,System.String,System.String,System.Boolean,System.String)">
             <summary> Constructor for the LogFileXHTML_Style class. </summary>
-            <param name="bold"> Flag which indicates if this style should have the actual log portion of the line emboldened. </param>
-            <param name="font_Color"> The information for the color of the font used for this style. </param>
-            <param name="font_Size"> The information for the size of the font to use for this style. </param>
-            <param name="italics"> Flag which indicates if the actual log information for these style should be italicized. </param>
-            <param name="name"> The name of this style to be referenced in the body of the XHTML document. </param>
+            <param name="Bold"> Flag which indicates if this style should have the actual log portion of the line emboldened. </param>
+            <param name="FontColor"> The information for the color of the font used for this style. </param>
+            <param name="FontSize"> The information for the size of the font to use for this style. </param>
+            <param name="Italics"> Flag which indicates if the actual log information for these style should be italicized. </param>
+            <param name="Name"> The name of this style to be referenced in the body of the XHTML document. </param>
         </member>
-        <member name="M:SobekCM.Tools.Logs.LogFileXHTML_Style.#ctor(System.String)">
+        <member name="M:SobekCM.Tools.Logs.LogFileXhtmlStyle.#ctor(System.String)">
             <summary> Constructor for the LogFileXHTML_Style class which takes the style definition from
             HTML and parses each element for this object. </summary>
             <remarks> The input string must be of the exact form which the ToString() method creates. </remarks>
-            <param name="style_definition"> Style sheet in HTML format, as output by ToString() </param>
+            <param name="StyleDefinition"> Style sheet in HTML format, as output by ToString() </param>
         </member>
-        <member name="M:SobekCM.Tools.Logs.LogFileXHTML_Style.ToString">
+        <member name="M:SobekCM.Tools.Logs.LogFileXhtmlStyle.ToString">
             <summary> Returns the Style Sheet definition line which defines this style. </summary>
             <returns> Style sheet definition XHTML line. </returns>
         </member>
-        <member name="P:SobekCM.Tools.Logs.LogFileXHTML_Style.Bold">
+        <member name="P:SobekCM.Tools.Logs.LogFileXhtmlStyle.Bold">
             <summary> Gets flag which indicates if this style should have the actual log portion of the line emboldened. </summary>
         </member>
-        <member name="P:SobekCM.Tools.Logs.LogFileXHTML_Style.Font_Color">
+        <member name="P:SobekCM.Tools.Logs.LogFileXhtmlStyle.Font_Color">
             <summary> Gets the information for the color of the font used for this style. </summary>
         </member>
-        <member name="P:SobekCM.Tools.Logs.LogFileXHTML_Style.Font_Family">
+        <member name="P:SobekCM.Tools.Logs.LogFileXhtmlStyle.Font_Family">
             <summary> Gets the information for the font family for this style. </summary>
         </member>
-        <member name="P:SobekCM.Tools.Logs.LogFileXHTML_Style.Font_Size">
+        <member name="P:SobekCM.Tools.Logs.LogFileXhtmlStyle.Font_Size">
             <summary> Gets the information for the size of the font to use for this style. </summary>
         </member>
-        <member name="P:SobekCM.Tools.Logs.LogFileXHTML_Style.Italics">
+        <member name="P:SobekCM.Tools.Logs.LogFileXhtmlStyle.Italics">
             <summary> Gets flag which indicates if the actual log information for these style should be italicized. </summary>
         </member>
-        <member name="P:SobekCM.Tools.Logs.LogFileXHTML_Style.Name">
+        <member name="P:SobekCM.Tools.Logs.LogFileXhtmlStyle.Name">
             <summary> Gets the name of this style to be referenced in the body of the XHTML document. </summary>
         </member>
         <member name="T:SobekCM.Tools.Logs.LogFile_Exception">
@@ -735,11 +895,11 @@
         </member>
         <member name="M:SobekCM.Tools.Logs.LogFile_Exception.#ctor(System.String)">
             <summary> Constructor which creates a new LogFile_Exception </summary>
-            <param name="customMessage"> Custom message which explains the error which
+            <param name="CustomMessage"> Custom message which explains the error which
             occurred to fire this exception. </param>
         </member>
         <member name="T:SobekCM.Tools.SecurityInfo">
-            <summary> Object used to determine and ensure security.  It allows
+            <summary> Object used to determine and ensure security.    It allows
             for reading from the registry, checking local users and computer information, 
             and writing and reading to encrypted files. <br/><br/>
             </summary>
@@ -753,32 +913,32 @@
         </member>
         <member name="M:SobekCM.Tools.SecurityInfo.LocalMachineKey(System.String,System.String)">
             <summary> Returns a string value from the registry under HKEY_LOCAL_MACHINE. </summary>
-            <param name="keyLocation"> Location of the key (i.e. "Control Panel\Desktop") </param>
-            <param name="valueName"> Name of the value to retrieve </param>
+            <param name="KeyLocation"> Location of the key (i.e. "Control Panel\Desktop") </param>
+            <param name="ValueName"> Name of the value to retrieve </param>
             <returns> String value from the registry, or "-1" if an error occurs </returns>
         </member>
         <member name="M:SobekCM.Tools.SecurityInfo.CurrentUserKey(System.String,System.String)">
             <summary> Returns a string value from the registry under HKEY_CURRENT_USER. </summary>
-            <param name="keyLocation"> Location of the key (i.e. "Control Panel\Desktop") </param>
-            <param name="valueName"> Name of the value to retrieve </param>
+            <param name="KeyLocation"> Location of the key (i.e. "Control Panel\Desktop") </param>
+            <param name="ValueName"> Name of the value to retrieve </param>
             <returns> String value from the registry, or "-1" if an error occurs </returns>
         </member>
         <member name="M:SobekCM.Tools.SecurityInfo.ReadFromEncryptedFile(System.String,System.String,System.String,System.Int32,System.Int32)">
             <summary> Reads text from a file encrypted in DES encryption. (128 bit symmetric encryption) </summary>
-            <param name="filename"> Path and name of file to be read from</param>
-            <param name="key"> 8 character (64bit) key for decryption</param>
-            <param name="IV"> 8 character (64bit) initialization vector for decryption</param>
-            <param name="position"> Character position to start reading from</param>
-            <param name="length"> Number of characters to read from the file</param>
+            <param name="Filename"> Path and name of file to be read from</param>
+            <param name="Key"> 8 character (64bit) key for decryption</param>
+            <param name="Iv"> 8 character (64bit) initialization vector for decryption</param>
+            <param name="Position"> Character position to start reading from</param>
+            <param name="Length"> Number of characters to read from the file</param>
             <returns> Character array of data read and decrypted from file or a NULL if there was an error</returns>
         </member>
         <member name="M:SobekCM.Tools.SecurityInfo.WriteToEncryptedFile(System.String,System.String,System.String,System.String,System.Int32)">
             <summary> Writes text to a file encrypted in DES encryption. (128 bit symmetric encryption) </summary>
-            <param name="textToWrite"> Text which will be written to the file</param>
-            <param name="filename"> Path and name of file to be written to</param>
-            <param name="key"> 8 character (64bit) key for encryption</param>
-            <param name="IV"> 8 character (64bit) initialization vector for encryption</param>
-            <param name="position"> Character position in file to write the text</param>
+            <param name="TextToWrite"> Text which will be written to the file</param>
+            <param name="Filename"> Path and name of file to be written to</param>
+            <param name="Key"> 8 character (64bit) key for encryption</param>
+            <param name="Iv"> 8 character (64bit) initialization vector for encryption</param>
+            <param name="Position"> Character position in file to write the text</param>
             <returns> TRUE if written successfully, otherwise FALSE </returns>
         </member>
         <member name="M:SobekCM.Tools.SecurityInfo.SHA1_EncryptString(System.String)">
@@ -790,21 +950,21 @@
             <summary> Encrypt a string, given the string.  </summary>
             <param name="Source"> String to encrypt </param>
             <param name="Key"> Key for the encryption </param>
-            <param name="IV"> Initialization Vector for the encryption </param>
+            <param name="Iv"> Initialization Vector for the encryption </param>
             <returns> The encrypted string </returns>
         </member>
         <member name="M:SobekCM.Tools.SecurityInfo.EncryptString(System.String,System.String,System.String)">
             <summary> Encrypt a string, given the string, the key, and the IV values.  </summary>
             <param name="Source"> String to encrypt </param>
             <param name="Key"> Key for the encryption </param>
-            <param name="IV"> Initialization Vector for the encryption </param>
+            <param name="Iv"> Initialization Vector for the encryption </param>
             <returns> The encrypted string </returns>
         </member>
         <member name="M:SobekCM.Tools.SecurityInfo.DecryptString(System.String,System.String,System.String)">
             <summary> Decrypt a string, given the string, the key, and the IV values.  </summary>
             <param name="Source"> String to decrypt </param>
             <param name="Key"> Key for the encryption </param>
-            <param name="IV"> Initialization Vector for the encryption </param>
+            <param name="Iv"> Initialization Vector for the encryption </param>
             <returns> The decrypted string </returns>
         </member>
         <member name="P:SobekCM.Tools.SecurityInfo.UserName">
@@ -815,77 +975,77 @@
             <summary> Gets the complete current users name as a string. </summary>
             <remarks> This name is returned in the form 'DOMAIN\username'. </remarks>
         </member>
-        <member name="T:SobekCM.Tools.Settings.IS_UserSettings">
+        <member name="T:SobekCM.Tools.Settings.IsolatedStorage_Settings">
             <summary> IS_UserSettings is an abstract, static class which uses Isolated Storage and XML to
             store and retrive the settings for an application's user.
             </summary>
             <remarks> Object created by Mark V Sullivan (2004) for University of Florida's Digital Library Center. </remarks>
         </member>
-        <member name="F:SobekCM.Tools.Settings.IS_UserSettings.userSettings">
+        <member name="F:SobekCM.Tools.Settings.IsolatedStorage_Settings.userSettings">
             <summary> DataRow which holds the specific values </summary>
         </member>
-        <member name="F:SobekCM.Tools.Settings.IS_UserSettings.fileName">
+        <member name="F:SobekCM.Tools.Settings.IsolatedStorage_Settings.fileName">
             <summary> Name of the file which stores these settings </summary>
         </member>
-        <member name="M:SobekCM.Tools.Settings.IS_UserSettings.#cctor">
+        <member name="M:SobekCM.Tools.Settings.IsolatedStorage_Settings.#cctor">
             <summary> Static constructor for the IS_UserSettings base class </summary>
         </member>
-        <member name="M:SobekCM.Tools.Settings.IS_UserSettings.Create_DataSet">
+        <member name="M:SobekCM.Tools.Settings.IsolatedStorage_Settings.Create_DataSet">
             <summary> Method creates a new DataSet to house the user information </summary>
         </member>
-        <member name="M:SobekCM.Tools.Settings.IS_UserSettings.Read_XML_File">
+        <member name="M:SobekCM.Tools.Settings.IsolatedStorage_Settings.Read_XML_File">
             <summary> Reads the user settings from a XML file in Isolated Storage </summary>
             <returns> TRUE if the XML file already existed, otherwise FALSE </returns>
             <remarks> If the XML file does not exist, an empty DataSet is created </remarks>
         </member>
-        <member name="M:SobekCM.Tools.Settings.IS_UserSettings.Read_XML_File(System.String)">
+        <member name="M:SobekCM.Tools.Settings.IsolatedStorage_Settings.Read_XML_File(System.String)">
             <summary> Reads the user settings from a XML file in Isolated Storage </summary>
-            <param name="IS_FileName"> Name of the file </param>
+            <param name="IsolatedStorage_FileName"> Name of the file </param>
             <returns> TRUE if the XML file already existed, otherwise FALSE </returns>
             <remarks> If the XML file does not exist, an empty DataSet is created </remarks>
         </member>
-        <member name="M:SobekCM.Tools.Settings.IS_UserSettings.Write_XML_File">
+        <member name="M:SobekCM.Tools.Settings.IsolatedStorage_Settings.Write_XML_File">
             <summary> Writes the user settings to a XML file in Isolated Storage </summary>
             <returns> TRUE if the XML file is successfully written, otherwise FALSE </returns>
         </member>
-        <member name="M:SobekCM.Tools.Settings.IS_UserSettings.Write_XML_File(System.String)">
+        <member name="M:SobekCM.Tools.Settings.IsolatedStorage_Settings.Write_XML_File(System.String)">
             <summary> Writes the user settings to a XML file in Isolated Storage </summary>
-            <param name="IS_FileName"> Name of the file </param>
+            <param name="IsolatedStorage_FileName"> Name of the file </param>
             <returns> TRUE if the XML file is successfully written, otherwise FALSE </returns>
         </member>
-        <member name="M:SobekCM.Tools.Settings.IS_UserSettings.Add_Setting(System.String,System.Int32)">
+        <member name="M:SobekCM.Tools.Settings.IsolatedStorage_Settings.Add_Setting(System.String,System.Int32)">
             <summary> Set a value in the current user setting. </summary>
             <param name="SettingName"> Name of the setting </param>
-            <param name="newValue"> New value for the setting </param>
+            <param name="NewValue"> New value for the setting </param>
             <remarks> If the setting name already exists, the value will be changed
             to match the new value. </remarks>
         </member>
-        <member name="M:SobekCM.Tools.Settings.IS_UserSettings.Add_Setting(System.String,System.String)">
+        <member name="M:SobekCM.Tools.Settings.IsolatedStorage_Settings.Add_Setting(System.String,System.String)">
             <summary> Set a value in the current user setting. </summary>
             <param name="SettingName"> Name of the setting </param>
-            <param name="newValue"> New value for the setting </param>
+            <param name="NewValue"> New value for the setting </param>
             <remarks> If the setting name already exists, the value will be changed
             to match the new value. </remarks>
         </member>
-        <member name="M:SobekCM.Tools.Settings.IS_UserSettings.Get_Int_Setting(System.String)">
+        <member name="M:SobekCM.Tools.Settings.IsolatedStorage_Settings.Get_Int_Setting(System.String)">
             <summary> Gets a pre-existing integer setting for this user  </summary>
             <param name="SettingName"> Name of the setting to fetch </param>
             <returns> Value of the integer setting, or -1 if the setting was not found </returns>
         </member>
-        <member name="M:SobekCM.Tools.Settings.IS_UserSettings.Get_String_Setting(System.String)">
+        <member name="M:SobekCM.Tools.Settings.IsolatedStorage_Settings.Get_String_Setting(System.String)">
             <summary> Gets a pre-existing string setting for this user  </summary>
             <param name="SettingName"> Name of the setting to fetch </param>
             <returns> Value of the string setting, or an empty string if the setting was not found </returns>
         </member>
-        <member name="M:SobekCM.Tools.Settings.IS_UserSettings.Contains(System.String)">
+        <member name="M:SobekCM.Tools.Settings.IsolatedStorage_Settings.Contains(System.String)">
             <summary> Checks to see if a particular setting already exists for this user </summary>
             <param name="SettingName"> Name of the setting to look for </param>
             <returns> TRUE if the setting exists, otherwise FALSE </returns>
         </member>
-        <member name="P:SobekCM.Tools.Settings.IS_UserSettings.FileName">
+        <member name="P:SobekCM.Tools.Settings.IsolatedStorage_Settings.FileName">
             <summary> Gets and sets the name of the file which stores the user settings </summary>
         </member>
-        <member name="P:SobekCM.Tools.Settings.IS_UserSettings.Setting_DataSet">
+        <member name="P:SobekCM.Tools.Settings.IsolatedStorage_Settings.Setting_DataSet">
             <summary> Gets the dataset which contains all the values for this this Isolated Storage saved user setting file </summary>
         </member>
         <member name="T:SobekCM.Tools.FDA.FDA_File">
@@ -899,12 +1059,12 @@
         </member>
         <member name="M:SobekCM.Tools.FDA.FDA_File.#ctor(System.String,System.String,System.Int64,System.String,System.String,System.String)">
             <summary> Constructor creates a new instance of the FDA_File class </summary>
-            <param name="id">ID for this file in the FDA</param>
-            <param name="name">Name (or path) of the file</param>
-            <param name="size">Size of the file</param>
-            <param name="md5_checksum">MD5 checksum for the file</param>
-            <param name="sha1_checksum">SHA-1 checksum for the file</param>
-            <param name="preservation">Preservation level applied to this file</param>
+            <param name="ID">ID for this file in the FDA</param>
+            <param name="Name">Name (or path) of the file</param>
+            <param name="Size">Size of the file</param>
+            <param name="MD5_Checksum">MD5 checksum for the file</param>
+            <param name="SHA1_Checksum">SHA-1 checksum for the file</param>
+            <param name="Preservation">Preservation level applied to this file</param>
         </member>
         <member name="M:SobekCM.Tools.FDA.FDA_File.Add_Warning(System.String,System.String)">
             <summary> Add a new warning to this file </summary>
@@ -1153,7 +1313,7 @@
         </member>
         <member name="M:SobekCM.Tools.FDA.FDA_Report_Reader.Read(System.String)">
             <summary>Reads the FDA report and creates the associated data object </summary>
-            <param name="fileName">Name (including path) of the report to read</param>
+            <param name="FileName">Name (including path) of the report to read</param>
             <returns>All the important data from an ingest report</returns>
             <remarks>If an exception occurred during this process, the last exception is accessible in the <see cref="P:SobekCM.Tools.FDA.FDA_Report_Reader.Last_Exception"/> property. </remarks>
         </member>
@@ -1206,14 +1366,14 @@
         </member>
         <member name="M:SobekCM.Tools.FDA.FDA_Report_Writer.Write_Text(SobekCM.Tools.FDA.FDA_Report_Data,System.String)">
             <summary> Writes the basic information about a FDA report as a text file </summary>
-            <param name="report_data">FDA Report information</param>
-            <param name="fileName">Name for the text output file</param>
+            <param name="ReportData">FDA Report information</param>
+            <param name="FileName">Name for the text output file</param>
             <returns>Flag indicating if the report creation was successful</returns>
         </member>
         <member name="M:SobekCM.Tools.FDA.FDA_Report_Writer.Write(SobekCM.Tools.FDA.FDA_Report_Data,System.String)">
             <summary> Writes the basic information about a FDA ingest report as a valid XML file </summary>
-            <param name="report_data">FDA Report information</param>
-            <param name="fileName">Name for the XML output file</param>
+            <param name="ReportData">FDA Report information</param>
+            <param name="FileName">Name for the XML output file</param>
             <returns>Flag indicating if the report creation was successful</returns>
         </member>
         <member name="T:SobekCM.Tools.Properties.Resources">
@@ -1231,6 +1391,61 @@
               Overrides the current thread's CurrentUICulture property for all
               resource lookups using this strongly typed resource class.
             </summary>
+        </member>
+        <member name="T:SobekCM.Tools.SobekCM_File_Utilities">
+            <summary> Class contains static methods used for working with files, or
+            directories of files </summary>
+        </member>
+        <member name="M:SobekCM.Tools.SobekCM_File_Utilities.Delete_Folders_Recursively(System.String)">
+            <summary> Dletes a set of folders and files recursively </summary>
+            <param name="Folder"> Top folder to delete </param>
+            <returns> TRUE if successful, otherwise FALSE </returns>
+        </member>
+        <member name="M:SobekCM.Tools.SobekCM_File_Utilities.GetFiles(System.String,System.String)">
+            <summary> Returns file names from given top folder that comply to given filters </summary>
+            <param name="SourceFolder">Folder with files to retrieve</param>
+            <param name="Filters">Multiple file filters separated by | character</param>
+            <returns>Array of string file names that meet given filters</returns>
+        </member>
+        <member name="M:SobekCM.Tools.SobekCM_File_Utilities.GetFiles(System.String,System.String,System.IO.SearchOption)">
+            <summary> Returns file names from given folder that comply to given filters </summary>
+            <param name="SourceFolder">Folder with files to retrieve</param>
+            <param name="Filters">Multiple file filters separated by | character</param>
+            <param name="SearchOption">File.IO.SearchOption, could be AllDirectories or TopDirectoryOnly</param>
+            <returns>Array of string file names that meet given filters</returns>
+        </member>
+        <member name="T:SobekCM.Tools.SobekCM_Traced_Exception">
+            <summary> Custom exception which includes the trace router from the current HTTP request, which functions
+            as a mini-trace route/stack trace and can be included in the error email </summary>
+        </member>
+        <member name="M:SobekCM.Tools.SobekCM_Traced_Exception.#ctor(System.String,System.Exception,SobekCM.Tools.Custom_Tracer)">
+            <summary> Constructor for a new instance of the SobekCM_Traced_Exception class </summary>
+            <param name="Message"> The error message that explains the reason for the exception </param>
+            <param name="Inner_Exception"> The exception which is the cause of the current exception </param>
+            <param name="Tracer"> Trace object keeps a list of each method executed and important milestones in rendering </param>
+        </member>
+        <member name="P:SobekCM.Tools.SobekCM_Traced_Exception.Trace_Route_HTML">
+            <summary> Returns the trace route (from the stored tracer object) as html </summary>
+        </member>
+        <member name="P:SobekCM.Tools.SobekCM_Traced_Exception.Trace_Route">
+            <summary> Returns the trace route (from the stored tracer object) as text </summary>
+        </member>
+        <member name="T:SobekCM.Tools.StringKeyValuePair">
+            <summary> Fully serializable string key/value pair class </summary>
+        </member>
+        <member name="M:SobekCM.Tools.StringKeyValuePair.#ctor">
+            <summary> Constructor for a new instance of the StringKeyValuePair class </summary>
+        </member>
+        <member name="M:SobekCM.Tools.StringKeyValuePair.#ctor(System.String,System.String)">
+            <summary> Constructor for a new instance of the StringKeyValuePair class </summary>
+            <param name="Key"> Key for this key/value pair </param>
+            <param name="Value"> Value for this key/value pair </param>
+        </member>
+        <member name="P:SobekCM.Tools.StringKeyValuePair.Key">
+            <summary> Key for this key/value pair </summary>
+        </member>
+        <member name="P:SobekCM.Tools.StringKeyValuePair.Value">
+            <summary> Value for this key/value pair </summary>
         </member>
     </members>
 </doc>

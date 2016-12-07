@@ -1,2 +1,0 @@
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT_Wix_Installer_UFDC\bin\Release\SMaRT_Wix_Installer_UFDC.msi
-C:\GitRepository\SobekCM-Web-Application\Other Tools\SMaRT\SMaRT_Wix_Installer_UFDC\bin\Release\SMaRT_Wix_Installer_UFDC.wixpdb

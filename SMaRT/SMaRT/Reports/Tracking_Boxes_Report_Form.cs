@@ -4,8 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
-using SobekCM.Library.Database;
-using SobekCM.Library.Search;
+using SobekCM.Engine_Library.Database;
+using SobekCM.Management_Tool.Search;
 using SobekCM.Management_Tool.Settings;
 
 #endregion
@@ -22,7 +22,7 @@ namespace SobekCM.Management_Tool.Reports
 
             // Load the list of all tracking boxes
             listView1.Items.Clear();
-            List<string> trackingBoxes = SobekCM_Database.All_Tracking_Boxes;
+            List<string> trackingBoxes = Engine_Database.All_Tracking_Boxes;
             foreach (string thisBox in trackingBoxes)
             {
                 listView1.Items.Add(thisBox);
@@ -83,7 +83,7 @@ namespace SobekCM.Management_Tool.Reports
 
                 // Refresh the tracking box list
                 listView1.Items.Clear();
-                List<string> trackingBoxes = SobekCM_Database.All_Tracking_Boxes;
+                List<string> trackingBoxes = Engine_Database.All_Tracking_Boxes;
                 foreach (string thisBox in trackingBoxes)
                 {
                     listView1.Items.Add(thisBox);

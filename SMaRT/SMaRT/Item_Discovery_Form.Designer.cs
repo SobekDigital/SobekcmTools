@@ -1,4 +1,7 @@
-﻿namespace SobekCM.Management_Tool
+﻿using SobekCM.Core.Navigation;
+using SobekCM.Management_Tool.Search;
+
+namespace SobekCM.Management_Tool
 {
     partial class Item_Discovery_Form
     {
@@ -29,7 +32,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            SobekCM.Library.Search.SobekCM_Search_Object sobekCM_Search_Object1 = new SobekCM.Library.Search.SobekCM_Search_Object();
+            SobekCM_Search_Object sobekCM_Search_Object1 = new SobekCM_Search_Object();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Item_Discovery_Form));
             this.mainPanel = new System.Windows.Forms.Panel();
             this.instructionLabel = new System.Windows.Forms.Label();
@@ -175,7 +178,7 @@
             this.sobekCM_Item_Discovery_Panel1.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sobekCM_Item_Discovery_Panel1.Location = new System.Drawing.Point(8, 25);
             this.sobekCM_Item_Discovery_Panel1.Name = "sobekCM_Item_Discovery_Panel1";
-            this.sobekCM_Item_Discovery_Panel1.Search_Precision = SobekCM.Library.Navigation.Search_Precision_Type_Enum.Inflectional_Form;
+            this.sobekCM_Item_Discovery_Panel1.Search_Precision = Search_Precision_Type_Enum.Inflectional_Form;
             this.sobekCM_Item_Discovery_Panel1.Size = new System.Drawing.Size(737, 147);
             this.sobekCM_Item_Discovery_Panel1.TabIndex = 23;
             this.sobekCM_Item_Discovery_Panel1.Search_Requested += new SobekCM.Management_Tool.Controls.SobekCM_Item_Discovery_Panel.Search_Requested_Delegate(this.sobekCM_Item_Discovery_Panel1_Search_Requested);

@@ -1,10 +1,10 @@
 #region Using directives
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Text;
 using SobekCM.Resource_Object.Metadata_Modules;
 using SobekCM.Resource_Object.Metadata_Modules.VRACore;
@@ -29,18 +29,16 @@ namespace SobekCM.Resource_Object.Bib_Info
         private List<Publisher_Info> publishers;
         private int sortDate;
         private string sortTitle;
-        private Source_Info source;
-        private List<Temporal_Info> temporalSubjects;
+	    private List<Temporal_Info> temporalSubjects;
         private string vid;
 
         #region Constructors
 
         /// <summary> Constructor for a new instance of the Bibliographic_Info class. </summary>
         public Bibliographic_Info()
-            : base()
         {
             sortDate = -1;
-            source = new Source_Info();
+            Source = new Source_Info();
         }
 
         #endregion
@@ -89,7 +87,7 @@ namespace SobekCM.Resource_Object.Bib_Info
                 // Add the donor information
                 if ((hasDonor) && (Donor.hasData))
                 {
-                    metadataTerms.Add(new KeyValuePair<string, string>("Donor", Donor.ToString()));
+                    metadataTerms.Add(new KeyValuePair<string, string>("Donor", Donor.ToString(false)));
                 }
 
                 // Add the genre information
@@ -107,8 +105,16 @@ namespace SobekCM.Resource_Object.Bib_Info
                     foreach (Identifier_Info thisIdentifier in Identifiers)
                     {
                         metadataTerms.Add(new KeyValuePair<string, string>("Identifier", thisIdentifier.Identifier));
+
+                        if ((thisIdentifier.Type.IndexOf("ACCESSION", StringComparison.InvariantCultureIgnoreCase) >= 0) ||
+                            (thisIdentifier.Type.IndexOf("ACCN", StringComparison.InvariantCultureIgnoreCase) >= 0))
+                        {
+                            metadataTerms.Add(new KeyValuePair<string, string>("Accession Number", thisIdentifier.Identifier));
+                        }
                     }
                 }
+
+
 
                 // Add the languages
                 if (Languages_Count > 0)
@@ -158,7 +164,7 @@ namespace SobekCM.Resource_Object.Bib_Info
                 // Add the main title here
                 if (Main_Title.Title.Length > 0)
                 {
-                    metadataTerms.Add(new KeyValuePair<string, string>("Title", Main_Title.Title.ToString().Replace("<i>", " ").Replace("</i>", " ")));
+                    metadataTerms.Add(new KeyValuePair<string, string>("Title", Main_Title.Title.Replace("<i>", " ").Replace("</i>", " ")));
                 }
 
                 // Add any manufacturers here
@@ -206,7 +212,7 @@ namespace SobekCM.Resource_Object.Bib_Info
                     metadataTerms.Add(new KeyValuePair<string, string>("Edition", Origin_Info.Edition));
                 }
 
-                // Add publishers here
+                // Add publishers and the display publisher here here
                 List<string> places = new List<string>();
                 if (Publishers_Count > 0)
                 {
@@ -215,6 +221,8 @@ namespace SobekCM.Resource_Object.Bib_Info
                         if ((thisPublisher.Name.ToLower().IndexOf("s.n") < 0) || (thisPublisher.Name.Replace(" ", "").Replace("(", "").Replace(")", "").Replace("[", "").Replace("]", "").Replace(",", "").Replace(".", "").Replace(";", "").Replace(":", "").Replace(">", "").Replace("<", "").Length > 3))
                         {
                             metadataTerms.Add(new KeyValuePair<string, string>("Publisher", thisPublisher.Name));
+
+							metadataTerms.Add(new KeyValuePair<string, string>("Publisher.Display", thisPublisher.ToString().Replace("["," ").Replace("]"," ")));
                         }
 
                         if (thisPublisher.Places_Count > 0)
@@ -225,6 +233,8 @@ namespace SobekCM.Resource_Object.Bib_Info
                                     places.Add(thisPlace.Place_Text);
                             }
                         }
+
+
                     }
                 }
 
@@ -293,6 +303,8 @@ namespace SobekCM.Resource_Object.Bib_Info
                 List<string> city = new List<string>();
                 List<string> continent = new List<string>();
                 List<string> island = new List<string>();
+				List<string> spatials_display = new List<string>();
+				List<string> subjects_display = new List<string>();
                 if (Subjects_Count > 0)
                 {
                     foreach (Subject_Info thisSubject in Subjects)
@@ -304,12 +316,18 @@ namespace SobekCM.Resource_Object.Bib_Info
                         if (thisSubject.Class_Type == Subject_Info_Type.Name)
                         {
                             metadataTerms.Add(new KeyValuePair<string, string>("Name as Subject", thisSubject.ToString(false)));
+	                        string complete = thisSubject.ToString(false);
+	                        if ((complete.Length > 0) && (!subjects_display.Contains(complete)))
+		                        subjects_display.Add(complete);
                         }
 
                         // Add title subjects
                         if (thisSubject.Class_Type == Subject_Info_Type.TitleInfo)
                         {
                             metadataTerms.Add(new KeyValuePair<string, string>("Title as Subject", thisSubject.ToString(false)));
+							string complete = thisSubject.ToString(false);
+							if ((complete.Length > 0) && (!subjects_display.Contains(complete)))
+								subjects_display.Add(complete);
                         }
 
                         // Add the subject keywords
@@ -327,10 +345,21 @@ namespace SobekCM.Resource_Object.Bib_Info
                             }
                             if (standSubj.Geographics_Count > 0)
                             {
+								StringBuilder thisSpatialBuilder = new StringBuilder();
                                 foreach (string geoTerm in standSubj.Geographics)
                                 {
-                                    metadataTerms.Add(new KeyValuePair<string, string>("Spatial Coverage", geoTerm));
+	                                if (geoTerm.Length > 0)
+	                                {
+		                                metadataTerms.Add(new KeyValuePair<string, string>("Spatial Coverage", geoTerm));
+		                                if (thisSpatialBuilder.Length == 0)
+			                                thisSpatialBuilder.Append(geoTerm);
+		                                else
+			                                thisSpatialBuilder.Append(" -- " + geoTerm);
+	                                }
                                 }
+	                            string complete2 = thisSpatialBuilder.ToString();
+								if ((complete2.Length > 0) && (!spatials_display.Contains(complete2)))
+									spatials_display.Add(complete2);
                             }
                             if (standSubj.Topics_Count > 0)
                             {
@@ -339,6 +368,10 @@ namespace SobekCM.Resource_Object.Bib_Info
                                     metadataTerms.Add(new KeyValuePair<string, string>("Subject Keyword", topicTerm));
                                 }
                             }
+
+							string complete = thisSubject.ToString(false);
+							if ((complete.Length > 0) && (!subjects_display.Contains(complete)))
+								subjects_display.Add(complete);
                         }
 
                         // Add hierarchical spatial info
@@ -378,6 +411,13 @@ namespace SobekCM.Resource_Object.Bib_Info
                                 metadataTerms.Add(new KeyValuePair<string, string>("Spatial Coverage", hiero.Island));
                                 island.Add(hiero.Island);
                             }
+
+							// Add the complete spatial as a display
+	                        string complete = hiero.ToString();
+							if ((complete.Length > 0) && (!spatials_display.Contains(complete)))
+							{
+								spatials_display.Add(complete);
+				            }
                         }
                     }
                 }
@@ -399,6 +439,18 @@ namespace SobekCM.Resource_Object.Bib_Info
                 {
                     metadataTerms.Add(new KeyValuePair<string, string>("City", thisCity));
                 }
+
+				// Add the display spatial coverage
+				foreach (string thisSpatial in spatials_display)
+				{
+					metadataTerms.Add(new KeyValuePair<string, string>("Spatial Coverage.Display", thisSpatial));
+				}
+
+				// Add the display subjects
+				foreach (string thisSubject in subjects_display)
+				{
+					metadataTerms.Add(new KeyValuePair<string, string>("Subjects.Display", thisSubject));
+				}
 
                 // Add all target audiences
                 if (Target_Audiences_Count > 0)
@@ -435,7 +487,36 @@ namespace SobekCM.Resource_Object.Bib_Info
                     metadataTerms.Add(new KeyValuePair<string, string>("Edition", Origin_Info.Edition));
                 }
 
-                return metadataTerms;
+				// Get the pub date and year
+				string pubdate = Origin_Info.Date_Check_All_Fields;
+	            if (pubdate.Length > 0)
+	            {
+		            metadataTerms.Add(new KeyValuePair<string, string>("Publication Date", pubdate));
+
+		            // Try to get the year
+		            int year = -1;
+
+		            if (pubdate.Length == 4)
+		            {
+			            Int32.TryParse(pubdate, out year);
+		            }
+
+		            if (year == -1)
+		            {
+			            DateTime date;
+			            if (DateTime.TryParse(pubdate, out date))
+			            {
+				            year = date.Year;
+			            }
+		            }
+
+					if (year != -1)
+					{
+						metadataTerms.Add(new KeyValuePair<string, string>("Temporal Year", year.ToString()));
+					}
+	            }
+
+	            return metadataTerms;
             }
         }
 
@@ -480,12 +561,8 @@ namespace SobekCM.Resource_Object.Bib_Info
         /// there are no finding guide containers, the Containers property creates a readonly collection to pass back out.</remarks>
         public int Containers_Count
         {
-            get
-            {
-                if (containers == null)
-                    return 0;
-                else
-                    return containers.Count;
+            get {
+	            return containers == null ? 0 : containers.Count;
             }
         }
 
@@ -494,26 +571,22 @@ namespace SobekCM.Resource_Object.Bib_Info
         /// Even if there are no containers, this property creates a readonly collection to pass back out.</remarks>
         public ReadOnlyCollection<Finding_Guide_Container> Containers
         {
-            get
-            {
-                if (containers == null)
-                    return new ReadOnlyCollection<Finding_Guide_Container>(new List<Finding_Guide_Container>());
-                else
-                    return new ReadOnlyCollection<Finding_Guide_Container>(containers);
+            get {
+	            return containers == null ? new ReadOnlyCollection<Finding_Guide_Container>(new List<Finding_Guide_Container>()) : new ReadOnlyCollection<Finding_Guide_Container>(containers);
             }
         }
 
         /// <summary> Adds a new finding-guide container to the container list for this item </summary>
-        /// <param name="Type">Type of container this represents (i.e., Box, Folder, etc..)</param>
+		/// <param name="ContainerType">Type of container this represents (i.e., Box, Folder, etc..)</param>
         /// <param name="Name">Name of this container</param>
         /// <param name="Level">Level within the container list that this container resides</param>
         /// <remarks>This can be used later to construct EADs for single item loads</remarks>
-        public void Add_Container(string Type, string Name, int Level)
+        public void Add_Container(string ContainerType, string Name, int Level)
         {
             if (containers == null)
                 containers = new List<Finding_Guide_Container>();
 
-            containers.Add(new Finding_Guide_Container(Type, Name, Level));
+			containers.Add(new Finding_Guide_Container(ContainerType, Name, Level));
         }
 
         /// <summary> Clears all finding-guide containers associated with tis item </summary>
@@ -548,24 +621,7 @@ namespace SobekCM.Resource_Object.Bib_Info
         {
             get
             {
-                if (identifiers == null)
-                    return new string[0];
-
-                ArrayList NOTIS = new ArrayList();
-                foreach (Identifier_Info thisIdentifier in identifiers)
-                {
-                    if (thisIdentifier.Type.Replace("*", "").ToUpper() == "NOTIS")
-                    {
-                        NOTIS.Add(thisIdentifier.Identifier);
-                    }
-                }
-
-                string[] returnVal = new string[NOTIS.Count];
-                for (int i = 0; i < NOTIS.Count; i++)
-                {
-                    returnVal[i] = NOTIS[i].ToString();
-                }
-                return returnVal;
+	            return identifiers == null ? new string[0] : identifiers.Where(ThisIdentifier => ThisIdentifier.Type.Replace("*", "").ToUpper() == "NOTIS").Select(ThisIdentifier => ThisIdentifier.Identifier).ToArray();
             }
         }
 
@@ -577,12 +633,9 @@ namespace SobekCM.Resource_Object.Bib_Info
                 if (identifiers == null)
                     return String.Empty;
 
-                foreach (Identifier_Info thisIdentifier in identifiers)
+                foreach (Identifier_Info thisIdentifier in identifiers.Where(ThisIdentifier => ThisIdentifier.Type.Replace("*", "").ToUpper().IndexOf("ALEPH") >= 0))
                 {
-                    if (thisIdentifier.Type.Replace("*", "").ToUpper().IndexOf("ALEPH") >= 0)
-                    {
-                        return thisIdentifier.Identifier;
-                    }
+	                return thisIdentifier.Identifier;
                 }
                 return String.Empty;
             }
@@ -590,13 +643,10 @@ namespace SobekCM.Resource_Object.Bib_Info
             {
                 if (identifiers != null)
                 {
-                    foreach (Identifier_Info thisIdentifier in identifiers)
+                    foreach (Identifier_Info thisIdentifier in identifiers.Where(ThisIdentifier => ThisIdentifier.Type.Replace("*", "").ToUpper().IndexOf("ALEPH") >= 0))
                     {
-                        if (thisIdentifier.Type.Replace("*", "").ToUpper().IndexOf("ALEPH") >= 0)
-                        {
-                            thisIdentifier.Identifier = value;
-                            return;
-                        }
+	                    thisIdentifier.Identifier = value;
+	                    return;
                     }
                 }
                 Add_Identifier(value, "ALEPH");
@@ -643,11 +693,8 @@ namespace SobekCM.Resource_Object.Bib_Info
         {
             get
             {
-                TypeOfResource_SobekCM_Enum sobekcm_type = SobekCM_Type;
-                if ((sobekcm_type == TypeOfResource_SobekCM_Enum.Artifact) || (sobekcm_type == TypeOfResource_SobekCM_Enum.Aerial) || (sobekcm_type == TypeOfResource_SobekCM_Enum.Map) || (sobekcm_type == TypeOfResource_SobekCM_Enum.Photograph))
-                    return true;
-                else
-                    return false;
+	            TypeOfResource_SobekCM_Enum sobekcm_type = SobekCM_Type;
+	            return (sobekcm_type == TypeOfResource_SobekCM_Enum.Artifact) || (sobekcm_type == TypeOfResource_SobekCM_Enum.Aerial) || (sobekcm_type == TypeOfResource_SobekCM_Enum.Map) || (sobekcm_type == TypeOfResource_SobekCM_Enum.Photograph);
             }
         }
 
@@ -656,12 +703,8 @@ namespace SobekCM.Resource_Object.Bib_Info
         /// there are no affiliations, the Affiliations property creates a readonly collection to pass back out.</remarks>
         public int Affiliations_Count
         {
-            get
-            {
-                if (affiliations == null)
-                    return 0;
-                else
-                    return affiliations.Count;
+            get {
+	            return affiliations == null ? 0 : affiliations.Count;
             }
         }
 
@@ -670,12 +713,8 @@ namespace SobekCM.Resource_Object.Bib_Info
         /// Even if there are no affiliations, this property creates a readonly collection to pass back out.</remarks>
         public ReadOnlyCollection<Affiliation_Info> Affiliations
         {
-            get
-            {
-                if (affiliations == null)
-                    return new ReadOnlyCollection<Affiliation_Info>(new List<Affiliation_Info>());
-                else
-                    return new ReadOnlyCollection<Affiliation_Info>(affiliations);
+            get {
+	            return affiliations == null ? new ReadOnlyCollection<Affiliation_Info>(new List<Affiliation_Info>()) : new ReadOnlyCollection<Affiliation_Info>(affiliations);
             }
         }
 
@@ -684,12 +723,8 @@ namespace SobekCM.Resource_Object.Bib_Info
         /// there are no temporal subjects, the TemporalSubjects property creates a readonly collection to pass back out.</remarks>
         public int TemporalSubjects_Count
         {
-            get
-            {
-                if (temporalSubjects == null)
-                    return 0;
-                else
-                    return temporalSubjects.Count;
+            get {
+	            return temporalSubjects == null ? 0 : temporalSubjects.Count;
             }
         }
 
@@ -698,33 +733,22 @@ namespace SobekCM.Resource_Object.Bib_Info
         /// Even if there are no temporal subjects, this property creates a readonly collection to pass back out.</remarks>
         public ReadOnlyCollection<Temporal_Info> TemporalSubjects
         {
-            get
-            {
-                if (temporalSubjects == null)
-                    return new ReadOnlyCollection<Temporal_Info>(new List<Temporal_Info>());
-                else
-                    return new ReadOnlyCollection<Temporal_Info>(temporalSubjects);
+            get {
+	            return temporalSubjects == null ? new ReadOnlyCollection<Temporal_Info>(new List<Temporal_Info>()) : new ReadOnlyCollection<Temporal_Info>(temporalSubjects);
             }
         }
 
-        /// <summary> Gets the source insitution information associated with this resource </summary>
-        public Source_Info Source
-        {
-            get { return source; }
-        }
+	    /// <summary> Gets the source insitution information associated with this resource </summary>
+	    public Source_Info Source { get; private set; }
 
 
-        /// <summary> Gets the number of publishers associated with this resource </summary>
+	    /// <summary> Gets the number of publishers associated with this resource </summary>
         /// <remarks>This should be used rather than the Count property of the <see cref="Publishers"/> property.  Even if 
         /// there are no publishers, the Publishers property creates a readonly collection to pass back out.</remarks>
         public int Publishers_Count
         {
-            get
-            {
-                if (publishers == null)
-                    return 0;
-                else
-                    return publishers.Count;
+            get {
+	            return publishers == null ? 0 : publishers.Count;
             }
         }
 
@@ -733,12 +757,8 @@ namespace SobekCM.Resource_Object.Bib_Info
         /// Even if there are no publishers, this property creates a readonly collection to pass back out.</remarks>
         public ReadOnlyCollection<Publisher_Info> Publishers
         {
-            get
-            {
-                if (publishers == null)
-                    return new ReadOnlyCollection<Publisher_Info>(new List<Publisher_Info>());
-                else
-                    return new ReadOnlyCollection<Publisher_Info>(publishers);
+            get {
+	            return publishers == null ? new ReadOnlyCollection<Publisher_Info>(new List<Publisher_Info>()) : new ReadOnlyCollection<Publisher_Info>(publishers);
             }
         }
 
@@ -747,12 +767,8 @@ namespace SobekCM.Resource_Object.Bib_Info
         /// there are no manufacturers, the Manufacturers property creates a readonly collection to pass back out.</remarks>
         public int Manufacturers_Count
         {
-            get
-            {
-                if (manufacturers == null)
-                    return 0;
-                else
-                    return manufacturers.Count;
+            get {
+	            return manufacturers == null ? 0 : manufacturers.Count;
             }
         }
 
@@ -761,12 +777,8 @@ namespace SobekCM.Resource_Object.Bib_Info
         /// Even if there are no manufacturers, this property creates a readonly collection to pass back out.</remarks>
         public ReadOnlyCollection<Publisher_Info> Manufacturers
         {
-            get
-            {
-                if (manufacturers == null)
-                    return new ReadOnlyCollection<Publisher_Info>(new List<Publisher_Info>());
-                else
-                    return new ReadOnlyCollection<Publisher_Info>(manufacturers);
+            get {
+	            return manufacturers == null ? new ReadOnlyCollection<Publisher_Info>(new List<Publisher_Info>()) : new ReadOnlyCollection<Publisher_Info>(manufacturers);
             }
         }
 
@@ -793,7 +805,7 @@ namespace SobekCM.Resource_Object.Bib_Info
                 StringBuilder full_citation = new StringBuilder();
 
                 // Add the data from the base class
-                full_citation.Append(base.MODS_Citation_String);
+                full_citation.Append(MODS_Citation_String);
 
                 if (affiliations != null)
                 {
@@ -807,11 +819,11 @@ namespace SobekCM.Resource_Object.Bib_Info
 
                 full_citation.Append(VID + " | ");
 
-                if (source != null)
+                if (Source != null)
                 {
-                    full_citation.Append(source.Code + " | ");
+                    full_citation.Append(Source.Code + " | ");
 
-                    full_citation.Append(source.Statement + " | ");
+                    full_citation.Append(Source.Statement + " | ");
                 }
 
                 if (temporalSubjects != null)
@@ -869,88 +881,92 @@ namespace SobekCM.Resource_Object.Bib_Info
         /// <returns> Affiliation object, either the one passed in or one that equals it already in the list </returns>
         public Affiliation_Info Add_Affiliation(Affiliation_Info New_Affiliation)
         {
-            if (affiliations == null)
+	        if (affiliations == null)
                 affiliations = new List<Affiliation_Info>();
 
-            if (!affiliations.Contains(New_Affiliation))
-            {
-                affiliations.Add(New_Affiliation);
-                return New_Affiliation;
-            }
-            else
-            {
-                return affiliations.Find(New_Affiliation.Equals);
-            }
+	        if (affiliations.Contains(New_Affiliation))
+	        {
+		        return affiliations.Find(New_Affiliation.Equals);
+	        }
+
+		    affiliations.Add(New_Affiliation);
+		    return New_Affiliation;
         }
 
-        /// <summary> Adds a new temporal subject to this object </summary>
-        /// <param name="New_Temporal"> Temporral subject object to add to this item </param>
-        /// <returns> Temporal_Info object, either the one passed in or one that equals it already in the list </returns>
-        public Temporal_Info Add_Temporal_Subject(Temporal_Info New_Temporal)
+        /// <summary> Adds a new spatial subject (non-hierarchical) to this item </summary>
+        /// <param name="SpatialTerm"> Term for the spatial subject </param>
+        /// <returns> Subject_Info_Standard object that was created and added </returns>
+        public Subject_Info_Standard Add_Spatial_Subject(string SpatialTerm)
         {
-            if (temporalSubjects == null)
-                temporalSubjects = new List<Temporal_Info>();
+            Subject_Info_Standard returnValue = new Subject_Info_Standard();
+            returnValue.Add_Geographic(SpatialTerm);
+            Add_Subject(returnValue);
 
-            if (!temporalSubjects.Contains(New_Temporal))
-            {
-                temporalSubjects.Add(New_Temporal);
-                return New_Temporal;
-            }
-            else
-            {
-                Temporal_Info returnTemporal = temporalSubjects.Find(New_Temporal.Equals);
-                if ((New_Temporal.TimePeriod.Length > 0) && (returnTemporal.TimePeriod.Length == 0))
-                    returnTemporal.TimePeriod = New_Temporal.TimePeriod;
-                return returnTemporal;
-            }
+            return returnValue;
         }
 
-        /// <summary> Adds a new temporal subject to this object </summary>
-        /// <param name="Start_Year">Start year for the year range</param>
-        /// <param name="End_Year">End year for the year range</param>
-        /// <param name="TimePeriod">Description of the time period (i.e. 'Post-WWII')</param>
-        /// <returns> Temporal_Info object, either the one passed in or one that equals it already in the list </returns>
-        public Temporal_Info Add_Temporal_Subject(int Start_Year, int End_Year, string TimePeriod)
-        {
-            if (temporalSubjects == null)
-                temporalSubjects = new List<Temporal_Info>();
+	    /// <summary> Adds a new temporal subject to this object </summary>
+	    /// <param name="New_Temporal"> Temporral subject object to add to this item </param>
+	    /// <returns> Temporal_Info object, either the one passed in or one that equals it already in the list </returns>
+	    public Temporal_Info Add_Temporal_Subject(Temporal_Info New_Temporal)
+	    {
+		    if (temporalSubjects == null)
+			    temporalSubjects = new List<Temporal_Info>();
 
-            Temporal_Info newTemporal = new Temporal_Info(Start_Year, End_Year, TimePeriod);
-            if (!temporalSubjects.Contains(newTemporal))
-            {
-                temporalSubjects.Add(newTemporal);
-                return newTemporal;
-            }
-            else
-            {
-                Temporal_Info returnTemporal = temporalSubjects.Find(newTemporal.Equals);
-                if ((TimePeriod.Length > 0) && (returnTemporal.TimePeriod.Length == 0))
-                    returnTemporal.TimePeriod = TimePeriod;
-                return returnTemporal;
-            }
-        }
+		    if (!temporalSubjects.Contains(New_Temporal))
+		    {
+			    temporalSubjects.Add(New_Temporal);
+			    return New_Temporal;
+		    }
 
-        /// <summary> Adds a publisher to this resource </summary>
-        /// <param name="Name">Name of the publisher </param>
-        /// <returns>Object which represents the added publisher</returns>
-        public Publisher_Info Add_Publisher(string Name)
-        {
-            if (publishers == null)
-                publishers = new List<Publisher_Info>();
+		    Temporal_Info returnTemporal = temporalSubjects.Find(New_Temporal.Equals);
+		    if ((New_Temporal.TimePeriod.Length > 0) && (returnTemporal.TimePeriod.Length == 0))
+			    returnTemporal.TimePeriod = New_Temporal.TimePeriod;
+		    return returnTemporal;
+	    }
 
-            Publisher_Info newPublisher = new Publisher_Info(Name);
-            if (!publishers.Contains(newPublisher))
-            {
-                publishers.Add(newPublisher);
-                return newPublisher;
-            }
-            else
-            {
-                return publishers.Find(newPublisher.Equals);
-            }
-        }
+	    /// <summary> Adds a new temporal subject to this object </summary>
+	    /// <param name="Start_Year">Start year for the year range</param>
+	    /// <param name="End_Year">End year for the year range</param>
+	    /// <param name="TimePeriod">Description of the time period (i.e. 'Post-WWII')</param>
+	    /// <returns> Temporal_Info object, either the one passed in or one that equals it already in the list </returns>
+	    public Temporal_Info Add_Temporal_Subject(int Start_Year, int End_Year, string TimePeriod)
+	    {
+		    if (temporalSubjects == null)
+			    temporalSubjects = new List<Temporal_Info>();
 
-        /// <summary> Adds a publisher to this resource </summary>
+		    Temporal_Info newTemporal = new Temporal_Info(Start_Year, End_Year, TimePeriod);
+		    if (!temporalSubjects.Contains(newTemporal))
+		    {
+			    temporalSubjects.Add(newTemporal);
+			    return newTemporal;
+		    }
+
+		    Temporal_Info returnTemporal = temporalSubjects.Find(newTemporal.Equals);
+		    if ((TimePeriod.Length > 0) && (returnTemporal.TimePeriod.Length == 0))
+			    returnTemporal.TimePeriod = TimePeriod;
+		    return returnTemporal;
+	    }
+
+	    /// <summary> Adds a publisher to this resource </summary>
+	    /// <param name="Name">Name of the publisher </param>
+	    /// <returns>Object which represents the added publisher</returns>
+	    public Publisher_Info Add_Publisher(string Name)
+	    {
+		    if (publishers == null)
+			    publishers = new List<Publisher_Info>();
+
+		    Publisher_Info newPublisher = new Publisher_Info(Name);
+		    if (!publishers.Contains(newPublisher))
+		    {
+			    publishers.Add(newPublisher);
+			    return newPublisher;
+		    }
+
+		    return publishers.Find(newPublisher.Equals);
+	    }
+
+	    /// <summary> Adds a publisher to this resource </summary>
         /// <param name="New_Publisher">New publisher object </param>
         public Publisher_Info Add_Publisher(Publisher_Info New_Publisher)
         {
@@ -962,10 +978,8 @@ namespace SobekCM.Resource_Object.Bib_Info
                 publishers.Add(New_Publisher);
                 return New_Publisher;
             }
-            else
-            {
-                return publishers.Find(New_Publisher.Equals);
-            }
+
+            return publishers.Find(New_Publisher.Equals);
         }
 
         /// <summary> Removes a publisher linked to this resource  </summary>
@@ -990,10 +1004,8 @@ namespace SobekCM.Resource_Object.Bib_Info
                 manufacturers.Add(newPublisher);
                 return newPublisher;
             }
-            else
-            {
-                return manufacturers.Find(newPublisher.Equals);
-            }
+
+			return manufacturers.Find(newPublisher.Equals);
         }
 
         /// <summary> Adds a manufacturer to this resource </summary>
@@ -1008,10 +1020,8 @@ namespace SobekCM.Resource_Object.Bib_Info
                 manufacturers.Add(New_Manufacturer);
                 return New_Manufacturer;
             }
-            else
-            {
-                return manufacturers.Find(New_Manufacturer.Equals);
-            }
+
+			return manufacturers.Find(New_Manufacturer.Equals);
         }
 
         #endregion
@@ -1100,72 +1110,73 @@ namespace SobekCM.Resource_Object.Bib_Info
 
         #region Methods to write this data in the MODS file
 
-        /// <summary> Appends this bibliographic description information as MODS to the StringBuilder object </summary>
-        /// <param name="results">StringBuilder to add this XML to </param>
-        internal override void Add_MODS(TextWriter results, VRACore_Info vraCoreInfo)
+	    /// <summary> Appends this bibliographic description information as MODS to the StringBuilder object </summary>
+	    /// <param name="Results">StringBuilder to add this XML to </param>
+	    /// <param name="VRACoreInfo"> MODS can also contain the VRA core as an internal extension schema </param>
+	    internal override void Add_MODS(TextWriter Results, VRACore_Info VRACoreInfo)
         {
             // Set some values
             XML_Node_Base_Type.Reset_User_ID_Index();
-            if (source != null)
+            if (Source != null)
             {
-                base.recordInfo.Record_Content_Source = source.Statement;
+                recordInfo.Record_Content_Source = Source.Statement;
             }
             if (BibID.Length > 0)
             {
-                if ((base.recordInfo.Main_Record_Identifier.Identifier.Length != 0) && (base.recordInfo.Main_Record_Identifier.Type.ToLower() != "ufdc") && (base.recordInfo.Main_Record_Identifier.Type.ToLower() != "dloc") && (base.recordInfo.Main_Record_Identifier.Type.ToLower() != "sobekcm"))
+                if ((recordInfo.Main_Record_Identifier.Identifier.Length != 0) && (recordInfo.Main_Record_Identifier.Type.ToLower() != "ufdc") && (recordInfo.Main_Record_Identifier.Type.ToLower() != "dloc") && (recordInfo.Main_Record_Identifier.Type.ToLower() != "sobekcm"))
                 {
-                    Add_Identifier(base.recordInfo.Main_Record_Identifier.Identifier, base.recordInfo.Main_Record_Identifier.Type);
+                    Add_Identifier(recordInfo.Main_Record_Identifier.Identifier, recordInfo.Main_Record_Identifier.Type);
                 }
-                base.recordInfo.Main_Record_Identifier.Type = "sobekcm";
-                base.recordInfo.Main_Record_Identifier.Identifier = BibID + "_" + VID;
+                recordInfo.Main_Record_Identifier.Type = "sobekcm";
+                recordInfo.Main_Record_Identifier.Identifier = BibID + "_" + VID;
                 if (VID == "*****")
-                    base.recordInfo.Main_Record_Identifier.Identifier = BibID;
+                    recordInfo.Main_Record_Identifier.Identifier = BibID;
             }
             if (publishers != null)
             {
                 foreach (Publisher_Info thisPublisher in publishers)
                 {
-                    base.ModsOriginInfo.Add_Publisher(thisPublisher.Name);
+                    ModsOriginInfo.Add_Publisher(thisPublisher.Name);
                 }
             }
-            base.Add_MODS(results, vraCoreInfo);
+            base.Add_MODS(Results, VRACoreInfo);
         }
 
         /// <summary> Adds the custom SobekCM bibliographic information in the SobekCM-custom schema XML format</summary>
-        /// <param name="results"> Stream to write this source information as SobekCM-formatted XML</param>
-        internal void Add_SobekCM_BibDesc(TextWriter results)
+        /// <param name="Results"> Stream to write this source information as SobekCM-formatted XML</param>
+        internal void Add_SobekCM_BibDesc(TextWriter Results)
         {
             string sobekcm_namespace = "sobekcm";
-            results.Write("<" + sobekcm_namespace + ":bibDesc>\r\n");
+            Results.Write("<" + sobekcm_namespace + ":bibDesc>\r\n");
 
             // Add all the custom SobekCM specific data
-            results.Write(toMODS(sobekcm_namespace + ":BibID", BibID));
-            results.Write(toMODS(sobekcm_namespace + ":VID", VID));
+            Results.Write(toMODS(sobekcm_namespace + ":BibID", BibID));
+            Results.Write(toMODS(sobekcm_namespace + ":VID", VID));
 
             // Add affiliation MODS
             if (affiliations != null)
             {
                 foreach (Affiliation_Info thisAffiliation in affiliations)
                 {
-                    thisAffiliation.Add_SobekCM_Metadata(sobekcm_namespace, results);
+                    thisAffiliation.Add_SobekCM_Metadata(sobekcm_namespace, Results);
                 }
             }
 
             // Add the Encoding Level if there is one
             if (!String.IsNullOrEmpty(encodingLevel))
             {
-                results.Write(toMODS(sobekcm_namespace + ":EncodingLevel", encodingLevel));
+                Results.Write(toMODS(sobekcm_namespace + ":EncodingLevel", encodingLevel));
             }
 
             // Add finding guid section, if there is some
             if ((containers != null) && (containers.Count > 0))
             {
-                results.WriteLine("<" + sobekcm_namespace + ":FindingGuidePosition>");
+                Results.WriteLine("<" + sobekcm_namespace + ":FindingGuidePosition>");
                 foreach (Finding_Guide_Container thisContainer in containers)
                 {
-                    thisContainer.toMETS(results, sobekcm_namespace);
+                    thisContainer.ToMETS(Results, sobekcm_namespace);
                 }
-                results.WriteLine("</" + sobekcm_namespace + ":FindingGuidePosition>");
+                Results.WriteLine("</" + sobekcm_namespace + ":FindingGuidePosition>");
             }
 
             // Add the manufacturers
@@ -1173,39 +1184,40 @@ namespace SobekCM.Resource_Object.Bib_Info
             {
                 foreach (Publisher_Info thisName in manufacturers)
                 {
-                    thisName.Add_SobekCM_Metadata(sobekcm_namespace, "Manufacturer", results);
+                    thisName.Add_SobekCM_Metadata(sobekcm_namespace, "Manufacturer", Results);
                 }
             }
 
-            // Add the publishers
+            // Add the publishers 
             if (publishers != null)
             {
                 foreach (Publisher_Info thisName in publishers)
                 {
-                    thisName.Add_SobekCM_Metadata(sobekcm_namespace, "Publisher", results);
+                    thisName.Add_SobekCM_Metadata(sobekcm_namespace, "Publisher", Results);
                 }
             }
 
+
             // Add the source information
-            if (source != null)
+            if (Source != null)
             {
-                source.Add_SobekCM_Metadata(sobekcm_namespace, results);
+                Source.Add_SobekCM_Metadata(sobekcm_namespace, Results);
             }
 
             // Add temporal subjects
             if ((temporalSubjects != null) && (temporalSubjects.Count > 0))
             {
                 // Start this complex data type
-                results.Write("<" + sobekcm_namespace + ":Temporal>\r\n");
+                Results.Write("<" + sobekcm_namespace + ":Temporal>\r\n");
 
                 // Step through each element in this type
                 foreach (Temporal_Info thisTemporal in temporalSubjects)
                 {
-                    thisTemporal.Add_SobekCM_Metadata(sobekcm_namespace, results);
+                    thisTemporal.Add_SobekCM_Metadata(sobekcm_namespace, Results);
                 }
 
                 // Close this complete data type out
-                results.Write("</" + sobekcm_namespace + ":Temporal>\r\n");
+                Results.Write("</" + sobekcm_namespace + ":Temporal>\r\n");
             }
 
             //// Add type
@@ -1217,127 +1229,136 @@ namespace SobekCM.Resource_Object.Bib_Info
             // Add sorting information
             if (sortDate > 0)
             {
-                results.Write(toMODS(sobekcm_namespace + ":SortDate", sortDate.ToString()));
+                Results.Write(toMODS(sobekcm_namespace + ":SortDate", sortDate.ToString()));
             }
-            results.Write(toMODS(sobekcm_namespace + ":SortTitle", sortTitle));
+            Results.Write(toMODS(sobekcm_namespace + ":SortTitle", sortTitle));
 
             // End the custom SobekCM section
-            results.Write("</" + sobekcm_namespace + ":bibDesc>\r\n");
+            Results.Write("</" + sobekcm_namespace + ":bibDesc>\r\n");
         }
 
         #endregion
 
         #region Methods to create the sort safe title and date
 
-        /// <summary> Calculate the sort title for this resource</summary>
-        /// <param name="titleString">Actual title of this resource</param>
-        /// <returns>Sortable title value for this resource</returns>
-        public string sortSafeTitle(string titleString, bool usePredeterminedSortTitle)
+	    /// <summary> Calculate the sort title for this resource</summary>
+	    /// <param name="TitleString">Actual title of this resource</param>
+	    /// <param name="UsePredeterminedSortTitle"> Flag indicates if there is already a sort title which should be used </param>
+	    /// <returns>Sortable title value for this resource</returns>
+	    public string SortSafeTitle(string TitleString, bool UsePredeterminedSortTitle)
         {
-            if ((usePredeterminedSortTitle) && (SortTitle.Length > 0))
+            if ((UsePredeterminedSortTitle) && (SortTitle.Length > 0))
                 return sortTitle;
 
             // Remove all punctuation first
-            titleString = titleString.Replace("\"", "").Replace(".", "").Replace("'", "").Replace(",", "");
+            TitleString = TitleString.Replace("\"", "").Replace(".", "").Replace("'", "").Replace(",", "");
 
             // Build the collection of  articles
-            string[] articles = new string[9] {"EL", "LA", "LAS", "LE", "LES", "A", "THE", "UNAS", "UNOS"};
+            string[] articles = {"EL", "LA", "LAS", "LE", "LES", "A", "THE", "UNAS", "UNOS"};
 
             // Step through each article
-            string capitalTitle = titleString.ToUpper();
+            string capitalTitle = TitleString.ToUpper();
             foreach (string thisArticle in articles)
             {
                 if (capitalTitle.IndexOf(thisArticle + " ") == 0)
                 {
-                    titleString = titleString.Substring(thisArticle.Length + 1).Trim();
-                    capitalTitle = titleString.ToUpper();
+                    TitleString = TitleString.Substring(thisArticle.Length + 1).Trim();
+                    capitalTitle = TitleString.ToUpper();
                 }
             }
 
             // Return this value
-            return titleString.ToUpper();
+            return TitleString.ToUpper();
         }
 
-        /// <summary> Calculate the sort date for this resource</summary>
-        /// <param name="dateString">Actual date of this resource</param>
-        /// <returns>Sortable date value for this resource</returns>
-        /// <remarks>This computes the number of days since year January 1, year 1</remarks>
-        public int sortSafeDate(string dateString)
+	    /// <summary> Calculate the sort date for this resource</summary>
+	    /// <param name="DateString">Actual date of this resource</param>
+	    /// <returns>Sortable date value for this resource</returns>
+	    /// <remarks>This computes the number of days since year January 1, year 1</remarks>
+	    public int SortSafeDate(string DateString)
+	    {
+		    // If there is no date, do nothing
+		    if (DateString.Trim().Length == 0)
+		    {
+			    return -1;
+		    }
+
+		    // If there is already a sort date, use that
+		    if (sortDate > 0)
+			    return sortDate;
+
+		    // First, check to see if this is a proper date already
+
+		    // Try conversion
+		    DateTime thisDate;
+		    if (DateTime.TryParse(DateString, out thisDate))
+		    {
+			    // Conversion successful, so count days
+			    TimeSpan timeElapsed = thisDate.Subtract(new DateTime(1, 1, 1));
+			    sortDate = (int) timeElapsed.TotalDays;
+			    return sortDate;
+		    }
+	        
+            // Didn't work, so need to try and find a year at least
+	        DateString = DateString.Replace("[", "").Replace("]", "").Replace("(", "").Replace(")", "");
+	        DateString = DateString.ToUpper();
+	        DateString = DateString.Replace("circa", "").Replace("ca", "").Replace("c", "");
+	        DateString = DateString.Replace(".", "").Replace(",", "").Replace("-", "").Trim();
+
+	        // Step through looking for first four digits
+	        int start = -1;
+	        for (int i = 0; i < DateString.Length; i++)
+	        {
+	            if ((Char.IsNumber(DateString[i])) || (DateString[i] == '-') ||
+	                (DateString[i] == 'X') || (DateString[i] == '?') || (DateString[i] == 'U'))
+	            {
+	                if (start < 0)
+	                {
+	                    start = i;
+	                }
+	            }
+	            else
+	            {
+	                // Did this include four digits?
+	                if ((start >= 0) && ((i - start) >= 4))
+	                {
+	                    // You can stop
+	                    break;
+	                }
+	                start = -1;
+	            }
+	        }
+
+	        // If a start was found, use it
+	        if ((start >= 0) && ((DateString.Length - start) >= 4))
+	        {
+	            string year = DateString.Substring(start, 4).Replace("X", "0").Replace("?", "0").Replace("U", "0").Replace("-", "0");
+	            DateTime thisYear = new DateTime(Convert.ToInt16(year), 1, 1);
+	            TimeSpan timeElapsed = thisYear.Subtract(new DateTime(1, 1, 1));
+	            sortDate = (int) timeElapsed.TotalDays;
+	            return sortDate;
+	    
+            }
+
+	        // Return this value, as empty
+		    return -1;
+	    }
+
+	    #endregion
+
+        /// <summary> Holding location code for this material  </summary>
+        public string HoldingCode
         {
-            // If there is no date, do nothing
-            if (dateString.Trim().Length == 0)
+            get
             {
-                return -1;
+                return Location != null ? Location.Holding_Code : String.Empty;
             }
-
-            // If there is already a sort date, use that
-            if (sortDate > 0)
-                return sortDate;
-
-            // First, check to see if this is a proper date already
-            try
-            {
-                // Try conversion
-                DateTime thisDate = Convert.ToDateTime(dateString);
-
-                // Conversion successful, so count days
-                TimeSpan timeElapsed = thisDate.Subtract(new DateTime(1, 1, 1));
-                sortDate = (int) timeElapsed.TotalDays;
-                return sortDate;
-            }
-            catch
-            {
-                // Didn't work, so need to try and find a year at least
-                dateString = dateString.Replace("[", "").Replace("]", "").Replace("(", "").Replace(")", "");
-                dateString = dateString.ToUpper();
-                dateString = dateString.Replace("circa", "").Replace("ca", "").Replace("c", "");
-                dateString = dateString.Replace(".", "").Replace(",", "").Replace("-", "").Trim();
-
-                // Step through looking for first four digits
-                int start = -1;
-                for (int i = 0; i < dateString.Length; i++)
-                {
-                    if ((Char.IsNumber(dateString[i])) || (dateString[i] == '-') ||
-                        (dateString[i] == 'X') || (dateString[i] == '?') || (dateString[i] == 'U'))
-                    {
-                        if (start < 0)
-                        {
-                            start = i;
-                        }
-                    }
-                    else
-                    {
-                        // Did this include four digits?
-                        if ((start >= 0) && ((i - start) >= 4))
-                        {
-                            // You can stop
-                            break;
-                        }
-                        else
-                        {
-                            start = -1;
-                        }
-                    }
-                }
-
-                // If a start was found, use it
-                if ((start >= 0) && ((dateString.Length - start) >= 4))
-                {
-                    string year = dateString.Substring(start, 4).Replace("X", "0").Replace("?", "0").Replace("U", "0").Replace("-", "0");
-                    DateTime thisYear = new DateTime(Convert.ToInt16(year), 1, 1);
-                    TimeSpan timeElapsed = thisYear.Subtract(new DateTime(1, 1, 1));
-                    sortDate = (int) timeElapsed.TotalDays;
-                    return sortDate;
-                }
-            }
-
-            // Return this value, as empty
-            return -1;
         }
 
-        #endregion
 
-        public TypeOfResource_SobekCM_Enum SobekCM_Type
+	    /// <summary> Gets the controlled sobekcm type as an enumeration, based on the 
+	    /// type and genres listed within the metadata </summary>
+	    public TypeOfResource_SobekCM_Enum SobekCM_Type
         {
             get
             {
@@ -1347,23 +1368,31 @@ namespace SobekCM.Resource_Object.Bib_Info
                 {
                     foreach (Genre_Info thisGenre in genres)
                     {
-                        if (String.Compare(thisGenre.Authority, "sobekcm", true) == 0)
+                        if (String.Compare(thisGenre.Authority, "sobekcm", StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             sobekcm_genre = thisGenre.Genre_Term;
 
+                            // Special code here looking for ead
+                            if (String.Compare(sobekcm_genre, "ead", StringComparison.OrdinalIgnoreCase) == 0)
+                                return TypeOfResource_SobekCM_Enum.EAD;
+
                             // Special code here looking for project
-                            if (String.Compare(sobekcm_genre, "project", true) == 0)
+                            if (String.Compare(sobekcm_genre, "project", StringComparison.OrdinalIgnoreCase) == 0)
                                 return TypeOfResource_SobekCM_Enum.Project;
 
                             // Special code here looking for multivolume
-                            if (String.Compare(sobekcm_genre, "multivolume", true) == 0)
+                            if (String.Compare(sobekcm_genre, "multivolume", StringComparison.OrdinalIgnoreCase) == 0)
                                 return TypeOfResource_SobekCM_Enum.Multivolume;
+
+							// Special code here looking for dataset
+							if (String.Compare(sobekcm_genre, "dataset", StringComparison.OrdinalIgnoreCase) == 0)
+								return TypeOfResource_SobekCM_Enum.Dataset;
                         }
-                        else if (String.Compare(thisGenre.Authority, "marcgt", true) == 0)
+                        else if (String.Compare(thisGenre.Authority, "marcgt", StringComparison.OrdinalIgnoreCase) == 0)
                         {
-                            if (String.Compare(thisGenre.Genre_Term, "newspaper", true) == 0)
+                            if (String.Compare(thisGenre.Genre_Term, "newspaper", StringComparison.OrdinalIgnoreCase) == 0)
                                 sobekcm_genre = "newspaper";
-                            if (String.Compare(thisGenre.Genre_Term, "serial", true) == 0)
+                            if (String.Compare(thisGenre.Genre_Term, "serial", StringComparison.OrdinalIgnoreCase) == 0)
                                 sobekcm_genre = "serial";
                         }
                     }
@@ -1376,10 +1405,7 @@ namespace SobekCM.Resource_Object.Bib_Info
                         return TypeOfResource_SobekCM_Enum.Map;
 
                     case TypeOfResource_MODS_Enum.Mixed_Material:
-                        if (String.Compare(sobekcm_genre, "learning object", true) == 0)
-                            return TypeOfResource_SobekCM_Enum.Learning_Object;
-                        else
-                            return TypeOfResource_SobekCM_Enum.Mixed_Material;
+                        return String.Compare(sobekcm_genre, "learning object", StringComparison.OrdinalIgnoreCase) == 0 ? TypeOfResource_SobekCM_Enum.Learning_Object : TypeOfResource_SobekCM_Enum.Mixed_Material;
 
                     case TypeOfResource_MODS_Enum.Moving_Image:
                         return TypeOfResource_SobekCM_Enum.Video;
@@ -1388,7 +1414,7 @@ namespace SobekCM.Resource_Object.Bib_Info
                         return TypeOfResource_SobekCM_Enum.Notated_Music;
 
                     case TypeOfResource_MODS_Enum.Sofware_Multimedia:
-                        return TypeOfResource_SobekCM_Enum.Software_Multimedia;
+						return String.Compare(sobekcm_genre, "dataset", StringComparison.OrdinalIgnoreCase) == 0 ? TypeOfResource_SobekCM_Enum.Dataset : TypeOfResource_SobekCM_Enum.Software_Multimedia;
 
                     case TypeOfResource_MODS_Enum.Sound_Recording:
                     case TypeOfResource_MODS_Enum.Sound_Recording_Musical:
@@ -1396,10 +1422,7 @@ namespace SobekCM.Resource_Object.Bib_Info
                         return TypeOfResource_SobekCM_Enum.Audio;
 
                     case TypeOfResource_MODS_Enum.Still_Image:
-                        if (String.Compare(sobekcm_genre, "aerial photography", true) == 0)
-                            return TypeOfResource_SobekCM_Enum.Aerial;
-                        else
-                            return TypeOfResource_SobekCM_Enum.Photograph;
+                        return String.Compare(sobekcm_genre, "aerial photography", StringComparison.OrdinalIgnoreCase) == 0 ? TypeOfResource_SobekCM_Enum.Aerial : TypeOfResource_SobekCM_Enum.Photograph;
 
                     case TypeOfResource_MODS_Enum.Text:
                         switch (sobekcm_genre.ToUpper())
@@ -1426,15 +1449,8 @@ namespace SobekCM.Resource_Object.Bib_Info
                 // Clear any sobekcm genres
                 if (genres != null)
                 {
-                    List<Genre_Info> sobekcmGenres = new List<Genre_Info>();
-                    foreach (Genre_Info thisGenre in genres)
-                    {
-                        if (String.Compare(thisGenre.Authority, "sobekcm", true) == 0)
-                        {
-                            sobekcmGenres.Add(thisGenre);
-                        }
-                    }
-                    foreach (Genre_Info thisGenre in sobekcmGenres)
+                    List<Genre_Info> sobekcmGenres = genres.Where(ThisGenre => String.Compare(ThisGenre.Authority, "sobekcm", StringComparison.OrdinalIgnoreCase) == 0).ToList();
+	                foreach (Genre_Info thisGenre in sobekcmGenres)
                     {
                         Remove_Genre(thisGenre);
                     }
@@ -1463,6 +1479,16 @@ namespace SobekCM.Resource_Object.Bib_Info
 
                     case TypeOfResource_SobekCM_Enum.Book:
                         type.MODS_Type = TypeOfResource_MODS_Enum.Text;
+                        break;
+
+					case TypeOfResource_SobekCM_Enum.Dataset:
+						type.MODS_Type = TypeOfResource_MODS_Enum.Sofware_Multimedia;
+						Add_Genre("dataset", "sobekcm");
+						break;
+
+                    case TypeOfResource_SobekCM_Enum.EAD:
+                        type.MODS_Type = TypeOfResource_MODS_Enum.Mixed_Material;
+                        Add_Genre("ead", "sobekcm");
                         break;
 
                     case TypeOfResource_SobekCM_Enum.Learning_Object:
@@ -1517,6 +1543,8 @@ namespace SobekCM.Resource_Object.Bib_Info
             }
         }
 
+		/// <summary> Gets the controlled sobekcm type as a string, based on the 
+		/// type and genres listed within the metadata </summary>
         public string SobekCM_Type_String
         {
             get
@@ -1538,6 +1566,12 @@ namespace SobekCM.Resource_Object.Bib_Info
 
                     case TypeOfResource_SobekCM_Enum.Book:
                         return "Book";
+
+					case TypeOfResource_SobekCM_Enum.Dataset:
+						return "Dataset";
+
+                    case TypeOfResource_SobekCM_Enum.EAD:
+                        return "Finding Guide (EAD)";
 
                     case TypeOfResource_SobekCM_Enum.Learning_Object:
                         return "Learning Object";
@@ -1607,6 +1641,16 @@ namespace SobekCM.Resource_Object.Bib_Info
                         SobekCM_Type = TypeOfResource_SobekCM_Enum.Book;
                         return;
 
+					case "DATASET":
+						SobekCM_Type = TypeOfResource_SobekCM_Enum.Dataset;
+						return;
+
+                    case "EAD":
+                    case "FINDING GUIDE":
+					case "FINDING GUIDE (EAD)":
+                        SobekCM_Type = TypeOfResource_SobekCM_Enum.EAD;
+                        return;
+
                     case "LEARNING OBJECT":
                     case "LEARNING RESOURCE":
                         SobekCM_Type = TypeOfResource_SobekCM_Enum.Learning_Object;
@@ -1635,6 +1679,7 @@ namespace SobekCM.Resource_Object.Bib_Info
 
                     case "PHOTOGRAPH":
                     case "STILL IMAGE":
+					case "IMAGE":
                         SobekCM_Type = TypeOfResource_SobekCM_Enum.Photograph;
                         return;
 

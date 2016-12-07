@@ -1,5 +1,8 @@
+#region Using directives
+
 using System.Reflection;
-using System.Runtime.CompilerServices;
+
+#endregion
 
 //
 // General Information about an assembly is controlled through the following 
@@ -7,11 +10,11 @@ using System.Runtime.CompilerServices;
 // associated with an assembly.
 //
 [assembly: AssemblyTitle("SobekCM.Tools")]
-[assembly: AssemblyDescription("Miscellaneous tools used for the SobekCM system")]
+[assembly: AssemblyDescription("Part of the SobekCM open-source digital repository solution")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("University of Florida Libraries")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("SobekCM.Tools")]
-[assembly: AssemblyCopyright("Copyright ©  2006-2011")]
+[assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]		
 
@@ -26,7 +29,7 @@ using System.Runtime.CompilerServices;
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
 
-[assembly: AssemblyVersion("3.0.0")]
+[assembly: AssemblyVersion("4.10.0")]
 
 //
 // In order to sign your assembly you must specify a key to use. Refer to the 
@@ -56,4 +59,4 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyDelaySign(false)]
 [assembly: AssemblyKeyFile("")]
 [assembly: AssemblyKeyName("")]
-[assembly: AssemblyFileVersionAttribute("3.0.0")]
+[assembly: AssemblyFileVersion("4.10.0")]

@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using Microsoft.ApplicationBlocks.Data;
 
 #endregion
 
@@ -41,40 +40,40 @@ namespace SobekCM.Resource_Object.Metadata_Modules
         private Nullable<DateTime> embargoEnd;
         private string versionStatement;
 
+		/// <summary> Constructur for a new instance of the RightsMD_Info class </summary>
         public RightsMD_Info()
         {
             accessCode = AccessCode_Enum.NOT_SPECIFIED;
         }
 
+		/// <summary> Flag indicates if this metadata module contains data </summary>
         public bool hasData
         {
-            get
-            {
-                if ((!String.IsNullOrEmpty(versionStatement)) || (!String.IsNullOrEmpty(copyrightStatement)) || (embargoEnd.HasValue) || (accessCode != AccessCode_Enum.NOT_SPECIFIED))
-                    return true;
-                else
-                    return false;
-            }
+            get { return ((!String.IsNullOrEmpty(versionStatement)) || (!String.IsNullOrEmpty(copyrightStatement)) || (embargoEnd.HasValue) || (accessCode != AccessCode_Enum.NOT_SPECIFIED)); }
         }
 
+		/// <summary> Version statement from the rightsMD metadata module </summary>
         public string Version_Statement
         {
             get { return versionStatement ?? String.Empty; }
             set { versionStatement = value; }
         }
 
+		/// <summary> Separate copyright statement from the rightsMD metadata module </summary>
         public string Copyright_Statement
         {
             get { return copyrightStatement ?? String.Empty; }
             set { copyrightStatement = value; }
         }
 
+		/// <summary> Type of access to grant to this item  </summary>
         public AccessCode_Enum Access_Code
         {
             get { return accessCode; }
             set { accessCode = value; }
         }
 
+		/// <summary> Type of access to grant this item, as a string </summary>
         public string Access_Code_String
         {
             get
@@ -91,13 +90,33 @@ namespace SobekCM.Resource_Object.Metadata_Modules
                         return String.Empty;
                 }
             }
+		    set
+		    {
+		        switch (value.ToLower())
+		        {
+		            case "public":
+                        accessCode = AccessCode_Enum.Public;
+		                break;
+
+                    case "campus":
+                        accessCode = AccessCode_Enum.Campus;
+                        break;
+
+                    case "private":
+                        accessCode = AccessCode_Enum.Private;
+                        break;
+
+		        }
+		    }
         }
 
+		/// <summary> Flag indicates if this item has an end embargo date </summary>
         public bool Has_Embargo_End
         {
             get { return embargoEnd.HasValue; }
         }
 
+		/// <summary> Date of the embargo end, or 1/1/1900 if no embargo </summary>
         public DateTime Embargo_End
         {
             get { return embargoEnd.HasValue ? embargoEnd.Value : new DateTime(1900, 1, 1); }
@@ -134,7 +153,7 @@ namespace SobekCM.Resource_Object.Metadata_Modules
             Error_Message = String.Empty;
 
             // Get the UMI flag from the organizational notes
-            string UMI = String.Empty; //BibObject.Tracking.UMI_Flag
+            string umi = String.Empty; //BibObject.Tracking.UMI_Flag
             if ( BibObject.METS_Header.Creator_Org_Notes_Count > 0 ) 
             {
                 foreach (string thisNote in BibObject.METS_Header.Creator_Org_Notes)
@@ -142,7 +161,7 @@ namespace SobekCM.Resource_Object.Metadata_Modules
                     int umi_index = thisNote.ToUpper().IndexOf("UMI=");
                     if ((umi_index >= 0) && (umi_index + 4 < thisNote.Length))
                     {
-                        UMI = thisNote.Substring(umi_index + 4).Trim();
+                        umi = thisNote.Substring(umi_index + 4).Trim();
                         break;
                     }
                 }
@@ -150,19 +169,54 @@ namespace SobekCM.Resource_Object.Metadata_Modules
 
             try
             {
-                // Build the parameter list
-                SqlParameter[] param_list = new SqlParameter[4];
-                param_list[0] = new SqlParameter("@ItemID", ItemID);
-                param_list[1] = new SqlParameter("@Original_AccessCode", Access_Code_String);
+                // Create the SQL connection
+                using (SqlConnection sqlConnect = new SqlConnection(DB_ConnectionString))
+                {
+                    try
+                    {
+                        sqlConnect.Open();
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ApplicationException("Unable to open connection to the database." + Environment.NewLine + ex.Message, ex);
+                    }
 
-                if ( Has_Embargo_End )
-                    param_list[2] = new SqlParameter("@EmbargoEnd", Embargo_End);
-                else
-                    param_list[2] = new SqlParameter("@EmbargoEnd", DBNull.Value);
-                param_list[3] = new SqlParameter("@UMI", UMI);
+                    // Create the SQL command
+                    SqlCommand sqlCommand = new SqlCommand("SobekCM_RightsMD_Save_Access_Embargo_UMI", sqlConnect)
+                    {
+                        CommandType = CommandType.StoredProcedure
+                    };
 
-                // Execute this query stored procedure
-                SqlHelper.ExecuteNonQuery(DB_ConnectionString, CommandType.StoredProcedure, "PalmmRightsMD_Save_Access_Embargo_UMI", param_list);
+                    // Copy all the parameters to this adapter
+                    sqlCommand.Parameters.AddWithValue("@ItemID", ItemID);
+                    sqlCommand.Parameters.AddWithValue("@Original_AccessCode", Access_Code_String);
+                    if (Has_Embargo_End)
+                        sqlCommand.Parameters.AddWithValue("@EmbargoEnd", Embargo_End);
+                    else
+                        sqlCommand.Parameters.AddWithValue("@EmbargoEnd", DBNull.Value);
+                    sqlCommand.Parameters.AddWithValue("@UMI", umi);
+
+                    // Run the command itself
+                    try
+                    {
+                        sqlCommand.ExecuteNonQuery();
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ApplicationException("Error executing non-query command." + Environment.NewLine + ex.Message, ex);
+                    }
+
+                    // Close the connection (not technical necessary since we put the connection in the
+                    // scope of the using brackets.. it would dispose itself anyway)
+                    try
+                    {
+                        sqlConnect.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new ApplicationException("Unable to close connection to the database." + Environment.NewLine + ex.Message, ex);
+                    }
+                }
 
                 return true;
             }
@@ -172,8 +226,6 @@ namespace SobekCM.Resource_Object.Metadata_Modules
                 Error_Message = "Error encountered in RightsMD_Info.Save_Additional_Info_To_Database: " + ee.Message;
                 return false;
             }
-
-            return true;
         }
 
         /// <summary> Chance for this metadata module to load any additional data from the 

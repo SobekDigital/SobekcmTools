@@ -83,6 +83,25 @@
             the contents of this method with the code editor.
             </summary>
         </member>
+        <member name="T:SobekCM.Management_Tool.Search.SobekCM_Search_Object">
+            <summary> Object encapsulates all the information about a single search against a SobekCM library </summary>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Search.SobekCM_Search_Object.#ctor(SobekCM.Management_Tool.Search.SobekCM_Search_Object.SobekCM_Term_Enum,SobekCM.Management_Tool.Search.SobekCM_Search_Object.SobekCM_Term_Enum,SobekCM.Management_Tool.Search.SobekCM_Search_Object.SobekCM_Term_Enum,SobekCM.Management_Tool.Search.SobekCM_Search_Object.SobekCM_Term_Enum)">
+            <summary> Constructor for a new instance of the SobekCM_Search_Object class </summary>
+            <param name="Default_First_Term"></param>
+            <param name="Default_Second_Term"></param>
+            <param name="Default_Third_Term"></param>
+            <param name="Default_Fourth_Term"></param>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Search.SobekCM_Search_Object.Perform_Tracking_Search">
+            <summary> Performs the search indicated by this search object, employing the procedures used for the tracking type functionality included in the SobekCM Management and Reporting Tool (SMaRT) windows application </summary>
+            <returns> Dataset of all the results </returns>
+        </member>
+        <member name="M:SobekCM.Management_Tool.Search.SobekCM_Search_Object.Equals(SobekCM.Management_Tool.Search.SobekCM_Search_Object)">
+            <summary> Determines if this search is equal to another search </summary>
+            <param name="other"> Another search object for comparison purposes  </param>
+            <returns> TRUE if the searches are the same, otherwise FALSE </returns>
+        </member>
         <member name="T:SobekCM.Management_Tool.Update_Material_Recd_Born_Digital_Form">
             <summary> Form is used to update the material recevied and born digital flag
             simultaneously for an item or a set of items  </summary>
@@ -255,7 +274,7 @@
         <member name="M:SobekCM.Management_Tool.Ad_Hoc_Reporting_Query_Form.#ctor">
             <summary> Constructor for a new instance of the Ad_Hoc_Reporting_Query_Form form </summary>
         </member>
-        <member name="M:SobekCM.Management_Tool.Ad_Hoc_Reporting_Query_Form.#ctor(SobekCM.Library.Search.SobekCM_Search_Object,System.Data.DataSet)">
+        <member name="M:SobekCM.Management_Tool.Ad_Hoc_Reporting_Query_Form.#ctor(SobekCM.Management_Tool.Search.SobekCM_Search_Object,System.Data.DataSet)">
             <summary> Constructor for a new instance of the Ad_Hoc_Reporting_Query_Form form </summary>
             <param name="Initial_Search"> Initial search to display in this form </param>
             <param name="Initial_DataSet"> Initial dataset to display, which matches the intial search </param>
@@ -1110,23 +1129,14 @@
             <summary> Sets the internal focus on one of the text boxes within this serial hierarchy </summary>
             <param name="box"> Number indicates which text box to focus upon </param>
         </member>
-        <member name="M:SobekCM.Management_Tool.Serial_Hierarchy_Row.Save(System.Data.DataColumn,System.Data.DataColumn,System.Data.DataColumn,System.Data.DataColumn,System.Data.DataColumn,System.Data.DataColumn)">
+        <member name="M:SobekCM.Management_Tool.Serial_Hierarchy_Row.Save">
             <summary> Save the values from the text boxes within this serial hierarchy row to the
             item object held within this row </summary>
             <returns> Return TRUE if successful, otherwise FALSE </returns>
         </member>
-        <member name="M:SobekCM.Management_Tool.Serial_Hierarchy_Row.Set_Serial_Hierarchy(System.Data.DataRow,System.Data.DataColumn,System.Data.DataColumn,System.Data.DataColumn,System.Data.DataColumn,System.Data.DataColumn,System.Data.DataColumn,System.Data.DataColumn,System.Data.DataColumn,System.Data.DataColumn)">
+        <member name="M:SobekCM.Management_Tool.Serial_Hierarchy_Row.Set_Serial_Hierarchy(SobekCM.Core.Items.Item_Hierarchy_Details)">
             <summary> Sets the serial hierarchy displaying within this row </summary>
             <param name="Item_Row"></param>
-            <param name="itemIdColumn"></param>
-            <param name="titleColumn"></param>
-            <param name="level1TextColumn"></param>
-            <param name="level1IndexColumn"></param>
-            <param name="level2TextColumn"></param>
-            <param name="level2IndexColumn"></param>
-            <param name="level3TextColumn"></param>
-            <param name="level3IndexColumn"></param>
-            <param name="vidColumn"></param>
         </member>
         <member name="M:SobekCM.Management_Tool.Serial_Hierarchy_Row.OnPaint(System.Windows.Forms.PaintEventArgs)">
             <summary>  Override base OnPaint method which writes the VID as a graphics string on this row </summary>
@@ -1181,7 +1191,7 @@
         <member name="T:SobekCM.Management_Tool.Edit_Serial_Hierarchy_Form">
             <summary> Form is used to edit the serial hierarchy associated with an item group within a SobekCM library </summary>
         </member>
-        <member name="M:SobekCM.Management_Tool.Edit_Serial_Hierarchy_Form.#ctor(System.String,SobekCM.Library.Items.SobekCM_Items_In_Title)">
+        <member name="M:SobekCM.Management_Tool.Edit_Serial_Hierarchy_Form.#ctor(System.String,System.Collections.Generic.List{SobekCM.Core.Items.Item_Hierarchy_Details})">
             <summary> Constructor for a new instance of the Edit_Item_Group_Form class </summary>
             <param name="Group_Info"> List of all the items within this item group </param>
             <param name="BibID"> BibID of the current item being displayed </param>

@@ -5,6 +5,8 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
+using SobekCM.Core.Items;
+using SobekCM.Engine_Library.ApplicationState;
 
 #endregion
 
@@ -27,7 +29,7 @@ namespace SobekCM.Management_Tool
         private int index;
         private readonly Color oddColor = Color.FromArgb(238, 238, 238); //System.Drawing.Color.Gainsboro;
         private bool oddRow;
-        private DataRow thisItem;
+        private Item_Hierarchy_Details thisItem;
         private string vid;
 
         /// <summary> Constructor for a new instance of the Serial_Hierarchy_Row class </summary>
@@ -157,7 +159,7 @@ namespace SobekCM.Management_Tool
         }
 
         /// <summary> Gets and sets the item row with the serial hierarchy for this individual volume </summary>
-        public DataRow Serial_Hierarchy
+        public Item_Hierarchy_Details Serial_Hierarchy
         {
             get
             {
@@ -204,7 +206,7 @@ namespace SobekCM.Management_Tool
         /// <summary> Save the values from the text boxes within this serial hierarchy row to the
         /// item object held within this row </summary>
         /// <returns> Return TRUE if successful, otherwise FALSE </returns>
-        public bool Save( DataColumn level1TextColumn, DataColumn level1IndexColumn, DataColumn level2TextColumn, DataColumn level2IndexColumn, DataColumn level3TextColumn, DataColumn level3IndexColumn )
+        public bool Save()
         {
             if (thisItem != null)
             {
@@ -212,41 +214,41 @@ namespace SobekCM.Management_Tool
                 {
                     if ((index1TextBox.Text.Trim().Length > 0) && (Convert.ToUInt16(index1TextBox.Text.Trim()) >= 0))
                     {
-                        thisItem[ level1TextColumn ] = text1TextBox.Text.Trim();
-                        thisItem[level1IndexColumn] = Convert.ToUInt16(index1TextBox.Text.Trim());
+                        thisItem.Level1_Text = text1TextBox.Text.Trim();
+                        thisItem.Level1_Index = Convert.ToUInt16(index1TextBox.Text.Trim());
 
                         if ((index2TextBox.Text.Trim().Length > 0) && (Convert.ToUInt16(index2TextBox.Text.Trim()) >= 0))
                         {
-                            thisItem[level2TextColumn] = text2TextBox.Text.Trim();
-                            thisItem[level2IndexColumn] = Convert.ToUInt16(index2TextBox.Text.Trim());
+                            thisItem.Level2_Text = text2TextBox.Text.Trim();
+                            thisItem.Level2_Index = Convert.ToUInt16(index2TextBox.Text.Trim());
 
                             if ((index3TextBox.Text.Trim().Length > 0) && (Convert.ToUInt16(index3TextBox.Text.Trim()) >= 0))
                             {
-                                thisItem[level3TextColumn] = text3TextBox.Text.Trim();
-                                thisItem[level3IndexColumn] = Convert.ToUInt16(index3TextBox.Text.Trim());
+                                thisItem.Level3_Text = text3TextBox.Text.Trim();
+                                thisItem.Level3_Index = Convert.ToUInt16(index3TextBox.Text.Trim());
                             }
                             else
                             {
-                                thisItem[level3IndexColumn] = 0;
-                                thisItem[level3TextColumn] = String.Empty;
+                                thisItem.Level3_Index = 0;
+                                thisItem.Level3_Text = String.Empty;
                             }
                         }
                         else
                         {
-                            thisItem[level2IndexColumn] = 0;
-                            thisItem[level2TextColumn] = String.Empty;
-                            thisItem[level3IndexColumn] = 0;
-                            thisItem[level3TextColumn] = String.Empty;
+                            thisItem.Level2_Index = 0;
+                            thisItem.Level2_Text = String.Empty;
+                            thisItem.Level3_Index = 0;
+                            thisItem.Level3_Text = String.Empty;
                         }
                     }
                     else
                     {
-                        thisItem[level1IndexColumn] = 0;
-                        thisItem[level1TextColumn] = String.Empty;
-                        thisItem[level2IndexColumn] = 0;
-                        thisItem[level2TextColumn] = String.Empty;
-                        thisItem[level3IndexColumn] = 0;
-                        thisItem[level3TextColumn] = String.Empty;
+                        thisItem.Level1_Index = 0;
+                        thisItem.Level1_Text = String.Empty;
+                        thisItem.Level2_Index = 0;
+                        thisItem.Level2_Text = String.Empty;
+                        thisItem.Level3_Index = 0;
+                        thisItem.Level3_Text = String.Empty;
 
                     }
                 }
@@ -262,16 +264,7 @@ namespace SobekCM.Management_Tool
 
         /// <summary> Sets the serial hierarchy displaying within this row </summary>
         /// <param name="Item_Row"></param>
-        /// <param name="itemIdColumn"></param>
-        /// <param name="titleColumn"></param>
-        /// <param name="level1TextColumn"></param>
-        /// <param name="level1IndexColumn"></param>
-        /// <param name="level2TextColumn"></param>
-        /// <param name="level2IndexColumn"></param>
-        /// <param name="level3TextColumn"></param>
-        /// <param name="level3IndexColumn"></param>
-        /// <param name="vidColumn"></param>
-        public void Set_Serial_Hierarchy(DataRow Item_Row, DataColumn itemIdColumn, DataColumn titleColumn, DataColumn level1TextColumn, DataColumn level1IndexColumn, DataColumn level2TextColumn, DataColumn level2IndexColumn, DataColumn level3TextColumn, DataColumn level3IndexColumn, DataColumn vidColumn)
+        public void Set_Serial_Hierarchy(Item_Hierarchy_Details Item_Row )
         {
             thisItem = Item_Row;
 
@@ -288,24 +281,24 @@ namespace SobekCM.Management_Tool
             }
             else
             {
-                vid = Item_Row[vidColumn].ToString();
-                string level1Text = Item_Row[level1TextColumn].ToString();
+                vid = Item_Row.VID;
+                string level1Text = Item_Row.Level1_Text;
                 if (level1Text.Length > 0)
                 {
                     text1TextBox.Text = level1Text;
-                    index1TextBox.Text = Math.Max(Convert.ToInt32(thisItem[level1IndexColumn]), 0).ToString();
+                    index1TextBox.Text = Item_Row.Level1_Index.HasValue ? Math.Max(Convert.ToInt32(thisItem.Level1_Index), 0).ToString() : "0";
                 }
                 else
                 {
-                    text1TextBox.Text = Item_Row[titleColumn].ToString();
+                    text1TextBox.Text = Item_Row.Title;
                     index1TextBox.Text = "0";
                 }
 
-                string level2Text = Item_Row[level2TextColumn].ToString();
+                string level2Text = Item_Row.Level2_Text;
                 if (level2Text.Length > 0)
                 {
                     text2TextBox.Text = level2Text;
-                    index2TextBox.Text = Math.Max(Convert.ToInt32(thisItem[level2IndexColumn]), 0).ToString();
+                    index2TextBox.Text = Item_Row.Level2_Index.HasValue ? Math.Max(Convert.ToInt32(thisItem.Level2_Index), 0).ToString() : "0";
                 }
                 else
                 {
@@ -313,11 +306,11 @@ namespace SobekCM.Management_Tool
                     index2TextBox.Clear();
                 }
 
-                string level3Text = Item_Row[level3TextColumn].ToString();
+                string level3Text = Item_Row.Level3_Text;
                 if (level3Text.Length > 0)
                 {
                     text3TextBox.Text = level3Text;
-                    index3TextBox.Text = Math.Max( Convert.ToInt32( Item_Row[level3IndexColumn] ), 0).ToString();
+                    index3TextBox.Text = Item_Row.Level3_Index.HasValue ? Math.Max(Convert.ToInt32(thisItem.Level3_Index), 0).ToString() : "0";
                 }
                 else
                 {
@@ -469,7 +462,7 @@ namespace SobekCM.Management_Tool
         {
             if ((e.X > 20) && (e.X < 60))
             {
-                Process showItem = new Process { StartInfo = { FileName = Library.SobekCM_Library_Settings.System_Base_URL + bibid + "\\" + vid } };
+                Process showItem = new Process { StartInfo = { FileName = Engine_ApplicationCache_Gateway.Settings.Servers.System_Base_URL + bibid + "\\" + vid } };
                 showItem.Start();
             }
         }

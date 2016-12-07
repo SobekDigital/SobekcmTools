@@ -5,11 +5,13 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Security.Principal;
+using SobekCM.Engine_Library.ApplicationState;
 using SobekCM.Resource_Object;
 using SobekCM.Resource_Object.Database;
 using SobekCM.Resource_Object.Metadata_Modules;
 using SobekCM.Management_Tool.Importer;
 using SobekCM.Management_Tool.Settings;
+using SobekCM_Resource_Database;
 
 #endregion
 
@@ -89,7 +91,7 @@ namespace SobekCM.Management_Tool
                 {
                     // Try to find the source mets file
                     string assocFilePath = bibid.Substring(0, 2) + "\\" + bibid.Substring(2, 2) + "\\" + bibid.Substring(4, 2) + "\\" + bibid.Substring(6, 2) + "\\" + bibid.Substring(8, 2);
-                    string server_location = Library.SobekCM_Library_Settings.Image_Server_Network + "\\" + assocFilePath;
+                    string server_location = Engine_ApplicationCache_Gateway.Settings.Servers.Image_Server_Network + "\\" + assocFilePath;
                     if (Directory.Exists(server_location))
                     {
                         string[] vidFolders = Directory.GetDirectories(server_location);
@@ -174,7 +176,7 @@ namespace SobekCM.Management_Tool
                     newItem.Tracking.VID_Source = "SMaRT Volume Import:" + username;
                     newItem.Behaviors.Dark_Flag = dark;
                     newItem.Behaviors.IP_Restriction_Membership = (short)restrictionMask;
-                    SobekCM_Database.Save_New_Digital_Resource(newItem, false, false, username, String.Empty, -1);
+                    SobekCM_Item_Database.Save_New_Digital_Resource(newItem, false, false, username, String.Empty, -1);
 
                     // Save this VID to the table
                     thisRow[0] = newItem.VID;
@@ -185,7 +187,7 @@ namespace SobekCM.Management_Tool
                     newItem.Save_SobekCM_METS();
 
                     // Copy to the INBOUND and DATA FOLDERS
-                    string inbound_folder = Library.SobekCM_Library_Settings.Main_Builder_Input_Folder + "\\" + newItem.BibID + "_" + newItem.VID;
+                    string inbound_folder = Engine_ApplicationCache_Gateway.Settings.Builder.Main_Builder_Input_Folder + "\\" + newItem.BibID + "_" + newItem.VID;
                     if (!Directory.Exists(inbound_folder))
                         Directory.CreateDirectory(inbound_folder);
                     string newbibid = newItem.BibID;

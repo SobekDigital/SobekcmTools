@@ -4,7 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using SobekCM.Library;
+using SobekCM.Engine_Library;
+using SobekCM.Engine_Library.ApplicationState;
 using SobekCM.Management_Tool.Settings;
 
 #endregion
@@ -34,7 +35,7 @@ namespace SobekCM.Management_Tool
             }
 
             // Add each possible disposition type
-            List<string> dispositionTypes = SobekCM_Library_Settings.Disposition_Types_Past;
+            List<string> dispositionTypes = Engine_ApplicationCache_Gateway.Settings.Disposition_Types_Past;
             foreach (string thisType in dispositionTypes)
                 comboBox1.Items.Add(thisType);
             comboBox1.SelectedIndex = 0;
@@ -115,7 +116,7 @@ namespace SobekCM.Management_Tool
         {
             notes = textBox1.Text;
             date = dateTimePicker1.Value;
-            typeId = SobekCM_Library_Settings.Disposition_ID_Past(comboBox1.Text);
+            typeId = Engine_ApplicationCache_Gateway.Settings.Disposition_ID_Past(comboBox1.Text);
             DialogResult = DialogResult.OK;
             Close();
         }

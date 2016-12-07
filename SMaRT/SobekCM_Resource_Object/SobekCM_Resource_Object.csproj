@@ -28,7 +28,7 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>3.5</OldToolsVersion>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
@@ -67,6 +67,7 @@
     <WarningLevel>4</WarningLevel>
     <DebugType>full</DebugType>
     <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -89,6 +90,7 @@
     <WarningLevel>4</WarningLevel>
     <DebugType>none</DebugType>
     <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
     <DebugSymbols>true</DebugSymbols>
@@ -96,28 +98,30 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <BaseAddress>285212672</BaseAddress>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DocumentationFile>bin\Debug\UFDC_Bib_Package.XML</DocumentationFile>
+    <DocumentationFile>bin\Debug\SobekCM_Resource_Object.xml</DocumentationFile>
     <FileAlignment>4096</FileAlignment>
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
     <OutputPath>bin\x64\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <BaseAddress>285212672</BaseAddress>
-    <DocumentationFile>UFDC_Bib_Package.xml</DocumentationFile>
+    <DocumentationFile>bin\x64\Release\SobekCM_Resource_Object.xml</DocumentationFile>
     <Optimize>true</Optimize>
     <FileAlignment>4096</FileAlignment>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.ApplicationBlocks.Data">
-      <HintPath>..\DLLs\Microsoft.ApplicationBlocks.Data.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\DLLs\SolrNet\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="protobuf-net">
+      <HintPath>..\DLLs\Protobuf-net\protobuf-net.dll</HintPath>
     </Reference>
     <Reference Include="SolrNet">
       <HintPath>..\DLLs\SolrNet\SolrNet.dll</HintPath>
@@ -134,6 +138,7 @@
     <Reference Include="System.Drawing">
       <Name>System.Drawing</Name>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml">
       <Name>System.XML</Name>
     </Reference>
@@ -149,21 +154,52 @@
     <Compile Include="AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Builder\Bib_Package_Builder.cs" />
-    <Compile Include="Configuration\Additional_Metadata_Module_Config.cs" />
-    <Compile Include="Configuration\METS_Writing_Profile.cs" />
+    <Compile Include="Configuration\ResourceObjectSettings.cs" />
     <Compile Include="Database\DataSets\SobekCM_All_Items.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Event_Delegates.cs" />
+    <Compile Include="GenericXml\Mapping\GenericXmlMappingPath.cs" />
+    <Compile Include="GenericXml\Mapping\GenericXmlMappingSet.cs" />
+    <Compile Include="GenericXml\Mapping\GenericXmlMappingTreeNode.cs" />
+    <Compile Include="GenericXml\Mapping\PathMappingInstructions.cs" />
+    <Compile Include="GenericXml\Reader\GenericXmlNode.cs" />
+    <Compile Include="GenericXml\Reader\GenericXmlPath.cs" />
+    <Compile Include="GenericXml\Reader\GenericXmlPathValue.cs" />
+    <Compile Include="GenericXml\Reader\GenericXmlReader.cs" />
+    <Compile Include="GenericXml\Results\GenericXmlReaderResults.cs" />
+    <Compile Include="GenericXml\Results\MappedValue.cs" />
+    <Compile Include="GenericXml\Results\UnmappedValue.cs" />
     <Compile Include="Generic_Reader.cs" />
-    <Compile Include="Image_Derivative_Creation_Processor.cs" />
-    <Compile Include="iMetadataDescribable.cs" />
+    <Compile Include="Configuration\Additional_Metadata_Module_Config.cs" />
+    <Compile Include="Configuration\Metadata_Configuration.cs" />
+    <Compile Include="Configuration\Metadata_File_ReaderWriter_Config.cs" />
+    <Compile Include="Configuration\METS_Section_ReaderWriter_Config.cs" />
+    <Compile Include="Configuration\METS_Writing_Profile.cs" />
+    <Compile Include="Mapping\iBibliographicMapping.cs" />
+    <Compile Include="Mapping\Standard_Bibliographic_Mapping.cs" />
     <Compile Include="Metadata_File_ReaderWriters\MARC\ErrorHandling\MARC_Record_Parsing_Error.cs" />
     <Compile Include="Metadata_File_ReaderWriters\MARC\ErrorHandling\MARC_Record_Parsing_Warning.cs" />
+    <Compile Include="Metadata_File_ReaderWriters\MARC\MARC_Field.cs" />
+    <Compile Include="Metadata_File_ReaderWriters\MARC\MARC_Record.cs" />
+    <Compile Include="Metadata_File_ReaderWriters\MARC\MARC_Subfield.cs" />
+    <Compile Include="Metadata_Modules\EAD\Container_Info.cs" />
+    <Compile Include="Metadata_Modules\EAD\Description_of_Subordinate_Components.cs" />
+    <Compile Include="Metadata_Modules\EAD\Descriptive_Identification.cs" />
+    <Compile Include="Metadata_Modules\EAD\EAD_TOC_Included_Section.cs" />
+    <Compile Include="Metadata_Modules\EAD\Parent_Container_Info.cs" />
+    <Compile Include="Metadata_Modules\GeoSpatial\Coordinate_Circle.cs" />
+    <Compile Include="METS_Sec_ReaderWriters\ETD_MS_DC_METS_dmdSec_ReaderWriter.cs" />
+    <Compile Include="METS_Sec_ReaderWriters\ETD_SobekCM_METS_dmdSec_ReaderWriter.cs" />
+    <Compile Include="OAI\abstract_OAI_PMH_Metadata_Type_Writer.cs" />
+    <Compile Include="OAI\Writer\DC_OAI_Metadata_Type_Writer.cs" />
+    <Compile Include="OAI\iOAI_PMH_Metadata_Type_Writer.cs" />
+    <Compile Include="OAI\Writer\MarcXML_OAI_PMH_Metadata_Type_Writer.cs" />
+    <Compile Include="OAI\Writer\OAI_PMH_Metadata_Writers.cs" />
+    <Compile Include="Utilities\Image_Derivative_Creation_Processor.cs" />
+    <Compile Include="iMetadataDescribable.cs" />
     <Compile Include="Metadata_File_ReaderWriters\MARC\Parsers\MARC21_Parser_Directory_Entry.cs" />
     <Compile Include="Metadata_File_ReaderWriters\MARC\Parsers\MARC21_Exchange_Format_Parser.cs" />
-    <Compile Include="Metadata_File_ReaderWriters\MARC\MARC_Subfield.cs" />
     <Compile Include="Metadata_File_ReaderWriters\MARC\Parsers\MARC21_Parser_Variable_Field_Data.cs" />
     <Compile Include="Metadata_File_ReaderWriters\MARC\Parsers\MARCXML_Parser.cs" />
     <Compile Include="Metadata_File_ReaderWriters\MARC\Writers\MARC21_Exchange_Format_Writer.cs" />
@@ -195,7 +231,7 @@
     <Compile Include="METS_Sec_ReaderWriters\DAITSS_METS_amdSec_ReaderWriter.cs" />
     <Compile Include="METS_Sec_ReaderWriters\DarwinCore_METS_dmdSec_ReaderWriter.cs" />
     <Compile Include="METS_Sec_ReaderWriters\DC_METS_dmdSec_ReaderWriter.cs" />
-    <Compile Include="METS_Sec_ReaderWriters\ETD_METS_dmdSec_ReaderWriter.cs" />
+    <Compile Include="METS_Sec_ReaderWriters\ETD_PALMM_METS_dmdSec_ReaderWriter.cs" />
     <Compile Include="METS_Sec_ReaderWriters\GML_METS_dmdSec_ReaderWriter.cs" />
     <Compile Include="METS_Sec_ReaderWriters\iDivision_amdSec_ReaderWriter.cs" />
     <Compile Include="METS_Sec_ReaderWriters\iDivision_dmdSec_ReaderWriter.cs" />
@@ -211,22 +247,17 @@
     <Compile Include="METS_Sec_ReaderWriters\SobekCM_Map_METS_dmdSec_ReaderWriter.cs" />
     <Compile Include="METS_Sec_ReaderWriters\SobekCM_METS_dmdSec_ReaderWriter.cs" />
     <Compile Include="METS_Sec_ReaderWriters\VRACore_METS_dmdSec_ReaderWriter.cs" />
-    <Compile Include="OAI\OAI_Repository_DublinCore_Record.cs" />
-    <Compile Include="OAI\OAI_Repository_Information.cs" />
-    <Compile Include="OAI\OAI_Repository_Records_List.cs" />
-    <Compile Include="OAI\OAI_Repository_Stream_Reader.cs" />
+    <Compile Include="OAI\Reader\OAI_Repository_DublinCore_Record.cs" />
+    <Compile Include="OAI\Reader\OAI_Repository_Information.cs" />
+    <Compile Include="OAI\Reader\OAI_Repository_Records_List.cs" />
+    <Compile Include="OAI\Reader\OAI_Repository_Stream_Reader.cs" />
     <Compile Include="Metadata_Modules\GeoSpatial\Coordinate_Line.cs" />
     <Compile Include="Metadata_Modules\GeoSpatial\Coordinate_Point.cs" />
     <Compile Include="Metadata_Modules\GeoSpatial\Coordinate_Polygon.cs" />
     <Compile Include="Bib_Info\Publisher_Info.cs" />
     <Compile Include="Divisions\FileSHA1.cs" />
     <Compile Include="Divisions\Outer_Division_Info.cs" />
-    <Compile Include="Metadata_Modules\EAD\Container_Info.cs" />
-    <Compile Include="Metadata_Modules\EAD\Descriptive_Identification.cs" />
-    <Compile Include="Metadata_Modules\EAD\Description_of_Subordinate_Components.cs" />
     <Compile Include="Metadata_Modules\EAD\EAD_Info.cs" />
-    <Compile Include="Metadata_Modules\EAD\EAD_TOC_Included_Section.cs" />
-    <Compile Include="Metadata_Modules\EAD\Parent_Container_Info.cs" />
     <Compile Include="Metadata_Modules\iMetadata_Module.cs" />
     <Compile Include="Bib_Info\MODS_Info\Classification_Info.cs" />
     <Compile Include="Bib_Info\MODS_Info\Genre_Info.cs" />
@@ -252,18 +283,14 @@
     <Compile Include="Metadata_Modules\Zoological_Taxonomy_Info.cs" />
     <Compile Include="Tracking\Tracking_Info.cs" />
     <Compile Include="Behaviors\Behaviors_Info.cs" />
+    <Compile Include="Utilities\SobekCM_Item_Mover.cs" />
+    <Compile Include="Utilities\XmlValidator.cs" />
     <Compile Include="Web_Info.cs" />
     <Compile Include="XML_Node_Base_Type.cs" />
     <Compile Include="Download_Info_DEPRECATED.cs" />
-    <Compile Include="Configuration\Metadata_Configuration.cs" />
-    <Compile Include="Configuration\Metadata_File_ReaderWriter_Config.cs" />
-    <Compile Include="Configuration\METS_Section_ReaderWriter_Config.cs" />
     <Compile Include="Solr\SolrDocument.cs" />
     <Compile Include="Solr\SolrPage.cs" />
     <Compile Include="Testing\Test_Bib_Package.cs" />
-    <Compile Include="Behaviors\View_Enum.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Behaviors\View_Object.cs" />
     <Compile Include="Bibliographic_Mapping.cs">
       <SubType>Code</SubType>
@@ -307,18 +334,6 @@
     </Compile>
     <Compile Include="Bib_Info\MODS_Info\TypeOfResource_Info.cs" />
     <Compile Include="XML_Writing_Base_Type.cs" />
-    <Compile Include="Builder\Builder_General_Convert_Mill.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Builder\Builder_Page_File.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Builder\Builder_Page_File_Collection.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Builder\Builder_SplitFileName.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Divisions\abstract_TreeNode.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -358,13 +373,7 @@
     <Compile Include="Metadata_Modules\Maps\Map_Sheet.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Metadata_File_ReaderWriters\MARC\MARC_Field.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Metadata_File_ReaderWriters\MARC\MARC_Record.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="METS_Validator_Object.cs">
+    <Compile Include="Utilities\METS_Validator_Object.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="SobekCM_Item.cs">
@@ -379,24 +388,18 @@
     <Compile Include="Metadata_Modules\Oral_Interview_Info.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Metadata_Modules\PALMM_Info.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Metadata_Modules\Performing_Arts_Info.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Behaviors\Serial_Info.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="SobekCM_METS_Validator.cs">
+    <Compile Include="Utilities\SobekCM_METS_Validator.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="SobekCM_Item_Validator.cs" />
-    <Compile Include="SobekCM_METS_Finder.cs" />
+    <Compile Include="Utilities\SobekCM_Item_Validator.cs" />
+    <Compile Include="Utilities\SobekCM_METS_Finder.cs" />
     <Compile Include="MARC_HTML_Writer.cs" />
-    <Compile Include="Database\SobekCM_Database.cs">
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -414,6 +417,12 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SobekCM_Tools\SobekCM_Tools.csproj">
+      <Project>{a511ce4c-7bd6-4446-bca8-ab71f7aa8078}</Project>
+      <Name>SobekCM_Tools</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

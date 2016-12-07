@@ -70,7 +70,7 @@ namespace SobekCM.Resource_Object.Metadata_File_ReaderWriters
             if (Return_Package.BibID.Length == 0)
                 Return_Package.BibID = eadFileInfo.Name.Replace(".xml", "");
             Return_Package.VID = "00001";
-            Return_Package.Bib_Info.SobekCM_Type = TypeOfResource_SobekCM_Enum.Archival;
+            Return_Package.Bib_Info.SobekCM_Type = TypeOfResource_SobekCM_Enum.EAD;
             Return_Package.Bib_Info.Type.Collection = true;
 
             return returnValue;
@@ -97,22 +97,22 @@ namespace SobekCM.Resource_Object.Metadata_File_ReaderWriters
             }
 
             // Set a couple defaults first
-            Return_Package.Bib_Info.SobekCM_Type = TypeOfResource_SobekCM_Enum.Archival;
+            Return_Package.Bib_Info.SobekCM_Type = TypeOfResource_SobekCM_Enum.EAD;
             Return_Package.Bib_Info.Type.Collection = true;
             Error_Message = String.Empty;
 
             // Check for some options
-            string XSL_Location = String.Empty;
-            bool Analyze_Description = true;
+            string xslLocation = String.Empty;
+            bool analyzeDescription = true;
             if (Options != null)
             {
                 if (Options.ContainsKey("EAD_File_ReaderWriter:XSL_Location"))
                 {
-                    XSL_Location = Options["EAD_File_ReaderWriter:XSL_Location"].ToString();
+                    xslLocation = Options["EAD_File_ReaderWriter:XSL_Location"].ToString();
                 }
                 if (Options.ContainsKey("EAD_File_ReaderWriter:Analyze_Description"))
                 {
-                    bool.TryParse(Options["EAD_File_ReaderWriter:Analyze_Description"].ToString(), out Analyze_Description);
+                    bool.TryParse(Options["EAD_File_ReaderWriter:Analyze_Description"].ToString(), out analyzeDescription);
                 }
             }
 
@@ -167,12 +167,13 @@ namespace SobekCM.Resource_Object.Metadata_File_ReaderWriters
             eadInfo.Full_Description = description_builder.ToString();
 
             // Should the decrpition additionally be analyzed?
-            if (Analyze_Description)
+            if (analyzeDescription)
             {
                 // Try to read the XML
                 try
                 {
-                    XmlTextReader reader2 = new XmlTextReader(description_builder.ToString());
+                    StringReader strReader = new StringReader(description_builder.ToString());
+                    XmlTextReader reader2 = new XmlTextReader(strReader);
 
                     // Initial doctype declaration sometimes throws an error for a missing EAD.dtd.
                     bool ead_start_found = false;
@@ -182,7 +183,7 @@ namespace SobekCM.Resource_Object.Metadata_File_ReaderWriters
                         try
                         {
                             reader2.Read();
-                            if ((reader2.NodeType == XmlNodeType.Element) && (reader2.Name.ToLower() == GlobalVar.EAD_METADATA_MODULE_KEY))
+                            if ((reader2.NodeType == XmlNodeType.Element) && (reader2.Name.ToLower() == "ead"))
                             {
                                 ead_start_found = true;
                             }
@@ -256,7 +257,7 @@ namespace SobekCM.Resource_Object.Metadata_File_ReaderWriters
                                                 if (reader2.NodeType == XmlNodeType.Text)
                                                 {
                                                     Return_Package.Bib_Info.Main_Entity_Name.Full_Name = Trim_Final_Punctuation(reader2.Value);
-                                                    Return_Package.Bib_Info.Main_Entity_Name.Name_Type = Name_Info_Type_Enum.personal;
+                                                    Return_Package.Bib_Info.Main_Entity_Name.Name_Type = Name_Info_Type_Enum.Personal;
                                                 }
                                                 else if (reader2.NodeType == XmlNodeType.EndElement && reader2.Name.ToLower().Equals(nodeName))
                                                     break;
@@ -314,7 +315,7 @@ namespace SobekCM.Resource_Object.Metadata_File_ReaderWriters
                                     break;
 
                                 case "accessrestrict":
-                                    Return_Package.Bib_Info.Add_Note(Clean_Text_Block(reader2.ReadInnerXml()), Note_Type_Enum.restriction);
+                                    Return_Package.Bib_Info.Add_Note(Clean_Text_Block(reader2.ReadInnerXml()), Note_Type_Enum.Restriction);
                                     break;
 
                                 case "userestrict":
@@ -322,11 +323,11 @@ namespace SobekCM.Resource_Object.Metadata_File_ReaderWriters
                                     break;
 
                                 case "acqinfo":
-                                    Return_Package.Bib_Info.Add_Note(Clean_Text_Block(reader2.ReadInnerXml()), Note_Type_Enum.acquisition);
+                                    Return_Package.Bib_Info.Add_Note(Clean_Text_Block(reader2.ReadInnerXml()), Note_Type_Enum.Acquisition);
                                     break;
 
                                 case "bioghist":
-                                    Return_Package.Bib_Info.Add_Note(Clean_Text_Block(reader2.ReadInnerXml()), Note_Type_Enum.biographical);
+                                    Return_Package.Bib_Info.Add_Note(Clean_Text_Block(reader2.ReadInnerXml()), Note_Type_Enum.Biographical);
                                     break;
 
                                 case "scopecontent":
@@ -346,16 +347,16 @@ namespace SobekCM.Resource_Object.Metadata_File_ReaderWriters
                                             {
                                                 if (reader2.NodeType == XmlNodeType.Text)
                                                 {
-                                                    Subject_Info_Name newName = new Subject_Info_Name();
-                                                    //ToSee: where to add name? and ehat types
-                                                    //ToDo: Type
-                                                    newName.Full_Name = Trim_Final_Punctuation(reader2.Value);
-                                                    newName.Authority = source;
+                                                    Subject_Info_Name newName = new Subject_Info_Name
+                                                    {
+                                                        Full_Name = Trim_Final_Punctuation(reader2.Value), 
+                                                        Authority = source
+                                                    };
                                                     Return_Package.Bib_Info.Add_Subject(newName);
-                                                    if (tagnamei.StartsWith("corp"))
-                                                        newName.Name_Type = Name_Info_Type_Enum.corporate;
-                                                    else if (tagnamei.StartsWith("pers"))
-                                                        newName.Name_Type = Name_Info_Type_Enum.personal;
+                                                    if (tagnamei.IndexOf("corp", StringComparison.OrdinalIgnoreCase) == 0)
+                                                        newName.Name_Type = Name_Info_Type_Enum.Corporate;
+                                                    else if (tagnamei.IndexOf("pers", StringComparison.OrdinalIgnoreCase) == 0)
+                                                        newName.Name_Type = Name_Info_Type_Enum.Personal;
                                                     else
                                                         newName.Name_Type = Name_Info_Type_Enum.UNKNOWN;
                                                 }
@@ -390,10 +391,7 @@ namespace SobekCM.Resource_Object.Metadata_File_ReaderWriters
                                                                 else
                                                                     subject.Add_Topic(fragment);
 
-                                                                if (subjectTerm.Length > subjectTerm.IndexOf("--") + 3)
-                                                                    subjectTerm = subjectTerm.Substring(subjectTerm.IndexOf("--") + 2);
-                                                                else
-                                                                    subjectTerm = String.Empty;
+                                                                subjectTerm = subjectTerm.Length > subjectTerm.IndexOf("--") + 3 ? subjectTerm.Substring(subjectTerm.IndexOf("--") + 2) : String.Empty;
                                                             }
                                                             if (subjectTerm.Trim().Length > 0)
                                                             {
@@ -422,7 +420,7 @@ namespace SobekCM.Resource_Object.Metadata_File_ReaderWriters
                         }
 
 
-                        if (reader2.NodeType == XmlNodeType.EndElement && reader2.Name.Equals(GlobalVar.EAD_METADATA_MODULE_KEY))
+                        if (reader2.NodeType == XmlNodeType.EndElement && reader2.Name.Equals("ead"))
                             break;
                     }
 
@@ -437,18 +435,20 @@ namespace SobekCM.Resource_Object.Metadata_File_ReaderWriters
 
 
             // If there is a XSL, apply it to the description stored in the EAD sub-section of the item id
-            if (XSL_Location.Length > 0)
+            if (xslLocation.Length > 0)
             {
                 try
                 {
                     // Create the transform and load the XSL indicated
                     XslCompiledTransform transform = new XslCompiledTransform();
-                    transform.Load(XSL_Location);
+                    transform.Load(xslLocation);
 
                     // Apply the transform to convert the XML into HTML
                     StringWriter results = new StringWriter();
-                    XmlReaderSettings settings = new XmlReaderSettings();
-                    settings.ProhibitDtd = false;
+                    XmlReaderSettings settings = new XmlReaderSettings
+                    {
+                        DtdProcessing = DtdProcessing.Parse
+                    };
                     using (XmlReader transformreader = XmlReader.Create(new StringReader(eadInfo.Full_Description), settings))
                     {
                         transform.Transform(transformreader, null, results);
@@ -570,7 +570,7 @@ namespace SobekCM.Resource_Object.Metadata_File_ReaderWriters
                         }
                         else
                         {
-                            int end_link = eadInfo.Full_Description.IndexOf("</a>", index);
+                            int end_link = eadInfo.Full_Description.IndexOf("</a>", index, StringComparison.Ordinal);
                             string index_title = eadInfo.Full_Description.Substring(index + 16, end_link - index - 16);
                             if (index_title.Length > 38)
                                 index_title = index_title.Substring(0, 32) + "...";
@@ -578,9 +578,9 @@ namespace SobekCM.Resource_Object.Metadata_File_ReaderWriters
                         }
                     }
                 }
-                catch (Exception ee)
+                catch
                 {
-                    bool error = false;
+                    // Do nothing if an error occurred
                 }
             }
 

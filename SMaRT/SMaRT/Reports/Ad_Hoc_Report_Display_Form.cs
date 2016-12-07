@@ -10,10 +10,13 @@ using System.Drawing.Printing;
 using System.Text;
 using System.Windows.Forms;
 using DLC.Custom_Grid;
+using SobekCM.Engine_Library.ApplicationState;
+using SobekCM.Engine_Library.Database;
 using SobekCM.Resource_Object.Database;
-using SobekCM.Library;
+using SobekCM.Engine_Library;
 using SobekCM.Management_Tool.Settings;
 using SobekCM.Management_Tool.Versioning;
+using SobekCM_Resource_Database;
 
 #endregion
 
@@ -290,7 +293,7 @@ namespace SobekCM.Management_Tool
             // What is the currently selected action?
             if (openItemFromWebMenuItem.Checked)
             {
-                string url = SobekCM_Library_Settings.System_Base_URL + bibid;
+                string url = Engine_ApplicationCache_Gateway.Settings.Servers.System_Base_URL + bibid;
                 if (vid.IndexOf("(") < 0)
                 {
                     url = url + "/" + vid;
@@ -413,7 +416,7 @@ namespace SobekCM.Management_Tool
 
                 Font headerFont = new Font("Tahoma", 14, FontStyle.Bold);
                 Brush headerBrush = new SolidBrush(Color.Black);
-                g.DrawString("Ad Hoc " + SobekCM_Library_Settings.System_Abbreviation + " Report", headerFont, headerBrush, 120, 30);
+                g.DrawString("Ad Hoc " + Engine_ApplicationCache_Gateway.Settings.System.System_Abbreviation + " Report", headerFont, headerBrush, 120, 30);
 
                 bool more = gridPrinterShowAllRows ? gridPrinter.DrawDataGrid(g) : gridPrinter.DrawDataGrid_SelectedRows(g);
                 if (more)
@@ -563,7 +566,7 @@ namespace SobekCM.Management_Tool
                 if (itemid > 0)
                 {
                     updated++;
-                    if (SobekCM_Database.Save_New_Tracking_Box(itemid, new_tracking_box))
+                    if (Engine_Database.Save_New_Tracking_Box(itemid, new_tracking_box))
                         thisRow["Tracking_Box"] = new_tracking_box;
                 }
             }
@@ -586,17 +589,17 @@ namespace SobekCM.Management_Tool
                 int typeid = trackingBox.Disposition_Type_ID;
                 DateTime date = trackingBox.Disposition_Date;
                 string notes = trackingBox.Disposition_Notes;
-                string typeString = SobekCM_Library_Settings.Disposition_Term_Past(typeid);
+                string typeString = Engine_ApplicationCache_Gateway.Settings.Disposition_Term_Past(typeid);
                 if (notes.Trim().Length == 0)
                 {
-                    notes = SobekCM_Library_Settings.Disposition_Term_Past(typeid);
+                    notes = Engine_ApplicationCache_Gateway.Settings.Disposition_Term_Past(typeid);
                 }
                 foreach (DataRow thisRow in gridPanel.Selected_Row)
                 {
                     int itemid = Convert.ToInt32(thisRow["ItemID"]);
                     if (itemid > 0)
                     {
-                        if (SobekCM_Database.Update_Disposition(itemid, typeid, notes, date, username))
+                        if (SobekCM_Item_Database.Update_Disposition(itemid, typeid, notes, date, username))
                         {
                             thisRow["Disposition_Type"] = typeString;
                             thisRow["Disposition_Date"] = date;
@@ -623,7 +626,7 @@ namespace SobekCM.Management_Tool
                 int updated = 0;
                 int typeid = trackingBox.Disposition_Type_ID;
                 string notes = trackingBox.Disposition_Notes;
-                string typeString = SobekCM_Library_Settings.Disposition_Term_Future(typeid);
+                string typeString = Engine_ApplicationCache_Gateway.Settings.Disposition_Term_Future(typeid);
                 foreach (DataRow thisRow in gridPanel.Selected_Row)
                 {
                     int itemid = Convert.ToInt32(thisRow["ItemID"]);
@@ -631,7 +634,7 @@ namespace SobekCM.Management_Tool
                     {
                         if (thisRow["Disposition_Date"] == DBNull.Value)
                         {
-                            if (SobekCM_Database.Edit_Disposition_Advice(itemid, typeid, notes))
+                            if (SobekCM_Item_Database.Edit_Disposition_Advice(itemid, typeid, notes))
                             {
                                 thisRow["Disposition_Advice"] = typeString;
                                 //thisRow["Disposition_Advice_Notes"] = notes;
@@ -666,7 +669,7 @@ namespace SobekCM.Management_Tool
                     int itemid = Convert.ToInt32(thisRow["ItemID"]);
                     if (itemid > 0)
                     {
-                        SobekCM_Database.Add_Past_Workflow(itemid, type, notes, date, username, String.Empty);
+                        SobekCM_Item_Database.Add_Past_Workflow(itemid, type, notes, date, username, String.Empty);
                         updated++;
                     }
                     else
@@ -698,7 +701,7 @@ namespace SobekCM.Management_Tool
                     int itemid = Convert.ToInt32(thisRow["ItemID"]);
                     if (itemid > 0)
                     {
-                        if (SobekCM_Database.Update_Material_Received(itemid, date, estimated, username, notes))
+                        if (SobekCM_Item_Database.Update_Material_Received(itemid, date, estimated, username, notes))
                             thisRow["Material_Received_Date"] = date.ToShortDateString();
                         updated++;
                     }
@@ -726,7 +729,7 @@ namespace SobekCM.Management_Tool
                     int itemid = Convert.ToInt32(thisRow["ItemID"]);
                     if (itemid > 0)
                     {
-                        if ( SobekCM_Database.Update_Born_Digital_Flag(itemid, newflag))
+                        if (SobekCM_Item_Database.Update_Born_Digital_Flag(itemid, newflag))
                             thisRow["Born_Digital"] = newflag;
                         updated++;
                     }
@@ -749,7 +752,7 @@ namespace SobekCM.Management_Tool
             DialogResult result = saveFileDialog1.ShowDialog();
             if (result == DialogResult.OK)
             {
-                if (gridPanel.Export_as_Excel(saveFileDialog1.FileName, "Ad Hoc " + SobekCM_Library_Settings.System_Abbreviation + " Report", "Data"))
+                if (gridPanel.Export_as_Excel(saveFileDialog1.FileName, "Ad Hoc " + Engine_ApplicationCache_Gateway.Settings.System.System_Abbreviation + " Report", "Data"))
                 {
                     MessageBox.Show("Data exported as excel.\n\n" + saveFileDialog1.FileName + "       \n\n", "Export Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -842,7 +845,7 @@ namespace SobekCM.Management_Tool
             string vid = thisRow["VID"].ToString();
             string bibid = thisRow["BibID"].ToString();
 
-            string url = SobekCM_Library_Settings.System_Base_URL + bibid + "/" + vid;
+            string url = Engine_ApplicationCache_Gateway.Settings.Servers.System_Base_URL + bibid + "/" + vid;
 
             try
             {
@@ -920,7 +923,7 @@ namespace SobekCM.Management_Tool
                 if (itemid > 0)
                 {
                     updated++;
-                    if (SobekCM_Database.Save_New_Tracking_Box(itemid, new_tracking_box))
+                    if (Engine_Database.Save_New_Tracking_Box(itemid, new_tracking_box))
                         thisRow["Tracking_Box"] = new_tracking_box;
                 }
             }
@@ -941,7 +944,7 @@ namespace SobekCM.Management_Tool
                 int updated = 0;
                 int typeid = trackingBox.Disposition_Type_ID;
                 string notes = trackingBox.Disposition_Notes;
-                string typeString = SobekCM_Library_Settings.Disposition_Term_Future(typeid);
+                string typeString = Engine_ApplicationCache_Gateway.Settings.Disposition_Term_Future(typeid);
                 foreach (DataRow thisRow in gridPanel.Selected_Row)
                 {
                     int itemid = Convert.ToInt32(thisRow["ItemID"]);
@@ -949,7 +952,7 @@ namespace SobekCM.Management_Tool
                     {
                         if (thisRow["Disposition_Date"] == DBNull.Value)
                         {
-                            if (SobekCM_Database.Edit_Disposition_Advice(itemid, typeid, notes))
+                            if (SobekCM_Item_Database.Edit_Disposition_Advice(itemid, typeid, notes))
                             {
                                 thisRow["Disposition_Advice"] = typeString;
                                 //thisRow["Disposition_Advice_Notes"] = notes;
@@ -984,7 +987,7 @@ namespace SobekCM.Management_Tool
                     int itemid = Convert.ToInt32(thisRow["ItemID"]);
                     if (itemid > 0)
                     {
-                        SobekCM_Database.Add_Past_Workflow(itemid, type, notes, date, username, String.Empty);
+                        SobekCM_Item_Database.Add_Past_Workflow(itemid, type, notes, date, username, String.Empty);
                         updated++;
                     }
                     else
@@ -1011,17 +1014,17 @@ namespace SobekCM.Management_Tool
                 int typeid = trackingBox.Disposition_Type_ID;
                 DateTime date = trackingBox.Disposition_Date;
                 string notes = trackingBox.Disposition_Notes;
-                string typeString = SobekCM_Library_Settings.Disposition_Term_Past(typeid);
+                string typeString = Engine_ApplicationCache_Gateway.Settings.Disposition_Term_Past(typeid);
                 if (notes.Trim().Length == 0)
                 {
-                    notes = SobekCM_Library_Settings.Disposition_Term_Past(typeid);
+                    notes = Engine_ApplicationCache_Gateway.Settings.Disposition_Term_Past(typeid);
                 }
                 foreach (DataRow thisRow in gridPanel.Selected_Row)
                 {
                     int itemid = Convert.ToInt32(thisRow["ItemID"]);
                     if (itemid > 0)
                     {
-                        if (SobekCM_Database.Update_Disposition(itemid, typeid, notes, date, username))
+                        if (SobekCM_Item_Database.Update_Disposition(itemid, typeid, notes, date, username))
                         {
                             thisRow["Disposition_Type"] = typeString;
                             thisRow["Disposition_Date"] = date;
@@ -1052,7 +1055,7 @@ namespace SobekCM.Management_Tool
                     int itemid = Convert.ToInt32(thisRow["ItemID"]);
                     if (itemid > 0)
                     {
-                        if (SobekCM_Database.Update_Born_Digital_Flag(itemid, newflag))
+                        if (SobekCM_Item_Database.Update_Born_Digital_Flag(itemid, newflag))
                             thisRow["Born_Digital"] = newflag;
                         updated++;
                     }
@@ -1081,7 +1084,7 @@ namespace SobekCM.Management_Tool
                     int itemid = Convert.ToInt32(thisRow["ItemID"]);
                     if (itemid > 0)
                     {
-                        if (SobekCM_Database.Update_Material_Received(itemid, date, estimated, username, notes))
+                        if (SobekCM_Item_Database.Update_Material_Received(itemid, date, estimated, username, notes))
                             thisRow["Material_Received_Date"] = date.ToShortDateString();
                         updated++;
                     }

@@ -4,7 +4,7 @@ using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
-using SobekCM.Library.Database;
+using SobekCM.Engine_Library.Database;
 using SobekCM.Management_Tool.Settings;
 
 #endregion
@@ -113,7 +113,7 @@ namespace SobekCM.Management_Tool
             SMaRT_UserSettings.Save();
 
             // Add this request to the database
-            bool result = SobekCM_Database.Tivoli_Request_File(bibid, vid, "*", username.Replace(" ",""), email, note);
+            bool result = Engine_Database.Tivoli_Request_File(bibid, vid, "*", username.Replace(" ",""), email, note);
             if (result)
             {
                 MessageBox.Show("Request submitted.   You should receive an email when the retrieval is complete.    ", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);

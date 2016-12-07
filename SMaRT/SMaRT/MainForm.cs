@@ -6,7 +6,8 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
 using System.Windows.Forms;
-using SobekCM.Library;
+using SobekCM.Engine_Library;
+using SobekCM.Engine_Library.ApplicationState;
 using SobekCM.Management_Tool.Importer.Forms;
 using SobekCM.Management_Tool.Reports;
 using SobekCM.Management_Tool.Versioning;
@@ -44,12 +45,12 @@ namespace SobekCM.Management_Tool
 	        BackColor = Color.FromArgb(240, 240, 240);
 
 	        // Personalize several labels and controls now for the SobekCM Instance Name
-	        mainLabel.Text = SobekCM_Library_Settings.System_Abbreviation + " Manager";
-	        linkLabel1.Text = "Retrieve " + SobekCM_Library_Settings.System_Abbreviation + " Packages";
-	        retrievePackagesMenuItem.Text = "Retrieve " + SobekCM_Library_Settings.System_Abbreviation + " Packages";
-	        aboutMenuItem.Text = "About '" + SobekCM_Library_Settings.System_Abbreviation + " Manager'";
-	        viewItemsLinkLabel.Text = "View " + SobekCM_Library_Settings.System_Abbreviation + " Items";
-	        reportingModuleLinkLabel.Text = SobekCM_Library_Settings.System_Abbreviation + " Reporting Module";
+	        mainLabel.Text = Engine_ApplicationCache_Gateway.Settings.System.System_Abbreviation + " Manager";
+	        linkLabel1.Text = "Retrieve " + Engine_ApplicationCache_Gateway.Settings.System.System_Abbreviation + " Packages";
+	        retrievePackagesMenuItem.Text = "Retrieve " + Engine_ApplicationCache_Gateway.Settings.System.System_Abbreviation + " Packages";
+	        aboutMenuItem.Text = "About '" + Engine_ApplicationCache_Gateway.Settings.System.System_Abbreviation + " Manager'";
+	        viewItemsLinkLabel.Text = "View " + Engine_ApplicationCache_Gateway.Settings.System.System_Abbreviation + " Items";
+	        reportingModuleLinkLabel.Text = Engine_ApplicationCache_Gateway.Settings.System.System_Abbreviation + " Reporting Module";
 
 	    }
 
@@ -118,7 +119,7 @@ namespace SobekCM.Management_Tool
 	        // retrievePackagesMenuItem
 	        // 
 	        this.retrievePackagesMenuItem.Index = 0;
-	        this.retrievePackagesMenuItem.Text = "Retrieve " + SobekCM_Library_Settings.System_Abbreviation + " Packages";
+	        this.retrievePackagesMenuItem.Text = "Retrieve " + Engine_ApplicationCache_Gateway.Settings.System.System_Abbreviation + " Packages";
 	        this.retrievePackagesMenuItem.Click += new System.EventHandler(this.retrievePackagesMenuItem_Click);
 	        // 
 	        // exitMenuItem
@@ -354,7 +355,7 @@ namespace SobekCM.Management_Tool
         {
             // Must have a value (and be valid with write access) to the main builder folder
             // to be able to import things
-            string dropbox = SobekCM_Library_Settings.Main_Builder_Input_Folder;
+            string dropbox = Engine_ApplicationCache_Gateway.Settings.Builder.Main_Builder_Input_Folder;
             if (( String.IsNullOrEmpty(dropbox)) || ( !Directory.Exists(dropbox)))
             {
                 MessageBox.Show(
